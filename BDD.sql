@@ -50,3 +50,4 @@ CREATE TABLE participate (
         num_people INT NOT NULL,
         num_film INT NOT NULL
 );
+
