@@ -15,7 +15,14 @@ class Movie
                         <p class='movie-synopsis'>" . $this->synopsis . "</p>
                         <p class='movie-status'><strong>Status :</strong>" . $this->vu . "</p>
                     </div>
-                </div>
-               ";
+                </div>";
+    }
+
+    public function getHtml_list()
+    {
+        return "<li class = 'card' style='cursor: pointer;' id='" . $this->id . "'>" . $this->title . " (" . $this->release_date . ") : " . substr($this->synopsis, 0, 75) . "...</li>" .
+            "<script>
+                document.getElementById('" . $this->id . "').addEventListener('click', function() { window.location.href = 'movie.php?id=" . $this->id . "&title=" . $this->title . "'; });
+            </script>";
     }
 }

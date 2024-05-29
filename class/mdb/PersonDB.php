@@ -13,7 +13,12 @@ class PersonDB extends PdoWrapper
     }
     public function getActors()
     {
-        return $this->execute("SELECT * FROM person", null, "mdb\data_template\Movie");
+        return $this->execute("SELECT * FROM person", null, "mdb\data_template\Person");
+    }
+
+    public function getPersonById($id)
+    {
+        return $this->execute("SELECT * FROM person WHERE id = :id", ["id" => $id], "mdb\data_template\Person");
     }
 
     public function getActorsOfMovie($movieId)

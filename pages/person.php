@@ -2,7 +2,6 @@
 require_once "../config.php";
 require_once "../DB_CREDENTIALS.php";
 require_once $GLOBALS['PDO_WRAPPER'];
-use pdo_wrapper\PdoWrapper;
 
 require ".." . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR . "Autoloader.php";
 Autoloader::register();
@@ -10,14 +9,14 @@ Autoloader::register();
 
 <?php ob_start(); ?>
 
-<h2>More tranding movies</h2>
-<div id="film-list">
+    <h2><?php echo $_GET['fullName'];?></h2>
+
     <?php
-    $moviesDB = new mdb\MoviesDB();
-    $movies = $moviesDB->getMovieById(1);
-    foreach ($movies as $movie) { echo $movie->getHtml(); }
+    $id = $_GET['id'];
+    $actorsDB = new mdb\PersonDB();
+    $actors = $actorsDB->getPersonById($id);
+    echo $actors[0]->getHtml_Director();
     ?>
-</div>
 
 <?php $content = ob_get_clean(); ?>
 <?php Template::render($content);
