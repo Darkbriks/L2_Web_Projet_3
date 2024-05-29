@@ -13,10 +13,28 @@ Autoloader::register();
 <h2>Liste des Films</h2>
 <div id="film-list">
     <?php
-
+    // Obtenir la liste des films de la base de données
     $moviesDB = new mdb\MoviesDB();
     $movies = $moviesDB->getMovies();
-    foreach ($movies as $movie) { echo $movie->getHtml(); }
+
+    // Parcourir chaque film
+    foreach ($movies as $movie) {
+        // Afficher le HTML du film
+        echo $movie->getHtml();
+
+        // Obtenir les acteurs associés à ce film
+        $actorsDB = new mdb\PersonDB();
+        $actors = $actorsDB->getActorsOfMovie($movie->id);
+        $persons = $actorsDB->getDirectorOfMovie($movie->id);
+
+        // Afficher les acteurs associés à ce film
+        foreach ($actors as $actor) {
+            echo $actor->getHtml_Actor();
+        }
+        foreach ($persons as $person) {
+            echo $person->getHtml_Director();
+        }
+    }
 
     ?>
 </div>
