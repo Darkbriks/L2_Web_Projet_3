@@ -11,7 +11,37 @@ class PersonDB extends PdoWrapper
     {
         parent::__construct($GLOBALS['db_name'], $GLOBALS['db_host'], $GLOBALS['db_port'], $GLOBALS['db_user'], $GLOBALS['db_pwd']);
     }
+    public function addPerson($first_name, $last_name, $birth_date, $death_date, $type, $image_path) {
+        // Requête SQL pour insérer un nouveau film
+        $sql = "INSERT INTO movies (first_name, last_name, birth_date, death_date, type,image_path) 
+                VALUES (:title, :release_date, :synopsis, :vu, :image_path)";
+
+        // Préparer la requête
+        $stmt = $this->pdo->prepare($sql);
+
+        // Exécuter la requête avec les valeurs fournies
+        // Retourner true/false
+        return $stmt->execute([
+            ':first_name' => $first_name,
+            ':last_name' => $last_name,
+            ':birth_date' => $birth_date,
+            ':death_date' => $death_date,
+            ':type' => $type,
+            ':image_path' => $image_path
+        ]);
+    }
+
+    public function getpersons()
+    {
+        return $this->execute("SELECT * FROM person", null, "mdb\data_template\Movie");
+    }
+
     public function getActors()
+    {
+        return $this->execute("SELECT * FROM person", null, "mdb\data_template\Movie");
+    }
+
+    public function getDirectors()
     {
         return $this->execute("SELECT * FROM person", null, "mdb\data_template\Movie");
     }

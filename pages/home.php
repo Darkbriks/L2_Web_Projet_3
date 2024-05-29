@@ -23,17 +23,22 @@ Autoloader::register();
         echo $movie->getHtml();
 
         // Obtenir les acteurs associés à ce film
-        $actorsDB = new mdb\PersonDB();
-        $actors = $actorsDB->getActorsOfMovie($movie->id);
-        $persons = $actorsDB->getDirectorOfMovie($movie->id);
+        $personsDB = new mdb\PersonDB();
+        $actors = $personsDB->getActorsOfMovie($movie->id);
+        $directors = $personsDB->getDirectorOfMovie($movie->id);
+        $persons = $personsDB->getPersons();
 
         // Afficher les acteurs associés à ce film
         foreach ($actors as $actor) {
             echo $actor->getHtml_Actor();
         }
-        foreach ($persons as $person) {
-            echo $person->getHtml_Director();
+        foreach ($directors as $director) {
+            echo $director->getHtml_Director();
         }
+        foreach ($persons as $person) {
+            echo $person->getHtml_Person();
+        }
+
     }
 
     ?>

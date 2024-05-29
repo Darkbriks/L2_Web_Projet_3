@@ -9,7 +9,7 @@ class PdoWrapper
     private $db_port;
     private $db_user;
     private $db_pwd;
-    private $pdo;
+    protected $pdo;
 
     public function __construct($db_name, $db_host, $db_port, $db_user, $db_pwd)
     {

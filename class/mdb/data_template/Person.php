@@ -7,10 +7,10 @@ class Person
     public function getHtml_Person()//pas encore fonctionnel
     {
         if($this->type===1){
-            $this->getHtml_Actor();
+            return $this->getHtml_Actor();
         }
         elseif($this->type===2){
-            $this->getHtml_Realisator();
+            return $this->getHtml_Director();
         }
         else{
             return "<div class='person'>" .
@@ -24,13 +24,13 @@ class Person
         if($this->death_date===null){
             return "<div class='movie_actor'>" .
                 //"<h1> Actor :</h1>" .
-                "<p>" .$this->first_name . " " . $this->last_name ." played : " . $this->played_name . " (" . $this->birth_date. " / still alive) </p>" .
+                "<p>" .$this->first_name . " " . $this->last_name ." (" . $this->birth_date. " / still alive) played : " . $this->played_name .  "</p>" .
                 "</div>";
         }
         else{
             return "<div class='movie_actor'>" .
                 //"<h1> Actor :</h1>" .
-                "<p>" .$this->first_name . " " . $this->last_name ." played : " . $this->played_name . " (" . $this->birth_date ." / ".$this->death_date. ") </p>" .
+                "<p>" .$this->first_name . " " . $this->last_name ." (" . $this->birth_date ." / ".$this->death_date. ") played : " . $this->played_name .  "</p>" .
                 "</div>";
         }
     }
