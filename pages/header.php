@@ -8,5 +8,10 @@
             </ul>
         </nav>
         <button id="theme-toggle"></button>
+        <?php if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
+            <form action="logout.php" method="POST">
+                <input type="submit" value="Déconnexion">
+            </form>
+        <?php } ?>
     </div>
 </header>
