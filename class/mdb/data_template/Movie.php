@@ -25,7 +25,7 @@ class Movie
                     <div class='movie-info'>
                         <h3>{$this->title} ({$this->release_date})</h3>
                         <p class='movie-synopsis'>{$this->synopsis}</p>
-                        <p class='movie-director'><strong>Réalisateur :</strong> {$this->producer}</p>
+                        <p class='movie-producer'><strong>Réalisateur :</strong> {$this->producer}</p>
                         <p class='movie-actors'><strong>Acteurs :</strong> {$actorsList}</p>
                         <p class='movie-tags'><strong>Tags :</strong> {$tagsList}</p>
                         <p class='movie-status'><strong>Status :</strong> {$vu}</p>
