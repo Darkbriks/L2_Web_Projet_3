@@ -13,8 +13,8 @@ class PersonDB extends PdoWrapper
     }
     public function addPerson($first_name, $last_name, $birth_date, $death_date, $type, $image_path) {
         // Requête SQL pour insérer un nouveau film
-        $sql = "INSERT INTO movies (first_name, last_name, birth_date, death_date, type,image_path) 
-                VALUES (:title, :release_date, :synopsis, :vu, :image_path)";
+        $sql = "INSERT INTO person (first_name, last_name, birth_date, death_date, type,image_path) 
+                VALUES (:first_name, :last_name, :birth_date, :death_date, :type,:image_path)";
 
         // Préparer la requête
         $stmt = $this->pdo->prepare($sql);
@@ -31,14 +31,19 @@ class PersonDB extends PdoWrapper
         ]);
     }
 
-    public function getpersons()
+    public function getPersons()
     {
-        return $this->execute("SELECT * FROM person", null, "mdb\data_template\Movie");
+        return $this->execute("SELECT * FROM person", null, "mdb\data_template\Person");
     }
 
     public function getActors()
     {
         return $this->execute("SELECT * FROM person", null, "mdb\data_template\Person");
+    }
+
+    public function getComposers()
+    {
+        return $this->execute("SELECT * FROM composer", null, "mdb\data_template\Person");
     }
 
     public function getPersonById($id)
@@ -48,7 +53,7 @@ class PersonDB extends PdoWrapper
 
     public function getDirectors()
     {
-        return $this->execute("SELECT * FROM person", null, "mdb\data_template\Movie");
+        return $this->execute("SELECT * FROM person", null, "mdb\data_template\Person");
     }
 
     public function getActorsOfMovie($movieId)
@@ -70,6 +75,18 @@ class PersonDB extends PdoWrapper
         $query = "SELECT p.*
               FROM movie_director md
               INNER JOIN person p ON md.director_id = p.id
+              WHERE md.movie_id = :movieId";
+
+        // Exécution de la requête avec le paramètre :movieId
+        return $this->execute($query, array(':movieId' => $movieId), "mdb\data_template\Person");
+    }
+
+    public function getComposerOfMovie($movieId)
+    {
+        // Requête pour obtenir le directeur d'un film spécifique
+        $query = "SELECT p.*
+              FROM movie_composeur mc
+              INNER JOIN person p ON mc.composer_id = p.id
               WHERE md.movie_id = :movieId";
 
         // Exécution de la requête avec le paramètre :movieId
