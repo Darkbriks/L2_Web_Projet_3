@@ -93,4 +93,20 @@ class PersonDB extends PdoWrapper
         return $this->execute($query, array(':movieId' => $movieId), "mdb\data_template\Person");
     }
 
+    public function getMoviesByPerson($personId)
+    {
+        $query = "SELECT m.*
+              FROM movies m
+              INNER JOIN movie_actor ma ON m.id = ma.movie_id
+              WHERE ma.actor_id = :personId
+              UNION
+              SELECT m.*
+              FROM movies m
+              INNER JOIN movie_director md ON m.id = md.movie_id
+              WHERE md.director_id = :personId";
+
+        return $this->execute($query, array(':personId' => $personId));
+    }
+
+
 }

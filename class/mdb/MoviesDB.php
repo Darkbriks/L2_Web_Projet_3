@@ -47,4 +47,47 @@ class MoviesDB extends PdoWrapper
     {
         return $this->execute("SELECT * FROM movies WHERE title = :title", ["title" => $title], "mdb\data_template\Movie");
     }
+
+    public function getMoviesByActor($firstName, $lastName)
+    {
+        $query = "SELECT m.title
+              FROM movies m
+              JOIN movie_actor ma ON m.id = ma.movie_id
+              JOIN person p ON ma.actor_id = p.id
+              WHERE p.first_name = :firstName AND p.last_name = :lastName";
+
+        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName));
+    }
+
+    public function getMoviesByDirector($firstName, $lastName)
+    {
+        $query = "SELECT m.title
+              FROM movies m
+              JOIN movie_director md ON m.id = md.movie_id
+              JOIN person p ON md.director_id = p.id
+              WHERE p.first_name = :firstName AND p.last_name = :lastName";
+
+        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName));
+    }
+
+    public function getMoviesByRating($minRating)
+    {
+        $query = "SELECT m.title
+              FROM movies m
+              JOIN movie_rating mr ON m.id = mr.movie_id
+              WHERE mr.rating >= :minRating";
+
+        return $this->execute($query, array(':minRating' => $minRating));
+    }
+
+    public function getMoviesByExactRating($exactRating)
+    {
+        $query = "SELECT title
+              FROM movies
+              WHERE rating = :exactRating";
+
+        return $this->execute($query, array(':exactRating' => $exactRating));
+    }
+
+
 }
