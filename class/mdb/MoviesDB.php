@@ -11,10 +11,10 @@ class MoviesDB extends PdoWrapper
         parent::__construct($GLOBALS['db_name'], $GLOBALS['db_host'], $GLOBALS['db_port'], $GLOBALS['db_user'], $GLOBALS['db_pwd']);
     }
 
-    public function addMovies($title, $release_date, $synopsis, $vu, $image_path) {
+    public function addMovies($title, $release_date, $synopsis, $vu, $image_path, $time_duration, $note, $trailer_path, $rating) {
         // Requête SQL pour insérer un nouveau film
-        $sql = "INSERT INTO movies (title, release_date, synopsis, vu, image_path) 
-                VALUES (:title, :release_date, :synopsis, :vu, :image_path)";
+        $sql = "INSERT INTO movies (title, release_date, synopsis, vu, image_path, time_duration, note, trailer_path, rating) 
+                VALUES (:title, :release_date, :synopsis, :vu, :image_path, :time_duration, :note, :trailer_path, :rating)";
 
         // Préparer la requête
         $stmt = $this->pdo->prepare($sql);
@@ -26,7 +26,11 @@ class MoviesDB extends PdoWrapper
             ':release_date' => $release_date,
             ':synopsis' => $synopsis,
             ':vu' => $vu,
-            ':image_path' => $image_path
+            ':image_path' => $image_path,
+            ':time_duration' => $time_duration,
+            ':note' => $note,
+            ':trailer_path' => $trailer_path,
+            ':rating' => $rating
         ]);
     }
     public function getMovies()
