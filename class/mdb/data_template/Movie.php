@@ -20,7 +20,7 @@ class Movie
 
         return "<div class = 'card'>
                     <dic class = 'poster'>
-                        <img src='{$this->poster_url}' alt='Affiche de {$this->title}'>
+                        <img src='{$this->poster_link}' alt='Affiche de {$this->title}'>
                     </div>
                     <div class='movie-info'>
                         <h3>{$this->title} ({$this->release_date})</h3>
