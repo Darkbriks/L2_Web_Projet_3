@@ -7,5 +7,6 @@
                 <li><a href="admin.php">Admin</a></li>
             </ul>
         </nav>
+        <button id="theme-toggle"></button>
     </div>
 </header>
