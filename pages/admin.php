@@ -17,20 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && isset(
 
 <?php ob_start(); ?>
 
-<?php if (isset($_SESSION['admin']) && $_SESSION['admin'])
-{
-    ?>
-    <h2>Ajouter un Nouveau Film depuis une API</h2>
-    <form id="addFilmFromAPIForm" action="add_film_from_api.php" method="POST">
-        <label for="film_name">Nom du Film :</label>
-        <input type="text" id="film_name" name="film_name" required disabled>
-        <input type="submit" value="Rechercher" disabled>
-    </form>
-
-    <h2>Ajouter un Nouveau Film Manuellement</h2>
-
-    <?php
-}
+<?php if (isset($_SESSION['admin']) && $_SESSION['admin']) { $movieForm = new mdb\MovieForm(); echo $movieForm->getForm(); }
 else { include "login.php"; } ?>
 
 <?php $content = ob_get_clean(); ?>
