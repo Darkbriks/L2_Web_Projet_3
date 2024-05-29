@@ -9,7 +9,7 @@ class Template
         <head>
             <meta charset="UTF-8">
             <title>My movies</title>
-            <link rel="stylesheet" href="<?php echo $GLOBALS['CSS_DIR'] ?>my_movies.css">
+            <link rel="stylesheet" href="../css/my_movies.css">
         </head>
         <body>
             <?php include "header.php" ?>

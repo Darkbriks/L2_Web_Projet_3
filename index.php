@@ -1,2 +1,2 @@
-<?php header("Location: pages/?????.php"); //TODO: a remplir
+<?php header("Location: pages/home.php");
 exit();
