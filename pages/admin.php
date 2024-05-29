@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && isset(
     <h2>Ajouter un Nouveau Film depuis une API</h2>
     <form id="addFilmFromAPIForm" action="add_film_from_api.php" method="POST">
         <label for="film_name">Nom du Film :</label>
-        <input type="text" id="film_name" name="film_name" required>
-        <input type="submit" value="Rechercher">
+        <input type="text" id="film_name" name="film_name" required disabled>
+        <input type="submit" value="Rechercher" disabled>
     </form>
 
     <h2>Ajouter un Nouveau Film Manuellement</h2>
