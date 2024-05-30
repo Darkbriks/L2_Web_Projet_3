@@ -44,13 +44,13 @@ CREATE TABLE movie_tag (
 );
 
 CREATE TABLE movie_person (
-                              movie_id INT,
-                              person_id INT,
-                              person_type INT DEFAULT 0 CHECK(person_type IN (0, 1, 2, 3)), -- 0: default, 1: actor, 2: director, 3: composer
-                              played_name VARCHAR(20), -- Null uniquement si c'est un réalisateur ou un compositeur
-                              PRIMARY KEY (movie_id, person_id, person_type),
-                              FOREIGN KEY (movie_id) REFERENCES movies(id),
-                              FOREIGN KEY (person_id) REFERENCES person(id)
+    movie_id INT,
+    person_id INT,
+    person_type INT DEFAULT 0 CHECK(person_type IN (0, 1, 2, 3)), -- 0: default, 1: actor, 2: director, 3: composer
+    played_name VARCHAR(20), -- Null uniquement si c'est un réalisateur ou un compositeur
+    PRIMARY KEY (movie_id, person_id, person_type),
+    FOREIGN KEY (movie_id) REFERENCES movies(id),
+    FOREIGN KEY (person_id) REFERENCES person(id)
 );
 
 
@@ -72,21 +72,21 @@ INSERT INTO tag (name) VALUES
 
 -- Acteurs et réalisateurs de tous les films Star Wars
 INSERT INTO person (first_name, last_name, birth_date, death_date, image_path) VALUES
-                                                                                         ('Harrison', 'Ford', '1942-07-13', NULL, 'Harrison_Ford.jpg'),
-                                                                                         ('Carrie', 'Fisher', '1956-10-21', '2016-12-27', 'Carrie_Fisher.jpg'),
-                                                                                         ('Mark', 'Hamill', '1951-09-25', NULL, 'Mark_Hamill.jpg'),
-                                                                                         ('George', 'Lucas', '1944-05-14', NULL, 'George_Lucas.jpg'), -- Réalisateur
-                                                                                         ('Irvin', 'Kershner', '1923-04-29', '2010-11-27', 'Irvin_Kershner.jpg'), -- Réalisateur
-                                                                                         ('Richard', 'Marquand', '1938-09-22', '1987-09-04', 'Richard_Marquand.jpg'), -- Réalisateur
-                                                                                         ('Liam', 'Neeson', '1952-06-07', NULL, 'Liam_Neeson.jpg'),
-                                                                                         ('Natalie', 'Portman', '1981-06-09', NULL, 'Natalie_Portman.jpg'),
-                                                                                         ('Ewan', 'McGregor', '1971-03-31', NULL, 'Ewan_McGregor.jpg'),
-                                                                                         ('J.J.', 'Abrams', '1966-06-27', NULL, 'JJ_Abrams.jpg'), -- Réalisateur
-                                                                                         ('Rian', 'Johnson', '1973-12-17', NULL, 'Rian_Johnson.jpg'), -- Réalisateur
-                                                                                         ('John', 'Williams', '1932-02-08', NULL, 'John_Williams.jpg'), -- Compositeur
-                                                                                         ('Daisy', 'Ridley', '1992-04-10', NULL, 'Daisy_Ridley.jpg'),
-                                                                                         ('Adam', 'Driver', '1983-11-19', NULL, 'Adam_Driver.jpg'),
-                                                                                         ('John', 'Boyega', '1992-03-17', NULL, 'John_Boyega.jpg');
+     ('Harrison', 'Ford', '1942-07-13', NULL, 'Harrison_Ford.jpg'),
+     ('Carrie', 'Fisher', '1956-10-21', '2016-12-27', 'Carrie_Fisher.jpg'),
+     ('Mark', 'Hamill', '1951-09-25', NULL, 'Mark_Hamill.jpg'),
+     ('George', 'Lucas', '1944-05-14', NULL, 'George_Lucas.jpg'), -- Réalisateur
+     ('Irvin', 'Kershner', '1923-04-29', '2010-11-27', 'Irvin_Kershner.jpg'), -- Réalisateur
+     ('Richard', 'Marquand', '1938-09-22', '1987-09-04', 'Richard_Marquand.jpg'), -- Réalisateur
+     ('Liam', 'Neeson', '1952-06-07', NULL, 'Liam_Neeson.jpg'),
+     ('Natalie', 'Portman', '1981-06-09', NULL, 'Natalie_Portman.jpg'),
+     ('Ewan', 'McGregor', '1971-03-31', NULL, 'Ewan_McGregor.jpg'),
+     ('J.J.', 'Abrams', '1966-06-27', NULL, 'JJ_Abrams.jpg'), -- Réalisateur
+     ('Rian', 'Johnson', '1973-12-17', NULL, 'Rian_Johnson.jpg'), -- Réalisateur
+     ('John', 'Williams', '1932-02-08', NULL, 'John_Williams.jpg'), -- Compositeur
+     ('Daisy', 'Ridley', '1992-04-10', NULL, 'Daisy_Ridley.jpg'),
+     ('Adam', 'Driver', '1983-11-19', NULL, 'Adam_Driver.jpg'),
+     ('John', 'Boyega', '1992-03-17', NULL, 'John_Boyega.jpg');
 
 
 -- Insérer des films
@@ -103,27 +103,30 @@ INSERT INTO movies (title, release_date, synopsis, vu, image_path, time_duration
 
 -- Acteurs et personnages joués dans les films
 INSERT INTO movie_person (movie_id, person_id, played_name, person_type) VALUES
-                                                                             (1, 1, 'Han Solo', 1), (1, 2, 'Princess Leia', 1), (1, 3, 'Luke Skywalker', 1),
-                                                                             (2, 1, 'Han Solo', 1), (2, 2, 'Princess Leia', 1), (2, 3, 'Luke Skywalker', 1),
-                                                                             (3, 1, 'Han Solo', 1), (3, 2, 'Princess Leia', 1), (3, 3, 'Luke Skywalker', 1),
-                                                                             (4, 4, 'Qui-Gon Jinn', 1), (4, 8, 'Padmé Amidala', 1), (4, 9, 'Obi-Wan Kenobi', 1),
-                                                                             (5, 4, 'Qui-Gon Jinn', 1), (5, 8, 'Padmé Amidala', 1), (5, 9, 'Obi-Wan Kenobi', 1),
-                                                                             (6, 4, 'Qui-Gon Jinn', 1), (6, 8, 'Padmé Amidala', 1), (6, 9, 'Obi-Wan Kenobi', 1),
-                                                                             (7, 1, 'Han Solo', 1), (7, 2, 'Princess Leia', 1), (7, 13, 'Rey', 1),
-                                                                             (8, 14, 'Kylo Ren', 1), (8, 15, 'Finn', 1), (8, 13, 'Rey', 1),
-                                                                             (9, 14, 'Kylo Ren', 1), (9, 15, 'Finn', 1), (9, 13, 'Rey', 1),
-                                                                             (1, 4, NULL, 2), (2, 5, NULL, 2), (3, 6, NULL, 2), -- Ajout des réalisateurs pour les anciens films
-                                                                             (4, 4, NULL, 2), (5, 4, NULL, 2), (6, 4, NULL, 2), -- George Lucas comme réalisateur pour les 3 premiers
-                                                                             (7, 10, NULL, 2), (8, 11, NULL, 2), (9, 10, NULL, 2); -- Réalisateurs pour les 7, 8, 9
+     (1, 4, 'Qui-Gon Jinn', 1), (1, 8, 'Padmé Amidala', 1), (1, 9, 'Obi-Wan Kenobi', 1),
+     (2, 4, 'Qui-Gon Jinn', 1), (2, 8, 'Padmé Amidala', 1), (2, 9, 'Obi-Wan Kenobi', 1),
+     (3, 4, 'Qui-Gon Jinn', 1), (3, 8, 'Padmé Amidala', 1), (3, 9, 'Obi-Wan Kenobi', 1),
+     (4, 1, 'Han Solo', 1), (4, 2, 'Princess Leia', 1), (4, 3, 'Luke Skywalker', 1),
+     (5, 1, 'Han Solo', 1), (5, 2, 'Princess Leia', 1), (5, 3, 'Luke Skywalker', 1),
+     (6, 1, 'Han Solo', 1), (6, 2, 'Princess Leia', 1), (6, 3, 'Luke Skywalker', 1),
+     (7, 1, 'Han Solo', 1), (7, 2, 'Princess Leia', 1), (7, 13, 'Rey', 1),
+     (8, 14, 'Kylo Ren', 1), (8, 15, 'Finn', 1), (8, 13, 'Rey', 1),
+     (9, 14, 'Kylo Ren', 1), (9, 15, 'Finn', 1), (9, 13, 'Rey', 1),
+     (1, 4, NULL, 2), (2, 5, NULL, 2), (3, 6, NULL, 2), -- Ajout des réalisateurs pour les anciens films
+     (4, 4, NULL, 2), (5, 4, NULL, 2), (6, 4, NULL, 2), -- George Lucas comme réalisateur pour les 3 premiers
+     (7, 10, NULL, 2), (8, 11, NULL, 2), (9, 10, NULL, 2), -- Réalisateurs pour les 7, 8, 9
+     (1, 12, NULL, 3), (2, 12, NULL, 3), (3, 12, NULL, 3),
+     (4, 12, NULL, 3), (5, 12, NULL, 3), (6, 12, NULL, 3),
+     (7, 12, NULL, 3), (8, 12, NULL, 3), (9, 12, NULL, 3);
 
 -- Insérer des relations movie_tag
 INSERT INTO movie_tag (movie_id, tag_id) VALUES
-                                             (1, 1), (1, 5), (1, 6),
-                                             (2, 1), (2, 5), (2, 6),
-                                             (3, 1), (3, 5), (3, 6),
-                                             (4, 1), (4, 5), (4, 6),
-                                             (5, 1), (5, 5), (5, 6),
-                                             (6, 1), (6, 5), (6, 6),
-                                             (7, 1), (7, 5), (7, 6),
-                                             (8, 1), (8, 5), (8, 6),
-                                             (9, 1), (9, 5), (9, 6);
+     (1, 1), (1, 5), (1, 6),
+     (2, 1), (2, 5), (2, 6),
+     (3, 1), (3, 5), (3, 6),
+     (4, 1), (4, 5), (4, 6),
+     (5, 1), (5, 5), (5, 6),
+     (6, 1), (6, 5), (6, 6),
+     (7, 1), (7, 5), (7, 6),
+     (8, 1), (8, 5), (8, 6),
+     (9, 1), (9, 5), (9, 6);
