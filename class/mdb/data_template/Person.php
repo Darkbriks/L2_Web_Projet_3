@@ -4,24 +4,42 @@ namespace mdb\data_template;
 
 class Person
 {
+    private $id;
+    private $first_name;
+    private $last_name;
+    private $birth_date;
+    private $death_date;
+    private $image_path;
+    private $played_name; // Ajoutez cette propriété si elle n'existe pas
+    private $type;
+
+    // Getters
     public function getId() { return $this->id; }
     public function getFirstName() { return $this->first_name; }
     public function getLastName() { return $this->last_name; }
     public function getBirthDate() { return $this->birth_date; }
     public function getDeathDate() { return $this->death_date; }
-    public function getTypeId() { return $this->type; }
     public function getImagePath() { return $this->image_path; }
+    public function getPlayedName() { return $this->played_name; }
+    public function getType() { return $this->type; }
 
-    public function getHtml_Person()//pas encore fonctionnel
+    // Méthode pour générer le HTML en fonction du type
+    public function getHtml_Person()
     {
-        if($this->type===1) { return $this->getHtml_Actor(); }
-        else if($this->type===2) { return $this->getHtml_Realisator(); }
-        else{
-            return "<div class='person'>" .
-                "<p>" . $this->first_name . " " . $this->last_name . " (" . $this->birth_date ." / still alive) </p>" .
-                "</div>";
+        switch ($this->type) {
+            case 1:
+                return $this->getHtml_Actor();
+            case 2:
+                return $this->getHtml_Director();
+            case 3:
+                return $this->getHtml_Composer();
+            default:
+                return "<div class='person'>
+                    <p>{$this->first_name} {$this->last_name} ({$this->birth_date} / " . ($this->death_date ?? 'still alive') . ")</p>
+                </div>";
         }
     }
+
     public function getHtml_Actor()
     {
         return "<div class='actor'>
@@ -45,12 +63,21 @@ class Person
                     <h3>Music by: {$this->first_name} {$this->last_name}</h3>
                 </div>";
     }
+
     public function getHtml_list(bool $played_name = false)
     {
-        $html = "<li class = 'card' style='cursor: pointer;' id='" . $this->id . "'>" . $this->first_name . " " . $this->last_name . " (" . $this->birth_date . " / ";
-        if($this->death_date===null) { $html .= "still alive)"; } else { $html .= $this->death_date . ")"; }
-        if($played_name && $this->played_name !== null) { $html .= " : " . $this->played_name; } $html .= "</li>
-        <script>document.getElementById('" . $this->id . "').addEventListener('click', function() { window.location.href = 'person.php?id=" . $this->id . "&fullName=" . $this->first_name . " " . $this->last_name . "'; });</script>";
+        $html = "<li class='card' style='cursor: pointer;' id='{$this->id}'>
+                    {$this->first_name} {$this->last_name} ({$this->birth_date} / " . ($this->death_date ?? 'still alive') . ")";
+        if ($played_name && $this->played_name !== null) {
+            $html .= " : {$this->played_name}";
+        }
+        $html .= "</li>
+        <script>
+            document.getElementById('{$this->id}').addEventListener('click', function() {
+                window.location.href = 'person.php?id={$this->id}&fullName={$this->first_name} {$this->last_name}';
+            });
+        </script>";
         return $html;
     }
 }
+
