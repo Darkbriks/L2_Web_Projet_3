@@ -76,3 +76,145 @@ body.dark-theme {
     padding: 10px 20px;
     cursor: pointer;
 }
+
+.tags-menu {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.tag {
+    padding: 10px 15px;
+    background-color: dodgerblue;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.tag:hover {
+    background-color: blue;
+}
+
+.movies-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 100px;
+    overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    width: max-content;
+    height: 600px;
+    border-top: 1px solid white;
+    position: relative;
+}
+
+.movie-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: transparent;
+    transition: transform 0.2s;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+}
+
+.movie-poster img {
+    width: 100%;
+    display: block;
+}
+
+.movie-details {
+    display: none;
+    justify-content: center;
+    position: absolute;
+    width: 300px;
+    height: 450px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.movie-details h3 {
+    margin-top: 0;
+}
+
+.movie-synopsis {
+    font-size: 14px;
+    color: wheat;
+}
+
+.movie-producer, .movie-actors, .movie-tags, .movie-status {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.movie-actors, .movie-producer, h3{
+    color: antiquewhite;
+}
+
+.movie-tags {
+    color: dodgerblue;
+}
+
+.movie-status {
+    font-weight: bold;
+    color: forestgreen;
+}
+
+.slider-container {
+    overflow-x: auto;
+    position: relative;
+}
+.producers-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.producer-card, .producer-details {
+    border: 1px solid white;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: transparent;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.producer-card:hover, .producer-details:hover {
+    transform: scale(1.05);
+}
+
+.producer-image img {
+    width: 100%;
+    display: block;
+}
+
+.producer-name {
+    padding: 10px;
+    text-align: center;
+}
+
+.producer-info {
+    padding: 20px;
+    color: white;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 8px;
+}
+
+.producer-info p {
+    margin: 5px 0;
+}

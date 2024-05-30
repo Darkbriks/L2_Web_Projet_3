@@ -7,10 +7,24 @@
 </head>
 <header data-include = "header.html"></header>
 <body>
-<h1>This is my movies page</h1>
+<h1>MOVIES</h1>
+<div class="tags-menu" id="tags-menu">
+    <span class="tag" data-tag="All">All</span>
+    <span class="tag" data-tag="Action">Action</span>
+    <span class="tag" data-tag="Drame">Drame</span>
+    <span class="tag" data-tag="Comédie">Comédie</span>
+    <span class="tag" data-tag="Add">Add Tags...</span>
+
+    <!-- tags list -->
+</div>
+<div class = "slider-container">
+    <div class="movies-container" id="movies-container"></div>
+</div>
 
 
 <footer data-include="footer.html"></footer>
-<script src="../js/script.js"></script>
+<button id="theme">Dark Mode</button>
+<script src="../js/movie.js"></script>
+<script src ="../js/template.js"></script>
 </body>
 </html>
