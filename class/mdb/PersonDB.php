@@ -6,28 +6,16 @@ use pdo_wrapper\PdoWrapper;
 
 class PersonDB extends PdoWrapper
 {
-
     public function __construct()
     {
         parent::__construct($GLOBALS['db_name'], $GLOBALS['db_host'], $GLOBALS['db_port'], $GLOBALS['db_user'], $GLOBALS['db_pwd']);
     }
-    public function addPerson($first_name, $last_name, $birth_date, $death_date, $type, $image_path) {
-        // Requête SQL pour insérer un nouveau film
-        $sql = "INSERT INTO person (first_name, last_name, birth_date, death_date,image_path) 
-                VALUES (:first_name, :last_name, :birth_date, :death_date,:image_path)";
 
-        // Préparer la requête
+    public function addPerson($first_name, $last_name, $birth_date, $death_date, $type, $image_path): bool
+    {
+        $sql = "INSERT INTO person (first_name, last_name, birth_date, death_date, type ,image_path) VALUES (:first_name, :last_name, :birth_date, :death_date, :type,:image_path)";
         $stmt = $this->pdo->prepare($sql);
-
-        // Exécuter la requête avec les valeurs fournies
-        // Retourner true/false
-        return $stmt->execute([
-            ':first_name' => $first_name,
-            ':last_name' => $last_name,
-            ':birth_date' => $birth_date,
-            ':death_date' => $death_date,
-            ':image_path' => $image_path
-        ]);
+        return $stmt->execute([':first_name' => $first_name, ':last_name' => $last_name, ':birth_date' => $birth_date, ':type' => $type, ':death_date' => $death_date, ':image_path' => $image_path ]);
     }
 
     public function getPersons()
@@ -38,7 +26,7 @@ class PersonDB extends PdoWrapper
     // Méthode pour obtenir uniquement les acteurs
     public function getActors()
     {
-        return $this->execute("SELECT * FROM person WHERE type = 1", null, "mdb\data_template\Person");
+        return $this->execute("SELECT * FROM person WHERE type = 0 OR type = 1", null, "mdb\data_template\Person");
     }
 
     // Méthode pour obtenir uniquement les compositeurs
@@ -50,7 +38,7 @@ class PersonDB extends PdoWrapper
     // Méthode pour obtenir uniquement les réalisateurs
     public function getDirectors()
     {
-        return $this->execute("SELECT * FROM person WHERE type = 2", null, "mdb\data_template\Person");
+        return $this->execute("SELECT * FROM person WHERE type = 0 OR type = 2", null, "mdb\data_template\Person");
     }
     public function getPersonById($id)
     {
@@ -98,6 +86,4 @@ class PersonDB extends PdoWrapper
 
         return $this->execute($query, array(':personId' => $personId, ':personType' => $personType), "mdb\data_template\Movie");
     }
-
-
 }
