@@ -9,13 +9,13 @@ Autoloader::register();
 
 <?php ob_start(); ?>
 
-    <h2>Liste des Acteurs</h2>
+    <h2>Liste des Peoples</h2>
     <div id="film-list">
         <ul>
             <?php
-            $actorsDB = new mdb\PersonDB();
-            $actors = $actorsDB->getActors();
-            foreach ($actors as $actor) { echo $actor->getHtml_list(); } ?>
+            $personDB = new mdb\PersonDB();
+            $personDB = $personDB->getPersons();
+            foreach ($personDB as $person) { echo $person->getHtml_list(); } ?>
         </ul>
     </div>
 
