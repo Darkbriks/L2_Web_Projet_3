@@ -10,29 +10,25 @@ class LinkBD extends PdoWrapper
     {
         parent::__construct($GLOBALS['db_name'], $GLOBALS['db_host'], $GLOBALS['db_port'], $GLOBALS['db_user'], $GLOBALS['db_pwd']);
     }
-    public function addMovie_Actor($movie_id, $actor_id,$played_name): bool
+    public function addMovie_Person($movieId, $personId, $playedName, $personType)
     {
-        // Requête SQL pour lier un acteur à un film
-        $sql = "INSERT INTO movie_actor (movie_id, actor_id,played_name) 
-                VALUES (:movie_id, :actor_id, :played_name)";
-
-        // Préparer la requête
-        $stmt = $this->pdo->prepare($sql);
-
-        // Exécuter la requête avec les valeurs fournies
-        // Retourner true/false
-        return $stmt->execute([
-            ':movie_id' => $movie_id,
-            ':actor_id' => $actor_id,
-            ':played_name' => $played_name]);
+        $query = "INSERT INTO movie_person (movie_id, person_id, played_name, person_type)
+              VALUES (:movieId, :personId, :playedName, :personType)";
+        $params = array(
+            ':movieId' => $movieId,
+            ':personId' => $personId,
+            ':playedName' => $playedName,
+            ':personType' => $personType
+        );
+        return $this->execute($query, $params);
     }
 
-    public function addListOfMovie_Actor($list): bool
-    {
-        // Requête SQL pour lier une liste d'acteurs à un film
-        foreach ($list as $actor)
-        {
-            if(!$this->addMovie_Actor($actor['id'],$actor['actor_id'],$actor['played_name'])) { return false; }
+    public function addListOfMovie_Person($list) {
+        // Requête SQL pour insérer un nouveau tag
+        foreach ($list as $person) {
+            if(!$this->addMovie_Person($person['movie_id'],$person['person_id'],$person['played_name'],$person['person_type'])) {
+                return false;
+            }
         }
         return true;
     }
@@ -106,4 +102,5 @@ class LinkBD extends PdoWrapper
         }
         return true;
     }
+
 }
