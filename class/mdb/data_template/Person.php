@@ -4,6 +4,14 @@ namespace mdb\data_template;
 
 class Person
 {
+    public function getId() { return $this->id; }
+    public function getFirstName() { return $this->first_name; }
+    public function getLastName() { return $this->last_name; }
+    public function getBirthDate() { return $this->birth_date; }
+    public function getDeathDate() { return $this->death_date; }
+    public function getTypeId() { return $this->type; }
+    public function getImagePath() { return $this->image_path; }
+
     public function getHtml_Person()//pas encore fonctionnel
     {
         if($this->type===1) { return $this->getHtml_Actor(); }
