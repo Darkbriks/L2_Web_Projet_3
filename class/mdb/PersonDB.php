@@ -13,8 +13,8 @@ class PersonDB extends PdoWrapper
     }
     public function addPerson($first_name, $last_name, $birth_date, $death_date, $type, $image_path) {
         // Requête SQL pour insérer un nouveau film
-        $sql = "INSERT INTO person (first_name, last_name, birth_date, death_date, type,image_path) 
-                VALUES (:first_name, :last_name, :birth_date, :death_date, :type,:image_path)";
+        $sql = "INSERT INTO person (first_name, last_name, birth_date, death_date,image_path) 
+                VALUES (:first_name, :last_name, :birth_date, :death_date,:image_path)";
 
         // Préparer la requête
         $stmt = $this->pdo->prepare($sql);
@@ -26,7 +26,6 @@ class PersonDB extends PdoWrapper
             ':last_name' => $last_name,
             ':birth_date' => $birth_date,
             ':death_date' => $death_date,
-            ':type' => $type,
             ':image_path' => $image_path
         ]);
     }
@@ -36,76 +35,68 @@ class PersonDB extends PdoWrapper
         return $this->execute("SELECT * FROM person", null, "mdb\data_template\Person");
     }
 
+    // Méthode pour obtenir uniquement les acteurs
     public function getActors()
     {
-        return $this->execute("SELECT * FROM person", null, "mdb\data_template\Person");
+        return $this->execute("SELECT * FROM person WHERE type = 1", null, "mdb\data_template\Person");
     }
 
+    // Méthode pour obtenir uniquement les compositeurs
     public function getComposers()
     {
-        return $this->execute("SELECT * FROM composer", null, "mdb\data_template\Person");
+        return $this->execute("SELECT * FROM person WHERE type = 3", null, "mdb\data_template\Person");
     }
 
+    // Méthode pour obtenir uniquement les réalisateurs
+    public function getDirectors()
+    {
+        return $this->execute("SELECT * FROM person WHERE type = 2", null, "mdb\data_template\Person");
+    }
     public function getPersonById($id)
     {
         return $this->execute("SELECT * FROM person WHERE id = :id", ["id" => $id], "mdb\data_template\Person");
     }
 
-    public function getDirectors()
-    {
-        return $this->execute("SELECT * FROM person", null, "mdb\data_template\Person");
-    }
-
     public function getActorsOfMovie($movieId)
     {
-        // Requête pour obtenir les acteurs et les personnages qu'ils ont joués dans un film spécifique
-        $query = "SELECT p.*, ma.played_name
-              FROM movie_actor ma
-              INNER JOIN person p ON ma.actor_id = p.id
-              WHERE ma.movie_id = :movieId";
+        $query = "SELECT p.* 
+                  FROM movie_person mp
+                  INNER JOIN person p ON mp.person_id = p.id
+                  WHERE mp.movie_id = :movieId AND mp.person_type = 1";
 
-        // Exécution de la requête avec le paramètre :movieId
-        return $this->execute($query, array(':movieId' => $movieId), "mdb\data_template\Person");
-
-    }
-
-    public function getDirectorOfMovie($movieId)
-    {
-        // Requête pour obtenir le directeur d'un film spécifique
-        $query = "SELECT p.*
-              FROM movie_director md
-              INNER JOIN person p ON md.director_id = p.id
-              WHERE md.movie_id = :movieId";
-
-        // Exécution de la requête avec le paramètre :movieId
         return $this->execute($query, array(':movieId' => $movieId), "mdb\data_template\Person");
     }
 
-    public function getComposerOfMovie($movieId)
+    // Obtenir les réalisateurs d'un film
+    public function getDirectorsOfMovie($movieId)
     {
-        // Requête pour obtenir le directeur d'un film spécifique
-        $query = "SELECT p.*
-              FROM movie_composeur mc
-              INNER JOIN person p ON mc.composer_id = p.id
-              WHERE md.movie_id = :movieId";
+        $query = "SELECT p.* 
+                  FROM movie_person mp
+                  INNER JOIN person p ON mp.person_id = p.id
+                  WHERE mp.movie_id = :movieId AND mp.person_type = 2";
 
-        // Exécution de la requête avec le paramètre :movieId
         return $this->execute($query, array(':movieId' => $movieId), "mdb\data_template\Person");
     }
 
-    public function getMoviesByPerson($personId)
+    // Obtenir les compositeurs d'un film
+    public function getComposersOfMovie($movieId)
     {
-        $query = "SELECT m.*
-              FROM movies m
-              INNER JOIN movie_actor ma ON m.id = ma.movie_id
-              WHERE ma.actor_id = :personId
-              UNION
-              SELECT m.*
-              FROM movies m
-              INNER JOIN movie_director md ON m.id = md.movie_id
-              WHERE md.director_id = :personId";
+        $query = "SELECT p.* 
+                  FROM movie_person mp
+                  INNER JOIN person p ON mp.person_id = p.id
+                  WHERE mp.movie_id = :movieId AND mp.person_type = 3";
 
-        return $this->execute($query, array(':personId' => $personId));
+        return $this->execute($query, array(':movieId' => $movieId), "mdb\data_template\Person");
+    }
+
+    public function getMoviesOfPerson($personId, $personType)
+    {
+        $query = "SELECT m.* 
+              FROM movie_person mp
+              INNER JOIN movies m ON mp.movie_id = m.id
+              WHERE mp.person_id = :personId AND mp.person_type = :personType";
+
+        return $this->execute($query, array(':personId' => $personId, ':personType' => $personType), "mdb\data_template\Movie");
     }
 
 
