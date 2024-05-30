@@ -4,6 +4,17 @@ namespace mdb\data_template;
 
 class Movie
 {
+    public function getId() { return $this->id; }
+    public function getTitle() { return $this->title; }
+    public function getReleaseDate() { return $this->release_date; }
+    public function getSynopsis() { return $this->synopsis; }
+    public function getVu() { return $this->vu; }
+    public function getImagePath() { return $this->image_path; }
+    public function getTimeDuration() { return $this->time_duration; }
+    public function getNote() { return $this->note; }
+    public function getTrailerPath() { return $this->trailer_path; }
+    public function getRating() { return $this->rating; }
+
     public function getHtml()
     {
         return "<div class = 'card'>

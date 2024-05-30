@@ -1,4 +1,4 @@
 <?php
-$GLOBALS['PHP_DIR'] = __DIR__ . "/";
-$GLOBALS['CSS_DIR'] = $GLOBALS['PHP_DIR']."css/";
+$GLOBALS['PHP_DIR'] = __DIR__ . DIRECTORY_SEPARATOR;
+$GLOBALS['CSS_DIR'] = $GLOBALS['PHP_DIR']."css" . DIRECTORY_SEPARATOR;
 $GLOBALS['PDO_WRAPPER'] = $GLOBALS['PHP_DIR'] . "class/pdo_wrapper/PdoWrapper.php";

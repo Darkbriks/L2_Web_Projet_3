@@ -3,6 +3,7 @@ $admin_user = 'admin';
 $admin_pass = 'admin';
 
 require_once "../config.php";
+require_once "../DB_CREDENTIALS.php";
 require ".." . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR . "Autoloader.php";
 Autoloader::register();
 
@@ -17,8 +18,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && isset(
 
 <?php ob_start(); ?>
 
-<?php if (isset($_SESSION['admin']) && $_SESSION['admin']) { $movieForm = new mdb\MovieForm(); echo $movieForm->getForm(); }
-else { include "login.php"; } ?>
+<?php
+if (isset($_SESSION['admin']) && $_SESSION['admin'])
+{
+    $movieForm = new mdb\MovieForm();
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title']))
+    {
+        try { $movieForm->createMovie($_POST); }
+        catch (Exception $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+    echo $movieForm->getForm();
+}
+else { include "login.php"; }
+?>
 
 <?php $content = ob_get_clean(); ?>
 <?php Template::render($content);

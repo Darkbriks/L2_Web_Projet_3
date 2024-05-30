@@ -11,7 +11,8 @@ class MoviesDB extends PdoWrapper
         parent::__construct($GLOBALS['db_name'], $GLOBALS['db_host'], $GLOBALS['db_port'], $GLOBALS['db_user'], $GLOBALS['db_pwd']);
     }
 
-    public function addMovies($title, $release_date, $synopsis, $vu, $image_path, $time_duration, $note, $trailer_path, $rating) {
+    private function addMovie($title, $release_date, $synopsis, $vu, $image_path, $time_duration, $note, $trailer_path, $rating): bool
+    {
         // Requête SQL pour insérer un nouveau film
         $sql = "INSERT INTO movies (title, release_date, synopsis, vu, image_path, time_duration, note, trailer_path, rating) 
                 VALUES (:title, :release_date, :synopsis, :vu, :image_path, :time_duration, :note, :trailer_path, :rating)";
@@ -33,22 +34,32 @@ class MoviesDB extends PdoWrapper
             ':rating' => $rating
         ]);
     }
-    public function getMovies()
+
+    public function addMovieAndReturnId($title, $release_date, $synopsis, $vu, $image_path, $time_duration, $note, $trailer_path, $rating): int
+    {
+        // Retournes l'id du film ajouté ou 0 si l'ajout a échoué
+        if ($this->addMovie($title, $release_date, $synopsis, $vu, $image_path, $time_duration, $note, $trailer_path, $rating))
+        {
+            return $this->pdo->lastInsertId();
+        }
+        return 0;
+    }
+    public function getMovies(): array
     {
         return $this->execute("SELECT * FROM movies", null, "mdb\data_template\Movie");
     }
 
-    public function getMovieById($id)
+    public function getMovieById($id): array
     {
         return $this->execute("SELECT * FROM movies WHERE id = :id", ["id" => $id], "mdb\data_template\Movie");
     }
 
-    public function getMovieByTitle($title)
+    public function getMovieByTitle($title): array
     {
         return $this->execute("SELECT * FROM movies WHERE title = :title", ["title" => $title], "mdb\data_template\Movie");
     }
 
-    public function getMoviesByActor($firstName, $lastName)
+    public function getMoviesByActor($firstName, $lastName): array
     {
         $query = "SELECT m.title
               FROM movies m
@@ -59,7 +70,7 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName));
     }
 
-    public function getMoviesByDirector($firstName, $lastName)
+    public function getMoviesByDirector($firstName, $lastName): array
     {
         $query = "SELECT m.title
               FROM movies m
@@ -70,7 +81,7 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName));
     }
 
-    public function getMoviesByRating($minRating)
+    public function getMoviesByRating($minRating): array
     {
         $query = "SELECT m.title
               FROM movies m
@@ -80,14 +91,10 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query, array(':minRating' => $minRating));
     }
 
-    public function getMoviesByExactRating($exactRating)
+    public function getMoviesByExactRating($exactRating): array
     {
-        $query = "SELECT title
-              FROM movies
-              WHERE rating = :exactRating";
+        $query = "SELECT title FROM movies WHERE rating = :exactRating";
 
         return $this->execute($query, array(':exactRating' => $exactRating));
     }
-
-
 }
