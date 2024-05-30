@@ -45,12 +45,12 @@ class Person
                     <h3>Music by: {$this->first_name} {$this->last_name}</h3>
                 </div>";
     }
-}
-public function getHtml_list(bool $played_name = false)
-{
-    $html = "<li class = 'card' style='cursor: pointer;' id='" . $this->id . "'>" . $this->first_name . " " . $this->last_name . " (" . $this->birth_date . " / ";
-    if($this->death_date===null) { $html .= "still alive)"; } else { $html .= $this->death_date . ")"; }
-    if($played_name && $this->played_name !== null) { $html .= " : " . $this->played_name; } $html .= "</li>
+    public function getHtml_list(bool $played_name = false)
+    {
+        $html = "<li class = 'card' style='cursor: pointer;' id='" . $this->id . "'>" . $this->first_name . " " . $this->last_name . " (" . $this->birth_date . " / ";
+        if($this->death_date===null) { $html .= "still alive)"; } else { $html .= $this->death_date . ")"; }
+        if($played_name && $this->played_name !== null) { $html .= " : " . $this->played_name; } $html .= "</li>
         <script>document.getElementById('" . $this->id . "').addEventListener('click', function() { window.location.href = 'person.php?id=" . $this->id . "&fullName=" . $this->first_name . " " . $this->last_name . "'; });</script>";
-    return $html;
+        return $html;
+    }
 }
