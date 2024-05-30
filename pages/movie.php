@@ -17,17 +17,25 @@ Autoloader::register();
     $movies = $moviesDB->getMovieById($id);
     echo $movies[0]->getHtml();
 
-    $actorsDB = new mdb\PersonDB();
-    $actors = $actorsDB->getActorsOfMovie($movies[0]->id);
-    $directors = $actorsDB->getDirectorOfMovie($movies[0]->id);
+    $personDB = new mdb\PersonDB();
+    $directors = $personDB->getDirectorsOfMovie($movies[0]->id);
+    $actors = $personDB->getActorsOfMovie($movies[0]->id);
+    $composers = $personDB->getComposersOfMovie($movies[0]->id);
 
-    ?><h3>DIRECTOR(S)</h3><?php
+    ?><h3>DIRECTOR(S)</h3>
+    <ul><?php
     foreach ($directors as $director) { echo $director->getHtml_Director(); }
+    ?></ul><?php
 
     ?><h3>ACTOR(S)</h3>
     <ul><?php
     foreach ($actors as $actor) { echo $actor->getHtml_list(true); }
-    ?></ul>
+    ?></ul><?php
+
+    ?><h3>COMPOSER(S)</h3>
+    <ul><?php
+    foreach ($composers as $composer) { echo $composer->getHtml_list(); }
+?>
 
 <?php $content = ob_get_clean(); ?>
 <?php Template::render($content);

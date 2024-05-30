@@ -47,7 +47,7 @@ class PersonDB extends PdoWrapper
 
     public function getActorsOfMovie($movieId)
     {
-        $query = "SELECT p.* 
+        $query = "SELECT p.*, mp.played_name 
                   FROM movie_person mp
                   INNER JOIN person p ON mp.person_id = p.id
                   WHERE mp.movie_id = :movieId AND mp.person_type = 1";

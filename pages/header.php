@@ -5,7 +5,7 @@
             <ul>
                 <li><a href="home.php">Accueil</a></li>
                 <li><a href="allMovies.php">Films</a></li>
-                <li><a href="allActors.php">Acteurs</a></li>
+                <li><a href="allPeople.php">Peoples</a></li>
                 <li><a href="admin.php">Admin</a></li>
             </ul>
         </nav>
