@@ -34,16 +34,11 @@ class TagBD extends PdoWrapper
         return $this->execute("SELECT * FROM tag WHERE name = ?", $name, "mdb\data_template\Tag");
     }
 
-    public function addTag($name): bool
+    public function addTag($name): int
     {
-        // Requête SQL pour insérer un nouveau tag
         $sql = "INSERT INTO tag (name) VALUES (:name)";
-
-        // Préparer la requête
         $stmt = $this->pdo->prepare($sql);
-
-        // Exécuter la requête avec les valeurs fournies
-        // Retourner true/false
-        return $stmt->execute([':name' => $name]);
+        if($stmt->execute([':name' => $name])) { return $this->pdo->lastInsertId(); }
+        return 0;
     }
 }

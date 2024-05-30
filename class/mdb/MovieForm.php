@@ -41,11 +41,19 @@ class MovieForm
                     <input type='text' name='trailer' id='trailer' required>
                 </div>
                 <div> 
-                    <label for='category'>Catégorie</label>
-                    <select name='category' id='category' required>
-                        <option value=''>-- Choisir une catégorie --</option>";
-        foreach ($categories as $category) { $html .= "<option value='" . $category->getId() . "'>" . $category->getName() . "</option>"; }
-        $html .= "</select>
+                    <label for='category'>Catégories</label>
+                    <div id = 'categories'>";
+        foreach ($categories as $category) {
+            $html .= "<div>
+                        <input type='checkbox' name='category[]' id='category_" . $category->getId() . "' value='" . $category->getId() . "'>
+                        <label for='category_" . $category->getId() . "'>" . $category->getName() . "</label>
+                      </div>";
+        }
+        $html .= "</div>
+                    <div>
+                      <input type='text' id='newCategory' placeholder='Nouveau tag'>
+                      <button type='button' id='addCategory'>Ajouter Tag</button>
+                  </div>
                 </div>
                 <div> 
                     <label for='age_limit'>Limite d'Age</label>
@@ -67,21 +75,7 @@ class MovieForm
                     <button type='reset'>Annuler</button>
                 </div>
             </form>
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    document.getElementById('posters').addEventListener('change', function() {
-                        var file = this.files[0];
-                        var reader = new FileReader();
-                        reader.onload = function(e) {
-                            document.getElementById('posters-preview').innerHTML = '<img src=\"' + e.target.result + '\" alt=\"' + file.name + '\">';
-                        };
-                        reader.readAsDataURL(file);
-                    });
-                    document.getElementById('poster_alt').addEventListener('change', function() { document.getElementById('posters-preview').getElementsByTagName('img')[0].alt = this.value; });
-                });
-                // TODO 1: Add form validation
-            </script>
-            ";
+            <script src=" . $GLOBALS['JS_DIR'] . "MovieForm.js" . "></script>";
 
         return $html;
     }
@@ -116,9 +110,8 @@ class MovieForm
         if (empty($data['trailer']) || !filter_var($data['trailer'], FILTER_VALIDATE_URL) || !preg_match('/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|dailymotion\.com|vimeo\.com)\/.+$/', $data['trailer']))
         { throw new Exception('La bande annonce doit être une URL valide vers une vidéo (youtube, dailymotion, vimeo)'); }
 
-        // La liste des catégories doit contenir au moins une catégorie. Si une catégorie n'existe pas, elle doit être ajoutée à la base de données
-        $data['category'] = htmlspecialchars(trim($data['category']));
-        if (empty($data['category'])) { throw new Exception('La catégorie doit contenir au moins une catégorie'); }
+        // La liste des catégories doit contenir au moins un élément
+        if (empty($data['category'])) { throw new Exception('Le film doit appartenir à au moins une catégorie'); }
 
         // La limite d'âge ne doit pas être vide, et doit être un entier positif entre 0 et 18
         $data['age_limit'] = htmlspecialchars(trim($data['age_limit']));
@@ -133,7 +126,7 @@ class MovieForm
         catch (Exception $e) { throw new Exception($e->getMessage()); }
         $movie_id = $this->saveMovie($data);
         if ($movie_id === 0)  { throw new Exception('Erreur lors de l\'ajout du film dans la base de données'); }
-        else { $this->saveCategories(explode(',', $data['category']), $movie_id); }
+        else { $this->saveCategories($data['category'], $movie_id); }
     }
 
     /**
@@ -162,6 +155,7 @@ class MovieForm
         $linkDB = new LinkBD();
         foreach ($categories as $category)
         {
+            $category = htmlspecialchars(trim($category));
             $linkDB->addMovie_Tag($movie_id, $category);
         }
     }
