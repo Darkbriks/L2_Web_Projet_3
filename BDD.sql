@@ -2,8 +2,7 @@ DROP DATABASE IF EXISTS L2_Web_Projet_3;
 CREATE DATABASE IF NOT EXISTS L2_Web_Projet_3;
 USE L2_Web_Projet_3;
 
-DROP TABLE IF EXISTS movie_actor;
-DROP TABLE IF EXISTS movie_director;
+DROP TABLE IF EXISTS movie_person;
 DROP TABLE IF EXISTS movie_tag;
 DROP TABLE IF EXISTS tag;
 DROP TABLE IF EXISTS person;
@@ -28,7 +27,6 @@ CREATE TABLE person (
     last_name VARCHAR(50) NOT NULL,
     birth_date DATE NOT NULL,
     death_date DATE,
-    type INT DEFAULT 0 CHECK(type IN (0, 1, 2, 3)),
     image_path VARCHAR(100) NOT NULL
 );
 
@@ -48,13 +46,13 @@ CREATE TABLE movie_tag (
 CREATE TABLE movie_person (
                               movie_id INT,
                               person_id INT,
-                              person_type INT DEFAULT 0 CHECK(type IN (0, 1, 2, 3)),
-                              played_name VARCHAR(20), /*Null uniquement si c'est un réalisateur ou un compositeur*/
+                              person_type INT DEFAULT 0 CHECK(person_type IN (0, 1, 2, 3)), -- 0: default, 1: actor, 2: director, 3: composer
+                              played_name VARCHAR(20), -- Null uniquement si c'est un réalisateur ou un compositeur
                               PRIMARY KEY (movie_id, person_id, person_type),
                               FOREIGN KEY (movie_id) REFERENCES movies(id),
-                              FOREIGN KEY (actor_id) REFERENCES person(id)
-                                  FOREIGN KEY (person_type ) REFERENCES person(type)
+                              FOREIGN KEY (person_id) REFERENCES person(id)
 );
+
 
 INSERT INTO tag (name) VALUES
                           ('Action'),
@@ -72,22 +70,22 @@ INSERT INTO tag (name) VALUES
                           ('Thriller'),
                           ('Western');
 -- Acteurs et réalisateurs de tous les films Star Wars
-INSERT INTO person (first_name, last_name, birth_date, death_date, type, image_path) VALUES
-                                                                                         ('Harrison', 'Ford', '1942-07-13', NULL, 1, 'Harrison_Ford.jpg'),
-                                                                                         ('Carrie', 'Fisher', '1956-10-21', '2016-12-27', 1, 'Carrie_Fisher.jpg'),
-                                                                                         ('Mark', 'Hamill', '1951-09-25', NULL, 1, 'Mark_Hamill.jpg'),
-                                                                                         ('George', 'Lucas', '1944-05-14', NULL, 2, 'George_Lucas.jpg'), -- Réalisateur
-                                                                                         ('Irvin', 'Kershner', '1923-04-29', '2010-11-27', 2, 'Irvin_Kershner.jpg'), -- Réalisateur
-                                                                                         ('Richard', 'Marquand', '1938-09-22', '1987-09-04', 2, 'Richard_Marquand.jpg'), -- Réalisateur
-                                                                                         ('Liam', 'Neeson', '1952-06-07', NULL, 1, 'Liam_Neeson.jpg'),
-                                                                                         ('Natalie', 'Portman', '1981-06-09', NULL, 1, 'Natalie_Portman.jpg'),
-                                                                                         ('Ewan', 'McGregor', '1971-03-31', NULL, 1, 'Ewan_McGregor.jpg'),
-                                                                                         ('J.J.', 'Abrams', '1966-06-27', NULL, 2, 'JJ_Abrams.jpg'), -- Réalisateur
-                                                                                         ('Rian', 'Johnson', '1973-12-17', NULL, 2, 'Rian_Johnson.jpg'), -- Réalisateur
-                                                                                         ('John', 'Williams', '1932-02-08', NULL, 3, 'John_Williams.jpg'), -- Compositeur
-                                                                                         ('Daisy', 'Ridley', '1992-04-10', NULL, 1, 'Daisy_Ridley.jpg'),
-                                                                                         ('Adam', 'Driver', '1983-11-19', NULL, 1, 'Adam_Driver.jpg'),
-                                                                                         ('John', 'Boyega', '1992-03-17', NULL, 1, 'John_Boyega.jpg');
+INSERT INTO person (first_name, last_name, birth_date, death_date, image_path) VALUES
+                                                                                         ('Harrison', 'Ford', '1942-07-13', NULL, 'Harrison_Ford.jpg'),
+                                                                                         ('Carrie', 'Fisher', '1956-10-21', '2016-12-27', 'Carrie_Fisher.jpg'),
+                                                                                         ('Mark', 'Hamill', '1951-09-25', NULL, 'Mark_Hamill.jpg'),
+                                                                                         ('George', 'Lucas', '1944-05-14', NULL, 'George_Lucas.jpg'), -- Réalisateur
+                                                                                         ('Irvin', 'Kershner', '1923-04-29', '2010-11-27', 'Irvin_Kershner.jpg'), -- Réalisateur
+                                                                                         ('Richard', 'Marquand', '1938-09-22', '1987-09-04', 'Richard_Marquand.jpg'), -- Réalisateur
+                                                                                         ('Liam', 'Neeson', '1952-06-07', NULL, 'Liam_Neeson.jpg'),
+                                                                                         ('Natalie', 'Portman', '1981-06-09', NULL, 'Natalie_Portman.jpg'),
+                                                                                         ('Ewan', 'McGregor', '1971-03-31', NULL, 'Ewan_McGregor.jpg'),
+                                                                                         ('J.J.', 'Abrams', '1966-06-27', NULL, 'JJ_Abrams.jpg'), -- Réalisateur
+                                                                                         ('Rian', 'Johnson', '1973-12-17', NULL, 'Rian_Johnson.jpg'), -- Réalisateur
+                                                                                         ('John', 'Williams', '1932-02-08', NULL, 'John_Williams.jpg'), -- Compositeur
+                                                                                         ('Daisy', 'Ridley', '1992-04-10', NULL, 'Daisy_Ridley.jpg'),
+                                                                                         ('Adam', 'Driver', '1983-11-19', NULL, 'Adam_Driver.jpg'),
+                                                                                         ('John', 'Boyega', '1992-03-17', NULL, 'John_Boyega.jpg');
 
 
 -- Insérer des films
@@ -116,10 +114,6 @@ INSERT INTO movie_person (movie_id, person_id, played_name, person_type) VALUES
                                                                              (1, 4, NULL, 2), (2, 5, NULL, 2), (3, 6, NULL, 2), -- Ajout des réalisateurs pour les anciens films
                                                                              (4, 4, NULL, 2), (5, 4, NULL, 2), (6, 4, NULL, 2), -- George Lucas comme réalisateur pour les 3 premiers
                                                                              (7, 10, NULL, 2), (8, 11, NULL, 2), (9, 10, NULL, 2); -- Réalisateurs pour les 7, 8, 9
--- Réalisateurs des films
-INSERT INTO movie_person (movie_id, person_id) VALUES
-                                                       (1, 4), (2, 4), (3, 4), (4, 4), (5, 4), (6, 4), (7, 10), (8, 11), (9, 10);
-
 
 -- Insérer des relations movie_tag
 INSERT INTO movie_tag (movie_id, tag_id) VALUES
@@ -132,6 +126,3 @@ INSERT INTO movie_tag (movie_id, tag_id) VALUES
                                              (7, 1), (7, 5), (7, 6),
                                              (8, 1), (8, 5), (8, 6),
                                              (9, 1), (9, 5), (9, 6);
-
-INSERT INTO movie_person (movie_id, person_id) VALUES
-                                             (7, 10);
