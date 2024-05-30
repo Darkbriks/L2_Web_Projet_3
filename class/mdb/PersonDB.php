@@ -6,17 +6,14 @@ use pdo_wrapper\PdoWrapper;
 
 class PersonDB extends PdoWrapper
 {
-
     public function __construct()
     {
         parent::__construct($GLOBALS['db_name'], $GLOBALS['db_host'], $GLOBALS['db_port'], $GLOBALS['db_user'], $GLOBALS['db_pwd']);
     }
-    public function addPerson($first_name, $last_name, $birth_date, $death_date, $type, $image_path) {
-        // Requête SQL pour insérer un nouveau film
-        $sql = "INSERT INTO person (first_name, last_name, birth_date, death_date,image_path) 
-                VALUES (:first_name, :last_name, :birth_date, :death_date,:image_path)";
 
-        // Préparer la requête
+    public function addPerson($first_name, $last_name, $birth_date, $death_date, $type, $image_path): bool
+    {
+        $sql = "INSERT INTO person (first_name, last_name, birth_date, death_date, type ,image_path) VALUES (:first_name, :last_name, :birth_date, :death_date, :type,:image_path)";
         $stmt = $this->pdo->prepare($sql);
 
         // Exécuter la requête avec les valeurs fournies
@@ -109,6 +106,4 @@ class PersonDB extends PdoWrapper
 
         return $this->execute($query, array(':personId' => $personId, ':personType' => $personType), "mdb\data_template\Movie");
     }
-
-
 }

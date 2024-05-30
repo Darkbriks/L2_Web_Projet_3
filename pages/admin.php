@@ -22,9 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && isset(
 if (isset($_SESSION['admin']) && $_SESSION['admin'])
 {
     $movieForm = new mdb\MovieForm();
+    $img_file = $_FILES['posters'] ?? null;
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title']))
     {
-        try { $movieForm->createMovie($_POST); }
+        try
+        {
+            $movieForm->createMovie($_POST, $img_file);
+            echo "<p>Le film a été ajouté avec succès</p>";
+        }
         catch (Exception $e)
         {
             echo $e->getMessage();

@@ -18,8 +18,8 @@ class Movie
     public function getHtml()
     {
         return "<div class = 'card'>
-                    <div class = 'poster'>
-                        <img src='" . $this->image_path . "' alt='Affiche de " . $this->title . "'>
+                    <div class = 'posters'>
+                        <img src='" . $GLOBALS['POSTER_DIR'] . $this->image_path . "' alt='Affiche de " . $this->title . "'>
                     </div>
                     <div class='movie-info'>
                         <h3>" . $this->title . " (" . $this->release_date . ")</h3>
