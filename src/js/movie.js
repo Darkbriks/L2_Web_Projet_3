@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class='movie-details'>
                     <h3>${movie.title} (${movie.release_date})</h3>
                     <p class='movie-synopsis'>${movie.synopsis}</p>
-                    <p class='movie-producer'><strong>Réalisateur :</strong> <a href="../html/producers.html" id=${movie.producer_id}>${movie.producer}</a></p>
+                    <p class='movie-producer'><strong>Réalisateur :</strong> <a href="../html/person.html?id=${movie.producer_id}">${movie.producer}</a></p>
                     <p class='movie-actors'><strong>Acteurs :</strong> <a href="../html/actors.html" id=${movie.actors_id}>${movie.actors.join(', ')}</a></p>
                     <p class='movie-tags'><strong>Tags :</strong> ${movie.tags.join(', ')}</p>
                     <p class='movie-status'><strong>Status :</strong> ${movie.vu ? 'Vu' : 'Non vu'}</p>
@@ -51,7 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-    function filterMoviesByTag(tag) {
+
+ function filterMoviesByTag(tag) {
         if (tag === 'All') {
             renderMovies(movies);
         } else {
@@ -66,5 +67,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     renderMovies(movies);
 });
-
 

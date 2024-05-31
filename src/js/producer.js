@@ -46,17 +46,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     <img src='${producer.image}' alt='image de ${producer.name}'>
                 </div>
                 <div class='producer-name'>
-                    <h3><a href="producers.html?id=${producer.id}">${producer.name}</a></h3>
+                    <h3><a href="person.html?id=${producer.id}">${producer.name}</a></h3>
                 </div>
             `;
             container.appendChild(producerCard);
 
             producerCard.querySelector('.producer-image img').addEventListener('click', () => {
-                window.location.href = `producers.html?id=${producer.id}`;
+                window.location.href = `person.html?id=${producer.id}`;
             });
 
             producerCard.querySelector('.producer-name a').addEventListener('click', () => {
-                window.location.href = `producers.html?id=${producer.id}`;
+                window.location.href = `person.html?id=${producer.id}`;
             });
         });
     }
