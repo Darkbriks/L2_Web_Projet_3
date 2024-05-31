@@ -172,7 +172,7 @@ class MoviesDB extends PdoWrapper
               JOIN tag ON mt.tag_id = tag.id
               WHERE tag.id = :tag";
 
-        return $this->execute($query, [':tag' => $tag], "mdb\data_template\Movie");
+        return $this->execute($query, array(':tag' => $tag), "mdb\data_template\Movie");
     }
     public function getMoviesBy($release_date = null, $duration = null, $name = null, $note = null): array
     {
@@ -209,4 +209,13 @@ class MoviesDB extends PdoWrapper
 
         return $this->execute($query,NULL, "mdb\data_template\Movie");
     }
+
+    public function alterMovie_($movie_alter ,$movie_alter_value, $movie_id)
+    {
+        $query = "UPDATE movies SET" . $movie_alter . "= :movie_alter WHERE id = :id";
+        return $this->execute($query,array(':movie_alter' => $movie_alter_value,':id' => $movie_id),NULL);
+    }
+
+
+
 }

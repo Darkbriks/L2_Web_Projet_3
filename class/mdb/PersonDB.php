@@ -166,21 +166,10 @@ class PersonDB extends PdoWrapper
         return $this->execute($query, array(':personId' => $personId, ':personType' => $personType), "mdb\data_template\Movie");
     }
 
-    public function alterPerson_FirstName($firstName, $person_id)
+    public function alterPerson_($person_alter ,$person_alter_value, $person_id)
     {
-        $query = "UPDATE person
-        SET first_name = :firstName
-        WHERE id = :person_id";
-
-        return $this->execute($query, array(':firstName' => $firstName));
-    }
-    public function alterPerson_LasttName($lastName, $person_id)
-    {
-        $query = "UPDATE person
-        SET last_name = :lastName
-        WHERE id = :person_id";
-
-        return $this->execute($query, array(':lasrtName' => $lastName));
+        $query = "UPDATE person SET" . $person_alter . "= :person_alter WHERE id = :id";
+        return $this->execute($query,array(':person_alter' => $person_alter_value,':id' => $person_id),NULL);
     }
 
     public function getPersonsBy($alive = null, $type = null, $first_name = null,$last_name = null): array

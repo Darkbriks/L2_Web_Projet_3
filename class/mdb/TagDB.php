@@ -72,4 +72,10 @@ class TagDB extends PdoWrapper
         return true;
     }
 
+    public function alterTag_($tag_alter ,$tag_alter_value, $tag_id)
+    {
+        $query = "UPDATE tag SET" . $tag_alter . "= :tag_alter WHERE id = :id";
+        return $this->execute($query,array(':tag_alter' => $tag_alter_value,':id' => $tag_id),NULL);
+    }
+
 }
