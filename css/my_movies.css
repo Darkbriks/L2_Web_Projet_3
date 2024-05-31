@@ -170,7 +170,7 @@ body.dark-theme {
     overflow-x: auto;
     position: relative;
 }
-.producers-container {
+.peoples-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -178,7 +178,7 @@ body.dark-theme {
     margin-top: 20px;
 }
 
-.producer-card, .producer-details {
+.people-card, .people-details {
     border: 1px solid white;
     border-radius: 8px;
     overflow: hidden;
@@ -188,27 +188,27 @@ body.dark-theme {
     transition: transform 0.2s;
 }
 
-.producer-card:hover, .producer-details:hover {
+.people-card:hover, .people-details:hover {
     transform: scale(1.05);
 }
 
-.producer-image img {
+.people-image img {
     width: 100%;
     display: block;
 }
 
-.producer-name {
+.people-name {
     padding: 10px;
     text-align: center;
 }
 
-.producer-info {
+.people-info {
     padding: 20px;
     color: white;
     background: rgba(0, 0, 0, 0.8);
     border-radius: 8px;
 }
 
-.producer-info p {
+.people-info p {
     margin: 5px 0;
 }
