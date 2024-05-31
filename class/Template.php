@@ -10,7 +10,7 @@ class Template
             <meta charset="UTF-8">
             <title>My movies</title>
             <link rel="stylesheet" href="../css/my_movies.css">
-            <script src="../js/scripts.js"></script>
+            <script src="../js/script.js"></script>
         </head>
         <body>
             <?php include "header.php" ?>
