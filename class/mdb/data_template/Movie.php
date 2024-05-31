@@ -2,6 +2,9 @@
 
 namespace mdb\data_template;
 
+use mdb\PersonDB;
+use mdb\TagBD;
+
 class Movie
 {
     public function getId() { return $this->id; }
@@ -35,5 +38,30 @@ class Movie
             "<script>
                 document.getElementById('" . $this->id . "').addEventListener('click', function() { window.location.href = 'movie.php?id=" . $this->id . "&title=" . $this->title . "'; });
             </script>";
+    }
+
+    public function get_movieCard()
+    {
+        $personDB = new PersonDB();
+        $directors = $personDB->getDirectorsOfMovie($this->id);
+        $actors = $personDB->getActorsOfMovie($this->id);
+        $composers = $personDB->getComposersOfMovie($this->id);
+
+        $tags = (new TagBD())->getTagsOfMovie($this->id);
+        $tags = array_map(function($tag) { return $tag->getName(); }, $tags);
+
+        //Return an array with the movie's details
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'image_path' => $GLOBALS['POSTER_DIR'] . $this->image_path,
+            'release_date' => $this->release_date,
+            'synopsis' => $this->synopsis,
+            'directors' => $directors,
+            'actors' => $actors,
+            'composers' => $composers,
+            'tags' => $tags,
+            'vu' => $this->vu
+        ];
     }
 }

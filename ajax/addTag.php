@@ -1,5 +1,4 @@
 <?php
-// called by an ajax request
 require_once "../config.php";
 require_once "../DB_CREDENTIALS.php";
 require_once $GLOBALS['PDO_WRAPPER'];

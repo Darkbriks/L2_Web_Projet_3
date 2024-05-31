@@ -9,14 +9,26 @@ Autoloader::register();
 
 <?php ob_start(); ?>
 
-    <h2>Liste des Films</h2>
-    <div id="film-list">
-        <ul>
-            <?php
-            $moviesDB = new mdb\MoviesDB();
-            $movies = $moviesDB->getMovies();
-            foreach ($movies as $movie) { echo $movie->getHtml_list(); } ?>
-        </ul>
+    <script src="../js/allMovies.js"></script>
+    <h1>MOVIES</h1>
+    <div class="tags-menu" id="tags-menu">
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Filter by tag
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item tag" href="#" data-tag="-1">All</a></li>
+                <?php
+                $tagBD = new mdb\TagBD();
+                $tags = $tagBD->getTags();
+                foreach ($tags as $tag) { echo $tag->getHtml_li(); }
+                ?>
+            </ul>
+        </div>
+    </div>
+
+    <div class = "slider-container">
+        <div class="movies-container" id="movies-container"></div>
     </div>
 
 <?php $content = ob_get_clean(); ?>

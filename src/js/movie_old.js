@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    const movies = [
+    /*const movies = [
         { title: 'Film 1', release_date: '1977', synopsis: 'Ceci est un synopsis.', vu: true, poster_link: '../assets/newHope.jpeg', producer: 'Réalisateur 1', producer_id: 1, actors: ['Acteur 1', 'Acteur 2'], tags: ['Action', 'Drame'] },
         { title: 'Film 2', release_date: '1983', synopsis: 'Ceci est un synopsis.', vu: false, poster_link: '../assets/returnOfJedi.jpeg', producer: 'Réalisateur 5', producer_id: 5, actors: ['Acteur 3', 'Acteur 4'], tags: ['Comédie'] },
         { title: 'Film 3', release_date: '1980', synopsis: 'Ceci est un synopsis.', vu: false, poster_link: '../assets/strikesBack.jpeg', producer: 'Réalisateur 7', producer_id: 7, actors: ['Acteur 5', 'Acteur 6'], tags: ['Drame'] },
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { title: 'Film 7', release_date: '1980', synopsis: 'Ceci est un synopsis.', vu: false, poster_link: '../assets/strikesBack.jpeg', producer: 'Réalisateur 3', producer_id: 3, actors: ['Acteur 5', 'Acteur 6'], tags: ['Drame'] },
         { title: 'Film 8', release_date: '1980', synopsis: 'Ceci est un synopsis.', vu: false, poster_link: '../assets/strikesBack.jpeg', producer: 'Réalisateur 8', producer_id: 8, actors: ['Acteur 5', 'Acteur 6'], tags: ['Drame'] },
         { title: 'Film 9', release_date: '1980', synopsis: 'Ceci est un synopsis.', vu: false, poster_link: '../assets/strikesBack.jpeg', producer: 'Réalisateur 4', producer_id: 4, actors: ['Acteur 5', 'Acteur 6'], tags: ['Drame'] }
-    ];
+    ];*/
     function renderMovies(movies) {
         const container = document.getElementById('movies-container');
         container.innerHTML = '';
