@@ -116,12 +116,12 @@ class MoviesDB extends PdoWrapper
 
     public function getMoviesByTag($tag): array
     {
-        if($tag==-1){
+        if($tag===-1){
             return $this->getMovies();
         }
         $query = "SELECT  m.* FROM movies m
               JOIN movie_tag mt ON m.id = mt.movie_id
-              JOIN tag ON mt.person_id = tag.id
+              JOIN tag ON mt.tag_id = tag.id
               WHERE tag.id = :tag";
         return $this->execute($query, array(':tag' => $tag));
     }
