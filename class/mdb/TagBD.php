@@ -41,4 +41,14 @@ class TagBD extends PdoWrapper
         if($stmt->execute([':name' => $name])) { return $this->pdo->lastInsertId(); }
         return 0;
     }
+
+    public function getTagsOfMovie(int $movieId): array
+    {
+        $query = "SELECT tag.* 
+              FROM tag
+              JOIN movie_tag mt ON tag.id = mt.tag_id
+              WHERE mt.movie_id = :movieId";
+
+        return $this->execute($query, array(':movieId' => $movieId), "mdb\data_template\Tag");
+    }
 }
