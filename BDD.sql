@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS movies;
 
 CREATE TABLE movies (
     id   INT AUTO_INCREMENT PRIMARY KEY,
+    int type NOT NULL, /* 0, 1*/
     title VARCHAR(50) NOT NULL,
     release_date DATE NOT NULL,
     synopsis TEXT,
@@ -90,16 +91,16 @@ INSERT INTO person (first_name, last_name, birth_date, death_date, image_path) V
 
 
 -- Insérer des films
-INSERT INTO movies (title, release_date, synopsis, vu, image_path, time_duration, note, rating) VALUES
-    ('Star Wars: Episode I - The Phantom Menace', '1999-05-19', 'Two Jedi escape a hostile blockade to find allies and come across a young boy who may bring balance to the Force, but the long dormant Sith resurface to claim their old glory.', TRUE, 'Star_Wars_Episode_I_The_Phantom_Menace.jpg', 140,10,-9),
-    ('Star Wars: Episode II - Attack of the Clones', '2002-05-16', 'Ten years after initially meeting, Anakin Skywalker shares a forbidden romance with Padmé Amidala, while Obi-Wan Kenobi investigates an assassination attempt on the senator and discovers a secret clone army crafted for the Jedi.', TRUE, 'Star_Wars_Episode_II_Attack_of_the_Clones.jpg', 140,11,-9),
-    ('Star Wars: Episode III - Revenge of the Sith', '2005-05-19', 'Three years into the Clone Wars, the Jedi rescue Palpatine from Count Dooku. As Obi-Wan pursues a new threat, Anakin acts as a double agent between the Jedi Council and Palpatine and is lured into a sinister plan to rule the galaxy.', FALSE, 'Star_Wars_Episode_III_Revenge_of_the_Sith.jpg', 140,12,-9),
-    ('Star Wars: Episode IV - A New Hope', '1977-05-25', 'Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire''s world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.', TRUE, 'newHope.jpeg', 140,13,-9),
-    ('Star Wars: Episode V - The Empire Strikes Back', '1980-05-21', 'After the Rebels are brutally overpowered by the Empire on the ice planet Hoth, Luke Skywalker begins Jedi training with Yoda, while his friends are pursued by Darth Vader.', TRUE, 'strikesBack.jpeg', 140,14,-9),
-    ('Star Wars: Episode VI - Return of the Jedi', '1983-05-25', 'After a daring mission to rescue Han Solo from Jabba the Hutt, the Rebels dispatch to Endor to destroy the second Death Star. Meanwhile, Luke struggles to help Darth Vader back from the dark side without falling into the Emperor''s trap.', FALSE, 'returnOfJedi.jpeg', 140,15,-9),
-    ('Star Wars: Episode VII - The Force Awakens', '2015-12-18', 'Three decades after the Empire''s defeat, a new threat arises in the militant First Order. Stormtrooper defector Finn and the scavenger Rey are caught up in the Resistance''s search for the missing Luke Skywalker.', FALSE, 'Star_Wars_Episode_VII_The_Force_Awakens.jpg', 140,16,-9),
-    ('Star Wars: Episode VIII - The Last Jedi', '2017-12-15', 'Rey develops her newly discovered abilities with the guidance of Luke Skywalker, who is unsettled by the strength of her powers. Meanwhile, the Resistance prepares for battle with the First Order.', FALSE, 'Star_Wars_Episode_VIII_The_Last_Jedi.jpg', 140,17,-9),
-    ('Star Wars: Episode IX - The Rise of Skywalker', '2019-12-20', 'The surviving members of the Resistance face the First Order once again, and the legendary conflict between the Jedi and the Sith reaches its peak, bringing the Skywalker saga to its end.', FALSE, 'Star_Wars_Episode_IX_The_Rise_of_Skywalker.jpg',140 ,18,-9);
+INSERT INTO movies (title, type, release_date, synopsis, vu, image_path, time_duration, note, rating) VALUES
+    ('Star Wars: Episode I - The Phantom Menace', 0,'1999-05-19', 'Two Jedi escape a hostile blockade to find allies and come across a young boy who may bring balance to the Force, but the long dormant Sith resurface to claim their old glory.', TRUE, 'Star_Wars_Episode_I_The_Phantom_Menace.jpg', 140,10,-9),
+    ('Star Wars: Episode II - Attack of the Clones', 0,'2002-05-16', 'Ten years after initially meeting, Anakin Skywalker shares a forbidden romance with Padmé Amidala, while Obi-Wan Kenobi investigates an assassination attempt on the senator and discovers a secret clone army crafted for the Jedi.', TRUE, 'Star_Wars_Episode_II_Attack_of_the_Clones.jpg', 140,11,-9),
+    ('Star Wars: Episode III - Revenge of the Sith', 0,'2005-05-19', 'Three years into the Clone Wars, the Jedi rescue Palpatine from Count Dooku. As Obi-Wan pursues a new threat, Anakin acts as a double agent between the Jedi Council and Palpatine and is lured into a sinister plan to rule the galaxy.', FALSE, 'Star_Wars_Episode_III_Revenge_of_the_Sith.jpg', 140,12,-9),
+    ('Star Wars: Episode IV - A New Hope', 0,'1977-05-25', 'Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire''s world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.', TRUE, 'newHope.jpeg', 140,13,-9),
+    ('Star Wars: Episode V - The Empire Strikes Back', 0,'1980-05-21', 'After the Rebels are brutally overpowered by the Empire on the ice planet Hoth, Luke Skywalker begins Jedi training with Yoda, while his friends are pursued by Darth Vader.', TRUE, 'strikesBack.jpeg', 140,14,-9),
+    ('Star Wars: Episode VI - Return of the Jedi', 0,'1983-05-25', 'After a daring mission to rescue Han Solo from Jabba the Hutt, the Rebels dispatch to Endor to destroy the second Death Star. Meanwhile, Luke struggles to help Darth Vader back from the dark side without falling into the Emperor''s trap.', FALSE, 'returnOfJedi.jpeg', 140,15,-9),
+    ('Star Wars: Episode VII - The Force Awakens', 0,'2015-12-18', 'Three decades after the Empire''s defeat, a new threat arises in the militant First Order. Stormtrooper defector Finn and the scavenger Rey are caught up in the Resistance''s search for the missing Luke Skywalker.', FALSE, 'Star_Wars_Episode_VII_The_Force_Awakens.jpg', 140,16,-9),
+    ('Star Wars: Episode VIII - The Last Jedi', 0,'2017-12-15', 'Rey develops her newly discovered abilities with the guidance of Luke Skywalker, who is unsettled by the strength of her powers. Meanwhile, the Resistance prepares for battle with the First Order.', FALSE, 'Star_Wars_Episode_VIII_The_Last_Jedi.jpg', 140,17,-9),
+    ('Star Wars: Episode IX - The Rise of Skywalker', 0,'2019-12-20', 'The surviving members of the Resistance face the First Order once again, and the legendary conflict between the Jedi and the Sith reaches its peak, bringing the Skywalker saga to its end.', FALSE, 'Star_Wars_Episode_IX_The_Rise_of_Skywalker.jpg',140 ,18,-9);
 
 -- Acteurs et personnages joués dans les films
 INSERT INTO movie_person (movie_id, person_id, played_name, person_type) VALUES

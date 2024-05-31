@@ -113,4 +113,16 @@ class MoviesDB extends PdoWrapper
         $query = "SELECT id, title FROM movies WHERE rating = :rating";
         return $this->execute($query, array(':rating' => $rating));
     }
+
+    public function getMoviesByTag($tag): array
+    {
+        if($tag==-1){
+            return $this->getMovies();
+        }
+        $query = "SELECT  m.* FROM movies m
+              JOIN movie_tag mt ON m.id = mt.movie_id
+              JOIN tag ON mt.person_id = tag.id
+              WHERE tag.id = :tag";
+        return $this->execute($query, array(':tag' => $tag));
+    }
 }
