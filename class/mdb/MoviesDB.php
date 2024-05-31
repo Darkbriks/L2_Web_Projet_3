@@ -67,7 +67,7 @@ class MoviesDB extends PdoWrapper
               JOIN person p ON mp.person_id = p.id
               WHERE p.first_name = :firstName AND p.last_name = :lastName AND mp.person_type = 1";
 
-        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName));
+        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
     }
 
     /*
@@ -80,7 +80,7 @@ class MoviesDB extends PdoWrapper
               JOIN person p ON mp.person_id = p.id
               WHERE p.first_name = :firstName AND p.last_name = :lastName AND mp.person_type = 2";
 
-        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName));
+        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
     }
 
     /*
@@ -93,7 +93,7 @@ class MoviesDB extends PdoWrapper
               JOIN person p ON mp.person_id = p.id
               WHERE p.first_name = :firstName AND p.last_name = :lastName AND mp.person_type = 3";
 
-        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName));
+        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
     }
 
     /*
@@ -102,7 +102,7 @@ class MoviesDB extends PdoWrapper
     public function getMoviesByMinRating($minRating): array
     {
         $query = "SELECT  id, title FROM movies WHERE rating >= :minRating";
-        return $this->execute($query, array(':minRating' => $minRating));
+        return $this->execute($query, array(':minRating' => $minRating), "mdb\data_template\Movie");
     }
 
     /*
@@ -111,7 +111,7 @@ class MoviesDB extends PdoWrapper
     public function getMoviesByEqualRating($rating): array
     {
         $query = "SELECT id, title FROM movies WHERE rating = :rating";
-        return $this->execute($query, array(':rating' => $rating));
+        return $this->execute($query, array(':rating' => $rating), "mdb\data_template\Movie");
     }
 
     public function getMoviesByTag($tag): array
@@ -123,6 +123,7 @@ class MoviesDB extends PdoWrapper
               JOIN movie_tag mt ON m.id = mt.movie_id
               JOIN tag ON mt.tag_id = tag.id
               WHERE tag.id = :tag";
-        return $this->execute($query, array(':tag' => $tag));
+        return $this->execute($query, array(':tag' => $tag), "mdb\data_template\Movie");
     }
+
 }

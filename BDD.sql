@@ -73,21 +73,26 @@ INSERT INTO tag (name) VALUES
 
 -- Acteurs et réalisateurs de tous les films Star Wars
 INSERT INTO person (first_name, last_name, birth_date, death_date, image_path) VALUES
-     ('Harrison', 'Ford', '1942-07-13', NULL, 'Harrison_Ford.jpg'),
+     ('Harrison', 'Ford', '1942-07-13', NULL, 'Harrison_Ford.jpg'), -- 1
      ('Carrie', 'Fisher', '1956-10-21', '2016-12-27', 'Carrie_Fisher.jpg'),
      ('Mark', 'Hamill', '1951-09-25', NULL, 'Mark_Hamill.jpg'),
      ('George', 'Lucas', '1944-05-14', NULL, 'George_Lucas.jpg'), -- Réalisateur
-     ('Irvin', 'Kershner', '1923-04-29', '2010-11-27', 'Irvin_Kershner.jpg'), -- Réalisateur
+     ('Irvin', 'Kershner', '1923-04-29', '2010-11-27', 'Irvin_Kershner.jpg'), -- Réalisateur 5
      ('Richard', 'Marquand', '1938-09-22', '1987-09-04', 'Richard_Marquand.jpg'), -- Réalisateur
      ('Liam', 'Neeson', '1952-06-07', NULL, 'Liam_Neeson.jpg'),
      ('Natalie', 'Portman', '1981-06-09', NULL, 'Natalie_Portman.jpg'),
      ('Ewan', 'McGregor', '1971-03-31', NULL, 'Ewan_McGregor.jpg'),
-     ('J.J.', 'Abrams', '1966-06-27', NULL, 'JJ_Abrams.jpg'), -- Réalisateur
+     ('J.J.', 'Abrams', '1966-06-27', NULL, 'JJ_Abrams.jpg'), -- Réalisateur 10
      ('Rian', 'Johnson', '1973-12-17', NULL, 'Rian_Johnson.jpg'), -- Réalisateur
      ('John', 'Williams', '1932-02-08', NULL, 'John_Williams.jpg'), -- Compositeur
      ('Daisy', 'Ridley', '1992-04-10', NULL, 'Daisy_Ridley.jpg'),
      ('Adam', 'Driver', '1983-11-19', NULL, 'Adam_Driver.jpg'),
-     ('John', 'Boyega', '1992-03-17', NULL, 'John_Boyega.jpg');
+     ('John', 'Boyega', '1992-03-17', NULL, 'John_Boyega.jpg'),-- 15
+     ('Veronica', 'Taylor', '1978-04-09', NULL, 'Veronica_Taylor.jpg'),
+     ('Rachael', 'Lillis', '1978-07-08', NULL, 'Rachael_Lillis.jpg'),
+     ('Eric', 'Stuart', '1967-10-18', NULL, 'Eric_Stuart.jpg'),
+     ('Kunihiko', 'Yuyama', '1952-10-15', NULL, 'Kunihiko_Yuyama.jpg');
+
 
 
 -- Insérer des films
@@ -100,8 +105,12 @@ INSERT INTO movies (title, type, release_date, synopsis, vu, image_path, time_du
     ('Star Wars: Episode VI - Return of the Jedi', 0,'1983-05-25', 'After a daring mission to rescue Han Solo from Jabba the Hutt, the Rebels dispatch to Endor to destroy the second Death Star. Meanwhile, Luke struggles to help Darth Vader back from the dark side without falling into the Emperor''s trap.', FALSE, 'returnOfJedi.jpeg', 140,15,-9,'https://www.youtube.com/watch?v=7L8p7_SLzvU'),
     ('Star Wars: Episode VII - The Force Awakens', 0,'2015-12-18', 'Three decades after the Empire''s defeat, a new threat arises in the militant First Order. Stormtrooper defector Finn and the scavenger Rey are caught up in the Resistance''s search for the missing Luke Skywalker.', FALSE, 'Star_Wars_Episode_VII_The_Force_Awakens.jpg', 140,16,-9,'https://www.youtube.com/watch?v=sGbxmsDFVnE&list=PLYZVlJMKY1dJqti6ZcgLIzXsg0A0QWcqH&index=32'),
     ('Star Wars: Episode VIII - The Last Jedi', 0,'2017-12-15', 'Rey develops her newly discovered abilities with the guidance of Luke Skywalker, who is unsettled by the strength of her powers. Meanwhile, the Resistance prepares for battle with the First Order.', FALSE, 'Star_Wars_Episode_VIII_The_Last_Jedi.jpg', 140,17,-9,'https://www.youtube.com/watch?v=Q0CbN8sfihY&list=PLYZVlJMKY1dJqti6ZcgLIzXsg0A0QWcqH&index=34'),
-    ('Star Wars: Episode IX - The Rise of Skywalker', 0,'2019-12-20', 'The surviving members of the Resistance face the First Order once again, and the legendary conflict between the Jedi and the Sith reaches its peak, bringing the Skywalker saga to its end.', FALSE, 'Star_Wars_Episode_IX_The_Rise_of_Skywalker.jpg',140 ,18,-9,'https://www.youtube.com/watch?v=8Qn_spdM5Zg&list=PLYZVlJMKY1dJqti6ZcgLIzXsg0A0QWcqH&index=35');
-
+    ('Star Wars: Episode IX - The Rise of Skywalker', 0,'2019-12-20', 'The surviving members of the Resistance face the First Order once again, and the legendary conflict between the Jedi and the Sith reaches its peak, bringing the Skywalker saga to its end.', FALSE, 'Star_Wars_Episode_IX_The_Rise_of_Skywalker.jpg',140 ,18,-9,'https://www.youtube.com/watch?v=8Qn_spdM5Zg&list=PLYZVlJMKY1dJqti6ZcgLIzXsg0A0QWcqH&index=35'),
+    ('Pokémon: The First Movie - Mewtwo Strikes Back', 0, '1998-07-18', 'Ash et ses amis doivent affronter Mewtwo, un Pokémon légendaire créé par la Team Rocket.', FALSE, 'Pokemon_Movie_1.jpg', '01:15:00', 6, 'https://www.youtube.com/watch?v=hX-NHafvY5I', 9),-- 10
+    ('Pokémon: The Movie 2000 - The Power of One', '1999-07-17', 0, 'Ash et ses amis doivent sauver le monde d une catastrophe causée par la capture des oiseaux légendaires.', FALSE, 'Pokemon_Movie_2.jpg', 75, 7, 'https://www.youtube.com/watch?v=JHDctBjGBuA', 9),
+    ('Pokémon: The Movie 3 - Spell of the Unown', '2000-07-08', 0,'Ash et ses amis doivent sauver une jeune fille nommée Molly de l emprise des Pokémon Unown.', FALSE, 'Pokemon_Movie_3.jpg', 82, 6, 'https://www.youtube.com/watch?v=SEqstQn0sag', 8),
+    ('Pokémon: The Movie 4Ever - Celebi: Voice of the Forest', '2001-07-07', 0,'Ash et ses amis voyagent dans le temps pour sauver Celebi, un Pokémon légendaire.', FALSE, 'Pokemon_Movie_4.jpg', 73, 6, 'https://www.youtube.com/watch?v=9lES7wavO5E', 7),
+    ('Pokémon Heroes: Latios and Latias', '2002-07-13', 0,'Ash et ses amis doivent protéger la ville d Altomare des méchants qui veulent capturer les Pokémon légendaires Latios et Latias.', FALSE, 'Pokemon_Movie_5.jpg', 81, 6, 'https://www.youtube.com/watch?v=ZivTZFebZGY', 8);
 -- Acteurs et personnages joués dans les films
 INSERT INTO movie_person (movie_id, person_id, played_name, person_type) VALUES
      (1, 4, 'Qui-Gon Jinn', 1), (1, 8, 'Padmé Amidala', 1), (1, 9, 'Obi-Wan Kenobi', 1),
@@ -118,7 +127,14 @@ INSERT INTO movie_person (movie_id, person_id, played_name, person_type) VALUES
      (7, 10, NULL, 2), (8, 11, NULL, 2), (9, 10, NULL, 2), -- Réalisateurs pour les 7, 8, 9
      (1, 12, NULL, 3), (2, 12, NULL, 3), (3, 12, NULL, 3),
      (4, 12, NULL, 3), (5, 12, NULL, 3), (6, 12, NULL, 3),
-     (7, 12, NULL, 3), (8, 12, NULL, 3), (9, 12, NULL, 3);
+     (7, 12, NULL, 3), (8, 12, NULL, 3), (9, 12, NULL, 3),
+     (10, 16, 'Sacha', 1), (11, 16, 'Sacha', 1), (12, 16, 'Sacha', 1),(13, 16, 'Sacha', 1),(14, 16, 'Sacha', 1),
+     (10, 17, 'Ondine', 1), (11, 17, 'Ondine', 1), (12, 17, 'Ondine', 1),(13, 17, 'Ondine', 1),(14, 17, 'Ondine', 1),
+     (10, 18, 'Pierre', 1), (11, 18, 'Pierre', 1), (12, 18, 'Pierre', 1),(13, 18, 'Pierre', 1),(14, 18, 'Pierre', 1),
+     (10, 19, NULL, 2), (11, 19, NULL, 2), (12, 19, NULL, 2),(13, 19, NULL, 2),(14, 19, NULL, 2);
+
+
+
 
 -- Insérer des relations movie_tag
 INSERT INTO movie_tag (movie_id, tag_id) VALUES
@@ -130,4 +146,9 @@ INSERT INTO movie_tag (movie_id, tag_id) VALUES
      (6, 1), (6, 5), (6, 6),
      (7, 1), (7, 5), (7, 6),
      (8, 1), (8, 5), (8, 6),
-     (9, 1), (9, 5), (9, 6);
+     (9, 1), (9, 5), (9, 6),
+     (10, 1), (10, 2), (10, 6),
+     (11, 1), (11, 2), (11, 6),
+     (12, 1), (12, 2), (12, 6),
+     (13, 1), (13, 2), (13, 6),
+     (14, 1), (14, 2), (14, 6);
