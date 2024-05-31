@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     document.querySelectorAll('.tag').forEach(tagElement => {
-        tagElement.addEventListener('mouseenter', () => {
+        tagElement.addEventListener('click', () => {
             filterMoviesByTag(tagElement.getAttribute('data-tag'));
         });
     });
