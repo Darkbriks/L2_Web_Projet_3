@@ -183,4 +183,39 @@ class PersonDB extends PdoWrapper
         return $this->execute($query, array(':lasrtName' => $lastName));
     }
 
+    public function getPersonsBy($alive = null, $type = null, $first_name = null,$last_name = null): array
+    {
+        $query = "SELECT * FROM person WHERE 1=1";
+        $params = [];
+
+        if ($alive !== null) {
+            $query .= " AND death_date IS NULL";
+        }
+
+        if ($type !== null) {
+            $query .= " AND time_duration = :type";
+            $params[':type'] = $type;
+        }
+
+        if ($first_name !== null) {
+            $query .= " AND first_name LIKE :first_name";
+            $params[':first_name'] = '%' . $first_name . '%';
+        }
+
+        if ($last_name !== null) {
+            $query .= " AND last_name LIKE :last_name";
+            $params[':last_name'] = '%' . $last_name . '%';
+        }
+
+        return $this->execute($query, $params, "mdb\data_template\Movie");
+    }
+
+    public function getPersonsBy_Order($condition, $order): array
+    {
+        $order = ($order) ? "ASC" : "DESC";
+        $query = "SELECT * FROM person ORDER BY " . $condition. $order;
+
+        return $this->execute($query,NULL, "mdb\data_template\Movie");
+    }
+
 }
