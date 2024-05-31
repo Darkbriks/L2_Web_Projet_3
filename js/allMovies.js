@@ -12,8 +12,6 @@ document.addEventListener('DOMContentLoaded', function()
 
 function filterMoviesByTag(tagId)
 {
-    let filteredMovies = null;
-
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '../ajax/getMoviesByTag.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -42,7 +40,7 @@ function renderMovies(movies)
             "<img src='" + movie.image_path + "' alt='Affiche de " + movie.title + "'>" +
         "</div>" +
         "<div class='movie-details'>" +
-            "<h3>" + movie.title + " (" + movie.release_date + ")</h3>" +
+            "<h3 class='movie-title' id='" + movie.id + "' style='cursor: pointer'>" + movie.title + " (" + movie.release_date + ")</h3>" +
             "<p class='movie-synopsis'>" + movie.synopsis + "</p>" +
             "<p class='movie-producer'><strong>Réalisateur :</strong> <a href='../html/person.html?id=" + movie.producer_id + "'>" + movie.producer + "</a></p>" +
             "<p class='movie-actors'><strong>Acteurs :</strong> <a href='../html/actors.html' id=" + movie.actors_id + ">" + movie.actors.join(', ') + "</a></p>" +
@@ -52,8 +50,14 @@ function renderMovies(movies)
 
         container.appendChild(movieElement);
 
+        const title = movieElement.querySelector('.movie-title');
         const posterImg = movieElement.querySelector('.movie-poster img');
         const details = movieElement.querySelector('.movie-details');
+
+        title.addEventListener('click', () =>
+        {
+            window.location.href = 'movie.php?id=' + title.id;
+        });
 
         posterImg.addEventListener('click', () =>
         {

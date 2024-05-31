@@ -9,8 +9,6 @@ Autoloader::register();
 
 <?php ob_start(); ?>
 
-<h2><?php echo htmlspecialchars($_GET['title']); ?></h2>
-
 <?php
 $id = (int)$_GET['id'];
 $moviesDB = new mdb\MoviesDB();
