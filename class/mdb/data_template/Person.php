@@ -4,15 +4,6 @@ namespace mdb\data_template;
 
 class Person
 {
-    private $id;
-    private $first_name;
-    private $last_name;
-    private $birth_date;
-    private $death_date;
-    private $image_path;
-    private $played_name; // Ajoutez cette propriété si elle n'existe pas
-    private $type;
-
     // Getters
     public function getId() { return $this->id; }
     public function getFirstName() { return $this->first_name; }
@@ -78,6 +69,21 @@ class Person
             });
         </script>";
         return $html;
+    }
+
+    public function get_peopleCard()
+    {
+        return [
+            'id' => $this->id,
+            'full_name' => $this->first_name . ' ' . $this->last_name,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'birth_date' => $this->birth_date,
+            'death_date' => $this->death_date,
+            'image_path' => $this->image_path,
+            'played_name' => $this->played_name,
+            'type' => $this->type
+        ];
     }
 }
 

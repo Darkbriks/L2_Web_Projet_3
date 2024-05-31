@@ -9,15 +9,10 @@ Autoloader::register();
 
 <?php ob_start(); ?>
 
-    <h2>Liste des Peoples</h2>
-    <div id="film-list">
-        <ul>
-            <?php
-            $personDB = new mdb\PersonDB();
-            $personDB = $personDB->getPersons();
-            foreach ($personDB as $person) { echo $person->getHtml_list(); } ?>
-        </ul>
-    </div>
+    <script src="../js/allPeople.js"></script>
+
+    <h1>PEOPLES</h1>
+    <div class="peoples-container" id="peoples-container"></div>
 
 <?php $content = ob_get_clean(); ?>
 <?php Template::render($content);
