@@ -84,19 +84,6 @@ body.dark-theme {
     margin: 20px 0;
 }
 
-.tag {
-    padding: 10px 15px;
-    background-color: dodgerblue;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.tag:hover {
-    background-color: blue;
-}
-
 .movies-container {
     display: flex;
     gap: 20px;
