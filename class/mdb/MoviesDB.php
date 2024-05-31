@@ -174,7 +174,7 @@ class MoviesDB extends PdoWrapper
 
         return $this->execute($query, array(':tag' => $tag), "mdb\data_template\Movie");
     }
-    public function getMoviesBy($release_date = null, $duration = null, $name = null, $note = null): array
+    public function getMoviesBy($release_date = null, $duration = null, $name = null, $note = null, $rating = null, $synopsys): array
     {
         $query = "SELECT * FROM movies WHERE 1=1";
         $params = [];
@@ -197,6 +197,14 @@ class MoviesDB extends PdoWrapper
         if ($note !== null) {
             $query .= " AND note = :note";
             $params[':rating'] = $note;
+        }
+        if($rating !== null){
+            $query .= " AND rating = :rating";
+            $params[':rating'] = $rating;
+        }
+        if($synopsys !== null){
+            $query .= " AND synopsys LIKE :synopsys";
+            $params[':synopsys'] = '%' . $synopsys . '%';
         }
 
         return $this->execute($query, $params, "mdb\data_template\Movie");
