@@ -4,18 +4,24 @@
     <meta charset="UTF-8">
     <title>Movies</title>
     <link rel="stylesheet" href="../../css/my_movies.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <header data-include = "header.html"></header>
 <body>
 <h1>MOVIES</h1>
 <div class="tags-menu" id="tags-menu">
-    <span class="tag" data-tag="All">All</span>
-    <span class="tag" data-tag="Action">Action</span>
-    <span class="tag" data-tag="Drame">Drame</span>
-    <span class="tag" data-tag="Comédie">Comédie</span>
-    <span class="tag" data-tag="Add">Add Tags...</span>
-
-    <!-- tags list -->
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Tags
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item tag" href="#" data-tag="All">All</a></li>
+            <li>  <a class="dropdown-item tag" href="#" data-tag="Action">Action</a> </li>
+            <li>   <a class="dropdown-item tag" href="#" data-tag="Drame">Drame</a> </li>
+            <li> <a class="dropdown-item tag" href="#" data-tag="Comédie">Comédie</a></li>
+        </ul>
+    </div>
 </div>
 <div class = "slider-container">
     <div class="movies-container" id="movies-container"></div>
