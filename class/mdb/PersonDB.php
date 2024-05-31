@@ -27,6 +27,66 @@ class PersonDB extends PdoWrapper
         ]);
     }
 
+    public function addMovie_Person($movieId, $personId, $playedName, $personType): bool
+    {
+        $query = "INSERT INTO movie_person (movie_id, person_id, played_name, person_type)
+              VALUES (:movieId, :personId, :playedName, :personType)";
+        $params = array(
+            ':movieId' => $movieId,
+            ':personId' => $personId,
+            ':playedName' => $playedName,
+            ':personType' => $personType
+        );
+        return $this->execute($query, $params);
+    }
+
+    public function addListOfMovie_Person($list): bool
+    {
+        foreach ($list as $person)
+        {
+            if(!$this->addMovie_Person($person['movie_id'],$person['person_id'],$person['played_name'],$person['person_type'])) { return false; }
+        }
+        return true;
+    }
+
+
+    public function addMovie_Director($movie_id, $director_id): bool
+    {
+        return$this->addMovie_Person($movie_id, $director_id, '', 2);
+    }
+
+    /*
+     * Link a list of directors to a movie
+     */
+    public function addListOfMovie_Director($list): bool
+    {
+        foreach ($list as $director)
+        {
+            if(!$this->addMovie_Director($director['movie_id'], $director['director_id'])) { return false; }
+        }
+        return true;
+    }
+
+    /*
+     * Link a music composer to a movie
+     */
+    public function addMovie_Composer($movie_id, $composer_id): bool
+    {
+        return $this->addMovie_Person($movie_id, $composer_id, '', 3);
+    }
+
+    /*
+     * Link a list of music composers to a movie
+     */
+    public function addListOfMovie_Composer($list): bool
+    {
+        foreach ($list as $composer)
+        {
+            if(!$this->addMovie_Composer($composer['movie_id'], $composer['composer_id'])) { return false; }
+        }
+        return true;
+    }
+
     public function getPersons()
     {
         return $this->execute("SELECT * FROM person", null, "mdb\data_template\Person");

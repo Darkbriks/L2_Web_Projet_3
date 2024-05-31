@@ -152,11 +152,11 @@ class MovieForm
 
     private function saveCategories(array $categories, int $movie_id): void
     {
-        $linkDB = new LinkBD();
+        $tagDB = new TagBD();
         foreach ($categories as $category)
         {
             $category = htmlspecialchars(trim($category));
-            $linkDB->addMovie_Tag($movie_id, $category);
+            $tagDB->addMovie_Tag($movie_id, $category);
         }
     }
 }
