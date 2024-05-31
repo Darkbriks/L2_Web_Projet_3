@@ -38,25 +38,47 @@ document.addEventListener('DOMContentLoaded', function()
 
     document.getElementById('AddDirectorButton').addEventListener('click', function()
     {
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', '../ajax/movieFormAddPerson.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send('person=' + document.getElementById('directorsDataList').value);
-        xhr.onreadystatechange = function()
-        {
-            if (xhr.readyState === 4 && xhr.status === 200)
-            {
-                let response = JSON.parse(xhr.responseText);
-                if (response.success)
-                {
-                    let data = JSON.parse(response.data);
-                    document.querySelector('.directorsList').innerHTML += '' +
-                        '<div><input type=\"hidden\" name=\"directors[]\" value=\"' + data.id + '\" id=\"' + data.full_name + '\">' +
-                        '<label>' + data.full_name + '</label><button type=\"button\" onclick=\"this.parentElement.remove();\">Remove</button></div>';
-                }
-                else { console.log('Erreur:', response.error); }
-            }
-        }
+        let director = document.getElementById('directorDataList').value;
+        if (director) { addPersonToMovieList(director, 'director'); }
+    });
+
+    document.getElementById('AddActorButton').addEventListener('click', function()
+    {
+        let actor = document.getElementById('actorDataList').value;
+        let role = document.getElementById('role').value;
+        if (actor && role) { addPersonToMovieList(actor, 'actor', role); }
+    });
+
+    document.getElementById('AddComposerButton').addEventListener('click', function()
+    {
+        let composer = document.getElementById('composerDataList').value;
+        if (composer) { addPersonToMovieList(composer, 'composer'); }
     });
 });
+
+function addPersonToMovieList(person, type, role=null)
+{
+    let persons = document.querySelectorAll('.' + type + 'List input[type="hidden"]');
+    for (let i = 0; i < persons.length; i++) { if (persons[i].id === person) { console.log('Person already added'); return; } }
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', '../ajax/movieFormAddPerson.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send('person=' + person);
+    xhr.onreadystatechange = function()
+    {
+        if (xhr.readyState === 4 && xhr.status === 200)
+        {
+            let response = JSON.parse(xhr.responseText);
+            if (response.success)
+            {
+                let data = JSON.parse(response.data);
+                document.querySelector('.' + type + 'List').innerHTML += '<div><input type=\"hidden\" name=\"' + type + '[]\" data-role=\"' + role + '\" value=\"' + data.id + '\" id=\"' + data.full_name + '\">' +
+                '<label>' + data.full_name + (role !== null ? ' (' + role + ')' : '') + '</label><button type=\"button\" onclick=\"this.parentElement.remove();\">Remove</button></div>';
+            }
+            else { console.log('Erreur:', response.error); }
+        }
+    }
+}
+
 // TODO 1: Add form validation

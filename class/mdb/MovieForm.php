@@ -8,18 +8,13 @@ class MovieForm
 {
     const POSTER_DIR = 'uploads/posters/';
 
-    private array $persons = [];
-    private array $personsNames = [];
-
-
     public function getForm(): string
     {
         $tagDB = new TagDB();
         $categories = $tagDB->getTags();
 
         $personDB = new PersonDB();
-        $this->persons = $personDB->getPersons();
-        foreach ($this->persons as $person) { $this->personsNames[] = $person->getFirstName() . ' ' . $person->getLastName(); }
+        $persons = $personDB->getPersons();
 
         $html = "<h2>Ajouter un Nouveau Film Manuellement</h2>
             <form method='POST' enctype='multipart/form-data'>
@@ -74,16 +69,40 @@ class MovieForm
                         <option value='16'>16 ans et +</option>
                         <option value='18'>18 ans et +</option>
                     </select>
-                </div>";
-        $html .= "<div class='directorsList'></div>
+                </div>
+                <div class='directorList'></div>
                 <div>
-                    <label for='directorsDataList' class='form-label'>Director to add</label>
+                    <label for='directorDataList' class='form-label'>Director to add</label>
                         <div class='input-group mb-3'>
-                            <input class='form-control' list='datalistOptions' id='directorsDataList' placeholder='Type to search a directors...'>
-                            <button type='button' class='input-group-text' id='AddDirectorButton'>Add directors</button>
+                            <input class='form-control' list='datalistOptions' id='directorDataList' placeholder='Type to search a director...'>
+                            <button type='button' class='input-group-text' id='AddDirectorButton'>Add director</button>
                         </div>
                     <datalist id='datalistOptions'>";
-        foreach ($this->persons as $person) { $html .= "<option value='" . $person->getFirstName() . " " . $person->getLastName() . "'>"; }
+        foreach ($persons as $person) { $html .= "<option value='" . $person->getFirstName() . " " . $person->getLastName() . "'>"; }
+        $html .= "</datalist>
+                </div>
+                <div class='actorList'></div>
+                <div>
+                    <label for='actorDataList' class='form-label'>Actor to add</label>
+                        <div class='input-group mb-3'>
+                            <input class='form-control' list='datalistOptions' id='actorDataList' placeholder='Type to search an actor...'>
+                            <span class='input-group-text'>Rôle</span>
+                            <input class='form-control' id='role' placeholder='rôle joué...'>
+                            <button type='button' class='input-group-text' id='AddActorButton'>Add actor</button>
+                        </div>
+                    <datalist id='datalistOptions'>";
+        foreach ($persons as $person) { $html .= "<option value='" . $person->getFirstName() . " " . $person->getLastName() . "'>"; }
+        $html .= "</datalist>
+                </div>
+                <div class='composerList'></div>
+                <div>
+                    <label for='composerDataList' class='form-label'>Composer to add</label>
+                        <div class='input-group mb-3'>
+                            <input class='form-control' list='datalistOptions' id='composerDataList' placeholder='Type to search a composer...'>
+                            <button type='button' class='input-group-text' id='AddComposerButton'>Add composer</button>
+                        </div>
+                    <datalist id='datalistOptions'>";
+        foreach ($persons as $person) { $html .= "<option value='" . $person->getFirstName() . " " . $person->getLastName() . "'>"; }
         $html .= "</datalist>
                 </div>
                 <div>

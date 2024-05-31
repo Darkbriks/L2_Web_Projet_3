@@ -9,6 +9,8 @@ require_once $GLOBALS['PDO_WRAPPER'];
 require ".." . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR . "Autoloader.php";
 Autoloader::register();
 
+error_reporting(0);
+
 $person = trim($_POST['person']);
 
 $personDB = new PersonDB();
