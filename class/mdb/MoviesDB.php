@@ -172,9 +172,9 @@ class MoviesDB extends PdoWrapper
               JOIN tag ON mt.tag_id = tag.id
               WHERE tag.id = :tag";
 
-        return $this->execute($query, [':tag' => $tag], "mdb\data_template\Movie");
+        return $this->execute($query, array(':tag' => $tag), "mdb\data_template\Movie");
     }
-    public function getMoviesBy($release_date = null, $duration = null, $name = null, $note = null): array
+    public function getMoviesBy($release_date = null, $duration = null, $name = null, $note = null, $rating = null, $synopsys): array
     {
         $query = "SELECT * FROM movies WHERE 1=1";
         $params = [];
@@ -198,6 +198,14 @@ class MoviesDB extends PdoWrapper
             $query .= " AND note = :note";
             $params[':rating'] = $note;
         }
+        if($rating !== null){
+            $query .= " AND rating = :rating";
+            $params[':rating'] = $rating;
+        }
+        if($synopsys !== null){
+            $query .= " AND synopsys LIKE :synopsys";
+            $params[':synopsys'] = '%' . $synopsys . '%';
+        }
 
         return $this->execute($query, $params, "mdb\data_template\Movie");
     }
@@ -209,4 +217,13 @@ class MoviesDB extends PdoWrapper
 
         return $this->execute($query,NULL, "mdb\data_template\Movie");
     }
+
+    public function alterMovie_($movie_alter ,$movie_alter_value, $movie_id)
+    {
+        $query = "UPDATE movies SET" . $movie_alter . "= :movie_alter WHERE id = :id";
+        return $this->execute($query,array(':movie_alter' => $movie_alter_value,':id' => $movie_id),NULL);
+    }
+
+
+
 }
