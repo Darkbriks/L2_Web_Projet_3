@@ -3,7 +3,7 @@
 namespace mdb\data_template;
 
 use mdb\PersonDB;
-use mdb\TagBD;
+use mdb\TagDB;
 
 class Movie
 {
@@ -47,7 +47,7 @@ class Movie
         $actors = $personDB->getActorsOfMovie($this->id);
         $composers = $personDB->getComposersOfMovie($this->id);
 
-        $tags = (new TagBD())->getTagsOfMovie($this->id);
+        $tags = (new TagDB())->getTagsOfMovie($this->id);
         $tags = array_map(function($tag) { return $tag->getName(); }, $tags);
 
         //Return an array with the movie's details

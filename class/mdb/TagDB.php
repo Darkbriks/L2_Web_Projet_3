@@ -4,7 +4,7 @@ namespace mdb;
 
 use pdo_wrapper\PdoWrapper;
 
-class TagBD extends PdoWrapper
+class TagDB extends PdoWrapper
 {
     public function __construct()
     {
@@ -51,4 +51,25 @@ class TagBD extends PdoWrapper
 
         return $this->execute($query, array(':movieId' => $movieId), "mdb\data_template\Tag");
     }
+
+    /*
+     * Link a movie to a tag.
+     * When you add a tag to a movie, you have to add the tag to the tag table first.
+     */
+    public function addMovie_Tag($movie_id, $tag_id): bool
+    {
+        $sql = "INSERT INTO movie_tag (movie_id, tag_id) VALUES (:movie_id, :tag_id)";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([':movie_id' => $movie_id, ':tag_id' => $tag_id]);
+    }
+
+    /*
+     * Link a list of tags to a movie
+     */
+    public function addListOfMovie_Tag($list): bool
+    {
+        foreach ($list as $tag) { if(!$this->addMovie_Tag($tag['movie_id'], $tag['tag_id'])) { return false; } }
+        return true;
+    }
+
 }

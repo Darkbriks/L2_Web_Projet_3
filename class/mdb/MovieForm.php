@@ -10,7 +10,7 @@ class MovieForm
 
     public function getForm(): string
     {
-        $tagDB = new TagBD();
+        $tagDB = new TagDB();
         $categories = $tagDB->getTags();
 
         $html = "<h2>Ajouter un Nouveau Film Manuellement</h2>
@@ -152,11 +152,11 @@ class MovieForm
 
     private function saveCategories(array $categories, int $movie_id): void
     {
-        $linkDB = new LinkBD();
+        $tagDB = new TagDB();
         foreach ($categories as $category)
         {
             $category = htmlspecialchars(trim($category));
-            $linkDB->addMovie_Tag($movie_id, $category);
+            $tagDB->addMovie_Tag($movie_id, $category);
         }
     }
 }
