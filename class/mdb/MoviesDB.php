@@ -60,9 +60,40 @@ class MoviesDB extends PdoWrapper
     /*
      * Get all movies with a specified actor
      */
+
+    public function getMoviesIDByPerson($firstName, $lastName): array
+    {
+        $query = "SELECT m.id FROM movies m
+              JOIN movie_person mp ON m.id = mp.movie_id
+              JOIN person p ON mp.person_id = p.id
+              WHERE p.first_name = :firstName AND p.last_name = :lastName";
+
+        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
+    }
+
+    public function getMoviesByPerson($firstName, $lastName): array
+    {
+        $query = "SELECT m.* FROM movies m
+              JOIN movie_person mp ON m.id = mp.movie_id
+              JOIN person p ON mp.person_id = p.id
+              WHERE p.first_name = :firstName AND p.last_name = :lastName";
+
+        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
+    }
+
+    public function getMoviesIDByActor($firstName, $lastName): array
+    {
+        $query = "SELECT m.id FROM movies m
+              JOIN movie_person mp ON m.id = mp.movie_id
+              JOIN person p ON mp.person_id = p.id
+              WHERE p.first_name = :firstName AND p.last_name = :lastName AND mp.person_type = 1";
+
+        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
+    }
+
     public function getMoviesByActor($firstName, $lastName): array
     {
-        $query = "SELECT m.id, m.title FROM movies m
+        $query = "SELECT m.* FROM movies m
               JOIN movie_person mp ON m.id = mp.movie_id
               JOIN person p ON mp.person_id = p.id
               WHERE p.first_name = :firstName AND p.last_name = :lastName AND mp.person_type = 1";
@@ -73,9 +104,19 @@ class MoviesDB extends PdoWrapper
     /*
      * Get all movies with a specified director
      */
-    public function getMoviesByDirector($firstName, $lastName): array
+    public function getMoviesIDByDirector($firstName, $lastName): array
     {
         $query = "SELECT  m.id, m.title FROM movies m
+              JOIN movie_person mp ON m.id = mp.movie_id
+              JOIN person p ON mp.person_id = p.id
+              WHERE p.first_name = :firstName AND p.last_name = :lastName AND mp.person_type = 2";
+
+        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
+    }
+
+    public function getMoviesByDirector($firstName, $lastName): array
+    {
+        $query = "SELECT  m.* FROM movies m
               JOIN movie_person mp ON m.id = mp.movie_id
               JOIN person p ON mp.person_id = p.id
               WHERE p.first_name = :firstName AND p.last_name = :lastName AND mp.person_type = 2";
@@ -86,9 +127,19 @@ class MoviesDB extends PdoWrapper
     /*
      * Get all movies with a specified composer
      */
+    public function getMoviesIDByComposer($firstName, $lastName): array
+    {
+        $query = "SELECT m.id FROM movies m
+              JOIN movie_person mp ON m.id = mp.movie_id
+              JOIN person p ON mp.person_id = p.id
+              WHERE p.first_name = :firstName AND p.last_name = :lastName AND mp.person_type = 3";
+
+        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
+    }
+
     public function getMoviesByComposer($firstName, $lastName): array
     {
-        $query = "SELECT m.id, m.title FROM movies m
+        $query = "SELECT m.id FROM movies m
               JOIN movie_person mp ON m.id = mp.movie_id
               JOIN person p ON mp.person_id = p.id
               WHERE p.first_name = :firstName AND p.last_name = :lastName AND mp.person_type = 3";
