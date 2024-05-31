@@ -35,5 +35,28 @@ document.addEventListener('DOMContentLoaded', function()
             };
         }
     });
+
+    document.getElementById('AddDirectorButton').addEventListener('click', function()
+    {
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', '../ajax/movieFormAddPerson.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send('person=' + document.getElementById('directorsDataList').value);
+        xhr.onreadystatechange = function()
+        {
+            if (xhr.readyState === 4 && xhr.status === 200)
+            {
+                let response = JSON.parse(xhr.responseText);
+                if (response.success)
+                {
+                    let data = JSON.parse(response.data);
+                    document.querySelector('.directorsList').innerHTML += '' +
+                        '<div><input type=\"hidden\" name=\"directors[]\" value=\"' + data.id + '\" id=\"' + data.full_name + '\">' +
+                        '<label>' + data.full_name + '</label><button type=\"button\" onclick=\"this.parentElement.remove();\">Remove</button></div>';
+                }
+                else { console.log('Erreur:', response.error); }
+            }
+        }
+    });
 });
 // TODO 1: Add form validation

@@ -40,7 +40,7 @@ class Movie
             </script>";
     }
 
-    public function get_movieCard()
+    public function get_json()
     {
         $personDB = new PersonDB();
         $directors = $personDB->getDirectorsOfMovie($this->id);

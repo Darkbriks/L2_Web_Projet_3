@@ -12,6 +12,6 @@ $moviesDB = new MoviesDB();
 if ($_POST['tagId'] == -1) { $movies = $moviesDB->getMovies(); }
 else { $movies = $moviesDB->getMoviesByTag($_POST['tagId']); }
 
-$json_movies = json_encode(array_map(function($movie) { return $movie->get_movieCard(); }, $movies));
+$json_movies = json_encode(array_map(function($movie) { return $movie->get_json(); }, $movies));
 echo json_encode(['success' => true, 'data' => $json_movies]);
 ?>

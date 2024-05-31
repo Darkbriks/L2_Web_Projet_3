@@ -8,10 +8,18 @@ class MovieForm
 {
     const POSTER_DIR = 'uploads/posters/';
 
+    private array $persons = [];
+    private array $personsNames = [];
+
+
     public function getForm(): string
     {
         $tagDB = new TagDB();
         $categories = $tagDB->getTags();
+
+        $personDB = new PersonDB();
+        $this->persons = $personDB->getPersons();
+        foreach ($this->persons as $person) { $this->personsNames[] = $person->getFirstName() . ' ' . $person->getLastName(); }
 
         $html = "<h2>Ajouter un Nouveau Film Manuellement</h2>
             <form method='POST' enctype='multipart/form-data'>
@@ -42,8 +50,9 @@ class MovieForm
                 </div>
                 <div> 
                     <label for='category'>Catégories</label>
-                    <div id = 'categories'>";
-        foreach ($categories as $category) {
+                    <div id = 'category'>";
+        foreach ($categories as $category)
+        {
             $html .= "<div>
                         <input type='checkbox' name='category[]' id='category_" . $category->getId() . "' value='" . $category->getId() . "'>
                         <label for='category_" . $category->getId() . "'>" . $category->getName() . "</label>
@@ -65,6 +74,17 @@ class MovieForm
                         <option value='16'>16 ans et +</option>
                         <option value='18'>18 ans et +</option>
                     </select>
+                </div>";
+        $html .= "<div class='directorsList'></div>
+                <div>
+                    <label for='directorsDataList' class='form-label'>Director to add</label>
+                        <div class='input-group mb-3'>
+                            <input class='form-control' list='datalistOptions' id='directorsDataList' placeholder='Type to search a directors...'>
+                            <button type='button' class='input-group-text' id='AddDirectorButton'>Add directors</button>
+                        </div>
+                    <datalist id='datalistOptions'>";
+        foreach ($this->persons as $person) { $html .= "<option value='" . $person->getFirstName() . " " . $person->getLastName() . "'>"; }
+        $html .= "</datalist>
                 </div>
                 <div>
                     <label for='seen'>Vu</label>

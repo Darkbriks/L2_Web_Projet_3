@@ -71,7 +71,7 @@ class Person
         return $html;
     }
 
-    public function get_peopleCard()
+    public function get_json()
     {
         return [
             'id' => $this->id,
