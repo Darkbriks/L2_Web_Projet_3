@@ -27,7 +27,7 @@ class PersonDB extends PdoWrapper
         ]);
     }
 
-    public function addMovie_Person($movieId, $personId, $playedName, $personType): bool
+    public function addMovie_Person($movieId, $personId, $playedName, $personType=1): bool
     {
         $query = "INSERT INTO movie_person (movie_id, person_id, played_name, person_type)
               VALUES (:movieId, :personId, :playedName, :personType)";
@@ -48,7 +48,6 @@ class PersonDB extends PdoWrapper
         }
         return true;
     }
-
 
     public function addMovie_Director($movie_id, $director_id): bool
     {
@@ -166,4 +165,22 @@ class PersonDB extends PdoWrapper
 
         return $this->execute($query, array(':personId' => $personId, ':personType' => $personType), "mdb\data_template\Movie");
     }
+
+    public function alterPerson_FirstName($firstName, $person_id)
+    {
+        $query = "UPDATE person
+        SET first_name = :firstName
+        WHERE id = :person_id";
+
+        return $this->execute($query, array(':firstName' => $firstName));
+    }
+    public function alterPerson_LasttName($lastName, $person_id)
+    {
+        $query = "UPDATE person
+        SET last_name = :lastName
+        WHERE id = :person_id";
+
+        return $this->execute($query, array(':lasrtName' => $lastName));
+    }
+
 }

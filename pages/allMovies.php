@@ -19,7 +19,7 @@ Autoloader::register();
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item tag" href="#" data-tag="-1">All</a></li>
                 <?php
-                $tagBD = new mdb\TagBD();
+                $tagBD = new mdb\TagDB();
                 $tags = $tagBD->getTags();
                 foreach ($tags as $tag) { echo $tag->getHtml_li(); }
                 ?>

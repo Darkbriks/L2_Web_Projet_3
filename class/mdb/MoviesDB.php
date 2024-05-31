@@ -174,4 +174,39 @@ class MoviesDB extends PdoWrapper
 
         return $this->execute($query, [':tag' => $tag], "mdb\data_template\Movie");
     }
+    public function getMoviesBy($release_date = null, $duration = null, $name = null, $note = null): array
+    {
+        $query = "SELECT * FROM movies WHERE 1=1";
+        $params = [];
+
+        if ($release_date !== null) {
+            $query .= " AND release_date = :release_date";
+            $params[':release_date'] = $release_date;
+        }
+
+        if ($duration !== null) {
+            $query .= " AND time_duration = :duration";
+            $params[':duration'] = $duration;
+        }
+
+        if ($name !== null) {
+            $query .= " AND title LIKE :name";
+            $params[':name'] = '%' . $name . '%';
+        }
+
+        if ($note !== null) {
+            $query .= " AND note = :note";
+            $params[':rating'] = $note;
+        }
+
+        return $this->execute($query, $params, "mdb\data_template\Movie");
+    }
+
+    public function getMoviesBy_Order($condition, $order): array
+    {
+        $order = ($order) ? "ASC" : "DESC";
+        $query = "SELECT * FROM movies ORDER BY " . $condition. $order;
+
+        return $this->execute($query,NULL, "mdb\data_template\Movie");
+    }
 }

@@ -4,7 +4,7 @@ namespace mdb;
 
 use pdo_wrapper\PdoWrapper;
 
-class TagBD extends PdoWrapper
+class TagDB extends PdoWrapper
 {
     public function __construct()
     {
