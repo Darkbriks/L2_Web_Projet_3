@@ -55,6 +55,38 @@ document.addEventListener('DOMContentLoaded', function()
         let composer = document.getElementById('composerDataList').value;
         if (composer) { addPersonToMovieList(composer, 'composer', null); }
     });
+
+    document.querySelector('form').addEventListener('submit', function(event)
+    {
+        let releaseDate = document.getElementById('release_date').value;
+        let duration = parseInt(document.getElementById('duration').value);
+        let category = document.querySelectorAll('input[name="category[]"]:checked');
+        let currentDate = new Date().toISOString().split('T')[0];
+
+        if (releaseDate === '' || releaseDate > currentDate) {
+            showError('release_date', 'Please enter a valid release date');
+            event.preventDefault();
+        } else {
+            hideError('release_date');
+        }
+
+
+        if (isNaN(duration) || duration <= 0) {
+            showError('duration', 'Please enter a valid duration');
+            event.preventDefault();
+        } else {
+            hideError('duration');
+        }
+
+
+        if (category.length === 0) {
+            showError('category', 'Please select at least one category');
+            event.preventDefault();
+        } else {
+            hideError('category');
+        }
+
+    });
 });
 
 function addPersonToMovieList(person, type, role)
@@ -82,5 +114,20 @@ function addPersonToMovieList(person, type, role)
         }
     }
 }
-
-// TODO 1: Add form validation
+function showError(fieldId, message) {
+    let errorElement = document.getElementById(fieldId + '-error');
+    if (!errorElement) {
+        errorElement = document.createElement('div');
+        errorElement.id = fieldId + '-error';
+        errorElement.className = 'error-message';
+        let field = document.getElementById(fieldId);
+        field.parentNode.insertBefore(errorElement, field.nextSibling);
+    }
+    errorElement.textContent = message;
+}
+function hideError(fieldId) {
+    let errorElement = document.getElementById(fieldId + '-error');
+    if (errorElement) {
+        errorElement.parentNode.removeChild(errorElement);
+    }
+}

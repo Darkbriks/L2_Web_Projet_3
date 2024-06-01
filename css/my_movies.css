@@ -222,3 +222,12 @@ body.dark-theme label{
 .space{
     padding-top: 10px;
 }
+#category{
+    max-height: 100px;
+    overflow-y: auto;
+}
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
