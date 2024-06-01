@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Movie</title>
+    <link rel="stylesheet" href="../../css/my_movies.css">
+</head>
+<header data-include="header.html"></header>
+<body>
+<div class="container mt-5">
+<h2>Ajouter un Nouveau Film Manuellement</h2>
+<form method='POST' enctype='multipart/form-data'>
+    <div class="form-group">
+        <label for='title' >Titre</label>
+        <input type='text' class="form-control" name='title' id='title' required>
+    </div>
+    <div class="form-group">
+        <label for='release_date'>Date de Sortie</label>
+        <input type='date' class="form-control" name='release_date' id='release_date' required>
+    </div>
+    <div class="form-group">
+        <label for='duration'>Durée</label>
+        <input type='number' class="form-control" name='duration' id='duration' required>
+    </div>
+    <div class="mb-3">
+        <label for='posters'>Affiche</label>
+        <div id='posters-preview'><img src='' alt='' class="img-fluid"></div>
+        <input type='file' class="form-control" name='posters' id='posters' required accept='image/jpeg, image/jpg, image/png'>
+    </div>
+    <div class="input-group">
+        <label class="input-group-text" for='synopsis'>Synopsis</label>
+        <textarea class="form-control" aria-label="Synopsis" name='synopsis' id='synopsis' required></textarea>
+    </div>
+    <div class="form-group">
+        <label for='trailer'>Bande Annonce</label>
+        <input type='text' class="form-control" name='trailer' id='trailer' required>
+    </div>
+
+    <div class="form-group">
+        <label for='category'>Catégories</label>
+        <div id='category'>
+            <div>
+                <input type='checkbox' name='category[]' id='category_" . $category->getId() . "' value='" . $category->getId() . "'>
+                <label for='category_" . $category->getId() . "'>" . $category->getName() . "</label>
+            </div>
+        </div>
+        <div class="input-group mt-3">
+            <input type='text' id='newCategory' class="form-control" placeholder='Nouveau tag'>
+            <div class="input-group-append">
+                <button type='button' class="btn btn-secondary" id='addCategory'>Ajouter Tag</button>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for='age_limit'>Limite d'Age</label>
+        <select class="form-control" name='age_limit' id='age_limit' required>
+            <option value=''>-- Choisir une limite d'âge --</option>
+            <option value='1'>Tout Public</option>
+            <option value='10'>10 ans et +</option>
+            <option value='12'>12 ans et +</option>
+            <option value='16'>16 ans et +</option>
+            <option value='18'>18 ans et +</option>
+        </select>
+    </div>
+    <div class='directorList mb-3'></div>
+    <div class="form-group">
+        <label for='directorDataList' class='form-label'>Director to add</label>
+        <div class='input-group mb-3'>
+            <input class='form-control' list='datalistOptions' id='directorDataList' placeholder='Type to search a director...'>
+            <div class="input-group-append">
+                <button type='button' class='btn btn-secondary' id='AddDirectorButton'>Add director</button>
+            </div>
+        </div>
+        <datalist id='datalistOptions'></datalist>
+    </div>
+    <div class='actorList mb-3'></div>
+    <div class="form-group">
+        <label for='actorDataList' class='form-label'>Actor to add</label>
+        <div class='input-group mb-3'>
+            <input class='form-control' list='datalistOptions1' id='actorDataList' placeholder='Type to search an actor...'>
+            <div class="input-group-append">
+                <span class='input-group-text'>Rôle</span>
+            </div>
+            <input class='form-control' id='role' placeholder='rôle joué...'>
+            <div class="input-group-append">
+                <button type='button' class='btn btn-secondary' id='AddActorButton'>Add actor</button>
+            </div>
+        </div>
+        <datalist id='datalistOptions1'></datalist>
+    </div>
+    <div class='composerList mb-3'></div>
+    <div class="form-group">
+        <label for='composerDataList' class='form-label'>Composer to add</label>
+        <div class='input-group mb-3'>
+            <input class='form-control' list='datalistOptions2' id='composerDataList' placeholder='Type to search a composer...'>
+            <div class="input-group-append">
+                <button type='button' class='btn btn-secondary' id='AddComposerButton'>Add composer</button>
+            </div>
+        </div>
+        <datalist id='datalistOptions2'></datalist>
+    </div>
+    <div class="form-group form-check">
+        <input type='checkbox' class="form-check-input" name='seen' id='seen' value='0'>
+        <label class="form-check-label" for='seen'>Vu</label>
+    </div>
+    <div class="form-group">
+        <button type='submit' class="btn btn-success">Ajouter</button>
+        <button type='reset' class="btn btn-secondary">Annuler</button>
+    </div>
+
+</form>
+</div>
+<footer data-include="footer.html"></footer>
+
+<button id="theme">Dark Mode</button>
+<script src ="../../js/MovieForm.js"></script>
+<script src ="../js/template.js"></script>
+</body>
+</html>
