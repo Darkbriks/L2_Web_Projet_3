@@ -2,7 +2,6 @@
 require_once "../config.php";
 require_once "../DB_CREDENTIALS.php";
 require_once $GLOBALS['PDO_WRAPPER'];
-use pdo_wrapper\PdoWrapper;
 
 require ".." . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR . "Autoloader.php";
 Autoloader::register();

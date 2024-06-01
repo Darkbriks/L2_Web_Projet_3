@@ -1,3 +1,3 @@
 <footer>
-    <p>Element's sources ...</p>
+    <p><?php echo $GLOBALS['footer-text'] ?></p>
 </footer>

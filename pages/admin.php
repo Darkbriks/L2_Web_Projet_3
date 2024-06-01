@@ -7,12 +7,16 @@ require_once "../DB_CREDENTIALS.php";
 require ".." . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR . "Autoloader.php";
 Autoloader::register();
 
+//$lang = Cookies::get('language');
+$lang = $GLOBALS['CURRENT_LANGUAGE'];
+require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
+
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && isset($_POST['password']))
 {
     if ($_POST['username'] === $admin_user && $_POST['password'] === $admin_pass) { $_SESSION['admin'] = true; }
-    else { $login_error = "Nom d'utilisateur ou mot de passe incorrect"; }
+    else { $login_error = $GLOBALS['login-error']; }
 }
 ?>
 
@@ -28,7 +32,7 @@ if (isset($_SESSION['admin']) && $_SESSION['admin'])
         try
         {
             $movieForm->createMovie($_POST, $img_file);
-            echo "<p>Le film a été ajouté avec succès</p>";
+            echo "<p>" . $GLOBALS['admin-movie-success'] . "</p>";
         }
         catch (Exception $e)
         {

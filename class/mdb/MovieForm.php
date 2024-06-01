@@ -16,35 +16,35 @@ class MovieForm
         $personDB = new PersonDB();
         $persons = $personDB->getPersons();
 
-        $html = "<h2>Ajouter un Nouveau Film Manuellement</h2>
+        $html = "<h2>" . $GLOBALS['movie-form-title'] . "</h2>
             <form method='POST' enctype='multipart/form-data'>
                 <div> 
-                    <label for='title'>Titre</label>
-                    <input type='text' name='title' id='title' required>
+                    <label for='title'>" . $GLOBALS['movie-form-add-movie-title'] . "</label>
+                    <input type='text' name='title' id='title' required placeholder='" . $GLOBALS['movie-form-add-movie-title-placeholder'] . "'>
                 </div>
                 <div> 
-                    <label for='release_date'>Date de Sortie</label>
+                    <label for='release_date'>" . $GLOBALS['movie-form-add-movie-release-date'] . "</label>
                     <input type='date' name='release_date' id='release_date' required>
                 </div>
                 <div> 
-                    <label for='duration'>Durée</label>
-                    <input type='number' name='duration' id='duration' required>
+                    <label for='duration'>" . $GLOBALS['movie-form-add-movie-duration'] . "</label>
+                    <input type='number' name='duration' id='duration' required placeholder='" . $GLOBALS['movie-form-add-movie-duration-placeholder'] . "'>
                 </div>
                 <div> 
-                    <label for='posters'>Affiche</label>
+                    <label for='posters'>" . $GLOBALS['movie-form-add-movie-poster'] . "</label>
                     <div id='posters-preview'><img src='' alt=''></div>
                     <input type='file' name='posters' id='posters' required accept='image/jpeg, image/jpg, image/png'>
                 </div>
                 <div> 
-                    <label for='synopsis'>Synopsis</label>
-                    <textarea name='synopsis' id='synopsis' required></textarea>
+                    <label for='synopsis'>" . $GLOBALS['movie-form-add-movie-synopsis'] . "</label>
+                    <textarea name='synopsis' id='synopsis' required placeholder='" . $GLOBALS['movie-form-add-movie-synopsis-placeholder'] . "'></textarea>
                 </div>
                 <div> 
-                    <label for='trailer'>Bande Annonce</label>
-                    <input type='text' name='trailer' id='trailer' required>
+                    <label for='trailer'>" . $GLOBALS['movie-form-add-movie-trailer'] . "</label>
+                    <input type='text' name='trailer' id='trailer' required placeholder='" . $GLOBALS['movie-form-add-movie-trailer-placeholder'] . "'>
                 </div>
                 <div> 
-                    <label for='category'>Catégories</label>
+                    <label for='category'>" . $GLOBALS['movie-form-add-movie-tags'] . "</label>
                     <div id = 'category'>";
         foreach ($categories as $category)
         {
@@ -55,63 +55,64 @@ class MovieForm
         }
         $html .= "</div>
                     <div>
-                      <input type='text' id='newCategory' placeholder='Nouveau tag'>
-                      <button type='button' id='addCategory'>Ajouter Tag</button>
+                      <input type='text' id='newCategory' placeholder='" . $GLOBALS['movie-form-add-movie-new-tag'] . "'>
+                      <button type='button' id='addCategory'>" . $GLOBALS['movie-form-add-movie-add-tag'] . "</button>
                   </div>
                 </div>
                 <div> 
-                    <label for='age_limit'>Limite d'Age</label>
+                    <label for='age_limit'>" . $GLOBALS['movie-form-add-movie-age-rating'] . "</label>
                     <select name='age_limit' id='age_limit' required>
-                        <option value=''>-- Choisir une limite d'âge --</option>
-                        <option value='1'>Tout Public</option>
-                        <option value='10'>10 ans et +</option>
-                        <option value='12'>12 ans et +</option>
-                        <option value='16'>16 ans et +</option>
-                        <option value='18'>18 ans et +</option>
+                        <option value=''>-- " . $GLOBALS['movie-form-add-movie-age-rating'] . " --</option>
+                        <option value='1'>" . $GLOBALS['movie-form-add-movie-age-rating-all'] . "</option>
+                        <option value='10'>10 " . $GLOBALS['movie-form-add-movie-age-rating-number'] . "</option>
+                        <option value='12'>12 " . $GLOBALS['movie-form-add-movie-age-rating-number'] . "</option>
+                        <option value='16'>16 " . $GLOBALS['movie-form-add-movie-age-rating-number'] . "</option>
+                        <option value='18'>18 " . $GLOBALS['movie-form-add-movie-age-rating-number'] . "</option>
                     </select>
                 </div>
-                <div class='directorList'></div>
+               
                 <div>
-                    <label for='directorDataList' class='form-label'>Director to add</label>
+                    <label for='directorDataList' class='form-label'>" . $GLOBALS['movie-form-add-movie-director-to-add'] . "</label>
+                        <div class='directorList'></div>
                         <div class='input-group mb-3'>
-                            <input class='form-control' list='datalistOptions' id='directorDataList' placeholder='Type to search a director...'>
-                            <button type='button' class='input-group-text' id='AddDirectorButton'>Add director</button>
-                        </div>
-                    <datalist id='datalistOptions'>";
-        foreach ($persons as $person) { $html .= "<option value='" . $person->getFirstName() . " " . $person->getLastName() . "'>"; }
-        $html .= "</datalist>
-                </div>
-                <div class='actorList'></div>
-                <div>
-                    <label for='actorDataList' class='form-label'>Actor to add</label>
-                        <div class='input-group mb-3'>
-                            <input class='form-control' list='datalistOptions' id='actorDataList' placeholder='Type to search an actor...'>
-                            <span class='input-group-text'>Rôle</span>
-                            <input class='form-control' id='role' placeholder='rôle joué...'>
-                            <button type='button' class='input-group-text' id='AddActorButton'>Add actor</button>
-                        </div>
-                    <datalist id='datalistOptions'>";
-        foreach ($persons as $person) { $html .= "<option value='" . $person->getFirstName() . " " . $person->getLastName() . "'>"; }
-        $html .= "</datalist>
-                </div>
-                <div class='composerList'></div>
-                <div>
-                    <label for='composerDataList' class='form-label'>Composer to add</label>
-                        <div class='input-group mb-3'>
-                            <input class='form-control' list='datalistOptions' id='composerDataList' placeholder='Type to search a composer...'>
-                            <button type='button' class='input-group-text' id='AddComposerButton'>Add composer</button>
+                            <input class='form-control' list='datalistOptions' id='directorDataList' placeholder='" . $GLOBALS['movie-form-add-movie-add-director-placeholder'] . "'>
+                            <button type='button' class='input-group-text' id='AddDirectorButton'>" . $GLOBALS['movie-form-add-movie-add-director'] . "</button>
                         </div>
                     <datalist id='datalistOptions'>";
         foreach ($persons as $person) { $html .= "<option value='" . $person->getFirstName() . " " . $person->getLastName() . "'>"; }
         $html .= "</datalist>
                 </div>
                 <div>
-                    <label for='seen'>Vu</label>
+                    <label for='actorDataList' class='form-label'>" . $GLOBALS['movie-form-add-movie-actor-to-add'] . "</label>
+                        <div class='actorList'></div>
+                        <div class='input-group mb-3'>
+                            <input class='form-control' list='datalistOptions' id='actorDataList' placeholder='" . $GLOBALS['movie-form-add-movie-add-actor-placeholder'] . "'>
+                            <span class='input-group-text'>" . $GLOBALS['movie-form-add-movie-add-actor-role'] . "</span>
+                            <input class='form-control' id='role' placeholder='" . $GLOBALS['movie-form-add-movie-add-actor-role-placeholder'] . "'>
+                            <button type='button' class='input-group-text' id='AddActorButton'>" . $GLOBALS['movie-form-add-movie-add-actor'] . "</button>
+                        </div>
+                    <datalist id='datalistOptions'>";
+        foreach ($persons as $person) { $html .= "<option value='" . $person->getFirstName() . " " . $person->getLastName() . "'>"; }
+        $html .= "</datalist>
+                </div>
+                <div>
+                    <label for='composerDataList' class='form-label'>" . $GLOBALS['movie-form-add-movie-composer-to-add'] . "</label>
+                        <div class='composerList'></div>
+                        <div class='input-group mb-3'>
+                            <input class='form-control' list='datalistOptions' id='composerDataList' placeholder='" . $GLOBALS['movie-form-add-movie-add-composer-placeholder'] . "'>
+                            <button type='button' class='input-group-text' id='AddComposerButton'>" . $GLOBALS['movie-form-add-movie-add-composer'] . "</button>
+                        </div>
+                    <datalist id='datalistOptions'>";
+        foreach ($persons as $person) { $html .= "<option value='" . $person->getFirstName() . " " . $person->getLastName() . "'>"; }
+        $html .= "</datalist>
+                </div>
+                <div>
+                    <label for='seen'>" . $GLOBALS['movie-form-add-movie-seen'] . "</label>
                     <input type='checkbox' name='seen' id='seen' value='0'>
                 </div>
                 <div> 
-                    <button type='submit'>Ajouter</button>
-                    <button type='reset'>Annuler</button>
+                    <button type='submit'>" . $GLOBALS['movie-form-add-movie-add'] . "</button>
+                    <button type='reset'>" . $GLOBALS['movie-form-add-movie-cancel'] . "</button>
                 </div>
             </form>
             <script src=" . $GLOBALS['JS_DIR'] . "MovieForm.js" . "></script>";
@@ -131,7 +132,7 @@ class MovieForm
         try { $data['posters'] = $this->savePoster($img_file); }
         catch (Exception $e) { throw new Exception($e->getMessage()); }
         $movie_id = $this->saveMovie($data);
-        if ($movie_id === 0)  { throw new Exception('Erreur lors de l\'ajout du film dans la base de données'); }
+        if ($movie_id === 0)  { throw new Exception($GLOBALS['movie-form-exception-adding']); }
         else { $this->saveCategories($data['category'], $movie_id); }
 
 
@@ -175,7 +176,7 @@ class MovieForm
         $dir = $GLOBALS['PHP_DIR'] . self::POSTER_DIR;
         if (!is_dir($dir)) { mkdir($dir); }
         $uploaded = move_uploaded_file($tmp_name, $dir . $img_name);
-        if (!$uploaded) { throw new Exception('Erreur lors de l\'upload de l\'affiche'); }
+        if (!$uploaded) { throw new Exception($GLOBALS['movie-form-exception-upload']); }
         return $img_name;
     }
 
@@ -212,37 +213,37 @@ class MovieForm
     {
         // Le nom ne doit pas être vide, et doit contenir entre 3 et 50 caractères
         $data['title'] = htmlspecialchars(trim($data['title']));
-        if (empty($data['title']) || strlen($data['title']) < 3 || strlen($data['title']) > 50) { throw new Exception('Le titre doit contenir entre 3 et 50 caractères'); }
+        if (empty($data['title']) || strlen($data['title']) < 3 || strlen($data['title']) > 50) { throw new Exception($GLOBALS['movie-form-exception-title']); }
 
         // La date de sortie ne doit pas être vide, et doit être au format YYYY-MM-DD
         $data['release_date'] = htmlspecialchars(trim($data['release_date']));
-        if (empty($data['release_date']) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $data['release_date'])) { throw new Exception('La date de sortie doit être au format YYYY-MM-DD'); }
+        if (empty($data['release_date']) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $data['release_date'])) { throw new Exception($GLOBALS['movie-form-exception-release-date']); }
 
         // La durée (en minutes) ne doit pas être vide, et doit être un entier positif
         $data['duration'] = htmlspecialchars(trim($data['duration']));
-        if (empty($data['duration']) || !ctype_digit($data['duration']) || $data['duration'] <= 0) { throw new Exception('La durée doit être un entier positif'); }
+        if (empty($data['duration']) || !ctype_digit($data['duration']) || $data['duration'] <= 0) { throw new Exception($GLOBALS['movie-form-exception-duration']); }
 
         // L'affiche ne doit pas être vide, et doit être une image (jpg, jpeg, png)
         if (empty($img_file['name']) || !in_array($img_file['type'], ['image/jpeg', 'image/jpg', 'image/png']))
-        { throw new Exception('L\'affiche doit être une image (jpg, jpeg, png)'); }
+        { throw new Exception($GLOBALS['movie-form-exception-poster']); }
 
         // Le synopsis ne doit pas être vide, et doit contenir entre 10 et 500 caractères
         $data['synopsis'] = htmlspecialchars(trim($data['synopsis']));
-        if (empty($data['synopsis']) || strlen($data['synopsis']) < 10 || strlen($data['synopsis']) > 500) { throw new Exception('Le synopsis doit contenir entre 10 et 500 caractères'); }
+        if (empty($data['synopsis']) || strlen($data['synopsis']) < 10 || strlen($data['synopsis']) > 500) { throw new Exception($GLOBALS['movie-form-exception-synopsis']); }
 
         // La bande annonce ne doit pas être vide, et doit être une URL valide vers une vidéo (youtube, dailymotion, vimeo)
         $data['trailer'] = htmlspecialchars(trim($data['trailer']));
         if (empty($data['trailer']) || !filter_var($data['trailer'], FILTER_VALIDATE_URL) || !preg_match('/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|dailymotion\.com|vimeo\.com)\/.+$/', $data['trailer']))
-        { throw new Exception('La bande annonce doit être une URL valide vers une vidéo (youtube, dailymotion, vimeo)'); }
+        { throw new Exception($GLOBALS['movie-form-exception-trailer']); }
 
         // La liste des catégories doit contenir au moins un élément
-        if (empty($data['category'])) { throw new Exception('Le film doit appartenir à au moins une catégorie'); }
+        if (empty($data['category'])) { throw new Exception($GLOBALS['movie-form-exception-tags']); }
 
         // La limite d'âge ne doit pas être vide, et doit être un entier positif entre 0 et 18
         $data['age_limit'] = htmlspecialchars(trim($data['age_limit']));
-        if (empty($data['age_limit']) || !ctype_digit($data['age_limit']) || $data['age_limit'] < 0 || $data['age_limit'] > 18) { throw new Exception('La limite d\'âge doit être un entier positif entre 0 et 18'); }
+        if (empty($data['age_limit']) || !ctype_digit($data['age_limit']) || $data['age_limit'] < 0 || $data['age_limit'] > 18) { throw new Exception($GLOBALS['movie-form-exception-age-rating']); }
 
         // Vu doit être un booléen. Si la date de sortie est supérieure à la date actuelle, vu doit être faux
-        if ($data['seen'] && $data['release_date'] > date('Y-m-d')) { throw new Exception('Le film ne peut pas être vu s\'il n\'est pas encore sorti'); }
+        if ($data['seen'] && $data['release_date'] > date('Y-m-d')) { throw new Exception($GLOBALS['movie-form-exception-seen']); }
     }
 }
