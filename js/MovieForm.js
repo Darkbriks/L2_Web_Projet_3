@@ -39,24 +39,25 @@ document.addEventListener('DOMContentLoaded', function()
     document.getElementById('AddDirectorButton').addEventListener('click', function()
     {
         let director = document.getElementById('directorDataList').value;
-        if (director) { addPersonToMovieList(director, 'director'); }
+        if (director) { addPersonToMovieList(director, 'director', null); }
     });
 
     document.getElementById('AddActorButton').addEventListener('click', function()
     {
         let actor = document.getElementById('actorDataList').value;
         let role = document.getElementById('role').value;
+        if (role.includes('!$!')) { alert('L\'expression !$! est réservée dans ce contexte, veuillez ne pas l\'utiliser.'); return; }
         if (actor && role) { addPersonToMovieList(actor, 'actor', role); }
     });
 
     document.getElementById('AddComposerButton').addEventListener('click', function()
     {
         let composer = document.getElementById('composerDataList').value;
-        if (composer) { addPersonToMovieList(composer, 'composer'); }
+        if (composer) { addPersonToMovieList(composer, 'composer', null); }
     });
 });
 
-function addPersonToMovieList(person, type, role=null)
+function addPersonToMovieList(person, type, role)
 {
     let persons = document.querySelectorAll('.' + type + 'List input[type="hidden"]');
     for (let i = 0; i < persons.length; i++) { if (persons[i].id === person) { console.log('Person already added'); return; } }
@@ -73,7 +74,8 @@ function addPersonToMovieList(person, type, role=null)
             if (response.success)
             {
                 let data = JSON.parse(response.data);
-                document.querySelector('.' + type + 'List').innerHTML += '<div><input type=\"hidden\" name=\"' + type + '[]\" data-role=\"' + role + '\" value=\"' + data.id + '\" id=\"' + data.full_name + '\">' +
+                console.log(role);
+                document.querySelector('.' + type + 'List').innerHTML += '<div><input type=\"hidden\" name=\"' + type + '[]\" value=\"' + data.id + (role !== null ? '!$!' + role : '') + '\" id=\"' + data.full_name + '\">' +
                 '<label>' + data.full_name + (role !== null ? ' (' + role + ')' : '') + '</label><button type=\"button\" onclick=\"this.parentElement.remove();\">Remove</button></div>';
             }
             else { console.log('Erreur:', response.error); }

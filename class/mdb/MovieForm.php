@@ -107,7 +107,7 @@ class MovieForm
                 </div>
                 <div>
                     <label for='seen'>Vu</label>
-                    <input type='checkbox' name='seen' id='seen'>
+                    <input type='checkbox' name='seen' id='seen' value='0'>
                 </div>
                 <div> 
                     <button type='submit'>Ajouter</button>
@@ -124,6 +124,7 @@ class MovieForm
      */
     public function createMovie(array $data, $img_file)
     {
+        $data['seen'] = (isset($data['seen'])) ? $data['seen'] : 0;
         $this->checkForm($data, $img_file);
 
         // Save movie to database
@@ -140,6 +141,25 @@ class MovieForm
             {
                 $director = htmlspecialchars(trim($director));
                 if (!empty($director)) { $this->linkPersons([$director], $movie_id, 2); }
+            }
+        }
+
+        if (isset($data['actor']))
+        {
+            foreach ($data['actor'] as $value)
+            {
+                $actor = explode('!$!', $value)[0]; $actor = htmlspecialchars(trim($actor));
+                $role = explode('!$!', $value)[1]; $role = htmlspecialchars(trim($role));
+                if (!empty($actor)) { $this->linkPersons([$actor], $movie_id, 1, [$actor => $role]); }
+            }
+        }
+
+        if (isset($data['composer']))
+        {
+            foreach ($data['composer'] as $composer)
+            {
+                $composer = htmlspecialchars(trim($composer));
+                if (!empty($composer)) { $this->linkPersons([$composer], $movie_id, 3); }
             }
         }
     }
@@ -223,7 +243,6 @@ class MovieForm
         if (empty($data['age_limit']) || !ctype_digit($data['age_limit']) || $data['age_limit'] < 0 || $data['age_limit'] > 18) { throw new Exception('La limite d\'âge doit être un entier positif entre 0 et 18'); }
 
         // Vu doit être un booléen. Si la date de sortie est supérieure à la date actuelle, vu doit être faux
-        $data['seen'] = isset($data['seen']);
-        if ($data['seen'] && $data['release_date'] > date('Y-m-d')) { $data['seen'] = false; }
+        if ($data['seen'] && $data['release_date'] > date('Y-m-d')) { throw new Exception('Le film ne peut pas être vu s\'il n\'est pas encore sorti'); }
     }
 }
