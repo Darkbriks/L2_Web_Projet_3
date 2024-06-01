@@ -34,10 +34,11 @@ class PersonDB extends PdoWrapper
         $params = array(
             ':movieId' => $movieId,
             ':personId' => $personId,
-            ':playedName' => $playedName,
+            ':playedName' => ($playedName == '') ? NULL : $playedName,
             ':personType' => $personType
         );
-        return $this->execute($query, $params);
+        $this->execute($query, $params);
+        return true;
     }
 
     public function addListOfMovie_Person($list): bool

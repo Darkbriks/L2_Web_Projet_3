@@ -32,7 +32,4 @@ class PdoWrapper
         if ($class_name != null) { return $res->fetchAll(\PDO::FETCH_CLASS, $class_name); }
         else { return $res->fetchAll(\PDO::FETCH_CLASS); }
     }
-    // To call :
-    // $pdo = new PdoWrapper($GLOBALS['db_name'], $GLOBALS['db_host'], $GLOBALS['db_port'], $GLOBALS['db_user'], $GLOBALS['db_pwd']);
-    // $pdo->execute("SELECT * FROM films", [], "Film");
 }

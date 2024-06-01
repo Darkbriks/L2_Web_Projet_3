@@ -122,7 +122,73 @@ class MovieForm
     /**
      * @throws Exception
      */
-    public function createMovie(array $data, $img_file): void
+    public function createMovie(array $data, $img_file)
+    {
+        $this->checkForm($data, $img_file);
+
+        // Save movie to database
+        try { $data['posters'] = $this->savePoster($img_file); }
+        catch (Exception $e) { throw new Exception($e->getMessage()); }
+        $movie_id = $this->saveMovie($data);
+        if ($movie_id === 0)  { throw new Exception('Erreur lors de l\'ajout du film dans la base de données'); }
+        else { $this->saveCategories($data['category'], $movie_id); }
+
+
+        if (isset($data['director']))
+        {
+            foreach ($data['director'] as $director)
+            {
+                $director = htmlspecialchars(trim($director));
+                if (!empty($director)) { $this->linkPersons([$director], $movie_id, 2); }
+            }
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function savePoster(array $poster): string
+    {
+        $tmp_name = $poster['tmp_name'];
+        $img_name = $poster['name'];
+        $img_name = urldecode(htmlspecialchars($img_name));
+        $dir = $GLOBALS['PHP_DIR'] . self::POSTER_DIR;
+        if (!is_dir($dir)) { mkdir($dir); }
+        $uploaded = move_uploaded_file($tmp_name, $dir . $img_name);
+        if (!$uploaded) { throw new Exception('Erreur lors de l\'upload de l\'affiche'); }
+        return $img_name;
+    }
+
+    private function saveMovie(array $data): int
+    {
+        $movieDB = new MoviesDB();
+        return $movieDB->addMovieAndReturnId($data['title'], $data['release_date'], $data['synopsis'], $data['seen'], $data['posters'], $data['duration'], -1, $data['trailer'], $data['age_limit']);
+    }
+
+    private function saveCategories(array $categories, int $movie_id): void
+    {
+        $tagDB = new TagDB();
+        foreach ($categories as $category)
+        {
+            $category = htmlspecialchars(trim($category));
+            $tagDB->addMovie_Tag($movie_id, $category);
+        }
+    }
+
+    private function linkPersons(array $persons, int $movie_id, int $type, array $roles=null): void
+    {
+        $personDB = new PersonDB();
+        foreach ($persons as $person)
+        {
+            $person = htmlspecialchars(trim($person));
+            $personDB->addMovie_Person($movie_id, $person, ($roles !== null) ? $roles[$person] : null, $type);
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function checkForm(array $data, $img_file): void
     {
         // Le nom ne doit pas être vide, et doit contenir entre 3 et 50 caractères
         $data['title'] = htmlspecialchars(trim($data['title']));
@@ -159,43 +225,5 @@ class MovieForm
         // Vu doit être un booléen. Si la date de sortie est supérieure à la date actuelle, vu doit être faux
         $data['seen'] = isset($data['seen']);
         if ($data['seen'] && $data['release_date'] > date('Y-m-d')) { $data['seen'] = false; }
-
-        // Save movie to database
-        try { $data['posters'] = $this->savePoster($img_file); }
-        catch (Exception $e) { throw new Exception($e->getMessage()); }
-        $movie_id = $this->saveMovie($data);
-        if ($movie_id === 0)  { throw new Exception('Erreur lors de l\'ajout du film dans la base de données'); }
-        else { $this->saveCategories($data['category'], $movie_id); }
-    }
-
-    /**
-     * @throws Exception
-     */
-    private function savePoster(array $poster): string
-    {
-        $tmp_name = $poster['tmp_name'];
-        $img_name = $poster['name'];
-        $img_name = urldecode(htmlspecialchars($img_name));
-        $dir = $GLOBALS['PHP_DIR'] . self::POSTER_DIR;
-        if (!is_dir($dir)) { mkdir($dir); }
-        $uploaded = move_uploaded_file($tmp_name, $dir . $img_name);
-        if (!$uploaded) { throw new Exception('Erreur lors de l\'upload de l\'affiche'); }
-        return $img_name;
-    }
-
-    private function saveMovie(array $data): int
-    {
-        $movieDB = new MoviesDB();
-        return $movieDB->addMovieAndReturnId($data['title'], $data['release_date'], $data['synopsis'], $data['seen'], $data['posters'], $data['duration'], -1, $data['trailer'], $data['age_limit']);
-    }
-
-    private function saveCategories(array $categories, int $movie_id): void
-    {
-        $tagDB = new TagDB();
-        foreach ($categories as $category)
-        {
-            $category = htmlspecialchars(trim($category));
-            $tagDB->addMovie_Tag($movie_id, $category);
-        }
     }
 }
