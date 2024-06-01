@@ -1,20 +1,19 @@
 html{
-    height: 100%;
+    height: 100vh;
 }
 
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    transition: background-color 1s, color 1s;
-
+    transition: background-color 0s, color 0s;
 }
 
-header {
+/*header {
     background-color: #333;
     color: white;
     padding: 10px 0;
-}
+}*/
 
 .banner {
     max-width: 1200px;
@@ -49,7 +48,7 @@ main {
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
-    transition: background-color 1s, color 1s;
+    transition: background-color 0s, color 0s;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
@@ -58,6 +57,11 @@ footer {
     padding: 10px 0;
     background-color: #333;
     color: white;
+
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
 }
 
 footer p {
@@ -222,12 +226,91 @@ body.dark-theme label{
 .space{
     padding-top: 10px;
 }
-#category{
-    max-height: 100px;
-    overflow-y: auto;
-}
+
 .error-message {
     color: red;
     font-size: 14px;
     margin-top: 5px;
+}
+
+/********** Login Form **********/
+.login-form {
+    max-width: 20vw;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#login-form-submit {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+/********** Add Movie Form **********/
+.add-movie-form {
+    max-width: 30vw;
+    margin-top: 1.5vw;
+    padding: 1vw;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.add-movie-form h2 {
+    text-align: center;
+}
+
+#posters-preview {
+    display: flex;
+    width: 100%;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#posters-preview-apply {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+#posters-preview-apply img {
+    /* L'image est affichée avec le ratio d'une affiche de film (27:40).
+    Si l'image ne respecte pas ce ratio, elle sera rognée. */
+    width: 25vw;
+    height: 37.5vw;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+#remove-poster-btn {
+    margin-left: 5px;
+    height: 30px;
+    width: 30px;
+}
+
+#synopsis {
+    height: 100px;
+}
+
+#category {
+    /* organisation des éléments en 3 colonnes */
+    column-count: 3;
+    column-gap: 20px;
 }

@@ -3,13 +3,21 @@ document.addEventListener('DOMContentLoaded', function()
     document.getElementById('posters').addEventListener('change', function()
     {
         let file = this.files[0];
+        if (file === undefined) { removePoster(); }
+
         let reader = new FileReader();
         reader.onload = function(e)
         {
-            document.getElementById('posters-preview').innerHTML = '<img src=\"' + e.target.result + '\" alt=\"' + file.name + '\">';
+            let img_container = document.getElementById('posters-preview');
+            if (img_container === null) { img_container = document.getElementById('posters-preview-apply'); }
+            else { img_container.id = 'posters-preview-apply'; }
+            let img = img_container.querySelector('img');
+            img.src = e.target.result; img.alt = file.name;
         };
         reader.readAsDataURL(file);
     });
+
+    document.getElementById('remove-poster-btn').addEventListener('click', removePoster);
 
     document.getElementById('addCategory').addEventListener('click', function()
     {
@@ -26,10 +34,10 @@ document.addEventListener('DOMContentLoaded', function()
                     let response = JSON.parse(xhr.responseText);
                     if (response.success)
                     {
-                        // Ajouter le tag à la liste des catégories
                         let newCategory = document.createElement('div');
-                        newCategory.innerHTML = '<input type=\"checkbox\" name=\"category[]\" id=\"category_' + response.id + '\" value=\"' + response.id + '\"><label for=\"category_' + response.id + '\">' + response.name + '</label>';
-                        document.getElementById("categories").appendChild(newCategory);
+                        newCategory.className = 'form-check';
+                        newCategory.innerHTML = '<input class=\"form-check-input\" type=\"checkbox\" name=\"category[]\" id=\"category_' + response.id + '\" value=\"' + response.id + '\"><label class=\"form-check-label\" for=\"category_' + response.id + '\">' + response.name + '</label>';
+                        document.getElementById("category").appendChild(newCategory);
                     }
                 }
             };
@@ -88,6 +96,16 @@ document.addEventListener('DOMContentLoaded', function()
 
     });
 });
+
+function removePoster()
+{
+    let img_container = document.getElementById('posters-preview-apply');
+    if (img_container === null) { img_container = document.getElementById('posters-preview'); }
+    else { img_container.id = 'posters-preview'; }
+    let img = img_container.querySelector('img');
+    img.src = ''; img.alt = '';
+    document.getElementById('posters').value = '';
+}
 
 function addPersonToMovieList(person, type, role)
 {

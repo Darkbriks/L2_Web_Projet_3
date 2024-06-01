@@ -32,6 +32,7 @@ $GLOBALS['movie-form-add-movie-release-date'] = 'Date de sortie';
 $GLOBALS['movie-form-add-movie-duration'] = 'Durée';
 $GLOBALS['movie-form-add-movie-duration-placeholder'] = 'Entrez la durée du film';
 $GLOBALS['movie-form-add-movie-poster'] = 'Affiche';
+$GLOBALS['movie-form-add-movie-remove-poster'] = 'Supprimer';
 $GLOBALS['movie-form-add-movie-synopsis'] = 'Synopsis';
 $GLOBALS['movie-form-add-movie-synopsis-placeholder'] = 'Entrez le synopsis du film';
 $GLOBALS['movie-form-add-movie-trailer'] = 'Bande-annonce';

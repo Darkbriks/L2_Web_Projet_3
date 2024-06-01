@@ -13,11 +13,12 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && isset($_POST['password']))
+if (isset($_POST['username']) || isset($_POST['password']))
 {
     if ($_POST['username'] === $admin_user && $_POST['password'] === $admin_pass) { $_SESSION['admin'] = true; }
     else { $login_error = $GLOBALS['login-error']; }
 }
+
 ?>
 
 <?php ob_start(); ?>
@@ -39,7 +40,8 @@ if (isset($_SESSION['admin']) && $_SESSION['admin'])
             echo $e->getMessage();
         }
     }
-    echo $movieForm->getForm();
+    //echo $movieForm->getForm();
+    include "add-movie-form.php";
 }
 else { include "login.php"; }
 ?>
