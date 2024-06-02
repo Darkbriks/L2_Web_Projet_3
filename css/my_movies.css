@@ -7,7 +7,7 @@ body
 }
 
 /********** header **********/
-.banner {
+/*.banner {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
@@ -25,27 +25,34 @@ nav ul {
     margin: 0;
     padding: 0;
     display: flex;
-}
+}*/
 
-nav ul li {
-    margin-left: 20px;
-}
-
-nav ul li a {
+.navbar-title
+{
     color: white;
     text-decoration: none;
+    padding: 10px;
+    font-size: 2em;
+    margin-right: 2.5vw;
 }
 
+nav ul li { margin: 5px; }
+
+/*nav ul li a {
+    color: white;
+    text-decoration: none;
+}*/
+
 /********** footer **********/
-footer {
+footer
+{
+    width: 100%;
     text-align: center;
     padding: 10px 0;
     background-color: #333;
     color: white;
-
     position: fixed;
     bottom: 0;
-    width: 100%;
 }
 
 footer p { margin: 0; }
@@ -229,7 +236,7 @@ body.dark-theme label { color: darkgray; }*/
 }
 
 /********** validation error **********/
-.space{
+/*.space{
     padding-top: 10px;
 }
 
@@ -237,30 +244,28 @@ body.dark-theme label { color: darkgray; }*/
     color: red;
     font-size: 14px;
     margin-top: 5px;
-}
+}*/
 
 /********** Form **********/
 form h2 { text-align: center; }
 
 /********** Login Form **********/
-.login{
-    padding-top: 250px;
-}
 
-.login-form {
+.login-form
+{
     max-width: 20vw;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 15px;
-
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-#login-form-submit {
+#login-form-submit
+{
     position: relative;
     display: block;
     width: 100%;
@@ -275,13 +280,13 @@ form h2 { text-align: center; }
     padding: 1vw;
     border: 1px solid #ccc;
     border-radius: 20px;
-
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
 }
 
-#posters-preview {
+#posters-preview
+{
     display: flex;
     width: 100%;
     height: 0;
@@ -290,7 +295,8 @@ form h2 { text-align: center; }
     overflow: hidden;
 }
 
-#posters-preview-apply {
+#posters-preview-apply
+{
     display: flex;
     flex-direction: column;
     margin-top: 16px;
@@ -299,37 +305,29 @@ form h2 { text-align: center; }
     align-items: center;
 }
 
-#posters-preview-apply img {
-    /* L'image est affichée avec le ratio d'une affiche de film (27:40).
-    Si l'image ne respecte pas ce ratio, elle sera rognée. */
+#posters-preview-apply img
+{
     width: 25vw;
     height: 37.5vw;
     object-fit: cover;
     border-radius: 20px;
 }
 
-#remove-poster-btn {
+#remove-poster-btn
+{
     margin-left: 5px;
     height: 30px;
     width: 30px;
 }
 
-#synopsis {
-    height: 100px;
-}
+#synopsis { height: 100px; }
 
-#category {
-    /* organisation des éléments en 3 colonnes */
-    column-count: 3;
-    column-gap: 20px;
-}
+#category { column-count: 3; column-gap: 20px; }
 
-.remove-btn {
-    height: 40px;
-    width: 40px;
-}
+.remove-btn { height: 40px; width: 40px; }
 
-.login-form-submit {
+.login-form-submit
+{
     position: relative;
     display: flex;
     justify-content: center;
@@ -338,6 +336,7 @@ form h2 { text-align: center; }
     padding: 10px;
     margin-top: 10px;
 }
+
 /********** movie details page **********/
 .m_details{
     position: absolute;

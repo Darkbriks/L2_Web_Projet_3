@@ -31,7 +31,7 @@ function renderMovies(movies)
     const carrousel = document.querySelector('.carrousel');
     carrousel.innerHTML = '';
 
-    const moviesPerSlide = Math.floor((window.innerWidth * 0.95) / (window.innerHeight * 0.35)) - 1;
+    const moviesPerSlide = Math.max(Math.floor((window.innerWidth * 0.95) / (window.innerHeight * 0.35) - 1), 1);
     let slideIndex = 0;
 
     for (let i = 0; i < movies.length; i += moviesPerSlide)

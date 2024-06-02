@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><?php echo $GLOBALS['header-title']; ?></a>
+            <a class="navbar-title" href="#"><?php echo $GLOBALS['header-title']; ?></a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link active" href="home.php"><?php echo $GLOBALS['header-home']; ?></a></li>
