@@ -14,7 +14,7 @@ body {
     color: white;
     padding: 10px 0;
 }*/
-
+/********** header **********/
 .banner {
     max-width: 1200px;
     margin: 0 auto;
@@ -44,14 +44,7 @@ nav ul li a {
     text-decoration: none;
 }
 
-main {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    transition: background-color 0s, color 0s;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
+/********** footer **********/
 footer {
     text-align: center;
     padding: 10px 0;
@@ -68,6 +61,17 @@ footer p {
     margin: 0;
 }
 
+/********** body themes **********/
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    transition: background-color 0s, color 0s;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+
+
 body.light-theme {
     background-color: white;
     color: black;
@@ -78,6 +82,10 @@ body.dark-theme {
     color: white;
 }
 
+body.dark-theme label{
+    color: darkgray;
+}
+
 #theme{
     position: fixed;
     top: 80px;
@@ -86,6 +94,7 @@ body.dark-theme {
     cursor: pointer;
 }
 
+/********** tags_menu **********/
 .tags-menu {
     display: flex;
     justify-content: center;
@@ -93,6 +102,7 @@ body.dark-theme {
     margin: 20px 0;
 }
 
+/********** All movies page **********/
 .movies-container {
     display: flex;
     gap: 20px;
@@ -174,6 +184,8 @@ body.dark-theme {
     overflow-x: auto;
     position: relative;
 }
+
+/********** peoples page **********/
 .peoples-container {
     display: flex;
     flex-wrap: wrap;
@@ -216,13 +228,8 @@ body.dark-theme {
 .people-info p {
     margin: 5px 0;
 }
-body.dark-theme label{
-    color: darkgray;
-}
 
-.login{
-   padding-top: 250px;
-}
+/********** validation error **********/
 .space{
     padding-top: 10px;
 }
@@ -237,6 +244,10 @@ body.dark-theme label{
 form h2 { text-align: center; }
 
 /********** Login Form **********/
+.login{
+    padding-top: 250px;
+}
+
 .login-form {
     max-width: 20vw;
     margin: 0 auto;
@@ -327,4 +338,26 @@ form h2 { text-align: center; }
     width: 100%;
     padding: 10px;
     margin-top: 10px;
+}
+/********** movie details page **********/
+.m_details{
+    position: absolute;
+    width: max-content;
+    height: max-content;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+.movie-poster{
+    width: 300px;
+}
+
+/********** people details page **********/
+.producer-details{
+    position: absolute;
+    width: max-content;
+    height: max-content;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
 }
