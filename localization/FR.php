@@ -63,7 +63,7 @@ $GLOBALS['movie-form-exception-synopsis'] = 'Le synopsis du film est obligatoire
 $GLOBALS['movie-form-exception-trailer'] = 'La bande-annonce du film est obligatoire et doit être une URL valide vers une vidéo YouTube, Dailymotion, ou Vimeo';
 $GLOBALS['movie-form-exception-tags'] = 'Le film doit avoir au moins un tag';
 $GLOBALS['movie-form-exception-age-rating'] = 'La classification du film est obligatoire et doit être un nombre entier positif';
-$GLOBALS['movie-form-exception-seen'] = 'La valeur de "Vu" doit être vraie ou fausse. Le film ne peut pas avoir été vu si il n\'est pas sorti';
+$GLOBALS['movie-form-exception-seen'] = 'La valeur de \'\'Vu\'\' doit être vraie ou fausse. Le film ne peut pas avoir été vu si il n\'est pas sorti';
 $GLOBALS['movie-form-exception-actor-role'] = 'Le rôle doit être défini pour chaque acteur';
 
 ////////// LOGIN //////////

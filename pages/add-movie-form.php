@@ -11,8 +11,10 @@ $persons = $personDB->getPersons();
 ?>
 
 <form method='POST' enctype='multipart/form-data' class="add-movie-form">
-    <?php if (isset($add_movie_error)) { echo "<div class='alert alert-warning' role='alert'>$add_movie_error</div>"; } ?>
-    <?php if (isset($add_movie_success)) { echo "<div class='alert alert-success' role='alert'>$add_movie_success</div>"; } ?>
+    <div id="add-movie-form-msg">
+        <?php if (isset($add_movie_error)) { echo "<div class='alert alert-warning' role='alert'>$add_movie_error</div>"; } ?>
+        <?php if (isset($add_movie_success)) { echo "<div class='alert alert-success' role='alert'>$add_movie_success</div>"; } ?>
+    </div>
 
     <h2><?php echo $GLOBALS['movie-form-title'] ?></h2>
 
@@ -116,18 +118,21 @@ $persons = $personDB->getPersons();
     </div>
 
     <div class="mb-3 login-form-submit">
-        <button class="btn btn-success" type='submit'><?php echo $GLOBALS['movie-form-add-movie-add'] ?></button>
+        <button class="btn btn-success"><?php echo $GLOBALS['movie-form-add-movie-add'] ?></button>
         <span style="width: 25px"></span>
         <button class="btn btn-danger" type='reset'><?php echo $GLOBALS['movie-form-add-movie-cancel'] ?></button>
     </div>
 
 </form>
 
-<script src=<?php echo $GLOBALS['JS_DIR'] . "add-movie-form.js" ?>></script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function()
     {
+        document.getElementById('posters').addEventListener('change', function() { updatePosterPreview(this); });
+        document.getElementById('remove-poster-btn').addEventListener('click', removePoster);
+
+        document.getElementById('addCategory').addEventListener('click', addTag);
+
         document.getElementById('directorDataList').addEventListener('input', function()
         {
             let director = document.getElementById('directorDataList').value;
@@ -148,7 +153,69 @@ $persons = $personDB->getPersons();
             if (composer.length > 0) { updateOptionList('composer', composer); }
             else { clearOptionList('composer'); }
         });
+
+        document.getElementById('directorDataList').addEventListener('focusout', function() { clearOptionList('director'); });
+        document.getElementById('actorDataList').addEventListener('focusout', function() { clearOptionList('actor'); });
+        document.getElementById('composerDataList').addEventListener('focusout', function() { clearOptionList('composer'); });
+
+        document.querySelector('.add-movie-form').addEventListener('submit', function(e)
+        {
+            document.getElementById('add-movie-form-msg').innerHTML = '';
+            e.preventDefault();
+            if (validateForm()) { this.submit(); }
+            else { window.scrollTo(0, 0); }
+        });
     });
+
+    function updatePosterPreview(input)
+    {
+        let postersPreview = document.getElementById('posters-preview');
+        if (postersPreview === null) { postersPreview = document.getElementById('posters-preview-apply'); }
+        else { postersPreview.id = 'posters-preview-apply'; }
+
+        let posters = input.files;
+        if (posters.length > 0)
+        {
+            let reader = new FileReader();
+            reader.onload = function(e) { postersPreview.innerHTML = '<img src="' + e.target.result + '" alt="Poster">'; }
+            reader.readAsDataURL(posters[0]);
+        }
+        else { removePoster() }
+    }
+
+    function removePoster()
+    {
+        let postersPreview = document.getElementById('posters-preview-apply');
+        if (postersPreview === null) { postersPreview = document.getElementById('posters-preview'); }
+        else { postersPreview.id = 'posters-preview'; }
+        postersPreview.innerHTML = '';
+        document.getElementById('posters').value = '';
+    }
+
+    function addTag()
+    {
+        let newCategory = document.getElementById('newCategory').value.trim();
+        if (newCategory)
+        {
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', '../ajax/addTag.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send('tag=' + newCategory);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200)
+                {
+                    let response = JSON.parse(xhr.responseText);
+                    if (response.success)
+                    {
+                        let newCategory = document.createElement('div');
+                        newCategory.className = 'form-check';
+                        newCategory.innerHTML = '<input class=\"form-check-input\" type=\"checkbox\" name=\"category[]\" id=\"category_' + response.id + '\" value=\"' + response.id + '\"><label class=\"form-check-label\" for=\"category_' + response.id + '\">' + response.name + '</label>';
+                        document.getElementById("category").appendChild(newCategory);
+                    }
+                }
+            };
+        }
+    }
 
     function updateOptionList(type, value)
     {
@@ -216,4 +283,61 @@ $persons = $personDB->getPersons();
     }
 
     function removePersonFromList(button) { button.parentElement.remove(); }
+
+    function validateForm() {
+        let form = document.querySelector('.add-movie-form');
+        let title = form.querySelector('#title').value;
+        let release_date = form.querySelector('#release_date').value;
+        let duration = form.querySelector('#duration').value;
+        let posters = form.querySelector('#posters').value;
+        let synopsis = form.querySelector('#synopsis').value;
+        let trailer = form.querySelector('#trailer').value;
+        let age_limit = form.querySelector('#age_limit').value;
+        let actors = form.querySelectorAll('#actorList .input');
+
+        // Le nom ne doit pas être vide, et doit contenir entre 3 et 50 caractères
+        title = title.trim(); if (title.length < 3 || title.length > 50) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-title'] ?>", 'danger'); return false; }
+
+        // La date de sortie ne doit pas être vide, et doit être au format YYYY-MM-DD
+        release_date = release_date.trim(); if (!release_date.match(/^\d{4}-\d{2}-\d{2}$/)) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-release-date'] ?>", 'danger'); return false; }
+
+        // La durée (en minutes) ne doit pas être vide, et doit être un entier positif
+        duration = duration.trim(); if (isNaN(duration) || duration < 0) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-duration'] ?>", 'danger'); return false; }
+
+        // L'affiche ne doit pas être vide, et doit être une image (jpg, jpeg, png)
+        posters = posters.trim(); if (posters.length === 0) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-poster'] ?>", 'danger'); return false; }
+
+        // Le synopsis ne doit pas être vide, et doit contenir entre 10 et 500 caractères
+        synopsis = synopsis.trim(); if (synopsis.length < 10 || synopsis.length > 500) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-synopsis'] ?>", 'danger'); return false; }
+
+        // La bande annonce ne doit pas être vide, et doit être une URL valide vers une vidéo (youtube, dailymotion, vimeo)
+        trailer = trailer.trim(); if (!trailer.match(/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|dailymotion\.com|vimeo\.com)\/.+$/)) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-trailer'] ?>", 'danger'); return false; }
+
+        // La liste des catégories doit contenir au moins un élément
+        let categories = form.querySelectorAll('#category input:checked');
+        if (categories.length === 0) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-tags'] ?>", 'danger'); return false; }
+
+        // La limite d'âge ne doit pas être vide, et doit être un entier positif entre 0 et 18
+        age_limit = age_limit.trim(); if (isNaN(age_limit) || age_limit < 0 || age_limit > 18) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-age-rating'] ?>", 'danger'); return false; }
+
+        // Vu doit être un booléen. Si la date de sortie est supérieure à la date actuelle, vu doit être faux
+        let release_date_obj = new Date(release_date);
+        let seen = form.querySelector('#seen').checked;
+        if (seen && release_date_obj > new Date()) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-seen'] ?>", 'danger'); return false; }
+
+        // Tout les acteurs doivent avoir un rôle
+        for (let actor of actors)
+        {
+            let role = actor.querySelector('input[type="text"]');
+            if (role === null || role.value.trim().length === 0) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-actor-role'] ?>", 'danger'); return false; }
+        }
+
+        return true;
+    }
+
+    function showFormMsg(msg, type)
+    {
+        let form_msg = document.getElementById('add-movie-form-msg');
+        form_msg.innerHTML = '<div class="alert alert-' + type + '" role="alert">' + msg + '</div>';
+    }
 </script>
