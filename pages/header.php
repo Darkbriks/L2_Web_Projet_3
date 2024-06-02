@@ -23,14 +23,14 @@
                         <li class="nav-item dropdown dropstart" id="theme-dropdown">
                             <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="theme-button"><?php echo $GLOBALS['header-theme']; ?></button>
                             <ul class="dropdown-menu">
-                                <li><button class="dropdown-item" type="button" data-theme="light" value="dark"><?php echo $GLOBALS['template-dark-theme']; ?></button></li>
-                                <li><button class="dropdown-item" type="button" data-theme="dark" value="light"><?php echo $GLOBALS['template-light-theme']; ?></button></li>
+                                <li><button class="dropdown-item" type="button" data-theme="light" value="dark"><i class ="bi-moon-fill"></i><?php echo $GLOBALS['template-dark-theme']; ?></button></li>
+                                <li><button class="dropdown-item" type="button" data-theme="dark" value="light"><i class ="bi-sun-fill"></i><?php echo $GLOBALS['template-light-theme']; ?></button></li>
                             </ul>
                         </li>
 
                         <li class="nav-item dropdown dropstart" id="language-dropdown">
                             <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="language-button"><?php echo $GLOBALS['header-language-dropdown-default']; ?></button>
-                            <ul class="dropdown-menu"><?php foreach ($GLOBALS['languages-list'] as $key => $language) { ?><li><button class="dropdown-item" type="button" data-language="<?php echo $key; ?>"><?php echo $language; ?></button></li><?php } ?></ul>
+                            <ul class="dropdown-menu"><?php foreach ($GLOBALS['languages-list'] as $key => $language) { $flagPath = '../uploads/flags/' . $key . '.png';  ?><li><button class="dropdown-item" type="button" data-language="<?php echo $key; ?>"><img src="<?php echo $flagPath; ?>" alt="<?php echo $language; ?> flag" style="width: 20px; height: auto; margin-right: 8px;"><?php echo $language; ?></button></li><?php } ?></ul>
                         </li>
                     </ul>
                 </div>
