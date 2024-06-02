@@ -35,10 +35,12 @@ class MovieForm
 
         if (isset($data['actor']))
         {
-            foreach ($data['actor'] as $value)
+            if (!isset($data['actor_role']) || count($data['actor']) !== count($data['actor_role'])) { throw new Exception($GLOBALS['movie-form-exception-actor-role']); }
+
+            for ($i = 0; $i < count($data['actor']); $i++)
             {
-                $actor = explode('!$!', $value)[0]; $actor = htmlspecialchars(trim($actor));
-                $role = explode('!$!', $value)[1]; $role = htmlspecialchars(trim($role));
+                $actor = htmlspecialchars(trim($data['actor'][$i]));
+                $role = htmlspecialchars(trim($data['actor_role'][$i]));
                 if (!empty($actor)) { $this->linkPersons([$actor], $movie_id, 1, [$actor => $role]); }
             }
         }

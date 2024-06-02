@@ -2,6 +2,7 @@
 
 namespace mdb;
 
+use Exception;
 use pdo_wrapper\PdoWrapper;
 
 class MoviesDB extends PdoWrapper
@@ -9,6 +10,14 @@ class MoviesDB extends PdoWrapper
     public function __construct()
     {
         parent::__construct($GLOBALS['db_name'], $GLOBALS['db_host'], $GLOBALS['db_port'], $GLOBALS['db_user'], $GLOBALS['db_pwd']);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getData($attributes, $values, $and = true, $limit = 10, $order = 'id', $direction = 'ASC', $useLike = false, $table='movies', $class_name=null): bool|array
+    {
+        return parent::getData($attributes, $values, $and, $limit, $order, $direction, $useLike, $table, "mdb\data_template\Movie");
     }
 
     /*

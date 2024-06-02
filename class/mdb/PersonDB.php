@@ -2,6 +2,7 @@
 
 namespace mdb;
 
+use Exception;
 use pdo_wrapper\PdoWrapper;
 
 class PersonDB extends PdoWrapper
@@ -9,6 +10,14 @@ class PersonDB extends PdoWrapper
     public function __construct()
     {
         parent::__construct($GLOBALS['db_name'], $GLOBALS['db_host'], $GLOBALS['db_port'], $GLOBALS['db_user'], $GLOBALS['db_pwd']);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getData($attributes, $values, $and = true, $limit = 10, $order = 'id', $direction = 'ASC', $useLike = false, $table='person', $class_name=null): bool|array
+    {
+        return parent::getData($attributes, $values, $and, $limit, $order, $direction, $useLike, $table, "mdb\data_template\Person");
     }
 
     public function addPerson($first_name, $last_name, $birth_date, $death_date, $type, $image_path): bool

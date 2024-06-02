@@ -33,14 +33,10 @@ if (isset($_SESSION['admin']) && $_SESSION['admin'])
         try
         {
             $movieForm->createMovie($_POST, $img_file);
-            echo "<p>" . $GLOBALS['admin-movie-success'] . "</p>";
+            $add_movie_success = $GLOBALS['admin-movie-success'];
         }
-        catch (Exception $e)
-        {
-            echo $e->getMessage();
-        }
+        catch (Exception $e) { $add_movie_error = $e->getMessage(); }
     }
-    //echo $movieForm->getForm();
     include "add-movie-form.php";
 }
 else { include "login.php"; }

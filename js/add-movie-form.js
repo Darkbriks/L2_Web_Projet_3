@@ -44,26 +44,6 @@ document.addEventListener('DOMContentLoaded', function()
         }
     });
 
-    document.getElementById('AddDirectorButton').addEventListener('click', function()
-    {
-        let director = document.getElementById('directorDataList').value;
-        if (director) { addPersonToMovieList(director, 'director', null); }
-    });
-
-    document.getElementById('AddActorButton').addEventListener('click', function()
-    {
-        let actor = document.getElementById('actorDataList').value;
-        let role = document.getElementById('role').value;
-        if (role.includes('!$!')) { alert('L\'expression !$! est réservée dans ce contexte, veuillez ne pas l\'utiliser.'); return; }
-        if (actor && role) { addPersonToMovieList(actor, 'actor', role); }
-    });
-
-    document.getElementById('AddComposerButton').addEventListener('click', function()
-    {
-        let composer = document.getElementById('composerDataList').value;
-        if (composer) { addPersonToMovieList(composer, 'composer', null); }
-    });
-
     document.querySelector('form').addEventListener('submit', function(event)
     {
         let releaseDate = document.getElementById('release_date').value;
@@ -107,31 +87,6 @@ function removePoster()
     document.getElementById('posters').value = '';
 }
 
-function addPersonToMovieList(person, type, role)
-{
-    let persons = document.querySelectorAll('.' + type + 'List input[type="hidden"]');
-    for (let i = 0; i < persons.length; i++) { if (persons[i].id === person) { console.log('Person already added'); return; } }
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', '../ajax/movieFormAddPerson.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send('person=' + person);
-    xhr.onreadystatechange = function()
-    {
-        if (xhr.readyState === 4 && xhr.status === 200)
-        {
-            let response = JSON.parse(xhr.responseText);
-            if (response.success)
-            {
-                let data = JSON.parse(response.data);
-                console.log(role);
-                document.querySelector('.' + type + 'List').innerHTML += '<div><input type=\"hidden\" name=\"' + type + '[]\" value=\"' + data.id + (role !== null ? '!$!' + role : '') + '\" id=\"' + data.full_name + '\">' +
-                '<label>' + data.full_name + (role !== null ? ' (' + role + ')' : '') + '</label><button type=\"button\" onclick=\"this.parentElement.remove();\">Remove</button></div>';
-            }
-            else { console.log('Erreur:', response.error); }
-        }
-    }
-}
 function showError(fieldId, message) {
     let errorElement = document.getElementById(fieldId + '-error');
     if (!errorElement) {

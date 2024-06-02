@@ -233,6 +233,9 @@ body.dark-theme label{
     margin-top: 5px;
 }
 
+/********** Form **********/
+form h2 { text-align: center; }
+
 /********** Login Form **********/
 .login-form {
     max-width: 20vw;
@@ -266,10 +269,6 @@ body.dark-theme label{
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-}
-
-.add-movie-form h2 {
-    text-align: center;
 }
 
 #posters-preview {
@@ -313,4 +312,19 @@ body.dark-theme label{
     /* organisation des éléments en 3 colonnes */
     column-count: 3;
     column-gap: 20px;
+}
+
+.remove-btn {
+    height: 40px;
+    width: 40px;
+}
+
+.login-form-submit {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
 }

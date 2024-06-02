@@ -11,8 +11,6 @@ class Person
     public function getBirthDate() { return $this->birth_date; }
     public function getDeathDate() { return $this->death_date; }
     public function getImagePath() { return $this->image_path; }
-    public function getPlayedName() { return $this->played_name; }
-    public function getType() { return $this->type; }
 
     // Méthode pour générer le HTML en fonction du type
     public function getHtml_Person()
@@ -80,9 +78,7 @@ class Person
             'last_name' => $this->last_name,
             'birth_date' => $this->birth_date,
             'death_date' => $this->death_date,
-            'image_path' => $this->image_path,
-            'played_name' => $this->played_name,
-            'type' => $this->type
+            'image_path' => $this->image_path
         ];
     }
 }

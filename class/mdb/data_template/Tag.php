@@ -11,4 +11,12 @@ class Tag
     {
         return "<li><a class='dropdown-item tag' href='#' data-tag=" . $this->getId() . ">" . $this->getName() . "</a></li>";
     }
+
+    public function get_json()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name
+        ];
+    }
 }

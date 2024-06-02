@@ -44,17 +44,12 @@ $GLOBALS['movie-form-add-movie-age-rating'] = 'Classification';
 $GLOBALS['movie-form-add-movie-age-rating-placeholder'] = 'Entrez la classification du film';
 $GLOBALS['movie-form-add-movie-age-rating-all'] = 'Tout public';
 $GLOBALS['movie-form-add-movie-age-rating-number'] = 'ans et plus';
-$GLOBALS['movie-form-add-movie-director-to-add'] = 'Réalisateur à ajouter';
+$GLOBALS['movie-form-add-movie-directors-list'] = 'Liste des réalisateurs';
 $GLOBALS['movie-form-add-movie-add-director'] = 'Ajouter un réalisateur';
-$GLOBALS['movie-form-add-movie-add-director-placeholder'] = 'Entrez le nom du réalisateur';
-$GLOBALS['movie-form-add-movie-actor-to-add'] = 'Acteur à ajouter';
+$GLOBALS['movie-form-add-movie-actors-list'] = 'Liste des acteurs';
 $GLOBALS['movie-form-add-movie-add-actor'] = 'Ajouter un acteur';
-$GLOBALS['movie-form-add-movie-add-actor-placeholder'] = 'Entrez le nom de l\'acteur';
-$GLOBALS['movie-form-add-movie-add-actor-role'] = 'Rôle';
-$GLOBALS['movie-form-add-movie-add-actor-role-placeholder'] = 'Entrez le rôle de l\'acteur';
-$GLOBALS['movie-form-add-movie-composer-to-add'] = 'Compositeur à ajouter';
+$GLOBALS['movie-form-add-movie-composers-list'] = 'Liste des compositeurs';
 $GLOBALS['movie-form-add-movie-add-composer'] = 'Ajouter un compositeur';
-$GLOBALS['movie-form-add-movie-add-composer-placeholder'] = 'Entrez le nom du compositeur';
 $GLOBALS['movie-form-add-movie-seen'] = 'Vu';
 $GLOBALS['movie-form-add-movie-add'] = 'Ajouter';
 $GLOBALS['movie-form-add-movie-cancel'] = 'Annuler';
@@ -69,6 +64,7 @@ $GLOBALS['movie-form-exception-trailer'] = 'La bande-annonce du film est obligat
 $GLOBALS['movie-form-exception-tags'] = 'Le film doit avoir au moins un tag';
 $GLOBALS['movie-form-exception-age-rating'] = 'La classification du film est obligatoire et doit être un nombre entier positif';
 $GLOBALS['movie-form-exception-seen'] = 'La valeur de "Vu" doit être vraie ou fausse. Le film ne peut pas avoir été vu si il n\'est pas sorti';
+$GLOBALS['movie-form-exception-actor-role'] = 'Le rôle doit être défini pour chaque acteur';
 
 ////////// LOGIN //////////
 // login.php
@@ -77,3 +73,14 @@ $GLOBALS['login-user'] = 'Nom d\'utilisateur';
 $GLOBALS['login-password'] = 'Mot de passe';
 $GLOBALS['login-submit'] = 'Connexion';
 $GLOBALS['login-error'] = 'Nom d\'utilisateur ou mot de passe incorrect, veuillez réessayer';
+
+////////// SQL //////////
+// PdoWrapper.php
+$GLOBALS['pdo-connect-error'] = 'Erreur de connexion à la base de données : ';
+$GLOBALS['pdo-execute-error'] = 'Erreur lors de l\'exécution de la requête : ';
+
+////////// AJAX //////////
+// get-data.php
+$GLOBALS['ajax-get-data-table-not-valid'] = 'La table demandée n\'est pas valide. Les tables valides sont : movies, tag, et person';
+$GLOBALS['ajax-get-data-attribute-value-not-set'] = 'L\'attribut et/ou la valeur ne sont pas définis';
+$GLOBALS['ajax-get-data-table-not-set'] = 'La table n\'est pas définie';

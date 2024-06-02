@@ -44,17 +44,12 @@ $GLOBALS['movie-form-add-movie-age-rating'] = 'Age rating';
 $GLOBALS['movie-form-add-movie-age-rating-placeholder'] = 'Enter the movie age rating';
 $GLOBALS['movie-form-add-movie-age-rating-all'] = 'All public';
 $GLOBALS['movie-form-add-movie-age-rating-number'] = 'years old and over';
-$GLOBALS['movie-form-add-movie-director-to-add'] = 'Director to add';
+$GLOBALS['movie-form-add-movie-directors-list'] = 'Directors list';
 $GLOBALS['movie-form-add-movie-add-director'] = 'Add a director';
-$GLOBALS['movie-form-add-movie-add-director-placeholder'] = 'Enter the director\'s name';
-$GLOBALS['movie-form-add-movie-actor-to-add'] = 'Actor to add';
+$GLOBALS['movie-form-add-movie-actors-list'] = 'Actors list';
 $GLOBALS['movie-form-add-movie-add-actor'] = 'Add an actor';
-$GLOBALS['movie-form-add-movie-add-actor-placeholder'] = 'Enter the actor\'s name';
-$GLOBALS['movie-form-add-movie-add-actor-role'] = 'Role';
-$GLOBALS['movie-form-add-movie-add-actor-role-placeholder'] = 'Enter the actor\'s role';
-$GLOBALS['movie-form-add-movie-composer-to-add'] = 'Composer to add';
+$GLOBALS['movie-form-add-movie-composers-list'] = 'Composers list';
 $GLOBALS['movie-form-add-movie-add-composer'] = 'Add a composer';
-$GLOBALS['movie-form-add-movie-add-composer-placeholder'] = 'Enter the composer\'s name';
 $GLOBALS['movie-form-add-movie-seen'] = 'Seen';
 $GLOBALS['movie-form-add-movie-add'] = 'Add';
 $GLOBALS['movie-form-add-movie-cancel'] = 'Cancel';
@@ -69,6 +64,7 @@ $GLOBALS['movie-form-exception-trailer'] = 'The movie trailer is required and mu
 $GLOBALS['movie-form-exception-tags'] = 'The movie must have at least one tag';
 $GLOBALS['movie-form-exception-age-rating'] = 'The movie age rating is required and must be a positive integer';
 $GLOBALS['movie-form-exception-seen'] = 'The movie seen must be true or false. Movie can\'t be seen if it\'s not released yet';
+$GLOBALS['movie-form-exception-actor-role'] = 'The role must be set for each actor';
 
 ////////// LOGIN //////////
 // login.php
@@ -77,3 +73,14 @@ $GLOBALS['login-user'] = 'Username';
 $GLOBALS['login-password'] = 'Password';
 $GLOBALS['login-submit'] = 'Login';
 $GLOBALS['login-error'] = 'Username or password incorrect, please try again';
+
+////////// SQL //////////
+// PdoWrapper.php
+$GLOBALS['pdo-connect-error'] = 'Error connecting to the database : ';
+$GLOBALS['pdo-execute-error'] = 'Error executing the query : ';
+
+////////// AJAX //////////
+// get-data.php
+$GLOBALS['ajax-get-data-table-not-valid'] = 'The requested table is not valid. Valid tables are : movies, tag, and person';
+$GLOBALS['ajax-get-data-attribute-value-not-set'] = 'The attribute and/or the value are not set';
+$GLOBALS['ajax-get-data-table-not-set'] = 'The table is not set';
