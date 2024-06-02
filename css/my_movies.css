@@ -1,19 +1,11 @@
-html{
-    height: 100vh;
-}
-
-body {
+body
+{
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    transition: background-color 0s, color 0s;
+    box-sizing: border-box;
 }
 
-/*header {
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-}*/
 /********** header **********/
 .banner {
     max-width: 1200px;
@@ -54,45 +46,32 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-
 }
 
-footer p {
-    margin: 0;
-}
+footer p { margin: 0; }
 
 /********** body themes **********/
-main {
+/*main
+{
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
     transition: background-color 0s, color 0s;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+}*/
 
+/*body.light-theme { background-color: white; color: black; }
+body.dark-theme { background-color: black; color: white; }
+body.dark-theme label { color: darkgray; }*/
 
-
-body.light-theme {
-    background-color: white;
-    color: black;
-}
-
-body.dark-theme {
-    background-color: black;
-    color: white;
-}
-
-body.dark-theme label{
-    color: darkgray;
-}
-
-#theme{
+/*#theme
+{
     position: fixed;
     top: 80px;
     right: 10px;
     padding: 10px 20px;
     cursor: pointer;
-}
+}*/
 
 /********** tags_menu **********/
 .tags-menu {
@@ -103,87 +82,107 @@ body.dark-theme label{
 }
 
 /********** All movies page **********/
-.movies-container {
+.carrousel
+{
+    width: 100%;
+    height: 63vh;
+    overflow: hidden;
     display: flex;
-    gap: 20px;
+    justify-content: center;
     align-items: center;
-    margin-top: 10px;
-    overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    width: max-content;
-    height: 600px;
-    border-top: 1px solid white;
-    position: relative;
+    transition: transform 0.5s ease;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 }
 
-.movie-card {
+.carrousel-slide
+{
+    display: flex;
+    width: 95%;
+    justify-content: space-around;
+}
+
+.movie-card
+{
+    /*width: 20vw;*/
+    width: 35vh;
+    aspect-ratio: 27 / 40;
     display: flex;
     flex-direction: column;
-    border: 1px solid white;
-    border-radius: 8px;
     overflow: hidden;
-    width: 300px;
-    height: 450px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    background-color: transparent;
-    transition: transform 0.2s;
+    transition: transform 0.3s;
+    border: 1px solid white;
+    border-radius: 15px;
 }
 
-.movie-card:hover {
-    transform: scale(1.05);
+.movie-poster img
+{
+    /*width: 20vw;*/
+    width: 35vh;
+    max-height: 60vh;
+    aspect-ratio: 27 / 40;
+    transition: transform 0.5s;
+    object-fit: cover;
 }
 
-.movie-poster img {
-    width: 100%;
-    height: 450px;
-    display: block;
-}
+.movie-card:hover { transform: scale(1.1); }
 
-.movie-details {
+.movie-details
+{
+    /*width: 20vw;*/
+    width: 35vh;
+    aspect-ratio: 27 / 40;
     display: none;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     position: absolute;
-    width: 300px;
-    height: 450px;
-    border-radius: 8px;
+    border-radius: 15px;
     background: rgba(0, 0, 0, 0.5);
     color: white;
-    padding: 20px;
+    padding: 30px;
     box-sizing: border-box;
-    flex-direction: column;
+    max-height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
 }
 
-.movie-details h3 {
-    margin-top: 0;
-}
-
-.movie-synopsis {
-    font-size: 14px;
+.movie-synopsis
+{
+    font-size: 0.9em;
     color: wheat;
+    text-align: justify;
 }
 
-.movie-producer, .movie-actors, .movie-tags, .movie-status {
-    font-size: 14px;
-    margin: 5px 0;
+.movie-producer, .movie-actors, .movie-tags, .movie-status { font-size: 0.9em; }
+
+.movie-actors, .movie-producer, h3{ color: antiquewhite; }
+
+.movie-tags { color: dodgerblue; }
+
+.movie-status { font-weight: bold; color: forestgreen; }
+
+.carrousel-nav
+{
+    min-width: 5vh;
+    min-height: 10vh;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
 }
 
-.movie-actors, .movie-producer, h3{
-    color: antiquewhite;
-}
-
-.movie-tags {
-    color: dodgerblue;
-}
-
-.movie-status {
-    font-weight: bold;
-    color: forestgreen;
-}
-
-.slider-container {
-    overflow-x: auto;
-    position: relative;
-}
+.carrousel-nav:hover { background-color: rgba(0, 0, 0, 0.8); }
+.carrousel-nav:nth-of-type(1) { left: 10px; }
+.carrousel-nav:nth-of-type(2) { right: 10px; }
 
 /********** peoples page **********/
 .peoples-container {

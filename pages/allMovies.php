@@ -27,9 +27,7 @@ Autoloader::register();
         </div>
     </div>
 
-    <div class = "slider-container">
-        <div class="movies-container" id="movies-container"></div>
-    </div>
+    <div class="carrousel" id="movies-container"></div>
 
 <?php $content = ob_get_clean(); ?>
 <?php Template::render($content);
