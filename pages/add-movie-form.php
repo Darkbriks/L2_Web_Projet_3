@@ -10,6 +10,85 @@ $personDB = new PersonDB();
 $persons = $personDB->getPersons();
 ?>
 
+<div class="mb-3">
+    <button type="button" class="btn btn-primary" id="add-actor-btn">Ajouter un acteur</button>
+</div>
+
+<div class="modal fade" id="addActorModal" tabindex="-1" aria-labelledby="addActorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addActorModalLabel">Ajouter un acteur</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="add-actor-form", method="post">
+                    <div class="mb-3">
+                        <label for="actor-first-name" class="form-label">Prénom</label>
+                        <input type="text" class="form-control" id="actor-first-name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="actor-last-name" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="actor-last-name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="actor-role" class="form-label">Rôle</label>
+                        <input type="text" class="form-control" id="actor-role" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="actor-type" class="form-label">Type (1.Actor 2.Director 3.Composer)</label>
+                        <input type="text" class="form-control" id="actor-type" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="actor-image" class="form-label">Image</label>
+                        <input type="file" class="form-control" id="actor-image" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('add-actor-btn').addEventListener('click', function() {
+            let addActorModal = new bootstrap.Modal(document.getElementById('addActorModal'));
+            addActorModal.show();
+        });
+
+        document.getElementById('add-actor-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let formData = new FormData();
+            formData.append('first_name', document.getElementById('actor-first-name').value.trim());
+            formData.append('last_name', document.getElementById('actor-last-name').value.trim());
+            formData.append('role', document.getElementById('actor-role').value.trim());
+            formData.append('type', document.getElementById('actor-type').value.trim());
+            formData.append('image', document.getElementById('actor-image').files[0]);
+
+            if (formData.get('first_name') && formData.get('last_name') && formData.get('role') && formData.get('type') && formData.get('image')) {
+                // Créer une instance de FormData pour envoyer les données
+                let xhr = new XMLHttpRequest();
+                xhr.open('POST', '../ajax/add-actor.php', true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            // Afficher un message de succès
+                            console.log('Acteur ajouté avec succès.');
+                        } else {
+                            // Afficher un message d'erreur
+                            console.error('Erreur lors de l\'ajout de l\'acteur :', xhr.status);
+                        }
+                    }
+                };
+                xhr.send(formData);
+            }
+        });
+    });
+</script>
+
+
+
 <form method='POST' enctype='multipart/form-data' class="add-movie-form">
     <div id="add-movie-form-msg">
         <?php if (isset($add_movie_error)) { echo "<div class='alert alert-warning' role='alert'>$add_movie_error</div>"; } ?>
@@ -240,7 +319,7 @@ $persons = $personDB->getPersons();
                         option.classList.add('list-group-item', 'list-group-item-action');
                         option.innerHTML = person.first_name + ' ' + person.last_name;
                         option.id = person.id;
-                        option.addEventListener('click', addPersonToList.bind(null, type, person.id, person.first_name + ' ' + person.last_name));
+                        option.addEventListener('click', addPersonToList.bind(null, type, perso n.id, person.first_name + ' ' + person.last_name));
                         personList.appendChild(option);
                     });
                 }
