@@ -67,6 +67,22 @@ $GLOBALS['movie-form-exception-age-rating'] = 'La clasificación por edad de la 
 $GLOBALS['movie-form-exception-seen'] = 'El estado de la película vista debe ser verdadero o falso. La película no puede ser vista si aún no se ha estrenado';
 $GLOBALS['movie-form-exception-actor-role'] = 'El papel debe ser establecido para cada actor';
 
+// PersonForm.php
+$GLOBALS['person-form-title'] = 'Agregar una persona';
+$GLOBALS['person-form-add-person-first-name'] = 'Nombre';
+$GLOBALS['person-form-add-person-last-name'] = 'Apellido';
+$GLOBALS['person-form-add-person-birth-date'] = 'Fecha de nacimiento';
+$GLOBALS['person-form-add-person-death-date'] = 'Fecha de defunción';
+$GLOBALS['person-form-add-person-image'] = 'Imagen';
+$GLOBALS['person-form-add-person-submit'] = 'Agregar';
+$GLOBALS['person-form-exception-adding'] = 'Error al agregar la persona a la base de datos';
+$GLOBALS['person-form-exception-first-name'] = 'El nombre de la persona es obligatorio y debe contener entre 3 y 50 caracteres';
+$GLOBALS['person-form-exception-last-name'] = 'El apellido de la persona es obligatorio y debe contener entre 3 y 50 caracteres';
+$GLOBALS['person-form-exception-birth-date'] = 'La fecha de nacimiento de la persona es obligatoria y debe estar en el formato AAAA-MM-DD';
+$GLOBALS['person-form-exception-death-date'] = 'La fecha de defunción de la persona debe estar en el formato AAAA-MM-DD';
+$GLOBALS['person-form-exception-image'] = 'Error al subir la imagen';
+$GLOBALS['person-form-exception-upload'] = 'Error al subir la imagen';
+
 ////////// ALL MOVIES //////////
 // allMovies.php
 $GLOBALS['all-movies-title'] = 'Películas';

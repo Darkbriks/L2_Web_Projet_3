@@ -67,6 +67,22 @@ $GLOBALS['movie-form-exception-age-rating'] = 'The movie age rating is required 
 $GLOBALS['movie-form-exception-seen'] = 'The movie seen must be true or false. Movie can\'t be seen if it\'s not released yet';
 $GLOBALS['movie-form-exception-actor-role'] = 'The role must be set for each actor';
 
+// PersonForm.php
+$GLOBALS['person-form-title'] = 'Add a person';
+$GLOBALS['person-form-add-person-first-name'] = 'First name';
+$GLOBALS['person-form-add-person-last-name'] = 'Last name';
+$GLOBALS['person-form-add-person-birth-date'] = 'Birth date';
+$GLOBALS['person-form-add-person-death-date'] = 'Death date';
+$GLOBALS['person-form-add-person-image'] = 'Image';
+$GLOBALS['person-form-add-person-submit'] = 'Add';
+$GLOBALS['person-form-exception-adding'] = 'Error adding the person to the database';
+$GLOBALS['person-form-exception-first-name'] = 'The person first name is required and must contain between 3 and 50 characters';
+$GLOBALS['person-form-exception-last-name'] = 'The person last name is required and must contain between 3 and 50 characters';
+$GLOBALS['person-form-exception-birth-date'] = 'The person birth date is required and must be at the format YYYY-MM-DD';
+$GLOBALS['person-form-exception-death-date'] = 'The person death date must be at the format YYYY-MM-DD';
+$GLOBALS['person-form-exception-image'] = 'The person image is required and must be at the format .jpg, .jpeg, or .png';
+$GLOBALS['person-form-exception-upload'] = 'Error uploading the image';
+
 ////////// ALL MOVIES //////////
 // allMovies.php
 $GLOBALS['all-movies-title'] = 'Movies';

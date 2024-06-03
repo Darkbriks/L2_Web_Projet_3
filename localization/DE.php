@@ -67,6 +67,22 @@ $GLOBALS['movie-form-exception-age-rating'] = 'Die Altersfreigabe des Films ist 
 $GLOBALS['movie-form-exception-seen'] = 'Der Filmstatus \'\'gesehen\'\' muss wahr oder falsch sein. Der Film kann nicht gesehen werden, wenn er noch nicht veröffentlicht ist';
 $GLOBALS['movie-form-exception-actor-role'] = 'Die Rolle muss für jeden Schauspieler festgelegt werden';
 
+// PersonForm.php
+$GLOBALS['person-form-title'] = 'Eine Person hinzufügen';
+$GLOBALS['person-form-add-person-first-name'] = 'Vorname';
+$GLOBALS['person-form-add-person-last-name'] = 'Nachname';
+$GLOBALS['person-form-add-person-birth-date'] = 'Geburtsdatum';
+$GLOBALS['person-form-add-person-death-date'] = 'Todesdatum';
+$GLOBALS['person-form-add-person-image'] = 'Bild';
+$GLOBALS['person-form-add-person-submit'] = 'Hinzufügen';
+$GLOBALS['person-form-exception-adding'] = 'Fehler beim Hinzufügen der Person zur Datenbank';
+$GLOBALS['person-form-exception-first-name'] = 'Der Vorname der Person ist erforderlich und muss zwischen 3 und 50 Zeichen enthalten';
+$GLOBALS['person-form-exception-last-name'] = 'Der Nachname der Person ist erforderlich und muss zwischen 3 und 50 Zeichen enthalten';
+$GLOBALS['person-form-exception-birth-date'] = 'Das Geburtsdatum der Person ist erforderlich und muss im Format JJJJ-MM-TT vorliegen';
+$GLOBALS['person-form-exception-death-date'] = 'Das Todesdatum der Person muss im Format JJJJ-MM-TT vorliegen';
+$GLOBALS['person-form-exception-image'] = 'Fehler beim Hochladen des Bildes';
+$GLOBALS['person-form-exception-upload'] = 'Fehler beim Hochladen des Bildes';
+
 ////////// ALL MOVIES //////////
 // allMovies.php
 $GLOBALS['all-movies-title'] = 'Filme';
