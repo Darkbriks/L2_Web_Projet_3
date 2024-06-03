@@ -85,8 +85,10 @@ class ActorForm
         }
 
         // L'image ne doit pas être vide, et doit être une image (jpg, jpeg, png)
-        if (empty($img_file['image_path']) || !in_array($img_file['type'], ['image/jpeg', 'image/jpg', 'image/png'])) {
-            throw new Exception($GLOBALS['actor-form-exception-image']);
+        if (!empty($img_file['image_path'])) {
+            if(!in_array($img_file['type'], ['image/jpeg', 'image/jpg', 'image/png'])){
+                throw new Exception($GLOBALS['actor-form-exception-image']);
+            }
         }
 
         /*// Le type doit être un entier entre 0 et 3 (0: unknown, 1: actor, 2: director, 3: composer)
