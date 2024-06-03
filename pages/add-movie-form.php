@@ -32,12 +32,12 @@ $persons = $personDB->getPersons();
                         <input type="text" class="form-control" id="actor-last-name" required>
                     </div>
                     <div class="mb-3">
-                        <label for="actor-role" class="form-label">Rôle</label>
-                        <input type="text" class="form-control" id="actor-role" required>
+                        <label for="actor-birth_date" class="form-label">Naissance</label>
+                        <input type="date" class="form-control" id="actor-birth_date" required>
                     </div>
                     <div class="mb-3">
-                        <label for="actor-type" class="form-label">Type (1.Actor 2.Director 3.Composer)</label>
-                        <input type="text" class="form-control" id="actor-type" required>
+                        <label for="actor-death_date" class="form-label">Mort</label>
+                        <input type="date" class="form-control" id="actor-death_date">
                     </div>
                     <div class="mb-3">
                         <label for="actor-image" class="form-label">Image</label>
@@ -62,11 +62,11 @@ $persons = $personDB->getPersons();
             let formData = new FormData();
             formData.append('first_name', document.getElementById('actor-first-name').value.trim());
             formData.append('last_name', document.getElementById('actor-last-name').value.trim());
-            formData.append('role', document.getElementById('actor-role').value.trim());
-            formData.append('type', document.getElementById('actor-type').value.trim());
+            formData.append('birth_date', document.getElementById('actor-birth_date').value.trim());
+            formData.append('death_date', document.getElementById('actor-death_date').value.trim());
             formData.append('image', document.getElementById('actor-image').files[0]);
 
-            if (formData.get('first_name') && formData.get('last_name') && formData.get('role') && formData.get('type') && formData.get('image')) {
+            if (formData.get('first_name') && formData.get('last_name') && formData.get('birth_date') && formData.get('death_date') && formData.get('image')) {
                 // Créer une instance de FormData pour envoyer les données
                 let xhr = new XMLHttpRequest();
                 xhr.open('POST', '../ajax/add-actor.php', true);
