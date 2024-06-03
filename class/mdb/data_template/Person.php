@@ -73,6 +73,16 @@ class Person
         return $html;
     }
 
+    public function getHtml_card(bool $played_name = false): string
+    {
+        return "<div class='person-card' style='cursor: pointer;' id='{$this->id}'>
+                    <img src='" . $GLOBALS['PEOPLES_DIR'] . $this->image_path . "' alt='{$this->first_name} {$this->last_name}'>
+                    <h3>{$this->first_name} {$this->last_name}</h3>
+                    " . ($played_name && $this->played_name !== null ? "<p>{$this->played_name}</p>" : '') . "
+                </div>
+                <script>document.getElementById('{$this->id}').addEventListener('click', function() { window.location.href = 'person.php?id={$this->id}'; });</script>";
+    }
+
     public function get_json()
     {
         return [

@@ -98,6 +98,12 @@ $GLOBALS['home-most-popular-title'] = 'Beliebteste Filme';
 
 ////////// MOVIE //////////
 // movie.php
+$GLOBALS['movie-release-date'] = 'Veröffentlichungsdatum';
+$GLOBALS['movie-time-duration'] = 'Dauer';
+$GLOBALS['movie-rating'] = 'Bewertung';
+$GLOBALS['movie-note'] = 'Notiz';
+$GLOBALS['movie-vu'] = 'Gesehen';
+$GLOBALS['movie-synopsis'] = 'Zusammenfassung';
 $GLOBALS['movie-directors'] = 'Regisseur(en)';
 $GLOBALS['movie-actors'] = 'Schauspieler';
 $GLOBALS['movie-composers'] = 'Komponist(en)';

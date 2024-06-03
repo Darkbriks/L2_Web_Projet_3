@@ -104,6 +104,7 @@ $GLOBALS['movie-release-date'] = 'Date de sortie';
 $GLOBALS['movie-time-duration'] = 'Durée';
 $GLOBALS['movie-rating'] = 'Classification';
 $GLOBALS['movie-note'] = 'Note';
+$GLOBALS['movie-vu'] = 'Vu';
 $GLOBALS['movie-synopsis'] = 'Synopsis';
 $GLOBALS['movie-directors'] = 'Réalisateur(s)';
 $GLOBALS['movie-actors'] = 'Acteur(s)';

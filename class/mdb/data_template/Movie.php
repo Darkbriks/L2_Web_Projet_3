@@ -31,13 +31,14 @@ class Movie
                                 <p><strong>" . $GLOBALS['movie-release-date'] . ":</strong> " . $this->release_date . "</p>
                                 <p><strong>" . $GLOBALS['movie-time-duration'] . ":</strong> " . $this->time_duration . "</p>
                                 <p><strong>" . $GLOBALS['movie-rating'] . ":</strong> " . $this->rating . "</p>
-                                <p><strong>" . $GLOBALS['movie-note'] . ":</strong> " . $this->note . "</p>    
+                                <p><strong>" . $GLOBALS['movie-note'] . ":</strong> " . $this->note . "</p>   
+                                <p><strong>" . $GLOBALS['movie-vu'] . ":</strong> " . $this->vu . "</p> 
                             </div>
                         </div>
                     </div>
                     <div class='movie-present-trailer'>
-                        <!-- le trailer est un lien vers la vidéo youtube, viméo, etc. -->
-                        <iframe width='560' height='315' src='" . $this->trailer_path . "' title='Trailer de " . $this->title . "'></iframe>
+                        <iframe src='https://www.youtube.com/embed/hSdieDadgM8?si=UK78JOfJwlKYeziy' title='YouTube video player' allow='clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>
+                    </div>
                     <div class='movie-present-synopsis'>
                         <h3>" . $GLOBALS['movie-synopsis'] . "</h3>
                         <p>" . $this->synopsis . "</p>

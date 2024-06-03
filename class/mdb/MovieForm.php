@@ -13,7 +13,7 @@ class MovieForm
      */
     public function createMovie(array $data, $img_file): void
     {
-        foreach ($data as $key => $value) { $data[$key] = htmlspecialchars(trim($value)); }
+        foreach ($data as $key => $value) { if (is_array($value)) { foreach ($value as $k => $v) { $data[$key][$k] = htmlspecialchars(trim($v)); } } else { $data[$key] = htmlspecialchars(trim($value)); } }
 
         $data['seen'] = (isset($data['seen'])) ? $data['seen'] : 0;
         $this->checkForm($data, $img_file);
