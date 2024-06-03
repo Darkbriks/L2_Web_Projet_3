@@ -25,7 +25,27 @@ if (isset($_POST['username']) || isset($_POST['password']))
 
 <?php
 if (isset($_SESSION['admin']) && $_SESSION['admin'])
-{
+{?>
+    <!-- TODO: Ajouter les deux boutons "Ajouter" et "Modifier" -->
+    <form method="POST" enctype="multipart/form-data">
+        <!-- Vos champs de formulaire ici
+
+        <div class="mb-3">
+            <button type="submit" name="action" value="add" class="btn btn-success">Ajouter</button>
+            <button type="submit" name="action" value="edit" class="btn btn-warning">Modifier</button>
+        </div>
+    </form>-->
+
+
+    <?php
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add'){
+        include "add-person-form.php";
+        include "add-movie-form.php";
+    }
+    else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'edit'){
+        include "update-person-form.php";
+        include "update-movie-form.php";
+    }
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title']))
     {
         try
@@ -48,8 +68,8 @@ if (isset($_SESSION['admin']) && $_SESSION['admin'])
         }
         catch (Exception $e) { ?><script> document.addEventListener('DOMContentLoaded', function() { set_user_msg("<?php echo $e->getMessage(); ?>", 'danger'); }); </script><?php }
     }
-    include "add-person-form.php";
-    include "add-movie-form.php";
+    include "update-person-form.php";
+    include "update-movie-form.php";
 }
 else { include "login.php"; }
 ?>
