@@ -107,6 +107,7 @@ class PersonDB extends PdoWrapper
         return $this->execute("SELECT * FROM person", null, "mdb\data_template\Person");
     }
 
+
     // Méthode pour obtenir uniquement les acteurs
     public function getActors()
     {
@@ -182,6 +183,21 @@ class PersonDB extends PdoWrapper
         return $this->execute($query, array(':personId' => $personId, ':personType' => $personType), "mdb\data_template\Movie");
     }
 
+    public function alterPerson($id, $first_name, $last_name, $birth_date, $death_date, $image_path): array
+    {
+        $query = "UPDATE person SET first_name = :first_name, last_name = :last_name, birth_date = :birth_date, death_date = :death_date, image_path = :image_path WHERE id = :id";
+        $params = array(
+            ':id' => $id,
+            ':first_name' => $first_name,
+            ':last_name' => $last_name,
+            ':birth_date' => $birth_date,
+            ':death_date' => $death_date,
+            ':image_path' => $image_path
+        );
+        return $this->execute($query, $params, NULL);
+    }
+
+
     public function alterPerson_($person_alter ,$person_alter_value, $person_id)
     {
         $query = "UPDATE person SET" . $person_alter . "= :person_alter WHERE id = :id";
@@ -222,4 +238,32 @@ class PersonDB extends PdoWrapper
 
         return $this->execute($query,NULL, "mdb\data_template\Movie");
     }
+
+    /**
+     * Suppression d'une personne par ID
+     */
+    public function deletePersonById($id): bool
+    {
+        $query = "DELETE FROM person WHERE id = :id";
+        $params = [':id' => $id];
+        return $this->execute($query, $params, NULL);
+    }
+
+    /**
+     * Suppression des relations dans movie_person par ID de la personne
+     */
+    public function deleteMoviePersonByPersonId($personId): bool
+    {
+        $query = "DELETE FROM movie_person WHERE person_id = :personId";
+        $params = [':personId' => $personId];
+        return $this->execute($query, $params, NULL);
+    }
+
+    // Suppression d'une personne et des relations associées
+    public function deletePersonAndRelationsById($id): bool
+    {
+        $this->deleteMoviePersonByPersonId($id);
+        return $this->deletePersonById($id);
+    }
+
 }
