@@ -237,6 +237,61 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query,array(':movie_alter' => $movie_alter_value,':id' => $movie_id),NULL);
     }
 
+    public function alterMovie($movie_id, $title, $release_date, $synopsis, $image_path, $time_duration, $note, $rating, $trailer_path)
+    {
+        $query = "UPDATE movies SET title = :title, release_date = :release_date, synopsis = :synopsis, image_path = :image_path, time_duration = :time_duration, note = :note, rating = :rating, trailer_path = :trailer_path WHERE id = :id";
 
+        $params = array(
+            ':title' => $title,
+            ':release_date' => $release_date,
+            ':synopsis' => $synopsis,
+            ':image_path' => $image_path,
+            ':time_duration' => $time_duration,
+            ':note' => $note,
+            ':rating' => $rating,
+            ':trailer_path' => $trailer_path,
+            ':id' => $movie_id
+        );
+
+        return $this->execute($query, $params, NULL);
+    }
+
+    /**
+     * Suppression d'un film par ID
+     */
+    public function deleteMovieById($id): bool
+    {
+        $query = "DELETE FROM movies WHERE id = :id";
+        $params = [':id' => $id];
+        return $this->execute($query, $params, NULL);
+    }
+
+    /**
+     * Suppression des relations dans movie_person par ID du film
+     */
+    public function deleteMoviePersonByMovieId($movieId): bool
+    {
+        $query = "DELETE FROM movie_person WHERE movie_id = :movieId";
+        $params = [':movieId' => $movieId];
+        return $this->execute($query, $params, NULL);
+    }
+
+    /**
+     * Suppression des relations dans movie_tag par ID du film
+     */
+    public function deleteMovieTagByMovieId($movieId): bool
+    {
+        $query = "DELETE FROM movie_tag WHERE movie_id = :movieId";
+        $params = [':movieId' => $movieId];
+        return $this->execute($query, $params, NULL);
+    }
+
+    // Suppression d'un film et des relations associées
+    public function deleteMovieAndRelationsById($id): bool
+    {
+        $this->deleteMoviePersonByMovieId($id);
+        $this->deleteMovieTagByMovieId($id);
+        return $this->deleteMovieById($id);
+    }
 
 }
