@@ -43,10 +43,6 @@ $persons = $personDB->getPersons();
                         <label for="actor-image" class="form-label">Image</label>
                         <input type="file" class="form-control" id="actor-image" accept="image/*">
                     </div>
-                    <div class="mb-3">
-                        <label for="actor-type" class="form-label">Type (1,2,3)</label>
-                        <input type="text" class="form-control" id="actor-type" required>
-                    </div>
                     <button type="submit" class="btn btn-primary">Ajouter</button>
                 </form>
             </div>
@@ -69,10 +65,9 @@ $persons = $personDB->getPersons();
             formData.append('birth_date', document.getElementById('actor-birth_date').value.trim());
             formData.append('death_date', document.getElementById('actor-death_date').value.trim());
             formData.append('image', document.getElementById('actor-image').files[0]);
-            formData.append('type', document.getElementById('actor-type').value.trim());
 
 
-            if (formData.get('first_name') && formData.get('last_name') && formData.get('birth_date') && formData.get('death_date') && formData.get('image') && formData.get('type')) {
+            if (formData.get('first_name') && formData.get('last_name') && formData.get('birth_date') && formData.get('death_date') && formData.get('image')) {
                 // Créer une instance de FormData pour envoyer les données
                 let xhr = new XMLHttpRequest();
                 xhr.open('POST', '../ajax/add-actor.php', true);

@@ -89,10 +89,10 @@ class ActorForm
             throw new Exception($GLOBALS['actor-form-exception-image']);
         }
 
-        // Le type doit être un entier entre 0 et 3 (0: unknown, 1: actor, 2: director, 3: composer)
+        /*// Le type doit être un entier entre 0 et 3 (0: unknown, 1: actor, 2: director, 3: composer)
         $data['type'] = htmlspecialchars(trim($data['type']));
         if (!ctype_digit($data['type']) || $data['type'] < 0 || $data['type'] > 3) {
             throw new Exception($GLOBALS['actor-form-exception-type']);
-        }
+        }*/
     }
 }
