@@ -67,7 +67,7 @@ $persons = $personDB->getPersons();
             formData.append('image_path', document.getElementById('actor-image_path').files[0]);
 
 
-            if (formData.get('first_name') && formData.get('last_name') && formData.get('birth_date') && formData.get('death_date') && formData.get('image_path')) {
+            if (formData.get('first_name') && formData.get('last_name') && formData.get('birth_date')) {
                 // Créer une instance de FormData pour envoyer les données
                 let xhr = new XMLHttpRequest();
                 xhr.open('POST', '../ajax/add-actor.php', true);
