@@ -73,7 +73,7 @@ INSERT INTO tag (name) VALUES
 
 -- Acteurs et réalisateurs de tous les films Star Wars
 INSERT INTO person (first_name, last_name, birth_date, death_date, image_path) VALUES
-     ('Harrison', 'Ford', '1942-07-13', NULL, 'Harrison_Ford.jpg'), -- 1
+     ('Harrison', 'Ford', '1942-07-13', NULL, 'Harrison_Ford.jpeg'), -- 1
      ('Carrie', 'Fisher', '1956-10-21', '2016-12-27', 'Carrie_Fisher.jpg'),
      ('Mark', 'Hamill', '1951-09-25', NULL, 'Mark_Hamill.jpg'),
      ('George', 'Lucas', '1944-05-14', NULL, 'George_Lucas.jpg'), -- Réalisateur

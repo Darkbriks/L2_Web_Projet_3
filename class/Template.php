@@ -64,6 +64,14 @@ class Template
                     }
                 }
             }
+
+            function set_user_msg(msg, type="info")
+            {
+                let msg_div = document.createElement('div');
+                msg_div.classList.add('alert', 'alert-' + type);
+                msg_div.textContent = msg;
+                document.getElementById('content').prepend(msg_div);
+            }
         </script>
     <?php
     }

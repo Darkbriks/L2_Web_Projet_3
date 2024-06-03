@@ -66,6 +66,32 @@ $GLOBALS['movie-form-exception-age-rating'] = 'La classification du film est obl
 $GLOBALS['movie-form-exception-seen'] = 'La valeur de \'\'Vu\'\' doit être vraie ou fausse. Le film ne peut pas avoir été vu si il n\'est pas sorti';
 $GLOBALS['movie-form-exception-actor-role'] = 'Le rôle doit être défini pour chaque acteur';
 
+////////// ALL MOVIES //////////
+// allMovies.php
+$GLOBALS['all-movies-title'] = 'Films';
+$GLOBALS['all-movies-filter-by-tag'] = 'Filtrer par tag';
+
+////////// ALL PEOPLES //////////
+// allPeoples.php
+$GLOBALS['all-peoples-title'] = 'Peoples';
+
+////////// HOME //////////
+// home.php
+$GLOBALS['home-most-popular-title'] = 'Films les plus populaires';
+
+////////// MOVIE //////////
+// movie.php
+$GLOBALS['movie-directors'] = 'Réalisateur(s)';
+$GLOBALS['movie-actors'] = 'Acteur(s)';
+$GLOBALS['movie-composers'] = 'Compositeur(s)';
+$GLOBALS['movie-error-1'] = 'Aucun ID de film fourni';
+$GLOBALS['movie-error-2'] = 'Aucun film trouvé avec l\'ID : ';
+
+////////// PERSON //////////
+// person.php
+$GLOBALS['person-error-1'] = 'Aucun ID de personne fourni';
+$GLOBALS['person-error-2'] = 'Aucune personne trouvée avec l\'ID : ';
+
 ////////// LOGIN //////////
 // login.php
 $GLOBALS['login-title'] = 'Veuillez vous connecter';

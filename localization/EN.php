@@ -67,6 +67,32 @@ $GLOBALS['movie-form-exception-age-rating'] = 'The movie age rating is required 
 $GLOBALS['movie-form-exception-seen'] = 'The movie seen must be true or false. Movie can\'t be seen if it\'s not released yet';
 $GLOBALS['movie-form-exception-actor-role'] = 'The role must be set for each actor';
 
+////////// ALL MOVIES //////////
+// allMovies.php
+$GLOBALS['all-movies-title'] = 'Movies';
+$GLOBALS['all-movies-filter-by-tag'] = 'Filter by tag';
+
+////////// ALL PEOPLES //////////
+// allPeoples.php
+$GLOBALS['all-peoples-title'] = 'Peoples';
+
+////////// HOME //////////
+// home.php
+$GLOBALS['home-most-popular-title'] = 'Most popular movies';
+
+////////// MOVIE //////////
+// movie.php
+$GLOBALS['movie-directors'] = 'Director(s)';
+$GLOBALS['movie-actors'] = 'Actor(s)';
+$GLOBALS['movie-composers'] = 'Composer(s)';
+$GLOBALS['movie-error-1'] = 'No movie ID provided';
+$GLOBALS['movie-error-2'] = 'No movie found with ID : ';
+
+////////// PERSON //////////
+// person.php
+$GLOBALS['person-error-1'] = 'No person ID provided';
+$GLOBALS['person-error-2'] = 'No person found with ID : ';
+
 ////////// LOGIN //////////
 // login.php
 $GLOBALS['login-title'] = 'Please login';

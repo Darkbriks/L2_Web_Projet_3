@@ -14,7 +14,7 @@ Autoloader::register();
 
 // Parameters
 // - table: string, the table used to get the data
-// - conditionLength: int, the number of conditions to get (default: 1)(if 0, get all data)
+// - conditionLength: int, the number of conditions to get (if 0, get all data)
 // - attributes: array, the attributes used to filter the data
 // - values: array, the values used to filter the data
 // - and: boolean, if true, use AND instead of OR (default: true)
@@ -28,10 +28,14 @@ try
     if (isset($_POST['table']))
     {
         $table = htmlspecialchars($_POST['table']);
-        if ($table === 'movies') { $db = new MoviesDB(); }
-        else if ($table === 'person') { $db = new PersonDB(); }
-        else if ($table === 'tag') { $db = new TagDB(); }
-        else { echo json_encode(['success' => false, 'error' => $GLOBALS['ajax-get-data-table-not-valid']]); exit(); }
+        try
+        {
+            if ($table === 'movies') { $db = new MoviesDB(); }
+            else if ($table === 'person') { $db = new PersonDB(); }
+            else if ($table === 'tag') { $db = new TagDB(); }
+            else { echo json_encode(['success' => false, 'error' => $GLOBALS['ajax-get-data-table-not-valid']]); exit(); }
+        }
+        catch (Exception $e) { echo json_encode(['success' => false, 'error' => $e->getMessage()]); exit(); }
 
         if (isset($_POST['conditionLength']))
         {

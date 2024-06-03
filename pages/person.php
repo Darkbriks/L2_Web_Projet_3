@@ -5,17 +5,26 @@ require_once $GLOBALS['PDO_WRAPPER'];
 
 require ".." . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR . "Autoloader.php";
 Autoloader::register();
+
+//$lang = Cookies::get('language');
+$lang = $GLOBALS['CURRENT_LANGUAGE'];
+require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
+
 ?>
 
 <?php ob_start(); ?>
 
-    <h2><?php echo $_GET['fullName'];?></h2>
-
     <?php
-    $id = $_GET['id'];
-    $actorsDB = new mdb\PersonDB();
-    $actors = $actorsDB->getPersonById($id);
-    echo $actors[0]->getHtml_Director();
+    try
+    {
+        if (!isset($_GET['id'])) { throw new Exception($GLOBALS['person-error-1'], 1); }
+        $id = htmlspecialchars($_GET['id']);
+        $actorsDB = new mdb\PersonDB();
+        $actors = $actorsDB->getPersonById($id);
+        if (count($actors) == 0) { throw new Exception($GLOBALS['person-error-2'] . $id, 2); }
+        echo $actors[0]->getHtml_Person();
+    }
+    catch (Exception $e) { ?><script> document.addEventListener('DOMContentLoaded', function() { set_user_msg("<?php echo $e->getMessage() . " Code: " . $e->getCode(); ?>", "danger"); }); </script> <?php }
     ?>
 
 <?php $content = ob_get_clean(); ?>
