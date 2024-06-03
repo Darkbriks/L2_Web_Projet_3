@@ -1,18 +1,12 @@
-document.addEventListener('DOMContentLoaded', function()
+document.addEventListener('DOMContentLoaded', function() { getPeople(); });
+
+function getPeople()
 {
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', '../ajax/getAllPeoples.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200)
-        {
-            let response = JSON.parse(xhr.responseText);
-            if (response.success) { renderPeople(JSON.parse(response.data)); }
-            else { console.error('Erreur:', response.error); }
-        }
-    };
-});
+    fetch('../ajax/get-data.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'table': 'person', 'conditionLength' : '0' }) })
+        .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
+        .then(data => { if (data.success) { renderPeople(JSON.parse(data.data)); } else { set_user_msg('Erreur: ' + data.error, 'danger'); } })
+        .catch(error => { console.error(error); });
+}
 
 function renderPeople(peoples)
 {
@@ -26,18 +20,13 @@ function renderPeople(peoples)
         peopleCard.style.cursor = 'pointer';
         peopleCard.innerHTML =
         "<div class='people-image'>" +
-            "<img src='" + people.image + "' alt='image de " + people.full_name + "'>" +
+            "<img src='" + people.image_path + "' alt='image de " + people.full_name + "'>" +
         "</div>" +
         "<div class='people-name'>" +
             "<h3>" + people.full_name + "</h3>" +
         "</div>";
 
-
         container.appendChild(peopleCard);
-
-        peopleCard.addEventListener('click', () =>
-        {
-            window.location.href = `person.php?id=${people.id}`;
-        });
+        peopleCard.addEventListener('click', () => { window.location.href = `person.php?id=${people.id}`; });
     });
 }

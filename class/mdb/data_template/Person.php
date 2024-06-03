@@ -13,9 +13,9 @@ class Person
     public function getImagePath() { return $this->image_path; }
 
     // Méthode pour générer le HTML en fonction du type
-    public function getHtml_Person()
+    public function getHtml_Person(): string
     {
-        switch ($this->type) {
+        /*switch ($this->type) {
             case 1:
                 return $this->getHtml_Actor();
             case 2:
@@ -26,10 +26,14 @@ class Person
                 return "<div class='person'>
                     <p>{$this->first_name} {$this->last_name} ({$this->birth_date} / " . ($this->death_date ?? 'still alive') . ")</p>
                 </div>";
-        }
+        }*/
+        return "<div class='person'>
+                    <img src='" . $GLOBALS['PEOPLES_DIR'] . $this->image_path . "' alt='{$this->first_name} {$this->last_name}'>
+                    <h3>{$this->first_name} {$this->last_name}</h3>
+                </div>";
     }
 
-    public function getHtml_Actor()
+    /*public function getHtml_Actor(): string
     {
         return "<div class='actor'>
                     <img src='{$this->image_path}' alt='{$this->first_name} {$this->last_name}'>
@@ -37,7 +41,7 @@ class Person
                 </div>";
     }
 
-    public function getHtml_Director()
+    public function getHtml_Director(): string
     {
         return "<div class='director'>
                     <img src='{$this->image_path}' alt='{$this->first_name} {$this->last_name}'>
@@ -45,15 +49,15 @@ class Person
                 </div>";
     }
 
-    public function getHtml_Composer()
+    public function getHtml_Composer(): string
     {
         return "<div class='composer'>
                     <img src='{$this->image_path}' alt='{$this->first_name} {$this->last_name}'>
                     <h3>Music by: {$this->first_name} {$this->last_name}</h3>
                 </div>";
-    }
+    }*/
 
-    public function getHtml_list(bool $played_name = false)
+    public function getHtml_list(bool $played_name = false): string
     {
         $html = "<li class='card' style='cursor: pointer;' id='{$this->id}'>
                     {$this->first_name} {$this->last_name} ({$this->birth_date} / " . ($this->death_date ?? 'still alive') . ")";
@@ -78,7 +82,7 @@ class Person
             'last_name' => $this->last_name,
             'birth_date' => $this->birth_date,
             'death_date' => $this->death_date,
-            'image_path' => $this->image_path
+            'image_path' => $GLOBALS['PEOPLES_DIR'] . $this->image_path
         ];
     }
 }

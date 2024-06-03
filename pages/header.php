@@ -5,8 +5,8 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link active" href="home.php"><?php echo $GLOBALS['header-home']; ?></a></li>
-                    <li class="nav-item"><a class="nav-link active" href="allMovies.php"><?php echo $GLOBALS['header-movies']; ?></a></li>
-                    <li class="nav-item"><a class="nav-link active" href="allPeople.php"><?php echo $GLOBALS['header-peoples']; ?></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="all-movies.php"><?php echo $GLOBALS['header-movies']; ?></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="all-people.php"><?php echo $GLOBALS['header-peoples']; ?></a></li>
                     <li class="nav-item"><a class="nav-link active" href="admin.php"><?php echo $GLOBALS['header-admin']; ?></a></li>
                     <!-- TODO: ajouter l'attribut "active" uniquement a la page courante -->
 

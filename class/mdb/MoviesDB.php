@@ -7,9 +7,13 @@ use pdo_wrapper\PdoWrapper;
 
 class MoviesDB extends PdoWrapper
 {
+    /**
+     * @throws Exception
+     */
     public function __construct()
     {
-        parent::__construct($GLOBALS['db_name'], $GLOBALS['db_host'], $GLOBALS['db_port'], $GLOBALS['db_user'], $GLOBALS['db_pwd']);
+        try { parent::__construct($GLOBALS['db_name'], $GLOBALS['db_host'], $GLOBALS['db_port'], $GLOBALS['db_user'], $GLOBALS['db_pwd']); }
+        catch (Exception $e) { throw new Exception($e->getMessage(), (int)$e->getCode()); }
     }
 
     /**
