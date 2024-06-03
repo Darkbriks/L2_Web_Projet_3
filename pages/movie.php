@@ -14,9 +14,9 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
 <?php ob_start(); ?>
 
-<?php
+<div class="container movie-container">
 
-try
+<?php try
 {
     if (!isset($_GET['id'])) { throw new Exception($GLOBALS['movie-error-1'], 1); }
     $id = (int)htmlspecialchars($_GET['id']);
@@ -37,6 +37,8 @@ try
     ?><h3><?php echo $GLOBALS['movie-composers'] ?></h3> <ul><?php foreach ($composers as $composer) { echo $composer->getHtml_list(); } ?></ul><?php
 }
 catch (Exception $e) { ?><script> document.addEventListener('DOMContentLoaded', function() { set_user_msg("<?php echo $e->getMessage() . " Code: " . $e->getCode(); ?>", "danger"); }); </script> <?php } ?>
+
+</div>
 
 <?php $content = ob_get_clean(); ?>
 <?php Template::render($content); ?>

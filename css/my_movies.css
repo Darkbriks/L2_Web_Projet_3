@@ -385,17 +385,45 @@ form h2 { text-align: center; }
 }
 
 /********** movie details page **********/
-.m_details{
-    position: absolute;
-    width: max-content;
-    height: max-content;
+.movie-container
+{
+    max-width: 40vw;
     padding: 20px;
     border: 2px solid var(--hight-constrast-color);
-    border-radius: 8px;
+    border-radius: 15px;
 }
-.movie-poster{
-    width: 300px;
+
+.movie-present
+{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
+
+.movie-present-head
+{
+    display: flex;
+    gap: 20px;
+}
+
+.movie-present-poster
+{
+    width: 50%;
+    aspect-ratio: var(--carrousel-slide-element-aspect-ratio);
+    overflow: hidden;
+    border: 1px solid var(--hight-constrast-color);
+    border-radius: 15px;
+}
+
+.movie-present-poster img
+{
+    height: 100%;
+    aspect-ratio: var(--carrousel-slide-element-aspect-ratio);
+    transition: transform 0.5s;
+    object-fit: cover;
+}
+
+.movie-present-poster img:hover { transform: scale(1.1); }
 
 /********** people details page **********/
 .producer-details{

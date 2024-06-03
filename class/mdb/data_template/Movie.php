@@ -20,14 +20,27 @@ class Movie
 
     public function getHtml()
     {
-        return "<div class = 'card'>
-                    <div class = 'posters'>
-                        <img src='" . $GLOBALS['POSTER_DIR'] . $this->image_path . "' alt='Affiche de " . $this->title . "'>
+        return "<div class='movie-present'>
+                    <div class='movie-present-head'>
+                        <div class = 'movie-present-poster'>
+                            <img src='" . $GLOBALS['POSTER_DIR'] . $this->image_path . "' alt='Affiche de " . $this->title . "'>
+                        </div>
+                        <div class='movie-present-info'>
+                            <h1>" . $this->title . "</h1>
+                            <div class='movie-present-details'>
+                                <p><strong>" . $GLOBALS['movie-release-date'] . ":</strong> " . $this->release_date . "</p>
+                                <p><strong>" . $GLOBALS['movie-time-duration'] . ":</strong> " . $this->time_duration . "</p>
+                                <p><strong>" . $GLOBALS['movie-rating'] . ":</strong> " . $this->rating . "</p>
+                                <p><strong>" . $GLOBALS['movie-note'] . ":</strong> " . $this->note . "</p>    
+                            </div>
+                        </div>
                     </div>
-                    <div class='movie-info'>
-                        <h3>" . $this->title . " (" . $this->release_date . ")</h3>
-                        <p class='movie-synopsis'>" . $this->synopsis . "</p>
-                        <p class='movie-status'><strong>Status :</strong>" . $this->vu . "</p>
+                    <div class='movie-present-trailer'>
+                        <!-- le trailer est un lien vers la vidéo youtube, viméo, etc. -->
+                        <iframe width='560' height='315' src='" . $this->trailer_path . "' title='Trailer de " . $this->title . "'></iframe>
+                    <div class='movie-present-synopsis'>
+                        <h3>" . $GLOBALS['movie-synopsis'] . "</h3>
+                        <p>" . $this->synopsis . "</p>
                     </div>
                 </div>";
     }
