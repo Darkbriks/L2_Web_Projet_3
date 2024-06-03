@@ -1,6 +1,11 @@
 <?php
+require_once "../config.php";
+require_once "../DB_CREDENTIALS.php";
+require_once $GLOBALS['PDO_WRAPPER'];
+require_once $GLOBALS['LOCALIZATION_DIR'] . $GLOBALS['CURRENT_LANGUAGE'] . '.php';
 
-require_once 'path/to/ActorForm.php';
+require ".." . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR . "Autoloader.php";
+Autoloader::register();
 
 // Vérifie si les données ont été envoyées via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
