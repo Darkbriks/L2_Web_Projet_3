@@ -1,3 +1,43 @@
+:root {
+    --background-color: white;
+    --text-color: black;
+    --primary-color: blue;
+    --secondary-color: lightblue;
+    --tertiary-color: lightgray;
+    --hight-constrast-color: black;
+
+    /********** Carrousel **********/
+    --carrousel-width: 100%;
+    --carrousel-height: 63vh;
+    --carrousel-slide-width: 95%;
+    --carrousel-slide-element-width: 35vh;
+    --carrousel-slide-element-aspect-ratio: 27 / 40;
+    --carrousel-nav-width: 5vh;
+    --carrousel-nav-height: 10vh;
+}
+
+/********** Dark theme **********/
+[data-theme="dark"]
+{
+    --background-color: black;
+    --text-color: white;
+    --primary-color: #131415;
+    --secondary-color: darkcyan;
+    --tertiary-color: #0b7012;
+    --hight-constrast-color: white;
+}
+
+/********** Light theme **********/
+[data-theme="light"]
+{
+    --background-color: white;
+    --text-color: black;
+    --primary-color: #b0b0ff;
+    --secondary-color: lightblue;
+    --tertiary-color: lightgray;
+    --hight-constrast-color: black;
+}
+
 body
 {
     font-family: Arial, sans-serif;
@@ -27,9 +67,15 @@ nav ul {
     display: flex;
 }*/
 
+nav
+{
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
 .navbar-title
 {
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
     padding: 10px;
     font-size: 2em;
@@ -49,8 +95,8 @@ footer
     width: 100%;
     text-align: center;
     padding: 10px 0;
-    background-color: #333;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--background-color);
     position: fixed;
     bottom: 0;
 }
@@ -91,8 +137,8 @@ body.dark-theme label { color: darkgray; }*/
 /********** All movies page **********/
 .carrousel
 {
-    width: 100%;
-    height: 63vh;
+    width: var(--carrousel-width);
+    height: var(--carrousel-height);
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -109,29 +155,29 @@ body.dark-theme label { color: darkgray; }*/
 .carrousel-slide
 {
     display: flex;
-    width: 95%;
+    width: var(--carrousel-slide-width);
     justify-content: space-around;
 }
 
 .movie-card
 {
     /*width: 20vw;*/
-    width: 35vh;
-    aspect-ratio: 27 / 40;
+    width: var(--carrousel-slide-element-width);
+    aspect-ratio: var(--carrousel-slide-element-aspect-ratio);
     display: flex;
     flex-direction: column;
     overflow: hidden;
     transition: transform 0.3s;
-    border: 1px solid white;
+    border: 1px solid var(--hight-constrast-color);
     border-radius: 15px;
 }
 
 .movie-poster img
 {
     /*width: 20vw;*/
-    width: 35vh;
+    width: var(--carrousel-slide-element-width);
     max-height: 60vh;
-    aspect-ratio: 27 / 40;
+    aspect-ratio: var(--carrousel-slide-element-aspect-ratio);
     transition: transform 0.5s;
     object-fit: cover;
 }
@@ -141,8 +187,8 @@ body.dark-theme label { color: darkgray; }*/
 .movie-details
 {
     /*width: 20vw;*/
-    width: 35vh;
-    aspect-ratio: 27 / 40;
+    width: var(--carrousel-slide-element-width);
+    aspect-ratio: var(--carrousel-slide-element-aspect-ratio);
     display: none;
     flex-direction: column;
     justify-content: space-between;
@@ -160,31 +206,32 @@ body.dark-theme label { color: darkgray; }*/
 .movie-synopsis
 {
     font-size: 0.9em;
-    color: wheat;
+    color: var(--text-color);
     text-align: justify;
 }
 
 .movie-producer, .movie-actors, .movie-tags, .movie-status { font-size: 0.9em; }
 
-.movie-actors, .movie-producer, h3{ color: antiquewhite; }
+.movie-actors, .movie-producer, h3{ color: var(--primary-color); }
 
-.movie-tags { color: dodgerblue; }
+.movie-tags { color: var(--secondary-color); }
 
-.movie-status { font-weight: bold; color: forestgreen; }
+.movie-status { font-weight: bold; color: var(--tertiary-color); }
 
 .carrousel-nav
 {
-    min-width: 5vh;
-    min-height: 10vh;
+    min-width: var(--carrousel-nav-width);
+    min-height: var(--carrousel-nav-height);
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.3);
     color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
     z-index: 10;
+    transition: background-color 0.3s;
 }
 
 .carrousel-nav:hover { background-color: rgba(0, 0, 0, 0.8); }
@@ -201,7 +248,7 @@ body.dark-theme label { color: darkgray; }*/
 }
 
 .people-card, .people-details {
-    border: 1px solid white;
+    border: 1px solid var(--hight-constrast-color);
     border-radius: 8px;
     overflow: hidden;
     background-color: transparent;
@@ -256,7 +303,7 @@ form h2 { text-align: center; }
     max-width: 20vw;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--hight-constrast-color);
     border-radius: 15px;
     position: absolute;
     top: 50%;
@@ -278,7 +325,7 @@ form h2 { text-align: center; }
     max-width: 30vw;
     margin-top: 1.5vw;
     padding: 1vw;
-    border: 1px solid #ccc;
+    border: 1px solid var(--hight-constrast-color);
     border-radius: 20px;
     position: absolute;
     left: 50%;
@@ -343,7 +390,7 @@ form h2 { text-align: center; }
     width: max-content;
     height: max-content;
     padding: 20px;
-    border: 2px solid #ccc;
+    border: 2px solid var(--hight-constrast-color);
     border-radius: 8px;
 }
 .movie-poster{
@@ -356,6 +403,6 @@ form h2 { text-align: center; }
     width: max-content;
     height: max-content;
     padding: 20px;
-    border: 2px solid #ccc;
+    border: 2px solid var(--hight-constrast-color);
     border-radius: 8px;
 }
