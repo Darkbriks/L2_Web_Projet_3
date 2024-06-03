@@ -14,7 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Appelle la méthode createActor avec les données du formulaire
     try {
-        $actorForm->createActor($_POST, $_FILES['image']);
+        $img_file = $_FILES['image_path'] ?? null;
+        $actorForm->createActor($_POST, $img_file);
         // Envoyer une réponse HTTP 200 en cas de succès
         http_response_code(200);
         echo 'Acteur ajouté avec succès.';
