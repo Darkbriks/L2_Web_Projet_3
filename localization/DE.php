@@ -13,6 +13,7 @@ $GLOBALS['header-home'] = 'Startseite';
 $GLOBALS['header-movies'] = 'Filme';
 $GLOBALS['header-peoples'] = 'Personen';
 $GLOBALS['header-admin'] = 'Admin';
+$GLOBALS['header-search'] = 'Suche';
 $GLOBALS['header-logout'] = 'Abmelden';
 $GLOBALS['header-theme'] = 'Thema';
 $GLOBALS['header-language-dropdown-default'] = 'Sprache wählen';
@@ -63,8 +64,34 @@ $GLOBALS['movie-form-exception-synopsis'] = 'Die Zusammenfassung des Films ist e
 $GLOBALS['movie-form-exception-trailer'] = 'Der Filmtrailer ist erforderlich und muss eine gültige URL von Youtube, Dailymotion oder Vimeo sein';
 $GLOBALS['movie-form-exception-tags'] = 'Der Film muss mindestens ein Stichwort haben';
 $GLOBALS['movie-form-exception-age-rating'] = 'Die Altersfreigabe des Films ist erforderlich und muss eine positive ganze Zahl sein';
-$GLOBALS['movie-form-exception-seen'] = 'Der Filmstatus "gesehen" muss wahr oder falsch sein. Der Film kann nicht gesehen werden, wenn er noch nicht veröffentlicht ist';
+$GLOBALS['movie-form-exception-seen'] = 'Der Filmstatus \'\'gesehen\'\' muss wahr oder falsch sein. Der Film kann nicht gesehen werden, wenn er noch nicht veröffentlicht ist';
 $GLOBALS['movie-form-exception-actor-role'] = 'Die Rolle muss für jeden Schauspieler festgelegt werden';
+
+////////// ALL MOVIES //////////
+// allMovies.php
+$GLOBALS['all-movies-title'] = 'Filme';
+$GLOBALS['all-movies-filter-by-tag'] = 'Nach Tag filtern';
+
+////////// ALL PEOPLES //////////
+// allPeoples.php
+$GLOBALS['all-peoples-title'] = 'Personen';
+
+////////// HOME //////////
+// home.php
+$GLOBALS['home-most-popular-title'] = 'Beliebteste Filme';
+
+////////// MOVIE //////////
+// movie.php
+$GLOBALS['movie-directors'] = 'Regisseur(en)';
+$GLOBALS['movie-actors'] = 'Schauspieler';
+$GLOBALS['movie-composers'] = 'Komponist(en)';
+$GLOBALS['movie-error-1'] = 'Keine Film-ID angegeben';
+$GLOBALS['movie-error-2'] = 'Kein Film gefunden mit ID : ';
+
+////////// PERSON //////////
+// person.php
+$GLOBALS['person-error-1'] = 'Keine Person-ID angegeben';
+$GLOBALS['person-error-2'] = 'Keine Person gefunden mit ID : ';
 
 ////////// LOGIN //////////
 // login.php
@@ -80,35 +107,25 @@ $GLOBALS['pdo-connect-error'] = 'Fehler beim Verbinden mit der Datenbank: ';
 $GLOBALS['pdo-execute-error'] = 'Fehler beim Ausführen der Abfrage: ';
 
 ////////// AJAX //////////
+// add-tag.php
+$GLOBALS['ajax-add-tag-error-1'] = 'Kein Tag angegeben';
+$GLOBALS['ajax-add-tag-error-2'] = 'Fehler beim Hinzufügen des Tags zur Datenbank';
+
 // get-data.php
-$GLOBALS['ajax-get-data-table-not-valid'] = 'Die angeforderte Tabelle ist nicht gültig. Gültige Tabellen sind: movies, tag und person';
-$GLOBALS['ajax-get-data-attribute-value-not-set'] = 'Das Attribut und/oder der Wert sind nicht gesetzt';
-$GLOBALS['ajax-get-data-table-not-set'] = 'Die Tabelle ist nicht gesetzt';
-// addTag.php
-$GLOBALS['tag-add-success'] = 'Tag erfolgreich hinzugefügt';
-$GLOBALS['tag-add-failure'] = 'Tag existiert bereits';
+$GLOBALS['ajax-get-data-table-not-valid'] = 'Angeforderte Tabelle ist ungültig. Gültige Tabellen sind: movies, tag und person';
+$GLOBALS['ajax-get-data-attribute-value-not-set'] = 'Attribut und/oder Wert nicht festgelegt';
+$GLOBALS['ajax-get-data-table-not-set'] = 'Tabelle nicht festgelegt';
+
 // get-localized-text.php
-$GLOBALS['error-no-language'] = 'Keine Sprache angegeben';
-$GLOBALS['error-text-not-found'] = 'Text nicht gefunden';
-$GLOBALS['error-no-text'] = 'Kein Text angegeben';
-// getAllPeoples.php
-$GLOBALS['person-fetch-success'] = 'Personen erfolgreich abgerufen';
-$GLOBALS['person-fetch-failure'] = 'Abrufen der Personen fehlgeschlagen';
+$GLOBALS['ajax-get-localized-text-error-1'] = 'Keine Sprache angegeben';
+$GLOBALS['ajax-get-localized-text-error-2'] = 'Kein Text angegeben';
+$GLOBALS['ajax-get-localized-text-error-3'] = 'Text nicht gefunden';
+
 // getMoviesByTag.php
-$GLOBALS['error-tag-id-missing'] = 'Tag-ID fehlt';
+$GLOBALS['ajax-get-movies-by-tag-error-1'] = 'Keine Tag-ID angegeben';
+
 // language.php
-$GLOBALS['error-no-method'] = 'Keine Methode angegeben';
-$GLOBALS['error-invalid-method'] = 'Ungültige Methode';
-$GLOBALS['error-no-language'] = 'Keine Sprache angegeben';
-$GLOBALS['error-cookie-not-set'] = 'Cookie konnte nicht gesetzt werden';
-// movieFormAddPerson.php
-$GLOBALS['error-person-not-found'] = 'Person nicht gefunden';
-
-// allMovies.php
-$GLOBALS['filter-by-tag'] = 'Nach Tag filtern';
-$GLOBALS['all'] = 'Alle';
-$GLOBALS['movies'] = 'FILME';
-
-
-// allPeople.php
-$GLOBALS['peoples'] = 'PERSONEN';
+$GLOBALS['ajax-language-error-1'] = 'Keine Methode angegeben';
+$GLOBALS['ajax-language-error-2'] = 'Ungültige Sprache';
+$GLOBALS['ajax-language-error-3'] = 'Sprache nicht festgelegt';
+$GLOBALS['ajax-language-error-4'] = 'Fehler beim Festlegen der Sprache';

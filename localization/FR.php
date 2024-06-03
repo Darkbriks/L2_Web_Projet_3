@@ -13,6 +13,7 @@ $GLOBALS['header-home'] = 'Accueil';
 $GLOBALS['header-movies'] = 'Films';
 $GLOBALS['header-peoples'] = 'Peoples';
 $GLOBALS['header-admin'] = 'Admin';
+$GLOBALS['header-search'] = 'Rechercher';
 $GLOBALS['header-logout'] = 'Déconnexion';
 $GLOBALS['header-theme'] = 'Thème';
 $GLOBALS['header-language-dropdown-default'] = 'Choisir la langue';
@@ -106,34 +107,25 @@ $GLOBALS['pdo-connect-error'] = 'Erreur de connexion à la base de données : ';
 $GLOBALS['pdo-execute-error'] = 'Erreur lors de l\'exécution de la requête : ';
 
 ////////// AJAX //////////
+// add-tag.php
+$GLOBALS['ajax-add-tag-error-1'] = 'Aucun tag fourni';
+$GLOBALS['ajax-add-tag-error-2'] = 'Erreur lors de l\'ajout du tag. Veuillez vous assurer que le tag n\'existe pas déjà';
+
 // get-data.php
 $GLOBALS['ajax-get-data-table-not-valid'] = 'La table demandée n\'est pas valide. Les tables valides sont : movies, tag, et person';
 $GLOBALS['ajax-get-data-attribute-value-not-set'] = 'L\'attribut et/ou la valeur ne sont pas définis';
 $GLOBALS['ajax-get-data-table-not-set'] = 'La table n\'est pas définie';
-// addTag.php
-$GLOBALS['tag-add-success'] = 'Tag ajouté avec succès';
-$GLOBALS['tag-add-failure'] = 'Le tag existe déjà';
+
 // get-localized-text.php
-$GLOBALS['error-no-language'] = 'Aucune langue fournie';
-$GLOBALS['error-text-not-found'] = 'Texte introuvable';
-$GLOBALS['error-no-text'] = 'Aucun texte fourni';
-// getAllPeoples.php
-$GLOBALS['person-fetch-success'] = 'Personnes récupérées avec succès';
-$GLOBALS['person-fetch-failure'] = 'Échec de la récupération des personnes';
+$GLOBALS['ajax-get-localized-text-error-1'] = 'Aucune langue fournie';
+$GLOBALS['ajax-get-localized-text-error-2'] = 'Texte introuvable';
+$GLOBALS['ajax-get-localized-text-error-3'] = 'Aucun texte fourni';
+
 // getMoviesByTag.php
-$GLOBALS['error-tag-id-missing'] = 'L\'ID du tag est manquant';
+$GLOBALS['ajax-get-movies-by-tag-error-1'] = 'ID de tag manquant';
+
 // language.php
-$GLOBALS['error-no-method'] = 'Aucune méthode fournie';
-$GLOBALS['error-invalid-method'] = 'Méthode invalide';
-$GLOBALS['error-no-language'] = 'Aucune langue fournie';
-$GLOBALS['error-cookie-not-set'] = 'Impossible de définir le cookie';
-// movieFormAddPerson.php
-$GLOBALS['error-person-not-found'] = 'Personne non trouvée';
-
-// allMovies.php
-$GLOBALS['filter-by-tag'] = 'Filtrer par tag';
-$GLOBALS['all'] = 'Tous';
-$GLOBALS['movies'] = 'FILMS';
-
-// allPeople.php
-$GLOBALS['peoples'] = 'PERSONNES';
+$GLOBALS['ajax-language-error-1'] = 'Aucune méthode fournie';
+$GLOBALS['ajax-language-error-2'] = 'Méthode invalide';
+$GLOBALS['ajax-language-error-3'] = 'Langue invalide';
+$GLOBALS['ajax-language-error-4'] = 'Erreur lors du changement de langue';

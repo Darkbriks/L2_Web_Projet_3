@@ -9,17 +9,6 @@ Autoloader::register();
 
 use mdb\MoviesDB;
 
-/*try { $moviesDB = new MoviesDB(); }
-catch (Exception $e) { echo json_encode(['success' => false, 'error' => $e->getMessage()]); exit(); }
-
-if ($_POST['tagId'] == -1) { $movies = $moviesDB->getMovies(); }
-else { $movies = $moviesDB->getMoviesByTag($_POST['tagId']); }
-
-$json_movies = json_encode(array_map(function($movie) { return $movie->get_json(); }, $movies));
-echo json_encode(['success' => true, 'data' => $json_movies]);*/
-
-
-
 if (isset($_POST['tagId']))
 {
     try { $moviesDB = new MoviesDB(); }
@@ -31,5 +20,5 @@ if (isset($_POST['tagId']))
     $json_movies = json_encode(array_map(function($movie) { return $movie->get_json(); }, $movies));
     echo json_encode(['success' => true, 'data' => $json_movies]);
 }
-else { echo json_encode(['success' => false, 'error' => 'No tagID provided']); }
+else { echo json_encode(['success' => false, 'error' => $GLOBALS['ajax-get-movies-by-tag-error-1']]); }
 ?>

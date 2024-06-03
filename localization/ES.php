@@ -13,6 +13,7 @@ $GLOBALS['header-home'] = 'Inicio';
 $GLOBALS['header-movies'] = 'Películas';
 $GLOBALS['header-peoples'] = 'Personas';
 $GLOBALS['header-admin'] = 'Admin';
+$GLOBALS['header-search'] = 'Buscar';
 $GLOBALS['header-logout'] = 'Cerrar sesión';
 $GLOBALS['header-theme'] = 'Tema';
 $GLOBALS['header-language-dropdown-default'] = 'Elegir idioma';
@@ -66,6 +67,32 @@ $GLOBALS['movie-form-exception-age-rating'] = 'La clasificación por edad de la 
 $GLOBALS['movie-form-exception-seen'] = 'El estado de la película vista debe ser verdadero o falso. La película no puede ser vista si aún no se ha estrenado';
 $GLOBALS['movie-form-exception-actor-role'] = 'El papel debe ser establecido para cada actor';
 
+////////// ALL MOVIES //////////
+// allMovies.php
+$GLOBALS['all-movies-title'] = 'Películas';
+$GLOBALS['all-movies-filter-by-tag'] = 'Filtrar por etiqueta';
+
+////////// ALL PEOPLES //////////
+// allPeoples.php
+$GLOBALS['all-peoples-title'] = 'Personas';
+
+////////// HOME //////////
+// home.php
+$GLOBALS['home-most-popular-title'] = 'Películas más populares';
+
+////////// MOVIE //////////
+// movie.php
+$GLOBALS['movie-directors'] = 'Director(es)';
+$GLOBALS['movie-actors'] = 'Actor(es)';
+$GLOBALS['movie-composers'] = 'Compositor(es)';
+$GLOBALS['movie-error-1'] = 'No se proporcionó ningún ID de película';
+$GLOBALS['movie-error-2'] = 'No se encontró ninguna película con el ID : ';
+
+////////// PERSON //////////
+// person.php
+$GLOBALS['person-error-1'] = 'No se proporcionó ningún ID de persona';
+$GLOBALS['person-error-2'] = 'No se encontró ninguna persona con el ID : ';
+
 ////////// LOGIN //////////
 // login.php
 $GLOBALS['login-title'] = 'Por favor, inicie sesión';
@@ -80,34 +107,25 @@ $GLOBALS['pdo-connect-error'] = 'Error al conectar con la base de datos: ';
 $GLOBALS['pdo-execute-error'] = 'Error al ejecutar la consulta: ';
 
 ////////// AJAX //////////
+// add-tag.php
+$GLOBALS['ajax-add-tag-error-1'] = 'No se proporcionó ninguna etiqueta';
+$GLOBALS['ajax-add-tag-error-2'] = 'Error al agregar la etiqueta a la base de datos';
+
 // get-data.php
 $GLOBALS['ajax-get-data-table-not-valid'] = 'La tabla solicitada no es válida. Las tablas válidas son: movies, tag y person';
-$GLOBALS['ajax-get-data-attribute-value-not-set'] = 'El atributo y/o el valor no están establecidos';
-$GLOBALS['ajax-get-data-table-not-set'] = 'La tabla no está establecida';
-// addTag.php
-$GLOBALS['tag-add-success'] = 'Etiqueta agregada exitosamente';
-$GLOBALS['tag-add-failure'] = 'La etiqueta ya existe';
+$GLOBALS['ajax-get-data-attribute-value-not-set'] = 'Atributo y/o valor no establecido';
+$GLOBALS['ajax-get-data-table-not-set'] = 'Tabla no establecida';
+
 // get-localized-text.php
-$GLOBALS['error-no-language'] = 'No se ha proporcionado ningún idioma';
-$GLOBALS['error-text-not-found'] = 'Texto no encontrado';
-$GLOBALS['error-no-text'] = 'No se ha proporcionado ningún texto';
-// getAllPeoples.php
-$GLOBALS['person-fetch-success'] = 'Personas recuperadas exitosamente';
-$GLOBALS['person-fetch-failure'] = 'Error al recuperar personas';
+$GLOBALS['ajax-get-localized-text-error-1'] = 'No se proporcionó ningún idioma';
+$GLOBALS['ajax-get-localized-text-error-2'] = 'No se proporcionó ningún texto';
+$GLOBALS['ajax-get-localized-text-error-3'] = 'Texto no encontrado';
+
 // getMoviesByTag.php
-$GLOBALS['error-tag-id-missing'] = 'Falta el ID del tag';
+$GLOBALS['ajax-get-movies-by-tag-error-1'] = 'ID de etiqueta faltante';
+
 // language.php
-$GLOBALS['error-no-method'] = 'No se ha proporcionado ningún método';
-$GLOBALS['error-invalid-method'] = 'Método no válido';
-$GLOBALS['error-no-language'] = 'No se ha proporcionado ningún idioma';
-$GLOBALS['error-cookie-not-set'] = 'No se pudo establecer la cookie';
-// movieFormAddPerson.php
-$GLOBALS['error-person-not-found'] = 'Persona no encontrada';
-
-// allMovies.php
-$GLOBALS['filter-by-tag'] = 'Filtrar por etiqueta';
-$GLOBALS['all'] = 'Todos';
-$GLOBALS['movies'] = 'PELÍCULAS';
-
-// allPeople.php
-$GLOBALS['peoples'] = 'PERSONAS';
+$GLOBALS['ajax-language-error-1'] = 'No se proporcionó ningún método';
+$GLOBALS['ajax-language-error-2'] = 'Idioma no válido';
+$GLOBALS['ajax-language-error-3'] = 'Error al cambiar el idioma';
+$GLOBALS['ajax-language-error-4'] = 'Idioma no establecido';
