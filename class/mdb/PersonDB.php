@@ -20,9 +20,9 @@ class PersonDB extends PdoWrapper
         return parent::getData($attributes, $values, $and, $limit, $order, $direction, $useLike, $table, "mdb\data_template\Person");
     }
 
-    public function addPerson($first_name, $last_name, $birth_date, $death_date, $type, $image_path): bool
+    public function addPerson($first_name, $last_name, $birth_date, $death_date, $image_path): bool
     {
-        $sql = "INSERT INTO person (first_name, last_name, birth_date, death_date, type ,image_path) VALUES (:first_name, :last_name, :birth_date, :death_date, :type,:image_path)";
+        $sql = "INSERT INTO person (first_name, last_name, birth_date, death_date ,image_path) VALUES (:first_name, :last_name, :birth_date, :death_date, :image_path)";
         $stmt = $this->pdo->prepare($sql);
 
         // Exécuter la requête avec les valeurs fournies
@@ -34,6 +34,12 @@ class PersonDB extends PdoWrapper
             ':death_date' => $death_date,
             ':image_path' => $image_path
         ]);
+    }
+
+    public function addPersonAndReturnId($first_name, $last_name, $birth_date, $death_date, $image_path): bool|int|string
+    {
+        if ($this->addPerson($first_name, $last_name, $birth_date, $death_date, $image_path)) { return $this->pdo->lastInsertId(); }
+        return 0;
     }
 
     public function addMovie_Person($movieId, $personId, $playedName, $personType=1): bool
@@ -216,13 +222,4 @@ class PersonDB extends PdoWrapper
 
         return $this->execute($query,NULL, "mdb\data_template\Movie");
     }
-
-    public function addPersonAndReturnId($first_name, $last_name, $birth_date, $death_date, $type, $image_path){
-        if ($this->addPerson($first_name, $last_name, $birth_date, $death_date, $type, $image_path))
-        {
-            return $this->pdo->lastInsertId();
-        }
-        return 0;
-    }
-
 }

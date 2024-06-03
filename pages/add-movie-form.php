@@ -10,86 +10,6 @@ $personDB = new PersonDB();
 $persons = $personDB->getPersons();
 ?>
 
-<div class="mb-3">
-    <button type="button" class="btn btn-primary" id="add-actor-btn">Ajouter un acteur</button>
-</div>
-
-<div class="modal fade" id="addActorModal" tabindex="-1" aria-labelledby="addActorModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addActorModalLabel">Ajouter un acteur</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="add-actor-form", method="post">
-                    <div class="mb-3">
-                        <label for="actor-first-name" class="form-label">Prénom</label>
-                        <input type="text" class="form-control" id="actor-first-name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="actor-last-name" class="form-label">Nom</label>
-                        <input type="text" class="form-control" id="actor-last-name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="actor-birth_date" class="form-label">Naissance</label>
-                        <input type="date" class="form-control" id="actor-birth_date" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="actor-death_date" class="form-label">Mort</label>
-                        <input type="date" class="form-control" id="actor-death_date">
-                    </div>
-                    <div class="mb-3">
-                        <label for="actor-image_path" class="form-label">Image</label>
-                        <input type="file" class="form-control" id="actor-image_path" accept="image/*">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Ajouter</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('add-actor-btn').addEventListener('click', function() {
-            let addActorModal = new bootstrap.Modal(document.getElementById('addActorModal'));
-            addActorModal.show();
-        });
-
-        document.getElementById('add-actor-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            let formData = new FormData();
-            formData.append('first_name', document.getElementById('actor-first-name').value.trim());
-            formData.append('last_name', document.getElementById('actor-last-name').value.trim());
-            formData.append('birth_date', document.getElementById('actor-birth_date').value.trim());
-            formData.append('death_date', document.getElementById('actor-death_date').value.trim());
-            formData.append('image_path', document.getElementById('actor-image_path').files[0]);
-
-
-            if (formData.get('first_name') && formData.get('last_name') && formData.get('birth_date')) {
-                // Créer une instance de FormData pour envoyer les données
-                let xhr = new XMLHttpRequest();
-                xhr.open('POST', '../ajax/add-actor.php', true);
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === 4) {
-                        if (xhr.status === 200) {
-                            // Afficher un message de succès
-                            console.log('Acteur ajouté avec succès.');
-                        } else {
-                            // Afficher un message d'erreur
-                            console.error('Erreur lors de l\'ajout de l\'acteur :', xhr.status);
-                        }
-                    }
-                };
-                xhr.send(formData);
-            }
-        });
-    });
-</script>
-
-
-
 <form method='POST' enctype='multipart/form-data' class="add-movie-form">
     <div id="add-movie-form-msg">
         <?php if (isset($add_movie_error)) { echo "<div class='alert alert-warning' role='alert'>$add_movie_error</div>"; } ?>
@@ -115,7 +35,6 @@ $persons = $personDB->getPersons();
 
     <div class="mb-3">
         <label for='posters' class="form-label"><?php echo $GLOBALS['movie-form-add-movie-poster'] ?></label>
-        <!--input class="form-control" type='file' name='posters' id='posters' required accept='image/jpeg, image/jpg, image/png'-->
         <div style="display: flex">
             <input class="form-control" type='file' name='posters' id='posters' required accept='image/jpeg, image/jpg, image/png'>
             <button type="button" class="btn-close" aria-label="Close" id="remove-poster-btn"></button>
@@ -320,7 +239,7 @@ $persons = $personDB->getPersons();
                         option.classList.add('list-group-item', 'list-group-item-action');
                         option.innerHTML = person.first_name + ' ' + person.last_name;
                         option.id = person.id;
-                        option.addEventListener('click', addPersonToList.bind(null, type, perso n.id, person.first_name + ' ' + person.last_name));
+                        option.addEventListener('click', addPersonToList.bind(null, type, person.id, person.first_name + ' ' + person.last_name));
                         personList.appendChild(option);
                     });
                 }
@@ -376,46 +295,46 @@ $persons = $personDB->getPersons();
         let actors = form.querySelectorAll('#actorList .input');
 
         // Le nom ne doit pas être vide, et doit contenir entre 3 et 50 caractères
-        title = title.trim(); if (title.length < 3 || title.length > 50) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-title'] ?>", 'danger'); return false; }
+        title = title.trim(); if (title.length < 3 || title.length > 50) { showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-title'] ?>", 'danger'); return false; }
 
         // La date de sortie ne doit pas être vide, et doit être au format YYYY-MM-DD
-        release_date = release_date.trim(); if (!release_date.match(/^\d{4}-\d{2}-\d{2}$/)) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-release-date'] ?>", 'danger'); return false; }
+        release_date = release_date.trim(); if (!release_date.match(/^\d{4}-\d{2}-\d{2}$/)) { showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-release-date'] ?>", 'danger'); return false; }
 
         // La durée (en minutes) ne doit pas être vide, et doit être un entier positif
-        duration = duration.trim(); if (isNaN(duration) || duration < 0) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-duration'] ?>", 'danger'); return false; }
+        duration = duration.trim(); if (isNaN(duration) || duration < 0) { showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-duration'] ?>", 'danger'); return false; }
 
         // L'affiche ne doit pas être vide, et doit être une image (jpg, jpeg, png)
-        posters = posters.trim(); if (posters.length === 0) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-poster'] ?>", 'danger'); return false; }
+        posters = posters.trim(); if (posters.length === 0) { showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-poster'] ?>", 'danger'); return false; }
 
         // Le synopsis ne doit pas être vide, et doit contenir entre 10 et 500 caractères
-        synopsis = synopsis.trim(); if (synopsis.length < 10 || synopsis.length > 500) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-synopsis'] ?>", 'danger'); return false; }
+        synopsis = synopsis.trim(); if (synopsis.length < 10 || synopsis.length > 500) { showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-synopsis'] ?>", 'danger'); return false; }
 
         // La bande annonce ne doit pas être vide, et doit être une URL valide vers une vidéo (youtube, dailymotion, vimeo)
-        trailer = trailer.trim(); if (!trailer.match(/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|dailymotion\.com|vimeo\.com)\/.+$/)) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-trailer'] ?>", 'danger'); return false; }
+        trailer = trailer.trim(); if (!trailer.match(/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|dailymotion\.com|vimeo\.com)\/.+$/)) { showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-trailer'] ?>", 'danger'); return false; }
 
         // La liste des catégories doit contenir au moins un élément
         let categories = form.querySelectorAll('#category input:checked');
-        if (categories.length === 0) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-tags'] ?>", 'danger'); return false; }
+        if (categories.length === 0) { showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-tags'] ?>", 'danger'); return false; }
 
         // La limite d'âge ne doit pas être vide, et doit être un entier positif entre 0 et 18
-        age_limit = age_limit.trim(); if (isNaN(age_limit) || age_limit < 0 || age_limit > 18) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-age-rating'] ?>", 'danger'); return false; }
+        age_limit = age_limit.trim(); if (isNaN(age_limit) || age_limit < 0 || age_limit > 18) { showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-age-rating'] ?>", 'danger'); return false; }
 
         // Vu doit être un booléen. Si la date de sortie est supérieure à la date actuelle, vu doit être faux
         let release_date_obj = new Date(release_date);
         let seen = form.querySelector('#seen').checked;
-        if (seen && release_date_obj > new Date()) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-seen'] ?>", 'danger'); return false; }
+        if (seen && release_date_obj > new Date()) { showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-seen'] ?>", 'danger'); return false; }
 
         // Tout les acteurs doivent avoir un rôle
         for (let actor of actors)
         {
             let role = actor.querySelector('input[type="text"]');
-            if (role === null || role.value.trim().length === 0) { showFormMsg("<?php echo $GLOBALS['movie-form-exception-actor-role'] ?>", 'danger'); return false; }
+            if (role === null || role.value.trim().length === 0) { showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-actor-role'] ?>", 'danger'); return false; }
         }
 
         return true;
     }
 
-    function showFormMsg(msg, type)
+    function showMovieFormMsg(msg, type)
     {
         let form_msg = document.getElementById('add-movie-form-msg');
         form_msg.innerHTML = '<div class="alert alert-' + type + '" role="alert">' + msg + '</div>';

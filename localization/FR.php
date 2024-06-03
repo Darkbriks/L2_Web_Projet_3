@@ -24,6 +24,7 @@ $GLOBALS['footer-text'] = 'Sources des éléments ...';
 ////////// ADMIN //////////
 // admin.php
 $GLOBALS['admin-movie-success'] = 'Film ajouté avec succès';
+$GLOBALS['admin-person-success'] = 'Personne ajoutée avec succès';
 
 // MovieForm.php
 $GLOBALS['movie-form-title'] = 'Ajouter un film';
@@ -66,6 +67,23 @@ $GLOBALS['movie-form-exception-tags'] = 'Le film doit avoir au moins un tag';
 $GLOBALS['movie-form-exception-age-rating'] = 'La classification du film est obligatoire et doit être un nombre entier positif';
 $GLOBALS['movie-form-exception-seen'] = 'La valeur de \'\'Vu\'\' doit être vraie ou fausse. Le film ne peut pas avoir été vu si il n\'est pas sorti';
 $GLOBALS['movie-form-exception-actor-role'] = 'Le rôle doit être défini pour chaque acteur';
+
+// PersonForm.php
+$GLOBALS['person-form-title'] = 'Ajouter une personne';
+$GLOBALS['person-form-add-person-first-name'] = 'Prénom';
+$GLOBALS['person-form-add-person-last-name'] = 'Nom de famille';
+$GLOBALS['person-form-add-person-birth-date'] = 'Date de naissance';
+$GLOBALS['person-form-add-person-death-date'] = 'Date de décès';
+$GLOBALS['person-form-add-person-image'] = 'Image';
+$GLOBALS['person-form-add-person-submit'] = 'Ajouter';
+$GLOBALS['person-form-exception-adding'] = 'Erreur lors de l\'ajout de la personne dans la base de données';
+$GLOBALS['person-form-exception-first-name'] = 'Le prénom de la personne est obligatoire et doit contenir entre 3 et 50 caractères';
+$GLOBALS['person-form-exception-last-name'] = 'Le nom de famille de la personne est obligatoire et doit contenir entre 3 et 50 caractères';
+$GLOBALS['person-form-exception-birth-date'] = 'La date de naissance de la personne est obligatoire, doit être au format YYYY-MM-DD et doit être une date passée';
+$GLOBALS['person-form-exception-death-date'] = 'La date de décès de la personne doit être vide ou une date passée';
+$GLOBALS['person-form-exception-image'] = 'L\'image de la personne est obligatoire et doit être au format .jpg, .jpeg, ou .png';
+$GLOBALS['person-form-exception-upload'] = 'Erreur lors du téléchargement de l\'image';
+
 
 ////////// ALL MOVIES //////////
 // allMovies.php
