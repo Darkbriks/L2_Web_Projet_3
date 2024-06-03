@@ -13,6 +13,7 @@ $GLOBALS['header-home'] = 'Home';
 $GLOBALS['header-movies'] = 'Movies';
 $GLOBALS['header-peoples'] = 'Peoples';
 $GLOBALS['header-admin'] = 'Admin';
+$GLOBALS['Search'] = 'Search';
 $GLOBALS['header-logout'] = 'Logout';
 $GLOBALS['header-theme'] = 'Theme';
 $GLOBALS['header-language-dropdown-default'] = 'Choose language';
@@ -84,3 +85,38 @@ $GLOBALS['pdo-execute-error'] = 'Error executing the query : ';
 $GLOBALS['ajax-get-data-table-not-valid'] = 'The requested table is not valid. Valid tables are : movies, tag, and person';
 $GLOBALS['ajax-get-data-attribute-value-not-set'] = 'The attribute and/or the value are not set';
 $GLOBALS['ajax-get-data-table-not-set'] = 'The table is not set';
+// addTag.php
+$GLOBALS['tag-add-success'] = 'Tag added successfully';
+$GLOBALS['tag-add-failure'] = 'Tag already exists';
+// get-localized-text.php
+$GLOBALS['error-no-language'] = 'No language provided';
+$GLOBALS['error-text-not-found'] = 'Text not found';
+$GLOBALS['error-no-text'] = 'No text provided';
+// getAllPeoples.php
+$GLOBALS['person-fetch-success'] = 'Successfully fetched persons';
+$GLOBALS['person-fetch-failure'] = 'Failed to fetch persons';
+// getMoviesByTag.php
+$GLOBALS['error-tag-id-missing'] = 'Tag ID is missing';
+// language.php
+$GLOBALS['error-no-method'] = 'No method provided';
+$GLOBALS['error-invalid-method'] = 'Invalid method';
+$GLOBALS['error-no-language'] = 'No language provided';
+$GLOBALS['error-cookie-not-set'] = 'Cookie could not be set';
+// movieFormAddPerson.php
+$GLOBALS['error-person-not-found'] = 'Person not found';
+
+
+// allMovies.php
+$GLOBALS['filter-by-tag'] = 'Filter by tag';
+$GLOBALS['all'] = 'All';
+$GLOBALS['movies'] = 'MOVIES';
+
+
+// allPeople.php
+$GLOBALS['peoples'] = 'PEOPLE';
+
+
+
+
+
+

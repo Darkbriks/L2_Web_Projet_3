@@ -84,3 +84,30 @@ $GLOBALS['pdo-execute-error'] = 'Erreur lors de l\'exécution de la requête : '
 $GLOBALS['ajax-get-data-table-not-valid'] = 'La table demandée n\'est pas valide. Les tables valides sont : movies, tag, et person';
 $GLOBALS['ajax-get-data-attribute-value-not-set'] = 'L\'attribut et/ou la valeur ne sont pas définis';
 $GLOBALS['ajax-get-data-table-not-set'] = 'La table n\'est pas définie';
+// addTag.php
+$GLOBALS['tag-add-success'] = 'Tag ajouté avec succès';
+$GLOBALS['tag-add-failure'] = 'Le tag existe déjà';
+// get-localized-text.php
+$GLOBALS['error-no-language'] = 'Aucune langue fournie';
+$GLOBALS['error-text-not-found'] = 'Texte introuvable';
+$GLOBALS['error-no-text'] = 'Aucun texte fourni';
+// getAllPeoples.php
+$GLOBALS['person-fetch-success'] = 'Personnes récupérées avec succès';
+$GLOBALS['person-fetch-failure'] = 'Échec de la récupération des personnes';
+// getMoviesByTag.php
+$GLOBALS['error-tag-id-missing'] = 'L\'ID du tag est manquant';
+// language.php
+$GLOBALS['error-no-method'] = 'Aucune méthode fournie';
+$GLOBALS['error-invalid-method'] = 'Méthode invalide';
+$GLOBALS['error-no-language'] = 'Aucune langue fournie';
+$GLOBALS['error-cookie-not-set'] = 'Impossible de définir le cookie';
+// movieFormAddPerson.php
+$GLOBALS['error-person-not-found'] = 'Personne non trouvée';
+
+// allMovies.php
+$GLOBALS['filter-by-tag'] = 'Filtrer par tag';
+$GLOBALS['all'] = 'Tous';
+$GLOBALS['movies'] = 'FILMS';
+
+// allPeople.php
+$GLOBALS['peoples'] = 'PERSONNES';
