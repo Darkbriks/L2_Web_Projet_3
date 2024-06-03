@@ -387,6 +387,7 @@ form h2 { text-align: center; }
 /********** movie details page **********/
 .movie-container
 {
+    margin-top: 5vh;
     max-width: 40vw;
     padding: 20px;
     border: 2px solid var(--hight-constrast-color);

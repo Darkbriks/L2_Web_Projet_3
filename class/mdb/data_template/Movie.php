@@ -29,9 +29,9 @@ class Movie
                             <h1>" . $this->title . "</h1>
                             <div class='movie-present-details'>
                                 <p><strong>" . $GLOBALS['movie-release-date'] . ":</strong> " . $this->release_date . "</p>
-                                <p><strong>" . $GLOBALS['movie-time-duration'] . ":</strong> " . $this->time_duration . "</p>
-                                <p><strong>" . $GLOBALS['movie-rating'] . ":</strong> " . $this->rating . "</p>
-                                <p><strong>" . $GLOBALS['movie-note'] . ":</strong> " . $this->note . "</p>   
+                                <p><strong>" . $GLOBALS['movie-time-duration'] . ":</strong> " . $this->time_duration . " " . $GLOBALS['movie-minutes'] . "</p>
+                                <p><strong>" . $GLOBALS['movie-rating'] . ":</strong> " . ($this->rating === 1 ? $GLOBALS['movie-rating-1'] : $this->rating . " " . $GLOBALS['movie-rating-2']) . "</p>
+                                <p><strong>" . $GLOBALS['movie-note'] . ":</strong> " . $this->note . $GLOBALS['movie-max-note'] . "</p>
                                 <p><strong>" . $GLOBALS['movie-vu'] . ":</strong> " . $this->vu . "</p> 
                             </div>
                         </div>
