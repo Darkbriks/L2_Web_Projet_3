@@ -7,12 +7,22 @@
             <label for="username"><?php echo $GLOBALS['login-user']; ?></label>
         </div>
         <div class="input-group mb-3">
-            <input type="password" class="form-control" id="password" name="password" placeholder="<?php echo $GLOBALS['login-password']; ?>">
-            <button type="button" class="btn btn-outline-secondary" id="toggle-password">
-                <i class="fas fa-eye"></i>
-            </button>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="password" name="password" placeholder=<?php echo $GLOBALS['login-password']; ?>>
+                <label for="password"><?php echo $GLOBALS['login-password']; ?></label>
+            </div>
+            <button type="button" class="btn btn-outline-secondary" id="toggle-password"><i class="fas fa-eye"></i></button>
         </div>
         <button type="submit" class="btn btn-primary" id="login-form-submit"><?php echo $GLOBALS['login-submit']; ?></button>
     </form>
 </div>
-<script src="../js/password.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function()
+    {
+        document.getElementById('toggle-password').addEventListener('click', function()
+        {
+            let passwordInput = document.getElementById('password');
+            passwordInput.setAttribute('type', (passwordInput.getAttribute('type') === 'password' ? 'text' : 'password'));
+        });
+    });
+</script>
