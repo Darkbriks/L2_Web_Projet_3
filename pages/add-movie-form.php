@@ -40,8 +40,8 @@ $persons = $personDB->getPersons();
                         <input type="date" class="form-control" id="actor-death_date">
                     </div>
                     <div class="mb-3">
-                        <label for="actor-image" class="form-label">Image</label>
-                        <input type="file" class="form-control" id="actor-image" accept="image/*">
+                        <label for="actor-image_path" class="form-label">Image</label>
+                        <input type="file" class="form-control" id="actor-image_path" accept="image/*">
                     </div>
                     <button type="submit" class="btn btn-primary">Ajouter</button>
                 </form>
@@ -64,10 +64,10 @@ $persons = $personDB->getPersons();
             formData.append('last_name', document.getElementById('actor-last-name').value.trim());
             formData.append('birth_date', document.getElementById('actor-birth_date').value.trim());
             formData.append('death_date', document.getElementById('actor-death_date').value.trim());
-            formData.append('image', document.getElementById('actor-image').files[0]);
+            formData.append('image_path', document.getElementById('actor-image_path').files[0]);
 
 
-            if (formData.get('first_name') && formData.get('last_name') && formData.get('birth_date') && formData.get('death_date') && formData.get('image')) {
+            if (formData.get('first_name') && formData.get('last_name') && formData.get('birth_date') && formData.get('death_date') && formData.get('image_path')) {
                 // Créer une instance de FormData pour envoyer les données
                 let xhr = new XMLHttpRequest();
                 xhr.open('POST', '../ajax/add-actor.php', true);
