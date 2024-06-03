@@ -239,6 +239,7 @@ $persons = $personDB->getPersons();
                         option.classList.add('list-group-item', 'list-group-item-action');
                         option.innerHTML = person.first_name + ' ' + person.last_name;
                         option.id = person.id;
+                        // TODO: Check why click not called
                         option.addEventListener('click', addPersonToList.bind(null, type, person.id, person.first_name + ' ' + person.last_name));
                         personList.appendChild(option);
                     });
@@ -253,6 +254,7 @@ $persons = $personDB->getPersons();
     // TODO: Améliorer le style du bouton de suppression
     function addPersonToList(type, id, name)
     {
+        console.log('Ajout de', name, 'à la liste des', type + 's');
         let personList = document.getElementById(type + 'List');
         personList.querySelectorAll('.input').forEach(function(person)
         {
@@ -279,6 +281,7 @@ $persons = $personDB->getPersons();
         personList.appendChild(person);
         clearOptionList(type);
         document.getElementById(type + 'DataList').value = '';
+        console.log('Personne ajoutée:', id, name);
     }
 
     function removePersonFromList(button) { button.parentElement.remove(); }
