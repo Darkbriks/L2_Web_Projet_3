@@ -217,4 +217,12 @@ class PersonDB extends PdoWrapper
         return $this->execute($query,NULL, "mdb\data_template\Movie");
     }
 
+    public function addPersonAndReturnId($first_name, $last_name, $birth_date, $death_date, $type, $image_path){
+        if ($this->addPerson($first_name, $last_name, $birth_date, $death_date, $type, $image_path))
+        {
+            return $this->pdo->lastInsertId();
+        }
+        return 0;
+    }
+
 }
