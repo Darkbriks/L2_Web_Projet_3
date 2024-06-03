@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-title" href="#"><?php echo $GLOBALS['header-title']; ?></a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
