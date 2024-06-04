@@ -197,7 +197,7 @@ $persons = $personDB->getPersons();
         if (newCategory)
         {
             let xhr = new XMLHttpRequest();
-            xhr.open('POST', '../api/addTag.php', true);
+            xhr.open('POST', '../api/add-tag.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send('tag=' + newCategory);
             xhr.onreadystatechange = function() {
