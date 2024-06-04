@@ -41,7 +41,7 @@ class Movie
                         </div>
                     </div>
                     <div class='movie-present-trailer'>
-                        <iframe src='https://www.youtube.com/embed/hSdieDadgM8?si=UK78JOfJwlKYeziy' title='YouTube video player' allow='clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>
+                        <iframe src='" . $this->trailer_path . "' title='YouTube video player' allow='clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>
                     </div>
                     <div class='movie-present-synopsis'>
                         <h3>" . $GLOBALS['movie-synopsis'] . "</h3>
