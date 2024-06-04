@@ -83,7 +83,7 @@ class TagDB extends PdoWrapper
 
     public function alterTag($id, $name): array
     {
-        $query = "UPDATE person SET name = :name WHERE id = :id";
+        $query = "UPDATE tag SET name = :name WHERE id = :id";
         $params = array(
             ':id' => $id,
             ':name' => $name

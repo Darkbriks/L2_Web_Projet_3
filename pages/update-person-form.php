@@ -5,18 +5,18 @@ $personDB = new PersonDB();
 $persons = $personDB->getPersons(); // Récupère toutes les personnes existantes depuis la base de données
 ?>
 
-    <div class="mb-3"><button type="button" class="btn btn-primary" id="add-person-btn">Modifier une personne</button></div>
+    <div class="mb-3"><button type="button" class="btn btn-primary" id="add-person-btn"><?php echo $GLOBALS['update-person-form-title']; ?></button></div>
 
     <div class="modal fade" id="add-person-modal" tabindex="-1" aria-labelledby="add-person-modal-label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="add-person-modal-label">Modifier une personne</h5>
+                    <h5 class="modal-title" id="add-person-modal-label"><?php echo $GLOBALS['update-person-form-title']; ?></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form method='POST' enctype='multipart/form-data' class="add-person-form">
-                        <label for="person_id">Choisir une personne à mettre à jour :</label>
+                        <label for="person_id"><?php echo $GLOBALS['update-person-form-question']; ?></label>
                         <select name="person_id" id="person_id">
                             <?php foreach ($persons as $person) { ?>
                                 <option value="<?php echo $person->getId(); ?>"><?php echo $person->getFirstName() . " " . $person->getLastName(); ?></option>
@@ -52,38 +52,49 @@ $persons = $personDB->getPersons(); // Récupère toutes les personnes existante
                             <input class="form-control" type='file' name='new_image_path' id='person-image'  accept='image/jpeg, image/jpg, image/png'>
                         </div>
 
-                        <button class="btn btn-primary" id="person-submit"><?php echo $GLOBALS['person-form-add-person-submit']; ?></button>
-                        <input type="submit" name="delete_person" value="Supprimer la personne">
+                        <button class="btn btn-primary" id="person-submit"><?php echo $GLOBALS['update-person-form-submit']; ?></button>
+                        <input type="submit" name="delete_person" value="<?php echo $GLOBALS['delete-person-form']; ?>">
 
                     </form>
                 </div>
             </div>
         </div>
     </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function()
+    {
+        document.getElementById('add-person-btn').addEventListener('click', function()
+        {
+            let add_person_modal = new bootstrap.Modal(document.getElementById('add-person-modal'));
+            add_person_modal.show();
+        });
+    });
+</script>
 
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['person_id'])) {
-
-    $person_id = $_POST['person_id'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($_POST['delete_person'])) {
-    // Vérifier si l'ID du personnage à supprimer est présent dans la requête
+        // Vérifier si l'ID du film à supprimer est présent dans la requête
+        if (isset($_POST['person_id'])) {
+            $movie_id = $_POST['person_id'];
 
-        // Appeler la fonction pour supprimer la personne avec l'ID spécifié
-        $success = $personDB->deletePersonAndRelationsById( $person_id);
+            // Appeler la fonction pour supprimer le film avec l'ID spécifié
+            $success = $personDB->deletePersonAndRelationsById( $_POST['person_id']);
 
-        if (!empty($success)) {
-            echo "Le personnage a été supprimé avec succès.";
-        } else {
-            echo "Une erreur s'est produite lors de la suppression du personnage.";
+            if ($success) {
+                echo "Le personnage a été supprimé avec succès.";
+            } else {
+                echo "Une erreur s'est produite lors de la suppression du personnage.";
+            }
+
+            // Rediriger l'utilisateur vers la même page pour éviter la soumission multiple du formulaire
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
         }
-
-        // Rediriger l'utilisateur vers la même page pour éviter la soumission multiple du formulaire
-        header("Location: " . $_SERVER['PHP_SELF']);
-        exit();
     }
-
     if (
+        isset($_POST['person_id']) &&
         isset($_POST['new_first_name']) &&
         isset($_POST['new_last_name']) &&
         isset($_POST['new_birth_date']) &&
@@ -91,6 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['person_id'])) {
         isset($_FILES['new_image_path'])
     ) {
         // Récupérer les valeurs des champs
+        $person_id = $_POST['person_id'];
         $new_first_name = $_POST['new_first_name'];
         $new_last_name = $_POST['new_last_name'];
         $new_birth_date = $_POST['new_birth_date'];
@@ -122,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['person_id'])) {
             exit();
         }
     }
-    else {
+    else if(isset($_POST['person_id'])) {
         // Afficher un message d'erreur si des champs requis sont manquants
         echo "Tous les champs requis doivent être remplis.";
     }

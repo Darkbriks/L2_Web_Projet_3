@@ -27,6 +27,11 @@ $GLOBALS['admin-movie-success'] = 'Film erfolgreich hinzugefügt';
 
 // MovieForm.php
 $GLOBALS['movie-form-title'] = 'Einen Film hinzufügen';
+$GLOBALS['movie-form-add-movie-image'] = 'Bild';
+$GLOBALS['movie-form-add-movie-score'] = 'Bewertung';
+$GLOBALS['update-movie-form-title'] = 'Wählen Sie einen Film aus, den Sie ändern möchten';
+$GLOBALS['update-movie-form-question'] = 'Diesen Film ändern';
+$GLOBALS['delete-movie-form'] = 'Diesen Film löschen';
 $GLOBALS['movie-form-add-movie-title'] = 'Titel';
 $GLOBALS['movie-form-add-movie-title-placeholder'] = 'Filmtitel eingeben';
 $GLOBALS['movie-form-add-movie-release-date'] = 'Veröffentlichungsdatum';
@@ -67,8 +72,20 @@ $GLOBALS['movie-form-exception-age-rating'] = 'Die Altersfreigabe des Films ist 
 $GLOBALS['movie-form-exception-seen'] = 'Der Filmstatus \'\'gesehen\'\' muss wahr oder falsch sein. Der Film kann nicht gesehen werden, wenn er noch nicht veröffentlicht ist';
 $GLOBALS['movie-form-exception-actor-role'] = 'Die Rolle muss für jeden Schauspieler festgelegt werden';
 
+//update-tag-form.php
+$GLOBALS['update-tag-form-title'] = 'Tag bearbeiten';
+$GLOBALS['update-tag-form-submit'] = 'Bearbeiten';
+$GLOBALS['update-tag-form-name'] = 'Name des Tags';
+$GLOBALS['update-tag-form-question'] = 'Wählen Sie einen Tag zum Aktualisieren aus';
+$GLOBALS['delete-tag-form'] = 'Tag löschen';
+
+
 // PersonForm.php
 $GLOBALS['person-form-title'] = 'Eine Person hinzufügen';
+$GLOBALS['update-person-form-title'] = 'Eine Person ändern';
+$GLOBALS['update-person-form-question'] = 'Wählen Sie eine Person aus, die Sie ändern möchten';
+$GLOBALS['delete-person-form'] = 'Diese Person löschen';
+$GLOBALS['update-person-form-submit']= 'Ändern';
 $GLOBALS['person-form-add-person-first-name'] = 'Vorname';
 $GLOBALS['person-form-add-person-last-name'] = 'Nachname';
 $GLOBALS['person-form-add-person-birth-date'] = 'Geburtsdatum';

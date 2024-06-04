@@ -22,6 +22,17 @@ class PersonDB extends PdoWrapper
 
     public function addPerson($first_name, $last_name, $birth_date, $death_date, $image_path): bool
     {
+         $checkSql = "SELECT COUNT(*) FROM person WHERE first_name = :first_name AND last_name = :last_name AND birth_date = :birth_date";
+         $stmt = $this->pdo->prepare($checkSql);
+         $stmt->execute([
+             ':first_name' => $first_name,
+             ':last_name' => $last_name,
+             ':birth_date' => $birth_date
+         ]);
+
+          if ($stmt->fetchColumn() > 0) {
+               throw new Exception("Person already exists.");
+          }
         $sql = "INSERT INTO person (first_name, last_name, birth_date, death_date ,image_path) VALUES (:first_name, :last_name, :birth_date, :death_date, :image_path)";
         $stmt = $this->pdo->prepare($sql);
 

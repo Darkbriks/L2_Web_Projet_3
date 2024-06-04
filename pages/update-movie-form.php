@@ -6,7 +6,7 @@ $movies = $movieDB->getMovies(); // Récupère tous les films existants depuis l
 ?>
 
 <form method='POST' enctype='multipart/form-data' class="update-movie-form">
-    <label for="movie_id">Choisir un film à mettre à jour :</label>
+    <label for="movie_id"><?php echo $GLOBALS['update-movie-form-title'] ?></label>
     <select name="movie_id" id="movie_id">
         <?php foreach ($movies as $movie) { ?>
             <option value="<?php echo $movie->getId(); ?>"><?php echo $movie->getTitle(); ?></option>
@@ -15,31 +15,31 @@ $movies = $movieDB->getMovies(); // Récupère tous les films existants depuis l
     <!-- Ajoutez les autres champs du formulaire pour permettre à l'utilisateur de modifier les informations du film -->
     <!-- Par exemple, pour mettre à jour le titre du film -->
     <div class="form-floating mb-3">
-        <input class="form-control" type='text' name='new_title' id='new_title' placeholder='Nouveau titre'>
-        <label for='new_title'>Nouveau titre</label>
+        <input class="form-control" type='text' name='new_title' id='new_title' placeholder='<?php echo $GLOBALS['movie-form-add-movie-title-placeholder'] ?>'>
+        <label for='new_title'><?php echo $GLOBALS['movie-form-add-movie-title-placeholder'] ?></label>
     </div>
     <div class="form-floating mb-3">
-        <input class="form-control" type='date' name='new_release_date' id='new_release_date' placeholder='Nouveau release_date'>
-        <label for='new_release_date'>Nouveau release_date</label>
+        <input class="form-control" type='date' name='new_release_date' id='new_release_date' placeholder='<?php echo $GLOBALS['movie-form-add-movie-release-date'] ?>'>
+        <label for='new_release_date'><?php echo $GLOBALS['movie-form-add-movie-release-date'] ?></label>
     </div>
     <div class="form-floating mb-3">
-        <textarea class="form-control" name='new_synopsis' id='new_synopsis' placeholder='Nouveau synopsis'></textarea>
-        <label for='new_synopsis'>Nouveau synopsis</label>
+        <textarea class="form-control" name='new_synopsis' id='new_synopsis' placeholder='<?php echo $GLOBALS['movie-form-add-movie-synopsis-placeholder'] ?>'></textarea>
+        <label for='new_synopsis'><?php echo $GLOBALS['movie-form-add-movie-synopsis'] ?></label>
     </div>
     <div class="form-floating mb-3">
-        <input class="form-control" type='file' name='new_image_path' id='new_image_path' placeholder='Nouveau image_path'>
-        <label for='new_image_path'>Nouveau image_path</label>
+        <input class="form-control" type='file' name='new_image_path' id='new_image_path' placeholder='<?php echo $GLOBALS['movie-form-add-movie-image'] ?>'>
+        <label for='new_image_path'><?php echo $GLOBALS['movie-form-add-movie-image'] ?></label>
     </div>
     <div class="form-floating mb-3">
-        <input class="form-control" type='number' name='new_time_duration' id='new_time_duration' placeholder='Nouveau time_duration'>
-        <label for='new_time_duration'>Nouveau time_duration</label>
+        <input class="form-control" type='number' name='new_time_duration' id='new_time_duration' placeholder='<?php echo $GLOBALS['movie-form-add-movie-duration-placeholder'] ?>'>
+        <label for='new_time_duration'><?php echo $GLOBALS['movie-form-add-movie-duration'] ?></label>
     </div>
     <div class="form-floating mb-3">
-        <input class="form-control" type='number' name='new_note' id='new_note' placeholder='Nouveau new_note'>
-        <label for='new_note'>Nouveau note</label>
+        <input class="form-control" type='number' name='new_note' id='new_note' placeholder='<?php echo $GLOBALS['movie-form-add-movie-score'] ?>'>
+        <label for='new_note'><?php echo $GLOBALS['movie-form-add-movie-score'] ?></label>
     </div>
     <div class="mb-3">
-        <label for='new_rating' hidden>Nouveau rating ?></label>
+        <label for='new_rating' hidden><?php echo $GLOBALS['movie-form-add-movie-age-rating'] ?>></label>
         <select class="form-select" name='new_rating' id='new_rating'>
             <option value=''><?php echo $GLOBALS['movie-form-add-movie-age-rating'] ?></option>
             <option value='1'><?php echo $GLOBALS['movie-form-add-movie-age-rating-all'] ?></option>
@@ -50,24 +50,15 @@ $movies = $movieDB->getMovies(); // Récupère tous les films existants depuis l
         </select>
     </div>
     <div class="form-floating mb-3">
-        <input class="form-control" type='text' name='new_trailer_path' id='new_trailer_path' placeholder='Nouveau trailer_path'>
-        <label for='new_trailer_path'>Nouveau trailer_path</label>
+        <input class="form-control" type='text' name='new_trailer_path' id='new_trailer_path' placeholder='<?php echo $GLOBALS['movie-form-add-movie-trailer-placeholder'] ?>'>
+        <label for='new_trailer_path'><?php echo $GLOBALS['movie-form-add-movie-trailer'] ?></label>
     </div>
-    <input type="submit" value="Mettre à jour le film">
-    <input type="submit" name="delete_movie" value="Supprimer le film">
+    <input type="submit" value="<?php echo $GLOBALS['update-movie-form-question'] ?>">
+    <input type="submit" name="delete_movie" value="<?php echo $GLOBALS['delete-movie-form'] ?>">
 
 
 </form>
-<script>
-    document.addEventListener('DOMContentLoaded', function()
-    {
-        document.getElementById('add-person-btn').addEventListener('click', function()
-        {
-            let add_person_modal = new bootstrap.Modal(document.getElementById('add-person-modal'));
-            add_person_modal.show();
-        });
-    });
-</script>
+
 <?php
 
 // Vérifier si le formulaire a été soumis
@@ -92,20 +83,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['movie_id'])) {
     // Vérifier si les champs requis sont présents
     if (isset($_POST['new_title']) && isset($_POST['new_release_date']) && isset($_POST['new_synopsis']) && isset($_FILES['new_image_path']) && isset($_POST['new_time_duration']) && isset($_POST['new_note']) && isset($_POST['new_rating']) && isset($_POST['new_trailer_path'])) {
         // Récupérer les valeurs des champs
-        $new_title = $_POST['new_title'];
-        $new_release_date = $_POST['new_release_date'];
-        $new_synopsis = $_POST['new_synopsis'];
-        $new_image_path = $_FILES['new_image_path']['name'];
-        $new_image_tmp_path = $_FILES['new_image_path']['tmp_name'];
-        $new_time_duration = $_POST['new_time_duration'];
-        $new_note = $_POST['new_note'];
-        $new_rating = $_POST['new_rating'];
+        $new_title = htmlspecialchars(trim($_POST['new_title']));
+        $new_release_date = htmlspecialchars(trim($_POST['new_release_date']));
+        $new_synopsis = htmlspecialchars(trim($_POST['new_synopsis']));
+        $new_time_duration = htmlspecialchars(trim($_POST['new_time_duration']));
+        $new_note = htmlspecialchars(trim($_POST['new_note']));
+        $new_rating = htmlspecialchars(trim($_POST['new_rating']));
         $new_trailer_path = $_POST['new_trailer_path'];
+        $new_image_name = $_FILES['new_image_path']['name'];
+        $new_image_tmp_path = $_FILES['new_image_path']['tmp_name'];
 
 
         // Traiter l'image si elle a été téléchargée
         $target_dir = "uploads/";
-        $new_image_path = $target_dir . basename($new_image_path);
+        $new_image_path = $target_dir . basename($new_image_name);
 
         // Traiter l'image si elle a été téléchargée
         if ($_FILES['new_image_path']['size'] > 0) {

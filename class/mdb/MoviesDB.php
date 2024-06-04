@@ -29,6 +29,15 @@ class MoviesDB extends PdoWrapper
      */
     private function addMovie($title, $release_date, $synopsis, $vu, $image_path, $time_duration, $note, $trailer_path, $rating): bool
     {
+         $checkSql = "SELECT COUNT(*) FROM movies WHERE title = :title";
+                 $stmt = $this->pdo->prepare($checkSql);
+                 $stmt->execute([
+                     ':title' => $title,
+                 ]);
+         if ($stmt->fetchColumn() > 0) {
+                        throw new Exception("Movie already exists.");
+                   }
+
         $sql = "INSERT INTO movies (title, release_date, synopsis, vu, image_path, time_duration, note, trailer_path, rating) VALUES (:title, :release_date, :synopsis, :vu, :image_path, :time_duration, :note, :trailer_path, :rating)";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([':title' => $title, ':release_date' => $release_date, ':synopsis' => $synopsis, ':vu' => $vu, ':image_path' => $image_path, ':time_duration' => $time_duration, ':note' => $note, ':trailer_path' => $trailer_path, ':rating' => $rating]);

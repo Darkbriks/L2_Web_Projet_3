@@ -26,6 +26,29 @@ class PersonForm
     /**
      * @throws Exception
      */
+    public function alterPerson(int $person_id, array $data, $img_file = null): void
+    {
+        foreach ($data as $key => $value) { $data[$key] = htmlspecialchars(trim($value)); }
+        $data['person-death-date'] = (isset($data['person-death-date'])) ? $data['person-death-date'] : null;
+        $this->checkForm($data, $img_file, true);
+
+        if ($img_file && !empty($img_file['name'])) {
+            try { $data['image-path'] = $this->saveImage($img_file); }
+            catch (Exception $e) { throw new Exception($e->getMessage()); }
+        }
+
+        $this->updateActor($person_id, $data);
+    }
+
+    private function updateActor(int $person_id, array $data): void
+    {
+        $personDB = new PersonDB();
+        $personDB->alterPerson($person_id, $data['person-first-name'], $data['person-last-name'], $data['person-birth-date'], $data['person-death-date'], $data['image-path']);
+    }
+
+    /**
+     * @throws Exception
+     */
     private function saveImage(array $image): string
     {
         $tmp_name = $image['tmp_name'];

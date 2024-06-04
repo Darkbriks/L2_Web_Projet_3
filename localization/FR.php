@@ -29,7 +29,13 @@ $GLOBALS['admin-person-success'] = 'Personne ajoutée avec succès';
 
 // MovieForm.php
 $GLOBALS['movie-form-title'] = 'Ajouter un film';
+
 $GLOBALS['movie-form-add-movie-title'] = 'Titre';
+$GLOBALS['movie-form-add-movie-image'] = 'Image';
+$GLOBALS['movie-form-add-movie-score'] = 'Note';
+$GLOBALS['update-movie-form-title'] = 'Choisir un film à modifier';
+$GLOBALS['update-movie-form-question'] = 'Modifier ce film';
+$GLOBALS['delete-movie-form'] = 'Supprimer ce film';
 $GLOBALS['movie-form-add-movie-title-placeholder'] = 'Entrez le titre du film';
 $GLOBALS['movie-form-add-movie-release-date'] = 'Date de sortie';
 $GLOBALS['movie-form-add-movie-duration'] = 'Durée';
@@ -69,8 +75,20 @@ $GLOBALS['movie-form-exception-age-rating'] = 'La classification du film est obl
 $GLOBALS['movie-form-exception-seen'] = 'La valeur de \'\'Vu\'\' doit être vraie ou fausse. Le film ne peut pas avoir été vu si il n\'est pas sorti';
 $GLOBALS['movie-form-exception-actor-role'] = 'Le rôle doit être défini pour chaque acteur';
 
+//update-tag-form.php
+$GLOBALS['update-tag-form-title']='Modifier un tag';
+$GLOBALS['update-tag-form-submit']='Modifier';
+$GLOBALS['update-tag-form-name']='Nom du tag';
+$GLOBALS['update-tag-form-question']='Choisir un tag à mettre à jour ';
+$GLOBALS['delete-tag-form']='Supprimer le tag';
+
+
 // PersonForm.php
 $GLOBALS['person-form-title'] = 'Ajouter une personne';
+$GLOBALS['update-person-form-title'] = 'Modifier une personne';
+$GLOBALS['update-person-form-question'] = 'Choisissez une personne à modifier';
+$GLOBALS['delete-person-form'] = 'Supprimer cette personne';
+$GLOBALS['update-person-form-submit']= 'Modifier';
 $GLOBALS['person-form-add-person-first-name'] = 'Prénom';
 $GLOBALS['person-form-add-person-last-name'] = 'Nom de famille';
 $GLOBALS['person-form-add-person-birth-date'] = 'Date de naissance';
