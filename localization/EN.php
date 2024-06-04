@@ -76,7 +76,7 @@ $GLOBALS['movie-form-exception-actor-role'] = 'The role must be set for each act
 $GLOBALS['update-tag-form-title'] = 'Edit a tag';
 $GLOBALS['update-tag-form-submit'] = 'Edit';
 $GLOBALS['update-tag-form-name'] = 'Tag name';
-$LANG['update-tag-form-question'] = 'Choose a tag to update';
+$GLOBALS['update-tag-form-question'] = 'Choose a tag to update';
 $GLOBALS['delete-tag-form'] = 'Delete the tag';
 
 
