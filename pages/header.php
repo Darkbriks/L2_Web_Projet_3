@@ -9,11 +9,13 @@
                     <li class="nav-item"><a class="nav-link active" href="all-people.php"><?php echo $GLOBALS['header-peoples']; ?></a></li>
                     <li class="nav-item"><a class="nav-link active" href="admin.php"><?php echo $GLOBALS['header-admin']; ?></a></li>
                     <!-- TODO: ajouter l'attribut "active" uniquement a la page courante -->
-
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="<?php echo $GLOBALS['header-search']; ?>" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit"><?php echo $GLOBALS['header-search']; ?></button>
-                    </form>
+                    <li>
+                        <div class="form-floating">
+                            <input class="form-control form-control-sm" type='text' name='search' id='search' required placeholder='<?php echo $GLOBALS['header-search'] ?>'>
+                            <label for='search'><?php echo $GLOBALS['header-search'] ?></label>
+                            <div class="search-list list-group" id="search-list"></div>
+                        </div>
+                    </li>
                 </ul>
 
                 <div class="d-flex">

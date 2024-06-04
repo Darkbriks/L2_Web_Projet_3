@@ -67,10 +67,16 @@ nav ul {
     display: flex;
 }*/
 
+header
+{
+    height: 84px;
+}
+
 nav
 {
+    height: 84px;
     background-color: var(--primary-color);
-    color: var(--background-color);
+    color: var(--text-color);
 }
 
 .navbar-title
@@ -82,7 +88,16 @@ nav
     margin-right: 2.5vw;
 }
 
+.nav-item { display: flex; align-items: center; }
+
 nav ul li { margin: 5px; }
+
+.list-group
+{
+    position: absolute;
+    top: 75px;
+    right: 0;
+}
 
 /*nav ul li a {
     color: white;

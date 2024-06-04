@@ -38,7 +38,57 @@ class Template
                 });
 
                 document.getElementById('language-button').textContent = '<?php echo $lang ?>';
+
+                document.getElementById('search').addEventListener('input', function() { search(this.value); });
             });
+
+            function search(value)
+            {
+                if (value.length === 0) { document.getElementById("search-list").innerHTML = ''; return; }
+
+                let movies = null;
+                let persons = null;
+
+                fetch('../api/get-data.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'table': 'movies', 'conditionLength': 1, 'attribute0': 'title', 'value0': value, 'limit': 3, 'useLike': true }) })
+                    .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
+                    .then(data => { if (data.success) { movies = JSON.parse(data.data); if (persons !== null) { displaySearchResults(movies, persons); } } else { console.log('Erreur:', data.error); } })
+                    .catch(error => { console.log('Erreur:', error); });
+
+                fetch('../api/get-data.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'table': 'person', 'conditionLength': 2, 'attribute0': 'first_name', 'value0': value, 'attribute1': 'last_name', 'value1': value, 'limit': 3, 'useLike': true }) })
+                    .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
+                    .then(data => { if (data.success) { persons = JSON.parse(data.data); if (movies !== null) { displaySearchResults(movies, persons); } } else { console.log('Erreur:', data.error); } })
+                    .catch(error => { console.log('Erreur:', error); });
+            }
+
+            function displaySearchResults(movies, persons)
+            {
+                let resultList = document.getElementById("search-list");
+                resultList.innerHTML = '';
+
+                movies.forEach(function (movie)
+                {
+                    let option = document.createElement('button');
+                    option.classList.add('list-group-item', 'list-group-item-action');
+                    option.innerHTML = movie.title + ' (' + movie.release_date + ')';
+                    option.id = movie.id;
+                    option.addEventListener('click', function () {
+                        window.location.href = 'movie.php?id=' + movie.id;
+                    });
+                    resultList.appendChild(option);
+                });
+
+                persons.forEach(function (person)
+                {
+                    let option = document.createElement('button');
+                    option.classList.add('list-group-item', 'list-group-item-action');
+                    option.innerHTML = person.first_name + ' ' + person.last_name;
+                    option.id = person.id;
+                    option.addEventListener('click', function () {
+                        window.location.href = 'person.php?id=' + person.id;
+                    });
+                    resultList.appendChild(option);
+                });
+            }
 
             function changeTheme(theme)
             {
