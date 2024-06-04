@@ -5,18 +5,18 @@ $personDB = new PersonDB();
 $persons = $personDB->getPersons(); // Récupère toutes les personnes existantes depuis la base de données
 ?>
 
-    <div class="mb-3"><button type="button" class="btn btn-primary" id="add-person-btn">Modifier une personne</button></div>
+    <div class="mb-3"><button type="button" class="btn btn-primary" id="add-person-btn"><?php echo $GLOBALS['update-person-form-title']; ?></button></div>
 
     <div class="modal fade" id="add-person-modal" tabindex="-1" aria-labelledby="add-person-modal-label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="add-person-modal-label">Modifier une personne</h5>
+                    <h5 class="modal-title" id="add-person-modal-label"><?php echo $GLOBALS['update-person-form-title']; ?></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form method='POST' enctype='multipart/form-data' class="add-person-form">
-                        <label for="person_id">Choisir une personne à mettre à jour :</label>
+                        <label for="person_id"><?php echo $GLOBALS['update-person-form-question']; ?></label>
                         <select name="person_id" id="person_id">
                             <?php foreach ($persons as $person) { ?>
                                 <option value="<?php echo $person->getId(); ?>"><?php echo $person->getFirstName() . " " . $person->getLastName(); ?></option>
@@ -52,8 +52,8 @@ $persons = $personDB->getPersons(); // Récupère toutes les personnes existante
                             <input class="form-control" type='file' name='new_image_path' id='person-image'  accept='image/jpeg, image/jpg, image/png'>
                         </div>
 
-                        <button class="btn btn-primary" id="person-submit"><?php echo $GLOBALS['person-form-add-person-submit']; ?></button>
-                        <input type="submit" name="delete_person" value="Supprimer le film">
+                        <button class="btn btn-primary" id="person-submit"><?php echo $GLOBALS['update-person-form-submit']; ?></button>
+                        <input type="submit" name="delete_person" value="<?php echo $GLOBALS['delete-person-form']; ?>">
 
                     </form>
                 </div>

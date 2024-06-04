@@ -27,6 +27,11 @@ $GLOBALS['admin-movie-success'] = 'Film erfolgreich hinzugefügt';
 
 // MovieForm.php
 $GLOBALS['movie-form-title'] = 'Einen Film hinzufügen';
+$GLOBALS['movie-form-add-movie-image'] = 'Bild';
+$GLOBALS['movie-form-add-movie-score'] = 'Bewertung';
+$GLOBALS['update-movie-form-title'] = 'Wählen Sie einen Film aus, den Sie ändern möchten';
+$GLOBALS['update-movie-form-question'] = 'Diesen Film ändern';
+$GLOBALS['delete-movie-form'] = 'Diesen Film löschen';
 $GLOBALS['movie-form-add-movie-title'] = 'Titel';
 $GLOBALS['movie-form-add-movie-title-placeholder'] = 'Filmtitel eingeben';
 $GLOBALS['movie-form-add-movie-release-date'] = 'Veröffentlichungsdatum';
@@ -69,6 +74,10 @@ $GLOBALS['movie-form-exception-actor-role'] = 'Die Rolle muss für jeden Schausp
 
 // PersonForm.php
 $GLOBALS['person-form-title'] = 'Eine Person hinzufügen';
+$GLOBALS['update-person-form-title'] = 'Eine Person ändern';
+$GLOBALS['update-person-form-question'] = 'Wählen Sie eine Person aus, die Sie ändern möchten';
+$GLOBALS['delete-person-form'] = 'Diese Person löschen';
+$GLOBALS['update-person-form-submit']= 'Ändern';
 $GLOBALS['person-form-add-person-first-name'] = 'Vorname';
 $GLOBALS['person-form-add-person-last-name'] = 'Nachname';
 $GLOBALS['person-form-add-person-birth-date'] = 'Geburtsdatum';

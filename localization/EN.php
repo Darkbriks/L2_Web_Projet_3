@@ -27,6 +27,9 @@ $GLOBALS['admin-movie-success'] = 'Movie successfully added';
 
 // MovieForm.php
 $GLOBALS['movie-form-title'] = 'Add a movie';
+$GLOBALS['update-movie-form-title'] = 'Choose a movie to modify';
+$GLOBALS['update-movie-form-question'] = 'Modify this movie';
+$GLOBALS['delete-movie-form'] = 'Delete this movie';
 $GLOBALS['movie-form-add-movie-title'] = 'Title';
 $GLOBALS['movie-form-add-movie-title-placeholder'] = 'Enter the movie title';
 $GLOBALS['movie-form-add-movie-release-date'] = 'Release date';
@@ -54,6 +57,8 @@ $GLOBALS['movie-form-add-movie-add-composer'] = 'Add a composer';
 $GLOBALS['movie-form-add-movie-seen'] = 'Seen';
 $GLOBALS['movie-form-add-movie-add'] = 'Add';
 $GLOBALS['movie-form-add-movie-cancel'] = 'Cancel';
+$GLOBALS['movie-form-add-movie-image'] = 'Image';
+$GLOBALS['movie-form-add-movie-score'] = 'Score';
 $GLOBALS['movie-form-exception-adding'] = 'Error adding the movie to the database';
 $GLOBALS['movie-form-exception-upload'] = 'Error uploading the poster';
 $GLOBALS['movie-form-exception-title'] = 'The movie title is required and must contain between 3 and 50 characters';
@@ -69,6 +74,10 @@ $GLOBALS['movie-form-exception-actor-role'] = 'The role must be set for each act
 
 // PersonForm.php
 $GLOBALS['person-form-title'] = 'Add a person';
+$GLOBALS['update-person-form-title'] = 'Modify a person';
+$GLOBALS['update-person-form-question'] = 'Choose a person to modify';
+$GLOBALS['delete-person-form'] = 'Delete this person';
+$GLOBALS['update-person-form-submit']= 'Modify';
 $GLOBALS['person-form-add-person-first-name'] = 'First name';
 $GLOBALS['person-form-add-person-last-name'] = 'Last name';
 $GLOBALS['person-form-add-person-birth-date'] = 'Birth date';
