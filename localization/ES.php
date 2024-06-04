@@ -151,6 +151,15 @@ $GLOBALS['login-error'] = 'Nombre de usuario o contraseña incorrectos, por favo
 $GLOBALS['pdo-connect-error'] = 'Error al conectar con la base de datos: ';
 $GLOBALS['pdo-execute-error'] = 'Error al ejecutar la consulta: ';
 
+// MovieDB.php
+$GLOBALS['movie-db-already-exists'] = 'La película existe ya';
+
+// PersonDB.php
+$GLOBALS['person-db-already-exists'] = 'La persona existe ya';
+
+// TagDB.php
+$GLOBALS['tag-db-already-exists'] = 'La etiqueta existe ya';
+
 ////////// AJAX //////////
 // add-tag.php
 $GLOBALS['api-add-tag-error-1'] = 'No se proporcionó ninguna etiqueta';

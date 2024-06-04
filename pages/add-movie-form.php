@@ -211,6 +211,7 @@ $persons = $personDB->getPersons();
                         newCategory.innerHTML = '<input class=\"form-check-input\" type=\"checkbox\" name=\"category[]\" id=\"category_' + response.id + '\" value=\"' + response.id + '\"><label class=\"form-check-label\" for=\"category_' + response.id + '\">' + response.name + '</label>';
                         document.getElementById("category").appendChild(newCategory);
                     }
+                    else { showMovieFormMsg(response.error, 'danger'); }
                 }
             };
         }
@@ -243,7 +244,7 @@ $persons = $personDB->getPersons();
                         personList.appendChild(option);
                     });
                 }
-                else { console.log('Erreur:', response.error); }
+                else { showMovieFormMsg(response.error, 'danger'); }
             }
         }
     }
@@ -338,5 +339,6 @@ $persons = $personDB->getPersons();
     {
         let form_msg = document.getElementById('add-movie-form-msg');
         form_msg.innerHTML = '<div class="alert alert-' + type + '" role="alert">' + msg + '</div>';
+        scroll(0, 0);
     }
 </script>

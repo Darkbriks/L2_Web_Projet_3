@@ -28,29 +28,46 @@ class TagDB extends PdoWrapper
         return $stmt->fetch() !== false;
     }
 
+    /**
+     * @throws Exception
+     */
     public function getTags(): array
     {
         return $this->execute("SELECT * FROM tag", null, "mdb\data_template\Tag");
     }
 
+    /**
+     * @throws Exception
+     */
     public function getTag($id): array
     {
         return $this->execute("SELECT * FROM tag WHERE id = ?", $id, "mdb\data_template\Tag");
     }
 
+    /**
+     * @throws Exception
+     */
     public function getTagByName($name): array
     {
         return $this->execute("SELECT * FROM tag WHERE name = ?", $name, "mdb\data_template\Tag");
     }
 
+    /**
+     * @throws Exception
+     */
     public function addTag($name): int
     {
+        if ($this->tagExist($name)) { throw new Exception($GLOBALS['tag-db-already-exists']); }
+
         $sql = "INSERT INTO tag (name) VALUES (:name)";
         $stmt = $this->pdo->prepare($sql);
         if($stmt->execute([':name' => $name])) { return $this->pdo->lastInsertId(); }
         return 0;
     }
 
+    /**
+     * @throws Exception
+     */
     public function getTagsOfMovie(int $movieId): array
     {
         $query = "SELECT tag.* 
@@ -81,6 +98,9 @@ class TagDB extends PdoWrapper
         return true;
     }
 
+    /**
+     * @throws Exception
+     */
     public function alterTag($id, $name): array
     {
         $query = "UPDATE tag SET name = :name WHERE id = :id";
@@ -91,7 +111,10 @@ class TagDB extends PdoWrapper
         return $this->execute($query, $params, NULL);
     }
 
-    public function alterTag_($tag_alter ,$tag_alter_value, $tag_id) : array
+    /**
+     * @throws Exception
+     */
+    public function alterTag_($tag_alter , $tag_alter_value, $tag_id) : array
     {
         $query = "UPDATE tag SET" . $tag_alter . "= :tag_alter WHERE id = :id";
         return $this->execute($query,array(':tag_alter' => $tag_alter_value,':id' => $tag_id),NULL);
@@ -99,6 +122,7 @@ class TagDB extends PdoWrapper
 
     /**
      * Suppression d'un tag par ID
+     * @throws Exception
      */
     public function deletePersonById($id): array
     {
@@ -106,8 +130,10 @@ class TagDB extends PdoWrapper
         $params = [':id' => $id];
         return $this->execute($query, $params, NULL);
     }
+
     /**
      * Suppression des relations dans movie_tag par ID du tag
+     * @throws Exception
      */
     public function deleteMovieTagByTagId($tag_id): array
     {
@@ -116,11 +142,12 @@ class TagDB extends PdoWrapper
         return $this->execute($query, $params, NULL);
     }
 
-    // Suppression d'une personne et des relations associées
+    /**
+     * @throws Exception
+     */
     public function deleteTagAndRelationsById($id): array
     {
         $this->deleteMovieTagByTagId($id);
         return $this->deletePersonById($id);
     }
-
 }

@@ -151,6 +151,15 @@ $GLOBALS['login-error'] = 'Benutzername oder Passwort falsch, bitte erneut versu
 $GLOBALS['pdo-connect-error'] = 'Fehler beim Verbinden mit der Datenbank: ';
 $GLOBALS['pdo-execute-error'] = 'Fehler beim Ausführen der Abfrage: ';
 
+// MovieDB.php
+$GLOBALS['movie-db-already-exists'] = 'Der Film existiert bereits';
+
+// PersonDB.php
+$GLOBALS['person-db-already-exists'] = 'Die Person existiert bereits';
+
+// TagDB.php
+$GLOBALS['tag-db-already-exists'] = 'Der Tag existiert bereits';
+
 ////////// API //////////
 // add-tag.php
 $GLOBALS['api-add-tag-error-1'] = 'Kein Tag angegeben';

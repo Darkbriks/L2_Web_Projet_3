@@ -24,27 +24,23 @@ class MoviesDB extends PdoWrapper
         return parent::getData($attributes, $values, $and, $limit, $order, $direction, $useLike, $table, "mdb\data_template\Movie");
     }
 
-    /*
-     * Add a movie to the database
+    /**
+     * @throws Exception
      */
     private function addMovie($title, $release_date, $synopsis, $vu, $image_path, $time_duration, $note, $trailer_path, $rating): bool
     {
-         $checkSql = "SELECT COUNT(*) FROM movies WHERE title = :title";
-                 $stmt = $this->pdo->prepare($checkSql);
-                 $stmt->execute([
-                     ':title' => $title,
-                 ]);
-         if ($stmt->fetchColumn() > 0) {
-                        throw new Exception("Movie already exists.");
-                   }
+        $checkSql = "SELECT COUNT(*) FROM movies WHERE title = :title";
+        $stmt = $this->pdo->prepare($checkSql);
+        $stmt->execute([':title' => $title]);
+        if ($stmt->fetchColumn() > 0) { throw new Exception($GLOBALS['movie-db-already-exists']); }
 
         $sql = "INSERT INTO movies (title, release_date, synopsis, vu, image_path, time_duration, note, trailer_path, rating) VALUES (:title, :release_date, :synopsis, :vu, :image_path, :time_duration, :note, :trailer_path, :rating)";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([':title' => $title, ':release_date' => $release_date, ':synopsis' => $synopsis, ':vu' => $vu, ':image_path' => $image_path, ':time_duration' => $time_duration, ':note' => $note, ':trailer_path' => $trailer_path, ':rating' => $rating]);
     }
 
-    /*
-     * Add a movie to the database and return its id. If the movie is not correctly added, return 0.
+    /**
+     * @throws Exception
      */
     public function addMovieAndReturnId($title, $release_date, $synopsis, $vu, $image_path, $time_duration, $note, $trailer_path, $rating): int
     {
@@ -55,34 +51,33 @@ class MoviesDB extends PdoWrapper
         return 0;
     }
 
-    /*
-     * Get all movies from the database
+    /**
+     * @throws Exception
      */
     public function getMovies(): array
     {
         return $this->execute("SELECT * FROM movies", null, "mdb\data_template\Movie");
     }
 
-    /*
-     * Get all movies with a specified id
+    /**
+     * @throws Exception
      */
     public function getMovieById($id): array
     {
         return $this->execute("SELECT * FROM movies WHERE id = :id", ["id" => $id], "mdb\data_template\Movie");
     }
 
-    /*
-     * Get all movies with a specified title
+    /**
+     * @throws Exception
      */
     public function getMovieByTitle($title): array
     {
         return $this->execute("SELECT * FROM movies WHERE title = :title", ["title" => $title], "mdb\data_template\Movie");
     }
 
-    /*
-     * Get all movies with a specified actor
+    /**
+     * @throws Exception
      */
-
     public function getMoviesIDByPerson($firstName, $lastName): array
     {
         $query = "SELECT m.id FROM movies m
@@ -93,6 +88,9 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
     }
 
+    /**
+     * @throws Exception
+     */
     public function getMoviesByPerson($firstName, $lastName): array
     {
         $query = "SELECT m.* FROM movies m
@@ -103,6 +101,9 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
     }
 
+    /**
+     * @throws Exception
+     */
     public function getMoviesIDByActor($firstName, $lastName): array
     {
         $query = "SELECT m.id FROM movies m
@@ -113,6 +114,9 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
     }
 
+    /**
+     * @throws Exception
+     */
     public function getMoviesByActor($firstName, $lastName): array
     {
         $query = "SELECT m.* FROM movies m
@@ -123,8 +127,8 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
     }
 
-    /*
-     * Get all movies with a specified director
+    /**
+     * @throws Exception
      */
     public function getMoviesIDByDirector($firstName, $lastName): array
     {
@@ -136,6 +140,9 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
     }
 
+    /**
+     * @throws Exception
+     */
     public function getMoviesByDirector($firstName, $lastName): array
     {
         $query = "SELECT  m.* FROM movies m
@@ -146,8 +153,8 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
     }
 
-    /*
-     * Get all movies with a specified composer
+    /**
+     * @throws Exception
      */
     public function getMoviesIDByComposer($firstName, $lastName): array
     {
@@ -159,6 +166,9 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
     }
 
+    /**
+     * @throws Exception
+     */
     public function getMoviesByComposer($firstName, $lastName): array
     {
         $query = "SELECT m.id FROM movies m
@@ -169,8 +179,8 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
     }
 
-    /*
-     * Get all movies with minimum rating
+    /**
+     * @throws Exception
      */
     public function getMoviesByMinRating($minRating): array
     {
@@ -178,8 +188,8 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query, array(':minRating' => $minRating), "mdb\data_template\Movie");
     }
 
-    /*
-     * Get all movies with a specified rating
+    /**
+     * @throws Exception
      */
     public function getMoviesByEqualRating($rating): array
     {
@@ -187,6 +197,9 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query, array(':rating' => $rating), "mdb\data_template\Movie");
     }
 
+    /**
+     * @throws Exception
+     */
     public function getMoviesByTag($tag): array
     {
         $query = "SELECT  m.* FROM movies m
@@ -196,6 +209,10 @@ class MoviesDB extends PdoWrapper
 
         return $this->execute($query, array(':tag' => $tag), "mdb\data_template\Movie");
     }
+
+    /**
+     * @throws Exception
+     */
     public function getMoviesBy($release_date = null, $duration = null, $name = null, $note = null, $rating = null, $synopsys): array
     {
         $query = "SELECT * FROM movies WHERE 1=1";
@@ -232,6 +249,9 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query, $params, "mdb\data_template\Movie");
     }
 
+    /**
+     * @throws Exception
+     */
     public function getMoviesBy_Order($condition, $order): array
     {
         $order = ($order) ? "ASC" : "DESC";
@@ -249,13 +269,19 @@ class MoviesDB extends PdoWrapper
         $this->execute($query, array(':seen' => $seen, ':id' => $id), NULL);
     }
 
-    public function alterMovie_($movie_alter ,$movie_alter_value, $movie_id)
+    /**
+     * @throws Exception
+     */
+    public function alterMovie_($movie_alter ,$movie_alter_value, $movie_id): bool|array
     {
         $query = "UPDATE movies SET" . $movie_alter . "= :movie_alter WHERE id = :id";
         return $this->execute($query,array(':movie_alter' => $movie_alter_value,':id' => $movie_id),NULL);
     }
 
-    public function alterMovie($movie_id, $title, $release_date, $synopsis, $image_path, $time_duration, $note, $rating, $trailer_path)
+    /**
+     * @throws Exception
+     */
+    public function alterMovie($movie_id, $title, $release_date, $synopsis, $image_path, $time_duration, $note, $rating, $trailer_path): bool|array
     {
         $query = "UPDATE movies SET title = :title, release_date = :release_date, synopsis = :synopsis, image_path = :image_path, time_duration = :time_duration, note = :note, rating = :rating, trailer_path = :trailer_path WHERE id = :id";
 
@@ -275,7 +301,7 @@ class MoviesDB extends PdoWrapper
     }
 
     /**
-     * Suppression d'un film par ID
+     * @throws Exception
      */
     public function deleteMovieById($id): array
     {
@@ -285,7 +311,7 @@ class MoviesDB extends PdoWrapper
     }
 
     /**
-     * Suppression des relations dans movie_person par ID du film
+     * @throws Exception
      */
     public function deleteMoviePersonByMovieId($movieId): array
     {
@@ -295,7 +321,7 @@ class MoviesDB extends PdoWrapper
     }
 
     /**
-     * Suppression des relations dans movie_tag par ID du film
+     * @throws Exception
      */
     public function deleteMovieTagByMovieId($movieId): array
     {
@@ -304,12 +330,13 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query, $params, NULL);
     }
 
-    // Suppression d'un film et des relations associées
+    /**
+     * @throws Exception
+     */
     public function deleteMovieAndRelationsById($id): array
     {
         $this->deleteMoviePersonByMovieId($id);
         $this->deleteMovieTagByMovieId($id);
         return $this->deleteMovieById($id);
     }
-
 }

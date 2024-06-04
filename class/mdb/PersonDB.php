@@ -20,24 +20,20 @@ class PersonDB extends PdoWrapper
         return parent::getData($attributes, $values, $and, $limit, $order, $direction, $useLike, $table, "mdb\data_template\Person");
     }
 
+    /**
+     * @throws Exception
+     */
     public function addPerson($first_name, $last_name, $birth_date, $death_date, $image_path): bool
     {
-         $checkSql = "SELECT COUNT(*) FROM person WHERE first_name = :first_name AND last_name = :last_name AND birth_date = :birth_date";
-         $stmt = $this->pdo->prepare($checkSql);
-         $stmt->execute([
-             ':first_name' => $first_name,
-             ':last_name' => $last_name,
-             ':birth_date' => $birth_date
-         ]);
+        $checkSql = "SELECT COUNT(*) FROM person WHERE first_name = :first_name AND last_name = :last_name AND birth_date = :birth_date";
+        $stmt = $this->pdo->prepare($checkSql);
+        $stmt->execute([':first_name' => $first_name, ':last_name' => $last_name, ':birth_date' => $birth_date]);
 
-          if ($stmt->fetchColumn() > 0) {
-               throw new Exception("Person already exists.");
-          }
+        if ($stmt->fetchColumn() > 0) {  throw new Exception($GLOBALS['person-db-already-exists']); }
+
         $sql = "INSERT INTO person (first_name, last_name, birth_date, death_date ,image_path) VALUES (:first_name, :last_name, :birth_date, :death_date, :image_path)";
         $stmt = $this->pdo->prepare($sql);
 
-        // Exécuter la requête avec les valeurs fournies
-        // Retourner true/false
         return $stmt->execute([
             ':first_name' => $first_name,
             ':last_name' => $last_name,
@@ -47,12 +43,18 @@ class PersonDB extends PdoWrapper
         ]);
     }
 
+    /**
+     * @throws Exception
+     */
     public function addPersonAndReturnId($first_name, $last_name, $birth_date, $death_date, $image_path): bool|int|string
     {
         if ($this->addPerson($first_name, $last_name, $birth_date, $death_date, $image_path)) { return $this->pdo->lastInsertId(); }
         return 0;
     }
 
+    /**
+     * @throws Exception
+     */
     public function addMovie_Person($movieId, $personId, $playedName, $personType=1): bool
     {
         $query = "INSERT INTO movie_person (movie_id, person_id, played_name, person_type)
@@ -67,6 +69,9 @@ class PersonDB extends PdoWrapper
         return true;
     }
 
+    /**
+     * @throws Exception
+     */
     public function addListOfMovie_Person($list): bool
     {
         foreach ($list as $person)
@@ -76,13 +81,16 @@ class PersonDB extends PdoWrapper
         return true;
     }
 
+    /**
+     * @throws Exception
+     */
     public function addMovie_Director($movie_id, $director_id): bool
     {
         return$this->addMovie_Person($movie_id, $director_id, '', 2);
     }
 
-    /*
-     * Link a list of directors to a movie
+    /**
+     * @throws Exception
      */
     public function addListOfMovie_Director($list): bool
     {
@@ -93,16 +101,16 @@ class PersonDB extends PdoWrapper
         return true;
     }
 
-    /*
-     * Link a music composer to a movie
+    /**
+     * @throws Exception
      */
     public function addMovie_Composer($movie_id, $composer_id): bool
     {
         return $this->addMovie_Person($movie_id, $composer_id, '', 3);
     }
 
-    /*
-     * Link a list of music composers to a movie
+    /**
+     * @throws Exception
      */
     public function addListOfMovie_Composer($list): bool
     {
@@ -113,14 +121,18 @@ class PersonDB extends PdoWrapper
         return true;
     }
 
-    public function getPersons()
+    /**
+     * @throws Exception
+     */
+    public function getPersons(): bool|array
     {
         return $this->execute("SELECT * FROM person", null, "mdb\data_template\Person");
     }
 
-
-    // Méthode pour obtenir uniquement les acteurs
-    public function getActors()
+    /**
+     * @throws Exception
+     */
+    public function getActors(): bool|array
     {
         $query = "SELECT DISTINCT p.* 
                   FROM person p
@@ -130,8 +142,10 @@ class PersonDB extends PdoWrapper
         return $this->execute($query, null, "mdb\data_template\Person");
     }
 
-    // Méthode pour obtenir uniquement les compositeurs
-    public function getComposers()
+    /**
+     * @throws Exception
+     */
+    public function getComposers(): bool|array
     {
         $query = "SELECT DISTINCT p.* 
                   FROM person p
@@ -141,8 +155,10 @@ class PersonDB extends PdoWrapper
         return $this->execute($query, null, "mdb\data_template\Person");
     }
 
-    // Méthode pour obtenir uniquement les réalisateurs
-    public function getDirectors()
+    /**
+     * @throws Exception
+     */
+    public function getDirectors(): bool|array
     {
         $query = "SELECT DISTINCT p.* 
                   FROM person p
@@ -151,12 +167,19 @@ class PersonDB extends PdoWrapper
 
         return $this->execute($query, null, "mdb\data_template\Person");
     }
-    public function getPersonById($id)
+
+    /**
+     * @throws Exception
+     */
+    public function getPersonById($id): bool|array
     {
         return $this->execute("SELECT * FROM person WHERE id = :id", ["id" => $id], "mdb\data_template\Person");
     }
 
-    public function getActorsOfMovie($movieId)
+    /**
+     * @throws Exception
+     */
+    public function getActorsOfMovie($movieId): bool|array
     {
         $query = "SELECT p.*, mp.played_name 
               FROM movie_person mp
@@ -165,7 +188,10 @@ class PersonDB extends PdoWrapper
         return $this->execute($query, array(':movieId' => $movieId), "mdb\data_template\Person");
     }
 
-    public function getDirectorsOfMovie($movieId)
+    /**
+     * @throws Exception
+     */
+    public function getDirectorsOfMovie($movieId): bool|array
     {
         $query = "SELECT p.* 
               FROM movie_person mp
@@ -174,7 +200,10 @@ class PersonDB extends PdoWrapper
         return $this->execute($query, array(':movieId' => $movieId), "mdb\data_template\Person");
     }
 
-    public function getComposersOfMovie($movieId)
+    /**
+     * @throws Exception
+     */
+    public function getComposersOfMovie($movieId): bool|array
     {
         $query = "SELECT p.* 
               FROM movie_person mp
@@ -183,8 +212,10 @@ class PersonDB extends PdoWrapper
         return $this->execute($query, array(':movieId' => $movieId), "mdb\data_template\Person");
     }
 
-
-    public function getMoviesOfPerson($personId, $personType)
+    /**
+     * @throws Exception
+     */
+    public function getMoviesOfPerson($personId, $personType): bool|array
     {
         $query = "SELECT m.* 
               FROM movie_person mp
@@ -194,6 +225,9 @@ class PersonDB extends PdoWrapper
         return $this->execute($query, array(':personId' => $personId, ':personType' => $personType), "mdb\data_template\Movie");
     }
 
+    /**
+     * @throws Exception
+     */
     public function alterPerson($id, $first_name, $last_name, $birth_date, $death_date, $image_path): array
     {
         $query = "UPDATE person SET first_name = :first_name, last_name = :last_name, birth_date = :birth_date, death_date = :death_date, image_path = :image_path WHERE id = :id";
@@ -209,12 +243,18 @@ class PersonDB extends PdoWrapper
     }
 
 
-    public function alterPerson_($person_alter ,$person_alter_value, $person_id)
+    /**
+     * @throws Exception
+     */
+    public function alterPerson_($person_alter ,$person_alter_value, $person_id): bool|array
     {
         $query = "UPDATE person SET" . $person_alter . "= :person_alter WHERE id = :id";
         return $this->execute($query,array(':person_alter' => $person_alter_value,':id' => $person_id),NULL);
     }
 
+    /**
+     * @throws Exception
+     */
     public function getPersonsBy($alive = null, $type = null, $first_name = null,$last_name = null): array
     {
         $query = "SELECT * FROM person WHERE 1=1";
@@ -242,6 +282,9 @@ class PersonDB extends PdoWrapper
         return $this->execute($query, $params, "mdb\data_template\Movie");
     }
 
+    /**
+     * @throws Exception
+     */
     public function getPersonsBy_Order($condition, $order): array
     {
         $order = ($order) ? "ASC" : "DESC";
@@ -251,7 +294,7 @@ class PersonDB extends PdoWrapper
     }
 
     /**
-     * Suppression d'une personne par ID
+     * @throws Exception
      */
     public function deletePersonById($id): array
     {
@@ -261,7 +304,7 @@ class PersonDB extends PdoWrapper
     }
 
     /**
-     * Suppression des relations dans movie_person par ID de la personne
+     * @throws Exception
      */
     public function deleteMoviePersonByPersonId($personId): array
     {
@@ -270,11 +313,12 @@ class PersonDB extends PdoWrapper
         return $this->execute($query, $params, NULL);
     }
 
-    // Suppression d'une personne et des relations associées
+    /**
+     * @throws Exception
+     */
     public function deletePersonAndRelationsById($id): array
     {
         $this->deleteMoviePersonByPersonId($id);
         return $this->deletePersonById($id);
     }
-
 }

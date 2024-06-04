@@ -103,7 +103,7 @@ $GLOBALS['person-form-exception-death-date'] = 'La date de décès de la personn
 $GLOBALS['person-form-exception-image'] = 'L\'image de la personne est obligatoire et doit être au format .jpg, .jpeg, ou .png';
 $GLOBALS['person-form-exception-upload'] = 'Erreur lors du téléchargement de l\'image';
 
-////////// ADVENCED SEARCH //////////
+////////// ADVANCED SEARCH //////////
 // advanced-search-movie.php
 $GLOBALS['advanced-search-movie-modal-title'] = 'Recherche avancée de films';
 $GLOBALS['advanced-search-movie-add-filter'] = 'Ajouter un filtre';
@@ -173,6 +173,15 @@ $GLOBALS['login-error'] = 'Nom d\'utilisateur ou mot de passe incorrect, veuille
 // PdoWrapper.php
 $GLOBALS['pdo-connect-error'] = 'Erreur de connexion à la base de données : ';
 $GLOBALS['pdo-execute-error'] = 'Erreur lors de l\'exécution de la requête : ';
+
+// MovieDB.php
+$GLOBALS['movie-db-already-exists'] = 'Le film existe déjà';
+
+// PersonDB.php
+$GLOBALS['person-db-already-exists'] = 'La personne existe déjà';
+
+// TagDB.php
+$GLOBALS['tag-db-already-exists'] = 'Le tag existe déjà';
 
 ////////// API //////////
 // add-tag.php
