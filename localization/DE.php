@@ -72,6 +72,14 @@ $GLOBALS['movie-form-exception-age-rating'] = 'Die Altersfreigabe des Films ist 
 $GLOBALS['movie-form-exception-seen'] = 'Der Filmstatus \'\'gesehen\'\' muss wahr oder falsch sein. Der Film kann nicht gesehen werden, wenn er noch nicht veröffentlicht ist';
 $GLOBALS['movie-form-exception-actor-role'] = 'Die Rolle muss für jeden Schauspieler festgelegt werden';
 
+//update-tag-form.php
+$GLOBALS['update-tag-form-title'] = 'Tag bearbeiten';
+$GLOBALS['update-tag-form-submit'] = 'Bearbeiten';
+$GLOBALS['update-tag-form-name'] = 'Name des Tags';
+$GLOBALS['update-tag-form-question'] = 'Wählen Sie einen Tag zum Aktualisieren aus';
+$GLOBALS['delete-tag-form'] = 'Tag löschen';
+
+
 // PersonForm.php
 $GLOBALS['person-form-title'] = 'Eine Person hinzufügen';
 $GLOBALS['update-person-form-title'] = 'Eine Person ändern';

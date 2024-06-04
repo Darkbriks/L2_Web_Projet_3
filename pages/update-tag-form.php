@@ -5,18 +5,18 @@ $tagDB = new \mdb\TagDB();
 $tags = $tagDB->getTags(); // Récupère toutes les tag existantes depuis la base de données
 ?>
 
-    <div class="mb-3"><button type="button" class="btn btn-primary" id="add-tag-btn">Modifier un tag</button></div>
+    <div class="mb-3"><button type="button" class="btn btn-primary" id="add-tag-btn"><?php echo $GLOBALS['update-tag-form-title']; ?></button></div>
 
     <div class="modal fade" id="add-tag-modal" tabindex="-1" aria-labelledby="add-tag-modal-label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="add-tag-modal-label">Modifier un tag</h5>
+                    <h5 class="modal-title" id="add-tag-modal-label"><?php echo $GLOBALS['update-tag-form-title']; ?></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form method='POST' enctype='multipart/form-data' class="add-tag-form">
-                        <label for="tag_id">Choisir une tag à mettre à jour :</label>
+                        <label for="tag_id"><?php echo $GLOBALS['update-tag-form-question']; ?></label>
                         <select name="tag_id" id="tag_id">
                             <?php foreach ($tags as $tag) { ?>
                                 <option value="<?php echo $tag->getId(); ?>"><?php echo $tag->getName() ?></option>
@@ -28,17 +28,28 @@ $tags = $tagDB->getTags(); // Récupère toutes les tag existantes depuis la bas
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name='new_name' id="tag-name"  placeholder='<?php echo 'Nom du tag'; ?>'>
-                            <label for="tag-name"><?php echo 'Nom du tag'; ?></label>
+                            <input type="text" class="form-control" name='new_name' id="tag-name"  placeholder='<?php echo $GLOBALS['update-tag-form-name']; ?>'>
+                            <label for="tag-name"><?php echo $GLOBALS['update-tag-form-name']; ?></label>
                         </div>
-                        <button class="btn btn-primary" id="tag-submit"><?php echo $GLOBALS['tag-form-add-tag-submit']; ?></button>
-                        <input type="submit" name="delete_tag" value="Supprimer le tag">
+                        <button class="btn btn-primary" id="tag-submit"><?php echo $GLOBALS['update-tag-form-title']; ?></button>
+                        <input type="submit" name="delete_tag" value="<?php echo $GLOBALS['delete-tag-form']; ?>">
 
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function()
+    {
+        document.getElementById('add-tag-btn').addEventListener('click', function()
+        {
+            let add_person_modal = new bootstrap.Modal(document.getElementById('add-tag-modal'));
+            add_person_modal.show();
+        });
+    });
+</script>
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['tag_id'])) {

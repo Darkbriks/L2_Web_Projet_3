@@ -58,16 +58,7 @@ $movies = $movieDB->getMovies(); // Récupère tous les films existants depuis l
 
 
 </form>
-<script>
-    document.addEventListener('DOMContentLoaded', function()
-    {
-        document.getElementById('add-person-btn').addEventListener('click', function()
-        {
-            let add_person_modal = new bootstrap.Modal(document.getElementById('add-person-modal'));
-            add_person_modal.show();
-        });
-    });
-</script>
+
 <?php
 
 // Vérifier si le formulaire a été soumis
@@ -98,14 +89,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['movie_id'])) {
         $new_time_duration = htmlspecialchars(trim($_POST['new_time_duration']));
         $new_note = htmlspecialchars(trim($_POST['new_note']));
         $new_rating = htmlspecialchars(trim($_POST['new_rating']));
-        $new_trailer_path = filter_var(trim($_POST['new_trailer_path']), FILTER_VALIDATE_URL);
-        $new_image_path = $_FILES['new_image_path']['name'];
+        $new_trailer_path = $_POST['new_trailer_path'];
+        $new_image_name = $_FILES['new_image_path']['name'];
         $new_image_tmp_path = $_FILES['new_image_path']['tmp_name'];
 
 
         // Traiter l'image si elle a été téléchargée
         $target_dir = "uploads/";
-        $new_image_path = $target_dir . basename($new_image_path);
+        $new_image_path = $target_dir . basename($new_image_name);
 
         // Traiter l'image si elle a été téléchargée
         if ($_FILES['new_image_path']['size'] > 0) {

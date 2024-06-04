@@ -60,7 +60,16 @@ $persons = $personDB->getPersons(); // Récupère toutes les personnes existante
             </div>
         </div>
     </div>
-
+<script>
+    document.addEventListener('DOMContentLoaded', function()
+    {
+        document.getElementById('add-person-btn').addEventListener('click', function()
+        {
+            let add_person_modal = new bootstrap.Modal(document.getElementById('add-person-modal'));
+            add_person_modal.show();
+        });
+    });
+</script>
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -125,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
     }
-    else {
+    else if(isset($_POST['person_id'])) {
         // Afficher un message d'erreur si des champs requis sont manquants
         echo "Tous les champs requis doivent être remplis.";
     }

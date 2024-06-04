@@ -72,6 +72,14 @@ $GLOBALS['movie-form-exception-age-rating'] = 'The movie age rating is required 
 $GLOBALS['movie-form-exception-seen'] = 'The movie seen must be true or false. Movie can\'t be seen if it\'s not released yet';
 $GLOBALS['movie-form-exception-actor-role'] = 'The role must be set for each actor';
 
+//update-tag-form.php
+$GLOBALS['update-tag-form-title'] = 'Edit a tag';
+$GLOBALS['update-tag-form-submit'] = 'Edit';
+$GLOBALS['update-tag-form-name'] = 'Tag name';
+$LANG['update-tag-form-question'] = 'Choose a tag to update';
+$GLOBALS['delete-tag-form'] = 'Delete the tag';
+
+
 // PersonForm.php
 $GLOBALS['person-form-title'] = 'Add a person';
 $GLOBALS['update-person-form-title'] = 'Modify a person';

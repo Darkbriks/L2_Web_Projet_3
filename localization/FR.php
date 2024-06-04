@@ -74,6 +74,14 @@ $GLOBALS['movie-form-exception-age-rating'] = 'La classification du film est obl
 $GLOBALS['movie-form-exception-seen'] = 'La valeur de \'\'Vu\'\' doit être vraie ou fausse. Le film ne peut pas avoir été vu si il n\'est pas sorti';
 $GLOBALS['movie-form-exception-actor-role'] = 'Le rôle doit être défini pour chaque acteur';
 
+//update-tag-form.php
+$GLOBALS['update-tag-form-title']='Modifier un tag';
+$GLOBALS['update-tag-form-submit']='Modifier';
+$GLOBALS['update-tag-form-name']='Nom du tag';
+$GLOBALS['update-tag-form-question']='Choisir un tag à mettre à jour ';
+$GLOBALS['delete-tag-form']='Supprimer le tag';
+
+
 // PersonForm.php
 $GLOBALS['person-form-title'] = 'Ajouter une personne';
 $GLOBALS['update-person-form-title'] = 'Modifier une personne';
