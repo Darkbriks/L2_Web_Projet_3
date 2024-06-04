@@ -8,6 +8,7 @@
                     <li class="nav-item"><a class="nav-link active" href="all-movies.php"><?php echo $GLOBALS['header-movies']; ?></a></li>
                     <li class="nav-item"><a class="nav-link active" href="all-people.php"><?php echo $GLOBALS['header-peoples']; ?></a></li>
                     <li class="nav-item"><a class="nav-link active" href="admin.php"><?php echo $GLOBALS['header-admin']; ?></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="advanced-search.php"><?php echo $GLOBALS['header-advanced-search']; ?></a></li>
                     <!-- TODO: ajouter l'attribut "active" uniquement a la page courante -->
                     <li>
                         <div class="form-floating">

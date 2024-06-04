@@ -13,6 +13,7 @@ $GLOBALS['header-home'] = 'Accueil';
 $GLOBALS['header-movies'] = 'Films';
 $GLOBALS['header-peoples'] = 'Peoples';
 $GLOBALS['header-admin'] = 'Admin';
+$GLOBALS['header-advanced-search'] = 'Recherche avancée';
 $GLOBALS['header-search'] = 'Rechercher';
 $GLOBALS['header-logout'] = 'Déconnexion';
 $GLOBALS['header-theme'] = 'Thème';
@@ -84,6 +85,25 @@ $GLOBALS['person-form-exception-death-date'] = 'La date de décès de la personn
 $GLOBALS['person-form-exception-image'] = 'L\'image de la personne est obligatoire et doit être au format .jpg, .jpeg, ou .png';
 $GLOBALS['person-form-exception-upload'] = 'Erreur lors du téléchargement de l\'image';
 
+////////// ADVENCED SEARCH //////////
+// advanced-search-movie.php
+$GLOBALS['advanced-search-movie-modal-title'] = 'Recherche avancée de films';
+$GLOBALS['advanced-search-movie-add-filter'] = 'Ajouter un filtre';
+$GLOBALS['advanced-search-movie-filter-attribute'] = 'Attribut';
+$GLOBALS['advanced-search-movie-filter-value'] = 'Valeur';
+$GLOBALS['advanced-search-movie-filter-remove'] = 'Supprimer';
+$GLOBALS['advanced-search-movie-filter-attribute-choose'] = 'Choisir...';
+$GLOBALS['advanced-search-movie-filter-attribute-title'] = 'Titre';
+$GLOBALS['advanced-search-movie-filter-attribute-release-date'] = 'Date de sortie';
+$GLOBALS['advanced-search-movie-filter-attribute-duration'] = 'Durée';
+$GLOBALS['advanced-search-movie-filter-attribute-synopsis'] = 'Synopsis';
+$GLOBALS['advanced-search-movie-filter-attribute-trailer'] = 'Bande-annonce';
+$GLOBALS['advanced-search-movie-filter-attribute-tags'] = 'Tags';
+$GLOBALS['advanced-search-movie-filter-attribute-age-rating'] = 'Classification';
+$GLOBALS['advanced-search-movie-filter-attribute-directors'] = 'Réalisateur(s)';
+$GLOBALS['advanced-search-movie-filter-attribute-actors'] = 'Acteur(s)';
+$GLOBALS['advanced-search-movie-filter-attribute-composers'] = 'Compositeur(s)';
+$GLOBALS['advanced-search-movie-filter-attribute-seen'] = 'Vu';
 
 ////////// ALL MOVIES //////////
 // allMovies.php
