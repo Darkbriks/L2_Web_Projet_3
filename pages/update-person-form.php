@@ -53,7 +53,7 @@ $persons = $personDB->getPersons(); // Récupère toutes les personnes existante
                         </div>
 
                         <button class="btn btn-primary" id="person-submit"><?php echo $GLOBALS['person-form-add-person-submit']; ?></button>
-                        <input type="submit" name="delete_person" value="Supprimer le film">
+                        <input type="submit" name="delete_person" value="Supprimer la personne">
 
                     </form>
                 </div>
@@ -61,13 +61,29 @@ $persons = $personDB->getPersons(); // Récupère toutes les personnes existante
         </div>
     </div>
 
-
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['person_id'])) {
 
+    $person_id = $_POST['person_id'];
+
+    if (isset($_POST['delete_person'])) {
+    // Vérifier si l'ID du personnage à supprimer est présent dans la requête
+
+        // Appeler la fonction pour supprimer la personne avec l'ID spécifié
+        $success = $personDB->deletePersonAndRelationsById( $person_id);
+
+        if (!empty($success)) {
+            echo "Le personnage a été supprimé avec succès.";
+        } else {
+            echo "Une erreur s'est produite lors de la suppression du personnage.";
+        }
+
+        // Rediriger l'utilisateur vers la même page pour éviter la soumission multiple du formulaire
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
+    }
 
     if (
-        isset($_POST['person_id']) &&
         isset($_POST['new_first_name']) &&
         isset($_POST['new_last_name']) &&
         isset($_POST['new_birth_date']) &&
@@ -75,7 +91,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         isset($_FILES['new_image_path'])
     ) {
         // Récupérer les valeurs des champs
-        $person_id = $_POST['person_id'];
         $new_first_name = $_POST['new_first_name'];
         $new_last_name = $_POST['new_last_name'];
         $new_birth_date = $_POST['new_birth_date'];
@@ -103,25 +118,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 echo "Une erreur s'est produite lors de la mise à jour des informations de la personne.";
             }
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit();
-        }
-    }
-    else if (isset($_POST['delete_person'])) {
-        // Vérifier si l'ID du film à supprimer est présent dans la requête
-        if (isset($_POST['person_id'])) {
-            $movie_id = $_POST['person_id'];
-
-            // Appeler la fonction pour supprimer le film avec l'ID spécifié
-            $success = $personDB->deletePersonAndRelationsById( $_POST['person_id']);
-
-            if ($success) {
-                echo "Le personnage a été supprimé avec succès.";
-            } else {
-                echo "Une erreur s'est produite lors de la suppression du personnage.";
-            }
-
-            // Rediriger l'utilisateur vers la même page pour éviter la soumission multiple du formulaire
             header("Location: " . $_SERVER['PHP_SELF']);
             exit();
         }

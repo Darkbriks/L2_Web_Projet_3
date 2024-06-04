@@ -268,7 +268,7 @@ class MoviesDB extends PdoWrapper
     /**
      * Suppression d'un film par ID
      */
-    public function deleteMovieById($id): bool
+    public function deleteMovieById($id): array
     {
         $query = "DELETE FROM movies WHERE id = :id";
         $params = [':id' => $id];
@@ -278,7 +278,7 @@ class MoviesDB extends PdoWrapper
     /**
      * Suppression des relations dans movie_person par ID du film
      */
-    public function deleteMoviePersonByMovieId($movieId): bool
+    public function deleteMoviePersonByMovieId($movieId): array
     {
         $query = "DELETE FROM movie_person WHERE movie_id = :movieId";
         $params = [':movieId' => $movieId];
@@ -288,7 +288,7 @@ class MoviesDB extends PdoWrapper
     /**
      * Suppression des relations dans movie_tag par ID du film
      */
-    public function deleteMovieTagByMovieId($movieId): bool
+    public function deleteMovieTagByMovieId($movieId): array
     {
         $query = "DELETE FROM movie_tag WHERE movie_id = :movieId";
         $params = [':movieId' => $movieId];
@@ -296,7 +296,7 @@ class MoviesDB extends PdoWrapper
     }
 
     // Suppression d'un film et des relations associées
-    public function deleteMovieAndRelationsById($id): bool
+    public function deleteMovieAndRelationsById($id): array
     {
         $this->deleteMoviePersonByMovieId($id);
         $this->deleteMovieTagByMovieId($id);

@@ -42,6 +42,7 @@ if (isset($_SESSION['admin']) && $_SESSION['admin'])
     }
     else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'edit'){
         include "update-person-form.php";
+        include "update-tag-form.php";
         include "update-movie-form.php";
     }
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title']))
@@ -67,6 +68,7 @@ if (isset($_SESSION['admin']) && $_SESSION['admin'])
         catch (Exception $e) { ?><script> document.addEventListener('DOMContentLoaded', function() { set_user_msg("<?php echo $e->getMessage(); ?>", 'danger'); }); </script><?php }
     }
     include "update-person-form.php";
+    include "update-tag-form.php";
     include "update-movie-form.php";
 }
 else { include "login.php"; }
