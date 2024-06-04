@@ -52,11 +52,11 @@ function renderMovies(movies)
                     "<p class='movie-synopsis'>" + movie.synopsis + "</p>";
 
             html += "<p class='movie-director'><strong>Réalisateur :</strong> ";
-            for (let i = 0; i < directors.length; i++) { html += "<a href='../pages/person.php?id=" + directors[i].id + "'>" + directors[i].full_name + "</a>"; }
+            for (let i = 0; i < directors.length; i++) { html += "<a href='../pages/person.php?id=" + directors[i].id + "'>" + directors[i].full_name + "</a> "; }
             html += "</p><p class='movie-actor'><strong>Acteurs :</strong> ";
-            for (let i = 0; i < actors.length; i++) { html += "<a href='../pages/person.php?id=" + actors[i].id + "'>" + actors[i].full_name + "</a>"; }
+            for (let i = 0; i < actors.length; i++) { html += "<a href='../pages/person.php?id=" + actors[i].id + "'>" + actors[i].full_name + "</a> "; }
             html += "</p><p class='movie-composer'><strong>Compositeurs :</strong> ";
-            for (let i = 0; i < composers.length; i++) { html += "<a href='../pages/person.php?id=" + composers[i].id + "'>" + composers[i].full_name + "</a>"; }
+            for (let i = 0; i < composers.length; i++) { html += "<a href='../pages/person.php?id=" + composers[i].id + "'>" + composers[i].full_name + "</a> "; }
 
             html += "</p><p class='movie-tags'><strong>Tags :</strong> " + movie.tags.join(', ') + "</p>" +
                     "<p class='movie-status'><strong>Status :</strong> " + (movie.vu ? 'Vu' : 'Non vu') + "</p>" +
