@@ -242,7 +242,7 @@ class PersonDB extends PdoWrapper
     /**
      * Suppression d'une personne par ID
      */
-    public function deletePersonById($id): bool
+    public function deletePersonById($id): array
     {
         $query = "DELETE FROM person WHERE id = :id";
         $params = [':id' => $id];
@@ -252,7 +252,7 @@ class PersonDB extends PdoWrapper
     /**
      * Suppression des relations dans movie_person par ID de la personne
      */
-    public function deleteMoviePersonByPersonId($personId): bool
+    public function deleteMoviePersonByPersonId($personId): array
     {
         $query = "DELETE FROM movie_person WHERE person_id = :personId";
         $params = [':personId' => $personId];
@@ -260,7 +260,7 @@ class PersonDB extends PdoWrapper
     }
 
     // Suppression d'une personne et des relations associées
-    public function deletePersonAndRelationsById($id): bool
+    public function deletePersonAndRelationsById($id): array
     {
         $this->deleteMoviePersonByPersonId($id);
         return $this->deletePersonById($id);

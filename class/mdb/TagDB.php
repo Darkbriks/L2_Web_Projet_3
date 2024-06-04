@@ -81,10 +81,46 @@ class TagDB extends PdoWrapper
         return true;
     }
 
-    public function alterTag_($tag_alter ,$tag_alter_value, $tag_id)
+    public function alterTag($id, $name): array
+    {
+        $query = "UPDATE person SET name = :name WHERE id = :id";
+        $params = array(
+            ':id' => $id,
+            ':name' => $name
+        );
+        return $this->execute($query, $params, NULL);
+    }
+
+    public function alterTag_($tag_alter ,$tag_alter_value, $tag_id) : array
     {
         $query = "UPDATE tag SET" . $tag_alter . "= :tag_alter WHERE id = :id";
         return $this->execute($query,array(':tag_alter' => $tag_alter_value,':id' => $tag_id),NULL);
+    }
+
+    /**
+     * Suppression d'un tag par ID
+     */
+    public function deletePersonById($id): array
+    {
+        $query = "DELETE FROM tag WHERE id = :id";
+        $params = [':id' => $id];
+        return $this->execute($query, $params, NULL);
+    }
+    /**
+     * Suppression des relations dans movie_tag par ID du tag
+     */
+    public function deleteMovieTagByTagId($tag_id): array
+    {
+        $query = "DELETE FROM movie_tag WHERE tag_id = :tag_id";
+        $params = [':tag_id' => $tag_id];
+        return $this->execute($query, $params, NULL);
+    }
+
+    // Suppression d'une personne et des relations associées
+    public function deleteTagAndRelationsById($id): array
+    {
+        $this->deleteMovieTagByTagId($id);
+        return $this->deletePersonById($id);
     }
 
 }

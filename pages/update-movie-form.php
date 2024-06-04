@@ -71,12 +71,27 @@ $movies = $movieDB->getMovies(); // Récupère tous les films existants depuis l
 <?php
 
 // Vérifier si le formulaire a été soumis
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['movie_id'])) {
+
+    $movie_id = $_POST['movie_id'];
+    if (isset($_POST['delete_movie'])) {
+        // Appeler la fonction pour supprimer le film avec l'ID spécifié
+        $success = $movieDB->deleteMovieAndRelationsById($movie_id);
+
+        if (!empty($success)) {
+            echo "Le film a été supprimé avec succès.";
+        } else {
+            echo "Une erreur s'est produite lors de la suppression du film.";
+        }
+
+        // Rediriger l'utilisateur vers la même page pour éviter la soumission multiple du formulaire
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
+    }
 
     // Vérifier si les champs requis sont présents
-    if (isset($_POST['movie_id']) && isset($_POST['new_title']) && isset($_POST['new_release_date']) && isset($_POST['new_synopsis']) && isset($_FILES['new_image_path']) && isset($_POST['new_time_duration']) && isset($_POST['new_note']) && isset($_POST['new_rating']) && isset($_POST['new_trailer_path'])) {
+    if (isset($_POST['new_title']) && isset($_POST['new_release_date']) && isset($_POST['new_synopsis']) && isset($_FILES['new_image_path']) && isset($_POST['new_time_duration']) && isset($_POST['new_note']) && isset($_POST['new_rating']) && isset($_POST['new_trailer_path'])) {
         // Récupérer les valeurs des champs
-        $movie_id = $_POST['movie_id'];
         $new_title = $_POST['new_title'];
         $new_release_date = $_POST['new_release_date'];
         $new_synopsis = $_POST['new_synopsis'];
@@ -107,25 +122,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Une erreur s'est produite lors de la mise à jour des informations du film.";
             }
 
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit();
-        }
-    }
-    else if (isset($_POST['delete_movie'])) {
-        // Vérifier si l'ID du film à supprimer est présent dans la requête
-        if (isset($_POST['movie_id'])) {
-            $movie_id = $_POST['movie_id'];
-
-            // Appeler la fonction pour supprimer le film avec l'ID spécifié
-            $success = $movieDB->deleteMovieAndRelationsById( $_POST['movie_id']);
-
-            if ($success) {
-                echo "Le film a été supprimé avec succès.";
-            } else {
-                echo "Une erreur s'est produite lors de la suppression du film.";
-            }
-
-            // Rediriger l'utilisateur vers la même page pour éviter la soumission multiple du formulaire
             header("Location: " . $_SERVER['PHP_SELF']);
             exit();
         }
