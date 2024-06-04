@@ -6,8 +6,8 @@ require_once $GLOBALS['PDO_WRAPPER'];
 require ".." . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR . "Autoloader.php";
 Autoloader::register();
 
-//$lang = Cookies::get('language');
-$lang = $GLOBALS['CURRENT_LANGUAGE'];
+session_start();
+$lang = $_SESSION['language'] ?? 'EN';
 require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
 ?>

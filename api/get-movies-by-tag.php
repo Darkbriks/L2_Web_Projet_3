@@ -2,7 +2,10 @@
 require_once "../config.php";
 require_once "../DB_CREDENTIALS.php";
 require_once $GLOBALS['PDO_WRAPPER'];
-require_once $GLOBALS['LOCALIZATION_DIR'] . $GLOBALS['CURRENT_LANGUAGE'] . '.php';
+
+session_start();
+$lang = $_SESSION['language'] ?? 'EN';
+require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
 require ".." . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR . "Autoloader.php";
 Autoloader::register();

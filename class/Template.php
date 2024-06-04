@@ -3,8 +3,7 @@ class Template
 {
     public static function render(string $content) : void
     {
-        //$lang = Cookies::get('language');
-        $lang = $GLOBALS['CURRENT_LANGUAGE'];
+        $lang = $_SESSION['language'] ?? 'EN';
         require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
         ?>
         <!doctype html>
@@ -53,7 +52,7 @@ class Template
             function setLanguage(newLanguage)
             {
                 let xhr = new XMLHttpRequest();
-                xhr.open('POST', '../ajax/language.php', true);
+                xhr.open('POST', '../api/language.php', true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 xhr.send('method=set&language=' + newLanguage);
                 xhr.onreadystatechange = function()

@@ -7,11 +7,9 @@ require_once "../DB_CREDENTIALS.php";
 require ".." . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR . "Autoloader.php";
 Autoloader::register();
 
-//$lang = Cookies::get('language');
-$lang = $GLOBALS['CURRENT_LANGUAGE'];
-require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
-
 session_start();
+$lang = $_SESSION['language'] ?? 'EN';
+require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
 if (isset($_POST['username']) || isset($_POST['password']))
 {
