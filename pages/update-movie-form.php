@@ -92,15 +92,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['movie_id'])) {
     // Vérifier si les champs requis sont présents
     if (isset($_POST['new_title']) && isset($_POST['new_release_date']) && isset($_POST['new_synopsis']) && isset($_FILES['new_image_path']) && isset($_POST['new_time_duration']) && isset($_POST['new_note']) && isset($_POST['new_rating']) && isset($_POST['new_trailer_path'])) {
         // Récupérer les valeurs des champs
-        $new_title = $_POST['new_title'];
-        $new_release_date = $_POST['new_release_date'];
-        $new_synopsis = $_POST['new_synopsis'];
+        $new_title = htmlspecialchars(trim($_POST['new_title']));
+        $new_release_date = htmlspecialchars(trim($_POST['new_release_date']));
+        $new_synopsis = htmlspecialchars(trim($_POST['new_synopsis']));
+        $new_time_duration = htmlspecialchars(trim($_POST['new_time_duration']));
+        $new_note = htmlspecialchars(trim($_POST['new_note']));
+        $new_rating = htmlspecialchars(trim($_POST['new_rating']));
+        $new_trailer_path = filter_var(trim($_POST['new_trailer_path']), FILTER_VALIDATE_URL);
         $new_image_path = $_FILES['new_image_path']['name'];
         $new_image_tmp_path = $_FILES['new_image_path']['tmp_name'];
-        $new_time_duration = $_POST['new_time_duration'];
-        $new_note = $_POST['new_note'];
-        $new_rating = $_POST['new_rating'];
-        $new_trailer_path = $_POST['new_trailer_path'];
 
 
         // Traiter l'image si elle a été téléchargée

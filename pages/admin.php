@@ -35,7 +35,7 @@ $action = $_SESSION['action'] ?? null;
 if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
     <!-- TODO: Ajouter les deux boutons "Ajouter" et "Modifier" -->
     <form method="POST" enctype="multipart/form-data">
-        <!-- Vos champs de formulaire ici -->
+        <!-- Vos champs de formulaire ici-->
 
         <div class="mb-3">
             <button type="submit" name="action" value="add" class="btn btn-success">Ajouter</button>
@@ -79,6 +79,7 @@ if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
 } else {
     include "login.php";
 }
+
 ?>
 
 <?php $content = ob_get_clean(); ?>
