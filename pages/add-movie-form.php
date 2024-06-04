@@ -197,7 +197,7 @@ $persons = $personDB->getPersons();
         if (newCategory)
         {
             let xhr = new XMLHttpRequest();
-            xhr.open('POST', '../ajax/addTag.php', true);
+            xhr.open('POST', '../api/addTag.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.send('tag=' + newCategory);
             xhr.onreadystatechange = function() {
@@ -220,7 +220,7 @@ $persons = $personDB->getPersons();
     {
         // TODO: Ajouter la possibilité de créer une personne si elle n'existe pas
         let xhr = new XMLHttpRequest();
-        xhr.open('POST', '../ajax/get-data.php', true);
+        xhr.open('POST', '../api/get-data.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send('table=person&conditionLength=2&attribute0=first_name&attribute1=last_name&value0=' + value + '&value1=' + value + '&and=false&limit=5&useLike=true');
         xhr.onreadystatechange = function()

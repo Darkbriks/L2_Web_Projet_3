@@ -231,6 +231,15 @@ class MoviesDB extends PdoWrapper
         return $this->execute($query,NULL, "mdb\data_template\Movie");
     }
 
+    /**
+     * @throws Exception
+     */
+    public function setSeen($id, $seen): void
+    {
+        $query = "UPDATE movies SET vu = :seen WHERE id = :id";
+        $this->execute($query, array(':seen' => $seen, ':id' => $id), NULL);
+    }
+
     public function alterMovie_($movie_alter ,$movie_alter_value, $movie_id)
     {
         $query = "UPDATE movies SET" . $movie_alter . "= :movie_alter WHERE id = :id";

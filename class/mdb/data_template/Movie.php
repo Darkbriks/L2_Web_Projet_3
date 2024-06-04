@@ -32,7 +32,11 @@ class Movie
                                 <p><strong>" . $GLOBALS['movie-time-duration'] . ":</strong> " . $this->time_duration . " " . $GLOBALS['movie-minutes'] . "</p>
                                 <p><strong>" . $GLOBALS['movie-rating'] . ":</strong> " . ($this->rating === 1 ? $GLOBALS['movie-rating-1'] : $this->rating . " " . $GLOBALS['movie-rating-2']) . "</p>
                                 <p><strong>" . $GLOBALS['movie-note'] . ":</strong> " . $this->note . $GLOBALS['movie-max-note'] . "</p>
-                                <p><strong>" . $GLOBALS['movie-vu'] . ":</strong> " . $this->vu . "</p> 
+                                <div class='movie-present-checkbox'>
+                                    <label class='form-check-label' for='seen'><strong>" . $GLOBALS['movie-vu'] . ": </strong></label>
+                                    <input class='form-check-input' type='checkbox' name='seen' id='seen' " . ($this->vu ? 'checked' : '') . " disabled>
+                                    <button class='btn btn-outline-secondary btn-sm' id='edit-vu'>" . $GLOBALS['movie-edit-vu'] . "</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -43,7 +47,42 @@ class Movie
                         <h3>" . $GLOBALS['movie-synopsis'] . "</h3>
                         <p>" . $this->synopsis . "</p>
                     </div>
-                </div>";
+                </div>
+                <script>
+                    document.getElementById('edit-vu').addEventListener('click', function()
+                    {
+                        if (document.getElementById('seen').disabled === false)
+                        {
+                            document.getElementById('seen').disabled = true;
+                            document.getElementById('edit-vu').innerText = '" . $GLOBALS['movie-edit-vu'] . "';
+                            saveVu();
+                        }
+                        else
+                        {
+                            document.getElementById('seen').disabled = false;
+                            document.getElementById('edit-vu').innerText = '" . $GLOBALS['movie-save-vu'] . "';
+                        }
+                    });
+                    
+                    function saveVu()
+                    {
+                        fetch('../api/set-seen.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'id': '" . $this->id . "', 'seen': document.getElementById('seen').checked.toString() }) })
+                            .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
+                            .then(data => { if (data.success) { set_msg(data.data, 'success'); } else { set_msg(data.error, 'danger'); } })
+                            .catch(error => { set_msg(error, 'danger'); });
+                    }
+                    
+                    function set_msg(msg, type)
+                    {
+                        let movieContainer = document.querySelector('.movie-container');
+                        let userMsg = document.createElement('div');
+                        userMsg.classList.add('alert', 'alert-' + type);
+                        userMsg.innerText = msg;
+                        movieContainer.prepend(userMsg);
+                        setTimeout(() => { userMsg.remove(); }, 5000);
+                    }
+                </script>
+                ";
     }
 
     public function getHtml_list()

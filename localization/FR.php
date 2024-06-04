@@ -109,6 +109,8 @@ $GLOBALS['movie-minutes'] = 'minutes';
 $GLOBALS['movie-rating-1'] = 'Tout public';
 $GLOBALS['movie-rating-2'] = 'ans et plus';
 $GLOBALS['movie-max-note'] = '/20';
+$GLOBALS['movie-edit-vu'] = 'Modifier';
+$GLOBALS['movie-save-vu'] = 'Sauvegarder';
 $GLOBALS['movie-synopsis'] = 'Synopsis';
 $GLOBALS['movie-directors'] = 'Réalisateur(s)';
 $GLOBALS['movie-actors'] = 'Acteur(s)';
@@ -134,26 +136,31 @@ $GLOBALS['login-error'] = 'Nom d\'utilisateur ou mot de passe incorrect, veuille
 $GLOBALS['pdo-connect-error'] = 'Erreur de connexion à la base de données : ';
 $GLOBALS['pdo-execute-error'] = 'Erreur lors de l\'exécution de la requête : ';
 
-////////// AJAX //////////
+////////// API //////////
 // add-tag.php
-$GLOBALS['ajax-add-tag-error-1'] = 'Aucun tag fourni';
-$GLOBALS['ajax-add-tag-error-2'] = 'Erreur lors de l\'ajout du tag. Veuillez vous assurer que le tag n\'existe pas déjà';
+$GLOBALS['api-add-tag-error-1'] = 'Aucun tag fourni';
+$GLOBALS['api-add-tag-error-2'] = 'Erreur lors de l\'ajout du tag. Veuillez vous assurer que le tag n\'existe pas déjà';
 
 // get-data.php
-$GLOBALS['ajax-get-data-table-not-valid'] = 'La table demandée n\'est pas valide. Les tables valides sont : movies, tag, et person';
-$GLOBALS['ajax-get-data-attribute-value-not-set'] = 'L\'attribut et/ou la valeur ne sont pas définis';
-$GLOBALS['ajax-get-data-table-not-set'] = 'La table n\'est pas définie';
+$GLOBALS['api-get-data-table-not-valid'] = 'La table demandée n\'est pas valide. Les tables valides sont : movies, tag, et person';
+$GLOBALS['api-get-data-attribute-value-not-set'] = 'L\'attribut et/ou la valeur ne sont pas définis';
+$GLOBALS['api-get-data-table-not-set'] = 'La table n\'est pas définie';
 
 // get-localized-text.php
-$GLOBALS['ajax-get-localized-text-error-1'] = 'Aucune langue fournie';
-$GLOBALS['ajax-get-localized-text-error-2'] = 'Texte introuvable';
-$GLOBALS['ajax-get-localized-text-error-3'] = 'Aucun texte fourni';
+$GLOBALS['api-get-localized-text-error-1'] = 'Aucune langue fournie';
+$GLOBALS['api-get-localized-text-error-2'] = 'Texte introuvable';
+$GLOBALS['api-get-localized-text-error-3'] = 'Aucun texte fourni';
 
-// getMoviesByTag.php
-$GLOBALS['ajax-get-movies-by-tag-error-1'] = 'ID de tag manquant';
+// get-movies-by-tag.php
+$GLOBALS['api-get-movies-by-tag-error-1'] = 'ID de tag manquant';
 
 // language.php
-$GLOBALS['ajax-language-error-1'] = 'Aucune méthode fournie';
-$GLOBALS['ajax-language-error-2'] = 'Méthode invalide';
-$GLOBALS['ajax-language-error-3'] = 'Langue invalide';
-$GLOBALS['ajax-language-error-4'] = 'Erreur lors du changement de langue';
+$GLOBALS['api-language-error-1'] = 'Aucune méthode fournie';
+$GLOBALS['api-language-error-2'] = 'Méthode invalide';
+$GLOBALS['api-language-error-3'] = 'Langue invalide';
+$GLOBALS['api-language-error-4'] = 'Erreur lors du changement de langue';
+
+// set-seen.php
+$GLOBALS['api-set-seen-error-1'] = 'Aucun ID de film fourni';
+$GLOBALS['api-set-seen-error-2'] = 'Aucun paramètre de \'Vu\' fourni';
+$GLOBALS['api-set-seen-success'] = 'Attribut \'Vu\' mis à jour avec succès';

@@ -20,5 +20,5 @@ if (isset($_POST['tagId']))
     $json_movies = json_encode(array_map(function($movie) { return $movie->get_json(); }, $movies));
     echo json_encode(['success' => true, 'data' => $json_movies]);
 }
-else { echo json_encode(['success' => false, 'error' => $GLOBALS['ajax-get-movies-by-tag-error-1']]); }
+else { echo json_encode(['success' => false, 'error' => $GLOBALS['api-get-movies-by-tag-error-1']]); }
 ?>

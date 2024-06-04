@@ -108,6 +108,8 @@ $GLOBALS['movie-minutes'] = 'Minuten';
 $GLOBALS['movie-rating-1'] = 'Jeder';
 $GLOBALS['movie-rating-2'] = 'Jahre und älter';
 $GLOBALS['movie-max-note'] = '/20';
+$GLOBALS['movie-edit-vu'] = 'Bearbeiten';
+$GLOBALS['movie-save-vu'] = 'Speichern';
 $GLOBALS['movie-directors'] = 'Regisseur(en)';
 $GLOBALS['movie-actors'] = 'Schauspieler';
 $GLOBALS['movie-composers'] = 'Komponist(en)';
@@ -132,26 +134,32 @@ $GLOBALS['login-error'] = 'Benutzername oder Passwort falsch, bitte erneut versu
 $GLOBALS['pdo-connect-error'] = 'Fehler beim Verbinden mit der Datenbank: ';
 $GLOBALS['pdo-execute-error'] = 'Fehler beim Ausführen der Abfrage: ';
 
-////////// AJAX //////////
+////////// API //////////
 // add-tag.php
-$GLOBALS['ajax-add-tag-error-1'] = 'Kein Tag angegeben';
-$GLOBALS['ajax-add-tag-error-2'] = 'Fehler beim Hinzufügen des Tags zur Datenbank';
+$GLOBALS['api-add-tag-error-1'] = 'Kein Tag angegeben';
+$GLOBALS['api-add-tag-error-2'] = 'Fehler beim Hinzufügen des Tags zur Datenbank';
 
 // get-data.php
-$GLOBALS['ajax-get-data-table-not-valid'] = 'Angeforderte Tabelle ist ungültig. Gültige Tabellen sind: movies, tag und person';
-$GLOBALS['ajax-get-data-attribute-value-not-set'] = 'Attribut und/oder Wert nicht festgelegt';
-$GLOBALS['ajax-get-data-table-not-set'] = 'Tabelle nicht festgelegt';
+$GLOBALS['api-get-data-table-not-valid'] = 'Angeforderte Tabelle ist ungültig. Gültige Tabellen sind: movies, tag und person';
+$GLOBALS['api-get-data-attribute-value-not-set'] = 'Attribut und/oder Wert nicht festgelegt';
+$GLOBALS['api-get-data-table-not-set'] = 'Tabelle nicht festgelegt';
 
 // get-localized-text.php
-$GLOBALS['ajax-get-localized-text-error-1'] = 'Keine Sprache angegeben';
-$GLOBALS['ajax-get-localized-text-error-2'] = 'Kein Text angegeben';
-$GLOBALS['ajax-get-localized-text-error-3'] = 'Text nicht gefunden';
+$GLOBALS['api-get-localized-text-error-1'] = 'Keine Sprache angegeben';
+$GLOBALS['api-get-localized-text-error-2'] = 'Kein Text angegeben';
+$GLOBALS['api-get-localized-text-error-3'] = 'Text nicht gefunden';
 
 // getMoviesByTag.php
-$GLOBALS['ajax-get-movies-by-tag-error-1'] = 'Keine Tag-ID angegeben';
+$GLOBALS['api-get-movies-by-tag-error-1'] = 'Keine Tag-ID angegeben';
 
 // language.php
-$GLOBALS['ajax-language-error-1'] = 'Keine Methode angegeben';
-$GLOBALS['ajax-language-error-2'] = 'Ungültige Sprache';
-$GLOBALS['ajax-language-error-3'] = 'Sprache nicht festgelegt';
-$GLOBALS['ajax-language-error-4'] = 'Fehler beim Festlegen der Sprache';
+$GLOBALS['api-language-error-1'] = 'Keine Methode angegeben';
+$GLOBALS['api-language-error-2'] = 'Ungültige Sprache';
+$GLOBALS['api-language-error-3'] = 'Sprache nicht festgelegt';
+$GLOBALS['api-language-error-4'] = 'Fehler beim Festlegen der Sprache';
+
+
+// set-seen.php
+$GLOBALS['api-set-seen-error-1'] = 'Keine Film-ID angegeben';
+$GLOBALS['api-set-seen-error-2'] = 'Fehler beim Aktualisieren des \'Gesehen\'-Attributs';
+$GLOBALS['api-set-seen-success'] = 'Attribut \'Gesehen\' erfolgreich aktualisiert';

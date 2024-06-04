@@ -108,6 +108,8 @@ $GLOBALS['movie-minutes'] = 'minutes';
 $GLOBALS['movie-rating-1'] = 'All public';
 $GLOBALS['movie-rating-2'] = 'years old and over';
 $GLOBALS['movie-max-note'] = '/20';
+$GLOBALS['movie-edit-vu'] = 'Edit';
+$GLOBALS['movie-save-vu'] = 'Save';
 $GLOBALS['movie-directors'] = 'Director(s)';
 $GLOBALS['movie-actors'] = 'Actor(s)';
 $GLOBALS['movie-composers'] = 'Composer(s)';
@@ -132,26 +134,32 @@ $GLOBALS['login-error'] = 'Username or password incorrect, please try again';
 $GLOBALS['pdo-connect-error'] = 'Error connecting to the database : ';
 $GLOBALS['pdo-execute-error'] = 'Error executing the query : ';
 
-////////// AJAX //////////
+////////// API //////////
 // add-tag.php
-$GLOBALS['ajax-add-tag-error-1'] = 'No tag provided';
-$GLOBALS['ajax-add-tag-error-2'] = 'Error adding the tag to the database';
+$GLOBALS['api-add-tag-error-1'] = 'No tag provided';
+$GLOBALS['api-add-tag-error-2'] = 'Error adding the tag to the database';
 
 // get-data.php
-$GLOBALS['ajax-get-data-table-not-valid'] = 'Requested table is not valid. Valid tables are : movies, tag, and person';
-$GLOBALS['ajax-get-data-attribute-value-not-set'] = 'Attribute and/or value not set';
-$GLOBALS['ajax-get-data-table-not-set'] = 'Table not set';
+$GLOBALS['api-get-data-table-not-valid'] = 'Requested table is not valid. Valid tables are : movies, tag, and person';
+$GLOBALS['api-get-data-attribute-value-not-set'] = 'Attribute and/or value not set';
+$GLOBALS['api-get-data-table-not-set'] = 'Table not set';
 
 // get-localized-text.php
-$GLOBALS['ajax-get-localized-text-error-1'] = 'No language provided';
-$GLOBALS['ajax-get-localized-text-error-2'] = 'No text provided';
-$GLOBALS['ajax-get-localized-text-error-3'] = 'Text not found';
+$GLOBALS['api-get-localized-text-error-1'] = 'No language provided';
+$GLOBALS['api-get-localized-text-error-2'] = 'No text provided';
+$GLOBALS['api-get-localized-text-error-3'] = 'Text not found';
 
 // getMoviesByTag.php
-$GLOBALS['ajax-get-movies-by-tag-error-1'] = 'No tagID provided';
+$GLOBALS['api-get-movies-by-tag-error-1'] = 'No tagID provided';
 
 // language.php
-$GLOBALS['ajax-language-error-1'] = 'No method provided';
-$GLOBALS['ajax-language-error-2'] = 'Invalid language';
-$GLOBALS['ajax-language-error-3'] = 'Language not set';
-$GLOBALS['ajax-language-error-4'] = 'Error setting the language';
+$GLOBALS['api-language-error-1'] = 'No method provided';
+$GLOBALS['api-language-error-2'] = 'Invalid language';
+$GLOBALS['api-language-error-3'] = 'Language not set';
+$GLOBALS['api-language-error-4'] = 'Error setting the language';
+
+
+// set-seen.php
+$GLOBALS['api-set-seen-error-1'] = 'No movie ID provided';
+$GLOBALS['api-set-seen-error-2'] = 'Error updating the \'Seen\' attribute';
+$GLOBALS['api-set-seen-success'] = '\'Seen\' attribute successfully updated';

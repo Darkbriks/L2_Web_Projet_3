@@ -17,7 +17,7 @@ if (isset($_POST['tag']))
     $id = $tagDB->addTag(htmlspecialchars($_POST['tag']));
 
     if ($id !== 0) { echo json_encode(['success' => true, 'id' => $id, 'name' => $_POST['tag']]); }
-    else { echo json_encode(['success' => false, 'error' => $GLOBALS['ajax-add-tag-error-2']]); }
+    else { echo json_encode(['success' => false, 'error' => $GLOBALS['api-add-tag-error-2']]); }
 }
-else { echo json_encode(['success' => false, 'error' => $GLOBALS['ajax-add-tag-error-1']]); }
+else { echo json_encode(['success' => false, 'error' => $GLOBALS['api-add-tag-error-1']]); }
 ?>

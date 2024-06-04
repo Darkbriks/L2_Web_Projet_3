@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function()
 
 function filterMoviesByTag(tagId)
 {
-    fetch('../ajax/get-movies-by-tag.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'tagId': tagId }) })
+    fetch('../api/get-movies-by-tag.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'tagId': tagId }) })
         .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
         .then(data => { if (data.success) { renderMovies(JSON.parse(data.data)); } else { set_user_msg(data.error, 'danger'); } })
         .catch(error => { set_user_msg(error, 'danger'); });

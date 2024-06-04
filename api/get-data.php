@@ -33,7 +33,7 @@ try
             if ($table === 'movies') { $db = new MoviesDB(); }
             else if ($table === 'person') { $db = new PersonDB(); }
             else if ($table === 'tag') { $db = new TagDB(); }
-            else { echo json_encode(['success' => false, 'error' => $GLOBALS['ajax-get-data-table-not-valid']]); exit(); }
+            else { echo json_encode(['success' => false, 'error' => $GLOBALS['api-get-data-table-not-valid']]); exit(); }
         }
         catch (Exception $e) { echo json_encode(['success' => false, 'error' => $e->getMessage()]); exit(); }
 
@@ -44,7 +44,7 @@ try
             $values = [];
             for ($i = 0; $i < $conditionLength; $i++)
             {
-                if (!isset($_POST['attribute' . $i]) || !isset($_POST['value' . $i])) { echo json_encode(['success' => false, 'error' => $GLOBALS['ajax-get-data-attribute-value-not-set']]); exit(); }
+                if (!isset($_POST['attribute' . $i]) || !isset($_POST['value' . $i])) { echo json_encode(['success' => false, 'error' => $GLOBALS['api-get-data-attribute-value-not-set']]); exit(); }
                 $attributes[] = htmlspecialchars($_POST['attribute' . $i]);
                 $values[] = htmlspecialchars($_POST['value' . $i]);
             }
@@ -63,10 +63,10 @@ try
             }
             catch (Exception $e) { echo json_encode(['success' => false, 'error' => $e->getMessage()]); exit(); }
         }
-        else { echo json_encode(['success' => false, 'error' => $GLOBALS['ajax-get-data-attribute-value-not-set']]); exit(); }
+        else { echo json_encode(['success' => false, 'error' => $GLOBALS['api-get-data-attribute-value-not-set']]); exit(); }
 
     }
-    else { echo json_encode(['success' => false, 'error' => $GLOBALS['ajax-get-data-table-not-set']]); exit(); }
+    else { echo json_encode(['success' => false, 'error' => $GLOBALS['api-get-data-table-not-set']]); exit(); }
 }
 catch (Exception $e)
 {

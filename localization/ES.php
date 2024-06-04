@@ -108,6 +108,8 @@ $GLOBALS['movie-minutes'] = 'minutos';
 $GLOBALS['movie-rating-1'] = 'Todo público';
 $GLOBALS['movie-rating-2'] = 'años y más';
 $GLOBALS['movie-max-note'] = '/20';
+$GLOBALS['movie-edit-vu'] = 'Editar';
+$GLOBALS['movie-save-vu'] = 'Guardar';
 $GLOBALS['movie-directors'] = 'Director(es)';
 $GLOBALS['movie-actors'] = 'Actor(es)';
 $GLOBALS['movie-composers'] = 'Compositor(es)';
@@ -134,24 +136,30 @@ $GLOBALS['pdo-execute-error'] = 'Error al ejecutar la consulta: ';
 
 ////////// AJAX //////////
 // add-tag.php
-$GLOBALS['ajax-add-tag-error-1'] = 'No se proporcionó ninguna etiqueta';
-$GLOBALS['ajax-add-tag-error-2'] = 'Error al agregar la etiqueta a la base de datos';
+$GLOBALS['api-add-tag-error-1'] = 'No se proporcionó ninguna etiqueta';
+$GLOBALS['api-add-tag-error-2'] = 'Error al agregar la etiqueta a la base de datos';
 
 // get-data.php
-$GLOBALS['ajax-get-data-table-not-valid'] = 'La tabla solicitada no es válida. Las tablas válidas son: movies, tag y person';
-$GLOBALS['ajax-get-data-attribute-value-not-set'] = 'Atributo y/o valor no establecido';
-$GLOBALS['ajax-get-data-table-not-set'] = 'Tabla no establecida';
+$GLOBALS['api-get-data-table-not-valid'] = 'La tabla solicitada no es válida. Las tablas válidas son: movies, tag y person';
+$GLOBALS['api-get-data-attribute-value-not-set'] = 'Atributo y/o valor no establecido';
+$GLOBALS['api-get-data-table-not-set'] = 'Tabla no establecida';
 
 // get-localized-text.php
-$GLOBALS['ajax-get-localized-text-error-1'] = 'No se proporcionó ningún idioma';
-$GLOBALS['ajax-get-localized-text-error-2'] = 'No se proporcionó ningún texto';
-$GLOBALS['ajax-get-localized-text-error-3'] = 'Texto no encontrado';
+$GLOBALS['api-get-localized-text-error-1'] = 'No se proporcionó ningún idioma';
+$GLOBALS['api-get-localized-text-error-2'] = 'No se proporcionó ningún texto';
+$GLOBALS['api-get-localized-text-error-3'] = 'Texto no encontrado';
 
 // getMoviesByTag.php
-$GLOBALS['ajax-get-movies-by-tag-error-1'] = 'ID de etiqueta faltante';
+$GLOBALS['api-get-movies-by-tag-error-1'] = 'ID de etiqueta faltante';
 
 // language.php
-$GLOBALS['ajax-language-error-1'] = 'No se proporcionó ningún método';
-$GLOBALS['ajax-language-error-2'] = 'Idioma no válido';
-$GLOBALS['ajax-language-error-3'] = 'Error al cambiar el idioma';
-$GLOBALS['ajax-language-error-4'] = 'Idioma no establecido';
+$GLOBALS['api-language-error-1'] = 'No se proporcionó ningún método';
+$GLOBALS['api-language-error-2'] = 'Idioma no válido';
+$GLOBALS['api-language-error-3'] = 'Error al cambiar el idioma';
+$GLOBALS['api-language-error-4'] = 'Idioma no establecido';
+
+
+// set-seen.php
+$GLOBALS['api-set-seen-error-1'] = 'No se proporcionó ningún ID de película';
+$GLOBALS['api-set-seen-error-2'] = 'Error al actualizar el atributo \'Visto\'';
+$GLOBALS['api-set-seen-success'] = 'Atributo \'Visto\' actualizado con éxito';
