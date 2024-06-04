@@ -100,6 +100,10 @@ class Movie
         $actors = $personDB->getActorsOfMovie($this->id);
         $composers = $personDB->getComposersOfMovie($this->id);
 
+        $json_directors = json_encode(array_map(function($director) { return $director->get_json(); }, $directors));
+        $json_actors = json_encode(array_map(function($actor) { return $actor->get_json(); }, $actors));
+        $json_composers = json_encode(array_map(function($composer) { return $composer->get_json(); }, $composers));
+
         $tags = (new TagDB())->getTagsOfMovie($this->id);
         $tags = array_map(function($tag) { return $tag->getName(); }, $tags);
 
@@ -110,9 +114,9 @@ class Movie
             'image_path' => $GLOBALS['POSTER_DIR'] . $this->image_path,
             'release_date' => $this->release_date,
             'synopsis' => $this->synopsis,
-            'directors' => $directors,
-            'actors' => $actors,
-            'composers' => $composers,
+            'directors' => $json_directors,
+            'actors' => $json_actors,
+            'composers' => $json_composers,
             'tags' => $tags,
             'vu' => $this->vu
         ];

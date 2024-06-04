@@ -37,20 +37,31 @@ function renderMovies(movies)
         const slideMovies = movies.slice(i, i + moviesPerSlide);
         slideMovies.forEach(movie =>
         {
+            let directors = JSON.parse(movie.directors);
+            let actors = JSON.parse(movie.actors);
+            let composers = JSON.parse(movie.composers);
+
             const movieElement = document.createElement('div');
             movieElement.classList.add('movie-card');
-            movieElement.innerHTML =
+            let html =
                 "<div class='movie-poster'>" +
                     "<img src='" + movie.image_path + "' alt='Affiche de " + movie.title + "'>" +
                 "</div>" +
                 "<div class='movie-details'>" +
                     "<h3 class='movie-title' id='" + movie.id + "' style='cursor: pointer'>" + movie.title + " (" + movie.release_date + ")</h3>" +
-                    "<p class='movie-synopsis'>" + movie.synopsis + "</p>" +
-                    "<p class='movie-producer'><strong>Réalisateur :</strong> <a href='../html/person.html?id=" + movie.producer_id + "'>" + movie.producer + "</a></p>" +
-                    "<p class='movie-actors'><strong>Acteurs :</strong> <a href='../html/actors.html' id=" + movie.actors_id + ">" + movie.actors.join(', ') + "</a></p>" +
-                    "<p class='movie-tags'><strong>Tags :</strong> " + movie.tags.join(', ') + "</p>" +
+                    "<p class='movie-synopsis'>" + movie.synopsis + "</p>";
+
+            html += "<p class='movie-director'><strong>Réalisateur :</strong> ";
+            for (let i = 0; i < directors.length; i++) { html += "<a href='../pages/person.php?id=" + directors[i].id + "'>" + directors[i].full_name + "</a>"; }
+            html += "</p><p class='movie-actor'><strong>Acteurs :</strong> ";
+            for (let i = 0; i < actors.length; i++) { html += "<a href='../pages/person.php?id=" + actors[i].id + "'>" + actors[i].full_name + "</a>"; }
+            html += "</p><p class='movie-composer'><strong>Compositeurs :</strong> ";
+            for (let i = 0; i < composers.length; i++) { html += "<a href='../pages/person.php?id=" + composers[i].id + "'>" + composers[i].full_name + "</a>"; }
+
+            html += "</p><p class='movie-tags'><strong>Tags :</strong> " + movie.tags.join(', ') + "</p>" +
                     "<p class='movie-status'><strong>Status :</strong> " + (movie.vu ? 'Vu' : 'Non vu') + "</p>" +
                 "</div>";
+            movieElement.innerHTML = html;
 
             slide.appendChild(movieElement);
 
