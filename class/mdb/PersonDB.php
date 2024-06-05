@@ -316,6 +316,16 @@ class PersonDB extends PdoWrapper
     /**
      * @throws Exception
      */
+    public function deleteMoviePersonByAll($movieId,$personId, $type): array
+    {
+        $query = "DELETE FROM movie_person WHERE person_id = :personId AND person_type = :type AND movie_id = :movieId";
+        $params = [':personId' => $personId, ':type' => $type, ':movieId' => $movieId];
+        return $this->execute($query, $params, NULL);
+    }
+
+    /**
+     * @throws Exception
+     */
     public function deletePersonAndRelationsById($id): array
     {
         $this->deleteMoviePersonByPersonId($id);

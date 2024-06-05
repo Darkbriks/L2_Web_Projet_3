@@ -5,71 +5,157 @@ $personDB = new PersonDB();
 $persons = $personDB->getPersons(); // Récupère toutes les personnes existantes depuis la base de données
 ?>
 
-    <div class="mb-3"><button type="button" class="btn btn-primary" id="add-person-btn"><?php echo $GLOBALS['update-person-form-title']; ?></button></div>
+    <div class="mb-3">
+        <button type="button" class="btn btn-primary" id="update-person-btn">
+            <?php echo htmlspecialchars($GLOBALS['update-person-form-title'], ENT_QUOTES, 'UTF-8'); ?>
+        </button>
+    </div>
 
     <div class="modal fade" id="add-person-modal" tabindex="-1" aria-labelledby="add-person-modal-label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="add-person-modal-label"><?php echo $GLOBALS['update-person-form-title']; ?></h5>
+                    <h5 class="modal-title" id="add-person-modal-label">
+                        <?php echo htmlspecialchars($GLOBALS['update-person-form-title'], ENT_QUOTES, 'UTF-8'); ?>
+                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method='POST' enctype='multipart/form-data' class="add-person-form">
-                        <label for="person_id"><?php echo $GLOBALS['update-person-form-question']; ?></label>
+                    <form method='POST' enctype='multipart/form-data' class="update-person-form">
+                        <label for="person_id">
+                            <?php echo htmlspecialchars($GLOBALS['update-person-form-question'], ENT_QUOTES, 'UTF-8'); ?>
+                        </label>
                         <select name="person_id" id="person_id">
                             <?php foreach ($persons as $person) { ?>
-                                <option value="<?php echo $person->getId(); ?>"><?php echo $person->getFirstName() . " " . $person->getLastName(); ?></option>
+                                <option value="<?php echo $person->getId(); ?>">
+                                    <?php echo htmlspecialchars($person->getFirstName() . " " . $person->getLastName(), ENT_QUOTES, 'UTF-8'); ?>
+                                </option>
                             <?php } ?>
                         </select>
-                        <div id="add-person-form-msg">
-                            <?php if (isset($add_person_error)) { echo "<div class='alert alert-warning' role='alert'>$add_person_error</div>"; } ?>
-                            <?php if (isset($add_person_success)) { echo "<div class='alert alert-success' role='alert'>$add_person_success</div>"; } ?>
+                        <div id="update-person-form-msg">
+                            <?php if (isset($add_person_error)) { echo "<div class='update-person-alert alert-warning' role='alert'>" . htmlspecialchars($add_person_error, ENT_QUOTES, 'UTF-8') . "</div>"; } ?>
+                            <?php if (isset($add_person_success)) { echo "<div class='update-person-alert alert-success' role='alert'>" . htmlspecialchars($add_person_success, ENT_QUOTES, 'UTF-8') . "</div>"; } ?>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name='new_first_name' id="person-first-name"  placeholder='<?php echo $GLOBALS['person-form-add-person-first-name']; ?>'>
-                            <label for="person-first-name"><?php echo $GLOBALS['person-form-add-person-first-name']; ?></label>
+                            <input type="text" class="form-control" name='new_first_name' id="person-first-name" placeholder='<?php echo htmlspecialchars($GLOBALS['person-form-add-person-first-name'], ENT_QUOTES, 'UTF-8'); ?>'>
+                            <label for="person-first-name">
+                                <?php echo htmlspecialchars($GLOBALS['person-form-add-person-first-name'], ENT_QUOTES, 'UTF-8'); ?>
+                            </label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name='new_last_name' id="person-last-name"  placeholder='<?php echo $GLOBALS['person-form-add-person-last-name']; ?>'>
-                            <label for="person-last-name"><?php echo $GLOBALS['person-form-add-person-last-name']; ?></label>
+                            <input type="text" class="form-control" name='new_last_name' id="person-last-name" placeholder='<?php echo htmlspecialchars($GLOBALS['person-form-add-person-last-name'], ENT_QUOTES, 'UTF-8'); ?>'>
+                            <label for="person-last-name">
+                                <?php echo htmlspecialchars($GLOBALS['person-form-add-person-last-name'], ENT_QUOTES, 'UTF-8'); ?>
+                            </label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input class="form-control" type='date' name='new_birth_date' id='person-birth-date' >
-                            <label for='person-birth-date'><?php echo $GLOBALS['person-form-add-person-birth-date']; ?></label>
+                            <input class="form-control" type='date' name='new_birth_date' id='person-birth-date'>
+                            <label for='person-birth-date'>
+                                <?php echo htmlspecialchars($GLOBALS['person-form-add-person-birth-date'], ENT_QUOTES, 'UTF-8'); ?>
+                            </label>
                         </div>
 
                         <div class="form-floating mb-3">
                             <input class="form-control" type='date' name='new_death_date' id='person-death-date'>
-                            <label for='person-death-date'><?php echo $GLOBALS['person-form-add-person-death-date']; ?></label>
+                            <label for='person-death-date'>
+                                <?php echo htmlspecialchars($GLOBALS['person-form-add-person-death-date'], ENT_QUOTES, 'UTF-8'); ?>
+                            </label>
                         </div>
 
                         <div class="mb-3">
-                            <label for="person-image" class="form-label"><?php echo $GLOBALS['person-form-add-person-image']; ?></label>
-                            <input class="form-control" type='file' name='new_image_path' id='person-image'  accept='image/jpeg, image/jpg, image/png'>
+                            <label for="person-image" class="form-label">
+                                <?php echo htmlspecialchars($GLOBALS['person-form-add-person-image'], ENT_QUOTES, 'UTF-8'); ?>
+                            </label>
+                            <input class="form-control" type='file' name='new_image_path' id='person-image' accept='image/jpeg, image/jpg, image/png'>
                         </div>
 
-                        <button class="btn btn-primary" id="person-submit"><?php echo $GLOBALS['update-person-form-submit']; ?></button>
-                        <input type="submit" name="delete_person" value="<?php echo $GLOBALS['delete-person-form']; ?>">
-
+                        <button class="btn btn-primary" id="person-submit">
+                            <?php echo htmlspecialchars($GLOBALS['update-person-form-submit'], ENT_QUOTES, 'UTF-8'); ?>
+                        </button>
+                        <input type="submit" name="delete_person" value="<?php echo htmlspecialchars($GLOBALS['delete-person-form'], ENT_QUOTES, 'UTF-8'); ?>">
                     </form>
                 </div>
             </div>
         </div>
     </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function()
-    {
-        document.getElementById('add-person-btn').addEventListener('click', function()
-        {
-            let add_person_modal = new bootstrap.Modal(document.getElementById('add-person-modal'));
-            add_person_modal.show();
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('update-person-btn').addEventListener('click', function() {
+                let add_person_modal = new bootstrap.Modal(document.getElementById('add-person-modal'));
+                add_person_modal.show();
+            });
         });
-    });
-</script>
+
+        document.querySelector('.update-person-form').addEventListener('submit', function(e) {
+            document.getElementById('update-person-form-msg').innerHTML = '';
+            e.preventDefault();
+            if (validatePersonForm()) {
+                document.querySelector('.update-person-form').submit();
+            }
+        });
+
+        function validatePersonForm() {
+            let form = document.querySelector('.update-person-form');
+            let name = form.querySelector('#person-first-name').value;
+            let surname = form.querySelector('#person-last-name').value;
+            let birthDate = form.querySelector('#person-birth-date').value;
+            let deathDate = form.querySelector('#person-death-date').value;
+            let image = form.querySelector('#person-image').value;
+
+            // Le nom ne doit pas être vide, et doit contenir entre 3 et 50 caractères
+            name = name.trim();
+            if (name.length < 3 || name.length > 50) {
+                showFormMsg("<?php echo addslashes($GLOBALS['person-form-exception-first-name']); ?>", "warning");
+                return false;
+            }
+
+            // Le nom de famille ne doit pas être vide, et doit contenir entre 3 et 50 caractères
+            surname = surname.trim();
+            if (surname.length < 3 || surname.length > 50) {
+                showFormMsg("<?php echo $GLOBALS['person-form-exception-last-name']; ?>", "warning");
+                return false;
+            }
+
+            // La date de naissance ne doit pas être vide et doit être une date passée
+            birthDate = birthDate.trim();
+            if (!birthDate) {
+                showFormMsg("<?php echo $GLOBALS['person-form-exception-birth-date']; ?>", "warning");
+                return false;
+            }
+            if (new Date(birthDate) > new Date()) {
+                showFormMsg("<?php echo $GLOBALS['person-form-exception-birth-date']; ?>", "warning");
+                return false;
+            }
+
+            // La date de décès doit être vide ou une date passée
+            deathDate = deathDate.trim();
+            if (deathDate && new Date(deathDate) > new Date()) {
+                showFormMsg("<?php echo $GLOBALS['person-form-exception-death-date']; ?>", "warning");
+                return false;
+            }
+
+            // L'affiche ne doit pas être vide, et doit être une image (jpg, jpeg, png)
+            /*image = image.trim();
+            if (image.length === 0) {
+                showFormMsg("<?php echo $GLOBALS['person-form-exception-image']; ?>", "warning");
+                return false;
+            }*/
+
+            return true;
+        }
+
+        function showFormMsg(msg, type) {
+            let form_msg = document.getElementById('update-person-form-msg');
+            form_msg.innerHTML = '<div class="update-person-alert alert-' + type + '" role="alert">' + msg + '</div>';
+            console.log(msg);
+        }
+    </script>
+
+
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -151,7 +237,7 @@ function checkValues($person_id, $new_first_name, $new_last_name, $new_birth_dat
     // Le prénom ne doit pas être vide, et doit contenir entre 3 et 50 caractères
     $new_first_name = trim($new_first_name);
     if (strlen($new_first_name) < 3 || strlen($new_first_name) > 50) {
-        echo "Le prénom doit contenir entre 3 et 50 caractères.";
+        echo "Le prénom doit contenir entre 3 et 50 caractères eadaedaz.";
         return false;
     }
 
