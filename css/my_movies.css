@@ -539,14 +539,61 @@ form h2 { text-align: center; }
     font-size: 0.9em;
 }
 
+.people-card {
+    width: 15vw;
+    background-color: transparent;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.people-card img {
+    height: 15vw;
+    width: 15vw;
+    object-fit: cover;
+    border: 1px solid var(--hight-constrast-color);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.people-card h3 {
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1em;
+    margin-top: auto;
+}
+.people-card:hover { transform: scale(1.05); }
 /********** people details page **********/
-.producer-details{
-    position: absolute;
+
+.person {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.person img {
+    width: 50vw;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    height: auto;
+    border: 2px solid var(--hight-constrast-color);
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.person-details {
     width: max-content;
-    height: max-content;
     padding: 20px;
     border: 2px solid var(--hight-constrast-color);
     border-radius: 8px;
+    text-align: center;
+    flex:1;
+    font-size: xx-large;
 }
 
 .title{
