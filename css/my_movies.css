@@ -192,6 +192,7 @@ body.dark-theme label { color: darkgray; }*/
     align-items: center;
     transition: transform 0.5s ease;
 
+    margin-top :2em;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -546,4 +547,9 @@ form h2 { text-align: center; }
     padding: 20px;
     border: 2px solid var(--hight-constrast-color);
     border-radius: 8px;
+}
+
+.title{
+    padding-top: 0.5em;
+    padding-left: 1em;
 }

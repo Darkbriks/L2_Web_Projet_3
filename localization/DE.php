@@ -118,8 +118,8 @@ $GLOBALS['all-peoples-title'] = 'Personen';
 
 ////////// HOME //////////
 // home.php
-$GLOBALS['home-most-popular-title'] = 'Beliebteste Filme';
-$GLOBALS['random-home-title'] = 'Zufällige Filme';
+$GLOBALS['home-discover-title'] = 'Découvertes de films';
+$GLOBALS['random-home-title'] = 'Filme entdecken';
 
 ////////// MOVIE //////////
 // movie.php

@@ -15,7 +15,7 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 <?php ob_start(); ?>
 
     <script src="../js/allMovies.js"></script>
-    <h1><?php echo $GLOBALS['all-movies-title']; ?></h1>
+    <h1 class="title"><?php echo $GLOBALS['all-movies-title']; ?></h1>
     <div class="tags-menu" id="tags-menu">
         <div class="dropdown">
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
