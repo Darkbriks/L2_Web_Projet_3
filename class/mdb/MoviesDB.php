@@ -19,6 +19,14 @@ class MoviesDB extends PdoWrapper
     /**
      * @throws Exception
      */
+    public function getRandomMovie() : array
+    {
+        return $this->execute("SELECT * FROM movies ORDER BY RAND() LIMIT 1",NULL,"mdb\data_template\Movie");
+    }
+
+    /**
+     * @throws Exception
+     */
     public function getData($attributes, $values, $and = true, $limit = 10, $order = 'id', $direction = 'ASC', $useLike = false, $table='movies', $class_name=null): bool|array
     {
         return parent::getData($attributes, $values, $and, $limit, $order, $direction, $useLike, $table, "mdb\data_template\Movie");

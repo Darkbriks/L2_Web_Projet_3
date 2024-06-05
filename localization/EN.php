@@ -11,6 +11,7 @@ $GLOBALS['template-dark-theme'] = 'Dark theme';
 $GLOBALS['header-title'] = 'Home Of Movies';
 $GLOBALS['header-home'] = 'Home';
 $GLOBALS['header-movies'] = 'Movies';
+$GLOBALS['header-advanced-search'] = 'Advanced Search';
 $GLOBALS['header-peoples'] = 'Peoples';
 $GLOBALS['header-admin'] = 'Admin';
 $GLOBALS['header-search'] = 'Search';
@@ -118,6 +119,7 @@ $GLOBALS['all-peoples-title'] = 'Peoples';
 ////////// HOME //////////
 // home.php
 $GLOBALS['home-most-popular-title'] = 'Most popular movies';
+$GLOBALS['random-home-title'] = 'Random Movies';
 
 ////////// MOVIE //////////
 // movie.php
