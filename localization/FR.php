@@ -140,7 +140,7 @@ $GLOBALS['all-peoples-title'] = 'Peoples';
 
 ////////// HOME //////////
 // home.php
-$GLOBALS['home-most-popular-title'] = 'Films les plus populaires';
+$GLOBALS['home-discover-title'] = 'Découvertes de films';
 $GLOBALS['random-home-title'] = 'Films aléatoires';
 
 ////////// MOVIE //////////

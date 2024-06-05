@@ -547,3 +547,8 @@ form h2 { text-align: center; }
     border: 2px solid var(--hight-constrast-color);
     border-radius: 8px;
 }
+
+.title{
+    margin-top: 0.5em;
+    margin-left: 1em;
+}

@@ -16,7 +16,7 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
     <script src="../js/allPeople.js"></script>
 
-    <h1><?php echo $GLOBALS['all-peoples-title']; ?></h1>
+    <h1 class="title"><?php echo $GLOBALS['all-peoples-title']; ?></h1>
     <div class="peoples-container" id="peoples-container"></div>
 
 <?php $content = ob_get_clean(); ?>

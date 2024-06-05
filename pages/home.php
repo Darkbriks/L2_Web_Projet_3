@@ -14,7 +14,7 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
 <?php ob_start(); ?>
 
-<h1><?php echo $GLOBALS['home-most-popular-title']; ?></h1>
+<h1 class="title"><?php echo $GLOBALS['home-discover-title']; ?></h1>
 <div id="home-list">
     <script src="../js/allMovies.js"></script>
     <div class="carrousel" id="movies-container"></div>
