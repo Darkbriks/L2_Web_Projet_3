@@ -26,64 +26,16 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
                     <h1 class="modal-title fs-5" id="staticBackdropLabel"><?php echo $GLOBALS['advanced-search-movie-modal-title']; ?></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
                 <div class="modal-body">
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="filter-movie-title">Title</label>
-                        <select class="form-select" id="operator-title">
-                            <option value="null">Choose an operator</option>
-                            <option value="LIKE">Like</option>
-                            <option value="NOT LIKE">Not like</option>
-                        </select>
-                        <input type="text" class="form-control" id="filter-movie-title">
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="filter-movie-release">Release date</label>
-                        <select class="form-select" id="operator-release">
-                            <option value="null">Choose an operator</option>
-                            <option value="=">Equal</option>
-                            <option value="!=">Not equal</option>
-                            <option value=">">Greater than</option>
-                            <option value="<">Less than</option>
-                        </select>
-                        <input type="date" class="form-control" id="filter-movie-release">
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="filter-movie-duration">Time duration</label>
-                        <select class="form-select" id="operator-duration">
-                            <option value="null">Choose an operator</option>
-                            <option value="=">Equal</option>
-                            <option value="!=">Not equal</option>
-                            <option value=">">Greater than</option>
-                            <option value="<">Less than</option>
-                        </select>
-                        <input type="number" class="form-control" id="filter-movie-duration">
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="filter-movie-rating">Rating</label>
-                        <select class="form-select" id="operator-rating">
-                            <option value="null">Choose an operator</option>
-                            <option value="=">Equal</option>
-                            <option value="!=">Not equal</option>
-                            <option value=">">Greater than</option>
-                            <option value="<">Less than</option>
-                        </select>
-                        <input type="number" class="form-control" id="filter-movie-rating">
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="filter-movie-note">Note</label>
-                        <select class="form-select" id="operator-note">
-                            <option value="null">Choose an operator</option>
-                            <option value="=">Equal</option>
-                            <option value="!=">Not equal</option>
-                            <option value=">">Greater than</option>
-                            <option value="<">Less than</option>
-                        </select>
-                        <input type="number" class="form-control" id="filter-movie-note">
-                    </div>
+                    <?php
+                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('movie-title', ['LIKE' => 'Like', 'NOT LIKE' => 'Not like']);
+                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('movie-release', ['=' => 'Equal', '!=' => 'Not equal', '>' => 'Greater than', '<' => 'Less than']);
+                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('movie-duration', ['=' => 'Equal', '!=' => 'Not equal', '>' => 'Greater than', '<' => 'Less than']);
+                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('movie-rating', ['=' => 'Equal', '!=' => 'Not equal', '>' => 'Greater than', '<' => 'Less than']);
+                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('movie-note', ['=' => 'Equal', '!=' => 'Not equal', '>' => 'Greater than', '<' => 'Less than']);
+                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('movie-synopsis', ['LIKE' => 'Like', 'NOT LIKE' => 'Not like']);
+                    ?>
 
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="filter-movie-seen">Vu</label>
@@ -95,71 +47,9 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
                         </select>
                     </div>
 
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="filter-movie-synopsis">Synopsis</label>
-                        <select class="form-select" id="operator-synopsis">
-                            <option value="null">Choose an operator</option>
-                            <option value="LIKE">Like</option>
-                            <option value="NOT LIKE">Not like</option>
-                        </select>
-                        <input type="text" class="form-control" id="filter-movie-synopsis">
-                    </div>
-
-                    <div class="mb-3">
-                        <p><?php echo $GLOBALS['movie-form-add-movie-directors-list'] ?></p>
-                        <div class="input-group mb-3">
-                            <label class="input-group-text" for="filter-movie-director"><?php echo $GLOBALS['movie-form-add-movie-directors-list'] ?></label>
-                            <select class="form-select" id="filter-movie-director">
-                                <option value="null">Choose an operator</option>
-                                <option value="true">Tous</option>
-                                <option value="false">Au moins un</option>
-                            </select>
-                        </div>
-                        <div id='directorList'></div>
-                        <div class='form-floating  mb-3'>
-                            <input class='form-control' list='datalistOptions' id='directorDataList' placeholder='<?php echo $GLOBALS['movie-form-add-movie-add-director'] ?>'>
-                            <label for='directorDataList' class='form-label'><?php echo $GLOBALS['movie-form-add-movie-add-director'] ?></label>
-                        </div>
-                        <div class="list-group" id='directorDatalistOptions'></div>
-                    </div>
-
-                    <div class="mb-3">
-                        <p><?php echo $GLOBALS['movie-form-add-movie-actors-list'] ?></p>
-                        <div class="input-group mb-3">
-                            <label class="input-group-text" for="filter-movie-actor"><?php echo $GLOBALS['movie-form-add-movie-actors-list'] ?></label>
-                            <select class="form-select" id="filter-movie-actor">
-                                <option value="null">Choose an operator</option>
-                                <option value="true">Tous</option>
-                                <option value="false">Au moins un</option>
-                            </select>
-                        </div>
-                        <div id='actorList'></div>
-                        <div class='form-floating  mb-3'>
-                            <input class='form-control' list='datalistOptions' id='actorDataList' placeholder='<?php echo $GLOBALS['movie-form-add-movie-add-actor'] ?>'>
-                            <label for='actorDataList' class='form-label'><?php echo $GLOBALS['movie-form-add-movie-add-actor'] ?></label>
-                        </div>
-                        <div class="list-group" id='actorDatalistOptions'></div>
-                    </div>
-
-                    <div class="mb-3">
-                        <p><?php echo $GLOBALS['movie-form-add-movie-composers-list'] ?></p>
-                        <div class="input-group mb-3">
-                            <label class="input-group-text" for="filter-movie-composer"><?php echo $GLOBALS['movie-form-add-movie-composers-list'] ?></label>
-                            <select class="form-select" id="filter-movie-composer">
-                                <option value="null">Choose an operator</option>
-                                <option value="true">Tous</option>
-                                <option value="false">Au moins un</option>
-                            </select>
-                        </div>
-                        <div id='composerList'></div>
-                        <div class='form-floating  mb-3'>
-                            <input class='form-control' list='datalistOptions' id='composerDataList' placeholder='<?php echo $GLOBALS['movie-form-add-movie-add-composer'] ?>'>
-                            <label for='composerDataList' class='form-label'><?php echo $GLOBALS['movie-form-add-movie-add-composer'] ?></label>
-                        </div>
-                        <div class="list-group" id='composerDatalistOptions'></div>
-                    </div>
-
+                    <?php echo mdb\form\GenerateFormInput::generateAdvancedSearchPersonFields(); ?>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="validate-search">Search</button>
@@ -190,27 +80,6 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
         document.addEventListener('DOMContentLoaded', function()
         {
             //document.getElementById('addCategory').addEventListener('click', addTag);
-
-            document.getElementById('directorDataList').addEventListener('input', function()
-            {
-                let director = document.getElementById('directorDataList').value;
-                if (director.length > 0) { updateOptionList('director', director); }
-                else { clearOptionList('director'); }
-            });
-
-            document.getElementById('actorDataList').addEventListener('input', function()
-            {
-                let actor = document.getElementById('actorDataList').value;
-                if (actor.length > 0) { updateOptionList('actor', actor); }
-                else { clearOptionList('actor'); }
-            });
-
-            document.getElementById('composerDataList').addEventListener('input', function()
-            {
-                let composer = document.getElementById('composerDataList').value;
-                if (composer.length > 0) { updateOptionList('composer', composer); }
-                else { clearOptionList('composer'); }
-            });
 
             document.getElementById('validate-search').addEventListener('click', searchMovies);
         });
@@ -248,7 +117,6 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
         function clearOptionList(type) { let personList = document.getElementById(type + 'DatalistOptions'); personList.innerHTML = ''; }
 
-        // TODO: Améliorer le style du bouton de suppression
         function addPersonToList(type, id, name)
         {
             let personList = document.getElementById(type + 'List');
@@ -275,30 +143,30 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
         function searchMovies()
         {
             let title = document.getElementById('filter-movie-title').value;
-            let titleOperator = document.getElementById('operator-title').value;
+            let titleOperator = document.getElementById('operator-movie-title').value;
             let release = document.getElementById('filter-movie-release').value;
-            let releaseOperator = document.getElementById('operator-release').value;
+            let releaseOperator = document.getElementById('operator-movie-release').value;
             let duration = document.getElementById('filter-movie-duration').value;
-            let durationOperator = document.getElementById('operator-duration').value;
+            let durationOperator = document.getElementById('operator-movie-duration').value;
             let rating = document.getElementById('filter-movie-rating').value;
-            let ratingOperator = document.getElementById('operator-rating').value;
+            let ratingOperator = document.getElementById('operator-movie-rating').value;
             let note = document.getElementById('filter-movie-note').value;
-            let noteOperator = document.getElementById('operator-note').value;
+            let noteOperator = document.getElementById('operator-movie-note').value;
             let seen = document.getElementById('filter-movie-seen').value;
             let synopsis = document.getElementById('filter-movie-synopsis').value;
-            let synopsisOperator = document.getElementById('operator-synopsis').value;
+            let synopsisOperator = document.getElementById('operator-movie-synopsis').value;
 
             let directors = [];
             document.getElementById('directorList').querySelectorAll('.person-id-value').forEach(function(director) { directors.push(director.value); });
-            let directorOperator = document.getElementById('filter-movie-director').value;
+            let directorOperator = document.getElementById('operator-director').value;
 
             let actors = [];
             document.getElementById('actorList').querySelectorAll('.person-id-value').forEach(function(actor) { actors.push(actor.value); });
-            let actorOperator = document.getElementById('filter-movie-actor').value;
+            let actorOperator = document.getElementById('operator-actor').value;
 
             let composers = [];
             document.getElementById('composerList').querySelectorAll('.person-id-value').forEach(function(composer) { composers.push(composer.value); });
-            let composerOperator = document.getElementById('filter-movie-composer').value;
+            let composerOperator = document.getElementById('operator-composer').value;
 
             let data = {
                 'title': title,
@@ -325,8 +193,6 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
             directors.forEach(function(director, index) { data['director' + index] = director; });
             actors.forEach(function(actor, index) { data['actor' + index] = actor; });
             composers.forEach(function(composer, index) { data['composer' + index] = composer; });
-
-            console.log(data);
 
             fetch('../api/advanced-search-get-movies.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data) })
                 .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })

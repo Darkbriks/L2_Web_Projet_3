@@ -13,21 +13,6 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 require ".." . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR . "Autoloader.php";
 Autoloader::register();
 
-// Parameters
-// - title: string. Default: ""
-// - titleOperator: string. Default: "LIKE"
-// - release: string. Default: "000-00-00"
-// - releaseOperator: string. Default: "<"
-// - duration: string. Default: "0"
-// - durationOperator: string. Default: "<"
-// - rating: string. Default: "-1"
-// - ratingOperator: string. Default: "<"
-// - note: string. Default: "-1"
-// - noteOperator: string. Default: "<"
-// - seen: string. Default: "-1"
-// - synopsis: string. Default: ""
-// - synopsisOperator: string. Default: "LIKE"
-
 // Get parameters
 $title = htmlspecialchars($_POST['title'] ?? "");
 $titleOperator = htmlspecialchars($_POST['titleOperator'] ?? "LIKE"); if ($titleOperator == "null") { $titleOperator = "LIKE"; }

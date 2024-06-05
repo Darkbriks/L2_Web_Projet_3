@@ -31,18 +31,15 @@ class MoviesDB extends PdoWrapper
     {
         $query = "SELECT m.id, mp.person_type, mp.person_id, mt.tag_id FROM movies m LEFT JOIN movie_person mp ON m.id = mp.movie_id LEFT JOIN person p ON mp.person_id = p.id LEFT JOIN movie_tag mt ON m.id = mt.movie_id LEFT JOIN tag t ON mt.tag_id = t.id
               WHERE m.title " . $titleOperator . " :title AND m.release_date " .  $releaseOperator . " :release AND m.time_duration " . $durationOperator . " :duration AND m.rating " . $ratingOperator . " :rating AND m.note " . $noteOperator . " :note AND m.synopsis " . $synopsisOperator . " :synopsis";
-
         $params = array(':title' => "%" . $title . "%", ':release' => $release, ':duration' => $duration, ':rating' => $rating, ':note' => $note, ':synopsis' => "%" . $synopsis . "%");
-
         if ($seen != -1) { $query .= " AND m.vu = :seen"; $params[':seen'] = $seen; }
-
         $res = $this->execute($query, $params, "mdb\data_template\AdvancedMovieSearch");
 
         $directorsDict = array();
         foreach ($res as $movie)
         {
             if ($movie->getPersonType() != 2) { continue; }
-            if ($directorsDict[$movie->getId()] == null) { $directorsDict[$movie->getId()] = array(); }
+            if (!isset($directorsDict[$movie->getId()])) { $directorsDict[$movie->getId()] = array(); }
             if (!in_array($movie->getPersonId(), $directorsDict[$movie->getId()])) { $directorsDict[$movie->getId()][] = $movie->getPersonId(); }
         }
 
@@ -50,7 +47,7 @@ class MoviesDB extends PdoWrapper
         foreach ($res as $movie)
         {
             if ($movie->getPersonType() != 1) { continue; }
-            if ($actorsDict[$movie->getId()] == null) { $actorsDict[$movie->getId()] = array(); }
+            if (!isset($actorsDict[$movie->getId()])) { $actorsDict[$movie->getId()] = array(); }
             if (!in_array($movie->getPersonId(), $actorsDict[$movie->getId()])) { $actorsDict[$movie->getId()][] = $movie->getPersonId(); }
         }
 
@@ -58,7 +55,7 @@ class MoviesDB extends PdoWrapper
         foreach ($res as $movie)
         {
             if ($movie->getPersonType() != 3) { continue; }
-            if ($composersDict[$movie->getId()] == null) { $composersDict[$movie->getId()] = array(); }
+            if (!isset($composersDict[$movie->getId()])) { $composersDict[$movie->getId()] = array(); }
             if (!in_array($movie->getPersonId(), $composersDict[$movie->getId()])) { $composersDict[$movie->getId()][] = $movie->getPersonId(); }
         }
 
@@ -66,7 +63,7 @@ class MoviesDB extends PdoWrapper
         foreach ($res as $movie)
         {
             if ($movie->getTagId() == null) { continue; }
-            if ($tagsDict[$movie->getId()] == null) { $tagsDict[$movie->getId()] = array(); }
+            if (!isset($tagsDict[$movie->getId()])) { $tagsDict[$movie->getId()] = array(); }
             if (!in_array($movie->getTagId(), $tagsDict[$movie->getId()])) { $tagsDict[$movie->getId()][] = $movie->getTagId(); }
         }
 
