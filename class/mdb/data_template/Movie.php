@@ -111,8 +111,12 @@ class Movie
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'image_path' => $GLOBALS['POSTER_DIR'] . $this->image_path,
             'release_date' => $this->release_date,
+            'time_duration' => $this->time_duration,
+            'note' => $this->note,
+            'rating' => $this->rating,
+            'trailer_path' => $this->trailer_path,
+            'image_path' => $GLOBALS['POSTER_DIR'] . $this->image_path,
             'synopsis' => $this->synopsis,
             'directors' => $json_directors,
             'actors' => $json_actors,

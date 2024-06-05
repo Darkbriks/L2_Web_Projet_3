@@ -19,9 +19,93 @@ class MoviesDB extends PdoWrapper
     /**
      * @throws Exception
      */
+    public function getRandomMovie() : array
+    {
+        return $this->execute("SELECT * FROM movies ORDER BY RAND() LIMIT 1",NULL,"mdb\data_template\Movie");
+    }
+
+    /**
+     * @throws Exception
+     */
     public function getData($attributes, $values, $and = true, $limit = 10, $order = 'id', $direction = 'ASC', $useLike = false, $table='movies', $class_name=null): bool|array
     {
         return parent::getData($attributes, $values, $and, $limit, $order, $direction, $useLike, $table, "mdb\data_template\Movie");
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function advancedMovieSearch($title, $titleOperator, $release, $releaseOperator, $duration, $durationOperator, $rating, $ratingOperator, $note, $noteOperator, $seen, $synopsis, $synopsisOperator, $directors, $directorsOperator, $actors, $actorsOperator, $composers, $composersOperator, $tags, $tagsOperator): array
+    {
+        $query = "SELECT m.id, mp.person_type, mp.person_id, mt.tag_id FROM movies m LEFT JOIN movie_person mp ON m.id = mp.movie_id LEFT JOIN person p ON mp.person_id = p.id LEFT JOIN movie_tag mt ON m.id = mt.movie_id LEFT JOIN tag t ON mt.tag_id = t.id
+              WHERE m.title " . $titleOperator . " :title AND m.release_date " .  $releaseOperator . " :release AND m.time_duration " . $durationOperator . " :duration AND m.rating " . $ratingOperator . " :rating AND m.note " . $noteOperator . " :note AND m.synopsis " . $synopsisOperator . " :synopsis";
+        $params = array(':title' => "%" . $title . "%", ':release' => $release, ':duration' => $duration, ':rating' => $rating, ':note' => $note, ':synopsis' => "%" . $synopsis . "%");
+        if ($seen != -1) { $query .= " AND m.vu = :seen"; $params[':seen'] = $seen; }
+        $res = $this->execute($query, $params, "mdb\data_template\AdvancedMovieSearch");
+
+        $directorsDict = array();
+        foreach ($res as $movie)
+        {
+            if ($movie->getPersonType() != 2) { continue; }
+            if (!isset($directorsDict[$movie->getId()])) { $directorsDict[$movie->getId()] = array(); }
+            if (!in_array($movie->getPersonId(), $directorsDict[$movie->getId()])) { $directorsDict[$movie->getId()][] = $movie->getPersonId(); }
+        }
+
+        $actorsDict = array();
+        foreach ($res as $movie)
+        {
+            if ($movie->getPersonType() != 1) { continue; }
+            if (!isset($actorsDict[$movie->getId()])) { $actorsDict[$movie->getId()] = array(); }
+            if (!in_array($movie->getPersonId(), $actorsDict[$movie->getId()])) { $actorsDict[$movie->getId()][] = $movie->getPersonId(); }
+        }
+
+        $composersDict = array();
+        foreach ($res as $movie)
+        {
+            if ($movie->getPersonType() != 3) { continue; }
+            if (!isset($composersDict[$movie->getId()])) { $composersDict[$movie->getId()] = array(); }
+            if (!in_array($movie->getPersonId(), $composersDict[$movie->getId()])) { $composersDict[$movie->getId()][] = $movie->getPersonId(); }
+        }
+
+        $tagsDict = array();
+        foreach ($res as $movie)
+        {
+            if ($movie->getTagId() == null) { continue; }
+            if (!isset($tagsDict[$movie->getId()])) { $tagsDict[$movie->getId()] = array(); }
+            if (!in_array($movie->getTagId(), $tagsDict[$movie->getId()])) { $tagsDict[$movie->getId()][] = $movie->getTagId(); }
+        }
+
+        // Pour chaque film, on verifie si les directeurs, acteurs, compositeurs et tags correspondent aux filtres
+        $filteredMovies = array();
+        foreach ($res as $movie)
+        {
+            if (in_array($movie->getId(), $filteredMovies)) { continue; }
+
+            $directorsMatch = 0;
+            $actorsMatch = 0;
+            $composersMatch = 0;
+            $tagsMatch = 0;
+
+            foreach ($directors as $director) { if (in_array($director, $directorsDict[$movie->getId()])) { $directorsMatch++; } }
+            foreach ($actors as $actor) { if (in_array($actor, $actorsDict[$movie->getId()])) { $actorsMatch++; } }
+            foreach ($composers as $composer) { if (in_array($composer, $composersDict[$movie->getId()])) { $composersMatch++; } }
+            foreach ($tags as $tag) { if (in_array($tag, $tagsDict[$movie->getId()])) { $tagsMatch++; } }
+
+            if (($directorsOperator == "AND" && $directorsMatch == count($directors)) || ($directorsOperator == "OR" && $directorsMatch > 0))
+            {
+                if (($actorsOperator == "AND" && $actorsMatch == count($actors)) || ($actorsOperator == "OR" && $actorsMatch > 0))
+                {
+                    if (($composersOperator == "AND" && $composersMatch == count($composers)) || ($composersOperator == "OR" && $composersMatch > 0))
+                    {
+                        if (($tagsOperator == "AND" && $tagsMatch == count($tags)) || ($tagsOperator == "OR" && $tagsMatch > 0))
+                        {
+                            $filteredMovies[] = $movie->getId();
+                        }
+                    }
+                }
+            }
+        }
+        return $filteredMovies;
     }
 
     /**
@@ -70,136 +154,6 @@ class MoviesDB extends PdoWrapper
     /**
      * @throws Exception
      */
-    public function getMovieByTitle($title): array
-    {
-        return $this->execute("SELECT * FROM movies WHERE title = :title", ["title" => $title], "mdb\data_template\Movie");
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getMoviesIDByPerson($firstName, $lastName): array
-    {
-        $query = "SELECT m.id FROM movies m
-              JOIN movie_person mp ON m.id = mp.movie_id
-              JOIN person p ON mp.person_id = p.id
-              WHERE p.first_name = :firstName AND p.last_name = :lastName";
-
-        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getMoviesByPerson($firstName, $lastName): array
-    {
-        $query = "SELECT m.* FROM movies m
-              JOIN movie_person mp ON m.id = mp.movie_id
-              JOIN person p ON mp.person_id = p.id
-              WHERE p.first_name = :firstName AND p.last_name = :lastName";
-
-        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getMoviesIDByActor($firstName, $lastName): array
-    {
-        $query = "SELECT m.id FROM movies m
-              JOIN movie_person mp ON m.id = mp.movie_id
-              JOIN person p ON mp.person_id = p.id
-              WHERE p.first_name = :firstName AND p.last_name = :lastName AND mp.person_type = 1";
-
-        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getMoviesByActor($firstName, $lastName): array
-    {
-        $query = "SELECT m.* FROM movies m
-              JOIN movie_person mp ON m.id = mp.movie_id
-              JOIN person p ON mp.person_id = p.id
-              WHERE p.first_name = :firstName AND p.last_name = :lastName AND mp.person_type = 1";
-
-        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getMoviesIDByDirector($firstName, $lastName): array
-    {
-        $query = "SELECT  m.id, m.title FROM movies m
-              JOIN movie_person mp ON m.id = mp.movie_id
-              JOIN person p ON mp.person_id = p.id
-              WHERE p.first_name = :firstName AND p.last_name = :lastName AND mp.person_type = 2";
-
-        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getMoviesByDirector($firstName, $lastName): array
-    {
-        $query = "SELECT  m.* FROM movies m
-              JOIN movie_person mp ON m.id = mp.movie_id
-              JOIN person p ON mp.person_id = p.id
-              WHERE p.first_name = :firstName AND p.last_name = :lastName AND mp.person_type = 2";
-
-        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getMoviesIDByComposer($firstName, $lastName): array
-    {
-        $query = "SELECT m.id FROM movies m
-              JOIN movie_person mp ON m.id = mp.movie_id
-              JOIN person p ON mp.person_id = p.id
-              WHERE p.first_name = :firstName AND p.last_name = :lastName AND mp.person_type = 3";
-
-        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getMoviesByComposer($firstName, $lastName): array
-    {
-        $query = "SELECT m.id FROM movies m
-              JOIN movie_person mp ON m.id = mp.movie_id
-              JOIN person p ON mp.person_id = p.id
-              WHERE p.first_name = :firstName AND p.last_name = :lastName AND mp.person_type = 3";
-
-        return $this->execute($query, array(':firstName' => $firstName, ':lastName' => $lastName), "mdb\data_template\Movie");
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getMoviesByMinRating($minRating): array
-    {
-        $query = "SELECT  id, title FROM movies WHERE rating >= :minRating";
-        return $this->execute($query, array(':minRating' => $minRating), "mdb\data_template\Movie");
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getMoviesByEqualRating($rating): array
-    {
-        $query = "SELECT id, title FROM movies WHERE rating = :rating";
-        return $this->execute($query, array(':rating' => $rating), "mdb\data_template\Movie");
-    }
-
-    /**
-     * @throws Exception
-     */
     public function getMoviesByTag($tag): array
     {
         $query = "SELECT  m.* FROM movies m
@@ -208,56 +162,6 @@ class MoviesDB extends PdoWrapper
               WHERE tag.id = :tag";
 
         return $this->execute($query, array(':tag' => $tag), "mdb\data_template\Movie");
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getMoviesBy($release_date = null, $duration = null, $name = null, $note = null, $rating = null, $synopsys): array
-    {
-        $query = "SELECT * FROM movies WHERE 1=1";
-        $params = [];
-
-        if ($release_date !== null) {
-            $query .= " AND release_date = :release_date";
-            $params[':release_date'] = $release_date;
-        }
-
-        if ($duration !== null) {
-            $query .= " AND time_duration = :duration";
-            $params[':duration'] = $duration;
-        }
-
-        if ($name !== null) {
-            $query .= " AND title LIKE :name";
-            $params[':name'] = '%' . $name . '%';
-        }
-
-        if ($note !== null) {
-            $query .= " AND note = :note";
-            $params[':rating'] = $note;
-        }
-        if($rating !== null){
-            $query .= " AND rating = :rating";
-            $params[':rating'] = $rating;
-        }
-        if($synopsys !== null){
-            $query .= " AND synopsys LIKE :synopsys";
-            $params[':synopsys'] = '%' . $synopsys . '%';
-        }
-
-        return $this->execute($query, $params, "mdb\data_template\Movie");
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getMoviesBy_Order($condition, $order): array
-    {
-        $order = ($order) ? "ASC" : "DESC";
-        $query = "SELECT * FROM movies ORDER BY " . $condition. $order;
-
-        return $this->execute($query,NULL, "mdb\data_template\Movie");
     }
 
     /**

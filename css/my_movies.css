@@ -44,7 +44,12 @@ body
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
+
+#content { flex: 1; }
 
 /********** header **********/
 /*.banner {
@@ -67,10 +72,7 @@ nav ul {
     display: flex;
 }*/
 
-header
-{
-    height: 84px;
-}
+header { height: 84px; }
 
 nav
 {
@@ -113,8 +115,12 @@ footer
     padding: 10px 0;
     background-color: var(--primary-color);
     color: var(--text-color);
-    position: fixed;
+    /* Le footer doit toujours rester en bas de la page, et ne jamais se superposer au contenu */
+    /*position: absolute;
     bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;*/
 }
 
 footer p { margin: 0; }
@@ -141,7 +147,31 @@ body.dark-theme label { color: darkgray; }*/
     padding: 10px 20px;
     cursor: pointer;
 }*/
+/********** mb-3 **********/
+.mb-3 {
+    text-align: center; /* Centre le contenu horizontalement */
+    margin-bottom: 1rem; /* Exemple de marge inférieure */
+}
+/********** btn-admin **********/
 
+.btn-admin{
+    margin-top: 1rem;
+}
+/********** btn-home **********/
+.btn-home {
+
+    padding: 0.5rem 1rem; /* Ajoute un rembourrage pour le bouton */
+    font-size: 1rem; /* Taille de la police du bouton */
+    background-color: #007bff; /* Couleur de fond du bouton */
+    color: white; /* Couleur du texte du bouton */
+    border: none; /* Supprime les bordures par défaut */
+    border-radius: 5px; /* Ajoute des coins arrondis */
+    cursor: pointer; /* Change le curseur au survol */
+}
+
+.btn-home:hover {
+    background-color: #0056b3; /* Change la couleur de fond au survol */
+}
 /********** tags_menu **********/
 .tags-menu {
     display: flex;
@@ -149,6 +179,7 @@ body.dark-theme label { color: darkgray; }*/
     gap: 10px;
     margin: 20px 0;
 }
+
 
 /********** All movies page **********/
 .carrousel
@@ -161,6 +192,7 @@ body.dark-theme label { color: darkgray; }*/
     align-items: center;
     transition: transform 0.5s ease;
 
+    margin-top :2em;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -339,7 +371,7 @@ form h2 { text-align: center; }
 /********** Add Movie Form **********/
 .add-movie-form {
     max-width: 30vw;
-    margin-top: 1.5vw;
+    margin-top: 1vw;
     padding: 1vw;
     border: 1px solid var(--hight-constrast-color);
     border-radius: 20px;
@@ -562,4 +594,9 @@ form h2 { text-align: center; }
     text-align: center;
     flex:1;
     font-size: xx-large;
+}
+
+.title{
+    padding-top: 0.5em;
+    padding-left: 1em;
 }

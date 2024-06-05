@@ -1,14 +1,35 @@
 document.addEventListener('DOMContentLoaded', function()
 {
-    document.querySelectorAll('.tag').forEach(tagElement =>
-    {
-        tagElement.addEventListener('click', () =>
-        {
-            filterMoviesByTag(tagElement.getAttribute('data-tag'));
+    const randomHome = document.getElementById('home-list');
+    if (randomHome) {
+        randomMovies()
+    }
+    else{
+        document.querySelectorAll('.tag').forEach(tagElement => {
+            tagElement.addEventListener('click', () => {
+                filterMoviesByTag(tagElement.getAttribute('data-tag'));
+            });
         });
-    });
-    filterMoviesByTag(-1)
+        filterMoviesByTag(-1);
+    }
+
+    // Ajout de l'écouteur d'événements pour le bouton avec l'ID random-home
+    const randomHomeButton = document.getElementById('random-home');
+    if (randomHomeButton) {
+        randomHomeButton.addEventListener('click', function() {
+            randomMovies()
+        });
+    }
+
 });
+
+function randomMovies()
+{
+    fetch('../api/get-random-movies.php')
+        .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
+        .then(data => { if (data.success) { const movies = JSON.parse(data.data); renderMovies(movies, true); } else { set_user_msg(data.error, 'danger'); } })
+        .catch(error => { set_user_msg(error, 'danger'); });
+}
 
 function filterMoviesByTag(tagId)
 {
@@ -18,15 +39,20 @@ function filterMoviesByTag(tagId)
         .catch(error => { set_user_msg(error, 'danger'); });
 }
 
-function renderMovies(movies)
+function renderMovies(movies, random = null )
 {
     const carrousel = document.querySelector('.carrousel');
     carrousel.innerHTML = '';
-
+    if(random === null){
+        limite = movies.length;
+    }
+    else{
+        limite = 3;
+    }
     const moviesPerSlide = Math.max(Math.floor((window.innerWidth * 0.95) / (window.innerHeight * 0.35) - 1), 1);
     let slideIndex = 0;
 
-    for (let i = 0; i < movies.length; i += moviesPerSlide)
+    for (let i = 0; i < limite; i += moviesPerSlide)
     {
         const slide = document.createElement('div');
         slide.classList.add('carrousel-slide');
@@ -89,19 +115,20 @@ function renderMovies(movies)
         carrousel.appendChild(slide);
         slideIndex++;
     }
+    if(random === null){
+        // Create navigation buttons
+        const prevButton = document.createElement('button');
+        prevButton.classList.add('carousel-control-prev-icon');
+        prevButton.classList.add('carrousel-nav');
+        prevButton.addEventListener('click', () => showSlide(-1));
+        carrousel.appendChild(prevButton);
 
-    // Create navigation buttons
-    const prevButton = document.createElement('button');
-    prevButton.classList.add('carousel-control-prev-icon');
-    prevButton.classList.add('carrousel-nav');
-    prevButton.addEventListener('click', () => showSlide(-1));
-    carrousel.appendChild(prevButton);
-
-    const nextButton = document.createElement('button');
-    nextButton.classList.add('carousel-control-next-icon');
-    nextButton.classList.add('carrousel-nav');
-    nextButton.addEventListener('click', () => showSlide(1));
-    carrousel.appendChild(nextButton);
+        const nextButton = document.createElement('button');
+        nextButton.classList.add('carousel-control-next-icon');
+        nextButton.classList.add('carrousel-nav');
+        nextButton.addEventListener('click', () => showSlide(1));
+        carrousel.appendChild(nextButton);
+    }
 }
 
 function showSlide(direction)

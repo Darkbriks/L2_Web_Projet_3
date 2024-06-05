@@ -251,14 +251,13 @@ $persons = $personDB->getPersons();
 
     function clearOptionList(type) { let personList = document.getElementById(type + 'DatalistOptions'); personList.innerHTML = ''; }
 
-    // TODO: Améliorer le style du bouton de suppression
     function addPersonToList(type, id, name)
     {
         let personList = document.getElementById(type + 'List');
         personList.querySelectorAll('.input').forEach(function(person)
         {
             if (person.value === id) { console.log('Personne déjà ajoutée'); return; }
-            // TODO: Fix this
+            // TODO: Fix this (ajouter 2 fois la même personne dans la même catégorie)
         });
 
         let person = document.createElement('div');

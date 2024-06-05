@@ -4,7 +4,7 @@ use mdb\MoviesDB;
 $movieDB = new MoviesDB();
 $movies = $movieDB->getMovies(); // Récupère tous les films existants depuis la base de données
 ?>
-<form method='POST' enctype='multipart/form-data' class="update-movie-form" id="update-movie-form">
+<form method='POST' enctype='multipart/form-data' class="add-movie-form" id="update-movie-form">
     <label for="movie_id"><?php echo $GLOBALS['update-movie-form-title']; ?></label>
     <select name="movie_id" id="movie_id">
         <?php foreach ($movies as $movie) { ?>

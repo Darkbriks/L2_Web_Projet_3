@@ -72,7 +72,7 @@ $persons = $personDB->getPersons(); // Récupère toutes les personnes existante
                             <input class="form-control" type='file' name='new_image_path' id='person-image' accept='image/jpeg, image/jpg, image/png'>
                         </div>
 
-                        <button class="btn btn-primary" id="person-submit">
+                        <button class="btn btn-primary" id="update-person-submit">
                             <?php echo htmlspecialchars($GLOBALS['update-person-form-submit'], ENT_QUOTES, 'UTF-8'); ?>
                         </button>
                         <input type="submit" name="delete_person" value="<?php echo htmlspecialchars($GLOBALS['delete-person-form'], ENT_QUOTES, 'UTF-8'); ?>">
@@ -90,7 +90,7 @@ $persons = $personDB->getPersons(); // Récupère toutes les personnes existante
             });
         });
 
-        document.querySelector('.update-person-form').addEventListener('submit', function(e) {
+        document.querySelector('#update-person-submit').addEventListener('submit', function(e) {
             document.getElementById('update-person-form-msg').innerHTML = '';
             e.preventDefault();
             if (validatePersonForm()) {

@@ -11,6 +11,7 @@ $GLOBALS['template-dark-theme'] = 'Dunkelmodus';
 $GLOBALS['header-title'] = 'Heimat der Filme';
 $GLOBALS['header-home'] = 'Startseite';
 $GLOBALS['header-movies'] = 'Filme';
+$GLOBALS['header-advanced-search'] = 'Erweiterte Suche';
 $GLOBALS['header-peoples'] = 'Personen';
 $GLOBALS['header-admin'] = 'Admin';
 $GLOBALS['header-search'] = 'Suche';
@@ -28,6 +29,9 @@ $GLOBALS['admin-movie-success'] = 'Film erfolgreich hinzugefügt';
 // MovieForm.php
 $GLOBALS['movie-form-title'] = 'Einen Film hinzufügen';
 $GLOBALS['movie-form-add-movie-image'] = 'Bild';
+$GLOBALS['update-form-link-title'] = 'Eine Verbindung hinzufügen';
+$GLOBALS['update-form-link'] = 'Die Verbindung hinzufügen';
+$GLOBALS['delete-form-link'] = 'Die Verbindung löschen';
 $GLOBALS['movie-form-add-movie-score'] = 'Bewertung';
 $GLOBALS['update-movie-form-title'] = 'Wählen Sie einen Film aus, den Sie ändern möchten';
 $GLOBALS['update-movie-form-question'] = 'Diesen Film ändern';
@@ -56,6 +60,7 @@ $GLOBALS['movie-form-add-movie-actors-list'] = 'Schauspielerliste';
 $GLOBALS['movie-form-add-movie-add-actor'] = 'Schauspieler hinzufügen';
 $GLOBALS['movie-form-add-movie-composers-list'] = 'Komponistenliste';
 $GLOBALS['movie-form-add-movie-add-composer'] = 'Komponist hinzufügen';
+$GLOBALS['movie-form-add-played'] = 'Gespielte Rolle';
 $GLOBALS['movie-form-add-movie-seen'] = 'Gesehen';
 $GLOBALS['movie-form-add-movie-add'] = 'Hinzufügen';
 $GLOBALS['movie-form-add-movie-cancel'] = 'Abbrechen';
@@ -83,6 +88,7 @@ $GLOBALS['tag-form-exception-name'] = 'Der Name des Tags muss zwischen 3 und 50 
 
 // PersonForm.php
 $GLOBALS['person-form-title'] = 'Eine Person hinzufügen';
+$GLOBALS['person-form-type'] = 'Personenart';
 $GLOBALS['update-person-form-title'] = 'Eine Person ändern';
 $GLOBALS['update-person-form-question'] = 'Wählen Sie eine Person aus, die Sie ändern möchten';
 $GLOBALS['delete-person-form'] = 'Diese Person löschen';
@@ -112,7 +118,8 @@ $GLOBALS['all-peoples-title'] = 'Personen';
 
 ////////// HOME //////////
 // home.php
-$GLOBALS['home-most-popular-title'] = 'Beliebteste Filme';
+$GLOBALS['home-discover-title'] = 'Découvertes de films';
+$GLOBALS['random-home-title'] = 'Filme entdecken';
 
 ////////// MOVIE //////////
 // movie.php
@@ -130,6 +137,9 @@ $GLOBALS['movie-edit-vu'] = 'Bearbeiten';
 $GLOBALS['movie-save-vu'] = 'Speichern';
 $GLOBALS['movie-directors'] = 'Regisseur(en)';
 $GLOBALS['movie-actors'] = 'Schauspieler';
+$GLOBALS['movie-actor'] = 'Schauspieler';
+$GLOBALS['movie-director'] = 'Regisseur';
+$GLOBALS['movie-composer'] = 'Komponist';
 $GLOBALS['movie-composers'] = 'Komponist(en)';
 $GLOBALS['movie-error-1'] = 'Keine Film-ID angegeben';
 $GLOBALS['movie-error-2'] = 'Kein Film gefunden mit ID : ';

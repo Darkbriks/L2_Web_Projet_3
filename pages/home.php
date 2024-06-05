@@ -14,17 +14,11 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
 <?php ob_start(); ?>
 
-<h1><?php echo $GLOBALS['home-most-popular-title']; ?></h1>
-<div id="film-list">
-    <?php
-    try
-    {
-        $moviesDB = new mdb\MoviesDB();
-        $movies = $moviesDB->getMovieById(1);
-        foreach ($movies as $movie) { echo $movie->getHtml(); }
-    }
-    catch (Exception $e) { ?><script> document.addEventListener('DOMContentLoaded', function() { set_user_msg("<?php echo $e->getMessage() . " Code: " . $e->getCode(); ?>", "danger"); }); </script> <?php }
-    ?>
+<h1 class="title"><?php echo $GLOBALS['home-discover-title']; ?></h1>
+<div id="home-list">
+    <script src="../js/allMovies.js"></script>
+    <div class="carrousel" id="movies-container"></div>
+    <div class="mb-3"><button type="button" class="btn-home" id="random-home"><?php echo $GLOBALS['random-home-title']; ?></button></div>
 </div>
 
 <?php $content = ob_get_clean(); ?>
