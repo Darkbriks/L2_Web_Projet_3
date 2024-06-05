@@ -11,6 +11,7 @@ $GLOBALS['template-dark-theme'] = 'Tema oscuro';
 $GLOBALS['header-title'] = 'Hogar de las Películas';
 $GLOBALS['header-home'] = 'Inicio';
 $GLOBALS['header-movies'] = 'Películas';
+$GLOBALS['header-advanced-search'] = 'Búsqueda avanzada';
 $GLOBALS['header-peoples'] = 'Personas';
 $GLOBALS['header-admin'] = 'Admin';
 $GLOBALS['header-search'] = 'Buscar';
@@ -118,6 +119,8 @@ $GLOBALS['all-peoples-title'] = 'Personas';
 ////////// HOME //////////
 // home.php
 $GLOBALS['home-most-popular-title'] = 'Películas más populares';
+$GLOBALS['random-home-title'] = 'Películas aleatorias';
+
 
 ////////// MOVIE //////////
 // movie.php
