@@ -47,6 +47,30 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
                         </select>
                     </div>
 
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <label class="input-group-text" for="filter-movie-tag">Tag</label>
+                            <select class="form-select" id="filter-movie-tag">
+                                <option value="null">Choose an operator</option>
+                                <option value="AND">AND</option>
+                                <option value="OR">OR</option>
+                            </select>
+                        </div>
+                        <div id='category'>
+                            <?php try
+                            {
+                                $tagDB = new mdb\TagDB(); $categories = $tagDB->getTags();
+                                foreach ($categories as $category) {?>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type='checkbox' name='category[]' id='category_<?php echo $category->getId() ?>' value='<?php echo $category->getId() ?>'>
+                                        <label class="form-check-label" for='category_<?php echo $category->getId() ?>'><?php echo $category->getName() ?></label>
+                                    </div>
+                                <?php }
+                            }
+                            catch (Exception $e) { echo $e->getMessage(); } ?>
+                        </div>
+                    </div>
+
                     <?php echo mdb\form\GenerateFormInput::generateAdvancedSearchPersonFields(); ?>
                 </div>
 
@@ -58,31 +82,8 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
         </div>
     </div>
 
-    <div class="modal fade" id="person-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    .
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
-        document.addEventListener('DOMContentLoaded', function()
-        {
-            //document.getElementById('addCategory').addEventListener('click', addTag);
-
-            document.getElementById('validate-search').addEventListener('click', searchMovies);
-        });
+        document.addEventListener('DOMContentLoaded', function() { document.getElementById('validate-search').addEventListener('click', searchMovies); });
 
         function updateOptionList(type, value)
         {
@@ -168,6 +169,10 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
             document.getElementById('composerList').querySelectorAll('.person-id-value').forEach(function(composer) { composers.push(composer.value); });
             let composerOperator = document.getElementById('operator-composer').value;
 
+            let tags = [];
+            document.getElementById('category').querySelectorAll('input[type="checkbox"]').forEach(function(tag) { if (tag.checked) { tags.push(tag.value); } });
+            let tagsOperator = document.getElementById('filter-movie-tag').value;
+
             let data = {
                 'title': title,
                 'titleOperator': titleOperator,
@@ -188,11 +193,14 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
                 'actorsOperator': actorOperator,
                 'nbComposers': composers.length,
                 'composersOperator': composerOperator,
+                'nbTags': tags.length,
+                'tagsOperator': tagsOperator
             };
 
             directors.forEach(function(director, index) { data['director' + index] = director; });
             actors.forEach(function(actor, index) { data['actor' + index] = actor; });
             composers.forEach(function(composer, index) { data['composer' + index] = composer; });
+            tags.forEach(function(tag, index) { data['tag' + index] = tag; });
 
             fetch('../api/advanced-search-get-movies.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data) })
                 .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })

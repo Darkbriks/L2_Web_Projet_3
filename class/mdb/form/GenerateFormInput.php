@@ -12,7 +12,7 @@ class GenerateFormInput
         $html .= '<option value="null">--</option>';
         foreach ($fieldOperatorValues as $key => $value) { $html .= '<option value="' . $key . '">' . $value . '</option>'; }
         $html .= '</select>';
-        $html .= '<input type="text" class="form-control" id="filter-' . $fieldName . '" name="filter-' . $fieldName . '">';
+        $html .= '<input type="text" class="form-control" id="filter-' . $fieldName . '" name="filter-' . $fieldName . '" placeholder="Type to search...">';
         $html .= '</div>';
         return $html;
     }
@@ -34,6 +34,7 @@ class GenerateFormInput
         $html .= '<label class="form-label" for="filter-' . $fieldName . '">Type to search...</label>';
         $html .= '</div>';
         $html .= '<div class="list-group" id="' . $fieldName . 'DatalistOptions"></div>';
+        $html .= '</div>';
         $html .= "<script>";
         $html .= "document.getElementById('" . $fieldName . "DataList').addEventListener('input', function() {";
         $html .= "let input = document.getElementById('" . $fieldName . "DataList').value;";
