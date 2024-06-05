@@ -74,6 +74,7 @@ if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
     } else if ($action === 'edit') {
         include "update-person-form.php";
         include "update-tag-form.php";
+        include "add-person-to-movie-form.php";
         include "update-movie-form.php";
     }
 } else {

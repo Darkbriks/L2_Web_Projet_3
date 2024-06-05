@@ -27,6 +27,9 @@ $GLOBALS['admin-movie-success'] = 'Movie successfully added';
 
 // MovieForm.php
 $GLOBALS['movie-form-title'] = 'Add a movie';
+$GLOBALS['update-form-link-title'] = 'Add a link';
+$GLOBALS['update-form-link'] = 'Add the link';
+$GLOBALS['delete-form-link'] = 'Delete the link';
 $GLOBALS['update-movie-form-title'] = 'Choose a movie to modify';
 $GLOBALS['update-movie-form-question'] = 'Modify this movie';
 $GLOBALS['delete-movie-form'] = 'Delete this movie';
@@ -54,6 +57,7 @@ $GLOBALS['movie-form-add-movie-actors-list'] = 'Actors list';
 $GLOBALS['movie-form-add-movie-add-actor'] = 'Add an actor';
 $GLOBALS['movie-form-add-movie-composers-list'] = 'Composers list';
 $GLOBALS['movie-form-add-movie-add-composer'] = 'Add a composer';
+$GLOBALS['movie-form-add-played'] = 'Role played';
 $GLOBALS['movie-form-add-movie-seen'] = 'Seen';
 $GLOBALS['movie-form-add-movie-add'] = 'Add';
 $GLOBALS['movie-form-add-movie-cancel'] = 'Cancel';
@@ -83,6 +87,7 @@ $GLOBALS['tag-form-exception-name'] = 'The tag name must contain between 3 and 5
 
 // PersonForm.php
 $GLOBALS['person-form-title'] = 'Add a person';
+$GLOBALS['person-form-type'] = 'Person type';
 $GLOBALS['update-person-form-title'] = 'Modify a person';
 $GLOBALS['update-person-form-question'] = 'Choose a person to modify';
 $GLOBALS['delete-person-form'] = 'Delete this person';
@@ -130,6 +135,9 @@ $GLOBALS['movie-edit-vu'] = 'Edit';
 $GLOBALS['movie-save-vu'] = 'Save';
 $GLOBALS['movie-directors'] = 'Director(s)';
 $GLOBALS['movie-actors'] = 'Actor(s)';
+$GLOBALS['movie-actor'] = 'Actor';
+$GLOBALS['movie-director'] = 'Director';
+$GLOBALS['movie-composer'] = 'Composer';
 $GLOBALS['movie-composers'] = 'Composer(s)';
 $GLOBALS['movie-error-1'] = 'No movie ID provided';
 $GLOBALS['movie-error-2'] = 'No movie found with ID : ';

@@ -29,10 +29,12 @@ $GLOBALS['admin-person-success'] = 'Personne ajoutée avec succès';
 
 // MovieForm.php
 $GLOBALS['movie-form-title'] = 'Ajouter un film';
-
 $GLOBALS['movie-form-add-movie-title'] = 'Titre';
 $GLOBALS['movie-form-add-movie-image'] = 'Image';
 $GLOBALS['movie-form-add-movie-score'] = 'Note';
+$GLOBALS['update-form-link-title'] = 'Ajouter une liaison';
+$GLOBALS['update-form-link'] = 'Ajouter la liaison';
+$GLOBALS['delete-form-link'] = 'Supprimer la liaison';
 $GLOBALS['update-movie-form-title'] = 'Choisir un film à modifier';
 $GLOBALS['update-movie-form-question'] = 'Modifier ce film';
 $GLOBALS['delete-movie-form'] = 'Supprimer ce film';
@@ -59,6 +61,8 @@ $GLOBALS['movie-form-add-movie-actors-list'] = 'Liste des acteurs';
 $GLOBALS['movie-form-add-movie-add-actor'] = 'Ajouter un acteur';
 $GLOBALS['movie-form-add-movie-composers-list'] = 'Liste des compositeurs';
 $GLOBALS['movie-form-add-movie-add-composer'] = 'Ajouter un compositeur';
+$GLOBALS['movie-form-add-played'] = 'Rôle joué';
+$GLOBALS['movie-form-add-played'] = 'Rôle joué';
 $GLOBALS['movie-form-add-movie-seen'] = 'Vu';
 $GLOBALS['movie-form-add-movie-add'] = 'Ajouter';
 $GLOBALS['movie-form-add-movie-cancel'] = 'Annuler';
@@ -86,6 +90,7 @@ $GLOBALS['tag-form-exception-name'] = 'Le nom de la balise doit contenir entre 3
 
 // PersonForm.php
 $GLOBALS['person-form-title'] = 'Ajouter une personne';
+$GLOBALS['person-form-type'] = 'Type de personne';
 $GLOBALS['update-person-form-title'] = 'Modifier une personne';
 $GLOBALS['update-person-form-question'] = 'Choisissez une personne à modifier';
 $GLOBALS['delete-person-form'] = 'Supprimer cette personne';
@@ -152,7 +157,10 @@ $GLOBALS['movie-edit-vu'] = 'Modifier';
 $GLOBALS['movie-save-vu'] = 'Sauvegarder';
 $GLOBALS['movie-synopsis'] = 'Synopsis';
 $GLOBALS['movie-directors'] = 'Réalisateur(s)';
+$GLOBALS['movie-director'] = 'Réalisateur';
+$GLOBALS['movie-composer'] = 'Compositeur';
 $GLOBALS['movie-actors'] = 'Acteur(s)';
+$GLOBALS['movie-actor'] = 'Acteur';
 $GLOBALS['movie-composers'] = 'Compositeur(s)';
 $GLOBALS['movie-error-1'] = 'Aucun ID de film fourni';
 $GLOBALS['movie-error-2'] = 'Aucun film trouvé avec l\'ID : ';
