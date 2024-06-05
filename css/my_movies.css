@@ -595,6 +595,21 @@ form h2 { text-align: center; }
     flex:1;
     font-size: xx-large;
 }
+.movie-card-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+.movie-card-list img{
+    width: var(--carrousel-slide-element-width);
+    max-height: 60vh;
+    aspect-ratio: var(--carrousel-slide-element-aspect-ratio);
+    transition: transform 0.5s;
+    object-fit: cover;
+}
 
 .title{
     padding-top: 0.5em;
