@@ -78,6 +78,7 @@ $GLOBALS['update-tag-form-submit'] = 'Edit';
 $GLOBALS['update-tag-form-name'] = 'Tag name';
 $GLOBALS['update-tag-form-question'] = 'Choose a tag to update';
 $GLOBALS['delete-tag-form'] = 'Delete the tag';
+$GLOBALS['tag-form-exception-name'] = 'The tag name must contain between 3 and 50 characters';
 
 
 // PersonForm.php

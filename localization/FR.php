@@ -81,6 +81,7 @@ $GLOBALS['update-tag-form-submit']='Modifier';
 $GLOBALS['update-tag-form-name']='Nom du tag';
 $GLOBALS['update-tag-form-question']='Choisir un tag à mettre à jour ';
 $GLOBALS['delete-tag-form']='Supprimer le tag';
+$GLOBALS['tag-form-exception-name'] = 'Le nom de la balise doit contenir entre 3 et 50 caractères.';
 
 
 // PersonForm.php

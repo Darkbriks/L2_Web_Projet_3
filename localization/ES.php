@@ -78,6 +78,7 @@ $GLOBALS['update-tag-form-submit'] = 'Modificar';
 $GLOBALS['update-tag-form-name'] = 'Nombre de la etiqueta';
 $GLOBALS['update-tag-form-question'] = 'Elegir una etiqueta para actualizar';
 $GLOBALS['delete-tag-form'] = 'Eliminar la etiqueta';
+$GLOBALS['tag-form-exception-name'] = 'El nombre de la etiqueta debe contener entre 3 y 50 caracteres.';
 
 
 // PersonForm.php
