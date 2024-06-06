@@ -51,8 +51,8 @@ if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {
             try {
                 $movieForm = new \mdb\form\MovieForm();
-                $img_file = $_FILES['posters'] ?? null;
-                $movieForm->createMovie($_POST, $img_file);
+                $img_file = $_FILES['image-path'] ?? null;
+                $movieForm->Movie($_POST, $img_file);
                 $add_movie_success = $GLOBALS['admin-movie-success'];
             } catch (Exception $e) {
                 $add_movie_error = $e->getMessage();
@@ -61,7 +61,7 @@ if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
             try {
                 $personForm = new \mdb\form\PersonForm();
                 $img_file = $_FILES['person-image'] ?? null;
-                $personForm->createPerson($_POST, $img_file);
+                $personForm->Person($_POST, $img_file);
                 ?><script> document.addEventListener('DOMContentLoaded', function() {
                         set_user_msg("<?php echo $GLOBALS['admin-person-success'] ?>", 'success');
                     }); </script><?php
@@ -80,7 +80,7 @@ if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
                 $personForm = new \mdb\form\PersonForm();
                 $img_file = $_FILES['person-image-path'] ?? null;
                 try {
-                    $personForm->alterPerson($_POST['person_id'], $_POST, $img_file);
+                    $personForm->Person($_POST, $img_file, $_POST['person_id']);
                 ?><script> document.addEventListener('DOMContentLoaded', function() {
                         set_user_msg("<?php echo $GLOBALS['admin-person-success'] ?>", 'success');
                     }); </script><?php
@@ -88,6 +88,16 @@ if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
                 ?><script> document.addEventListener('DOMContentLoaded', function() {
                         set_user_msg("<?php echo $e->getMessage(); ?>", 'danger');
                     }); </script><?php
+                }
+            }
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {
+                try {
+                    $movieForm = new \mdb\form\MovieForm();
+                    $img_file = $_FILES['image_path'] ?? null;
+                    $movieForm->Movie($_POST, $img_file,$_POST['movie_id']);
+                    $add_movie_success = $GLOBALS['admin-movie-success'];
+                } catch (Exception $e) {
+                    $add_movie_error = $e->getMessage();
                 }
             }
             include "add-person-to-movie-form.php";

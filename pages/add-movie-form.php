@@ -41,9 +41,9 @@ catch (Exception $e) { $add_movie_error = $e->getMessage(); }
     </div>
 
     <div class="mb-3">
-        <label for='posters' class="form-label"><?php echo $GLOBALS['movie-form-add-movie-poster'] ?></label>
+        <label for='image-path' class="form-label"><?php echo $GLOBALS['movie-form-add-movie-poster'] ?></label>
         <div style="display: flex">
-            <input class="form-control" type='file' name='posters' id='posters' required accept='image/jpeg, image/jpg, image/png'>
+            <input class="form-control" type='file' name='image-path' id='image-path' required accept='image/jpeg, image/jpg, image/png'>
             <button type="button" class="btn-close" aria-label="Close" id="remove-poster-btn"></button>
         </div>
         <div id='posters-preview'><img src='' alt=''></div>
@@ -134,7 +134,7 @@ catch (Exception $e) { $add_movie_error = $e->getMessage(); }
 <script>
     document.addEventListener('DOMContentLoaded', function()
     {
-        document.getElementById('posters').addEventListener('change', function() { updatePosterPreview(this); });
+        document.getElementById('image-path').addEventListener('change', function() { updatePosterPreview(this); });
         document.getElementById('remove-poster-btn').addEventListener('click', removePoster);
 
         document.getElementById('addCategory').addEventListener('click', addTag);
@@ -180,7 +180,7 @@ catch (Exception $e) { $add_movie_error = $e->getMessage(); }
         {
             let reader = new FileReader();
             reader.onload = function(e) { postersPreview.innerHTML = '<img src="' + e.target.result + '" alt="Poster">'; }
-            reader.readAsDataURL(posters[0]);
+            reader.readAsDataURL(image-path[0]);
         }
         else { removePoster() }
     }
@@ -191,7 +191,7 @@ catch (Exception $e) { $add_movie_error = $e->getMessage(); }
         if (postersPreview === null) { postersPreview = document.getElementById('posters-preview'); }
         else { postersPreview.id = 'posters-preview'; }
         postersPreview.innerHTML = '';
-        document.getElementById('posters').value = '';
+        document.getElementById('image-path').value = '';
     }
 
     function addTag()
@@ -225,7 +225,7 @@ catch (Exception $e) { $add_movie_error = $e->getMessage(); }
         let title = form.querySelector('#title').value;
         let release_date = form.querySelector('#release_date').value;
         let duration = form.querySelector('#duration').value;
-        let posters = form.querySelector('#posters').value;
+        let posters = form.querySelector('#image-path').value;
         let synopsis = form.querySelector('#synopsis').value;
         let trailer = form.querySelector('#trailer').value;
         let age_limit = form.querySelector('#age_limit').value;
