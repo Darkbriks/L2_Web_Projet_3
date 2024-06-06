@@ -283,6 +283,16 @@ class MoviesDB extends PdoWrapper
     /**
      * @throws Exception
      */
+    public function updateLink($movieId, $personId, $personRole): array
+    {
+        $query = "UPDATE movie_person SET played_name = :personRole WHERE movie_id = :movieId AND person_id = :personId";
+        $params = [':movieId' => $movieId, ':personId' => $personId, ':personRole' => $personRole];
+        return $this->execute($query, $params, NULL);
+    }
+
+    /**
+     * @throws Exception
+     */
     public function breakLink($movieId, $personId): array
     {
         $query = "DELETE FROM movie_person WHERE movie_id = :movieId AND person_id = :personId";

@@ -74,10 +74,16 @@ class Person
         $html = "<div class='person-card' id='card-{$this->id}'>
                     <img id='{$this->id}' src='" . $GLOBALS['PEOPLES_DIR'] . $this->image_path . "' alt='{$this->first_name} {$this->last_name}' style='cursor: pointer;'>
                     <h3>{$this->first_name} {$this->last_name}</h3>";
-        if (!$canEdit) { $html .= ($played_name && $this->played_name !== null ? "<p>{$this->played_name}</p>" : ''); }
+        if (!$canEdit && $this->played_name !== null) { $html .= "<p>{$this->played_name}</p>"; }
         if ($canEdit)
         {
-            $html .= ($played_name && $this->played_name !== null ? "<input type='text' id='role-{$this->id}' placeholder='Role' class='form-control form-control-sm' style='margin-bottom: 5px;' value='{$this->played_name}'>" : '');
+            if (isset($this->played_name))
+            {
+                $html .= '<div class="input-group input-group-sm mb-3">';
+                $html .= "<input type='text' id='role-{$this->id}' placeholder='Role' class='form-control' style='margin-bottom: 5px;' value='{$this->played_name}'>";
+                $html .= "<button type='button' class='btn btn-outline-secondary' id='update-{$this->id}'>Update</button>";
+                $html .= '</div>';
+            }
             $html .= "<button class='btn btn-primary  btn-sm' id='remove-{$this->id}'>Remove</button>";
         }
         $html .= "</div><script>document.getElementById('{$this->id}').addEventListener('click', function() { window.location.href = 'person.php?id={$this->id}'; });</script>";
@@ -96,6 +102,23 @@ class Person
                             .catch(error => { else { set_msg(error, 'danger'); });
                         });
                     </script>";
+            if (isset($this->played_name))
+            {
+                $html .= "<script>
+                            document.getElementById('update-{$this->id}').addEventListener('click', function()
+                            {
+                                let role = document.getElementById('role-{$this->id}').value;
+                                fetch('../api/set-movie-person-link.php', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                    body: 'updateLink=true&movieId={$movieId}&personId={$this->id}&role=' + role
+                                })
+                                .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
+                                .then(data => { if (data.success) { set_msg('Role updated', 'success'); } else { set_msg(data.error, 'warning'); } })
+                                .catch(error => { set_msg(error, 'danger'); });
+                            });
+                        </script>";
+            }
         }
         return $html;
     }

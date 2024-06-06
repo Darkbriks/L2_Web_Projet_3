@@ -45,4 +45,17 @@ else if (isset($_POST['removeLink']) && isset($_POST['movieId']) && isset($_POST
     }
     catch (Exception $e) { echo json_encode(['success' => false, 'error' => $e->getMessage()]); }
 }
+else if (isset($_POST['updateLink']) && isset($_POST['movieId']) && isset($_POST['personId']) && isset($_POST['role']))
+{
+    $movieId = (int)htmlspecialchars($_POST['movieId']);
+    $personId = (int)htmlspecialchars($_POST['personId']);
+    $personRole = htmlspecialchars($_POST['role']);
+
+    try
+    {
+        $moviesDB->updateLink($movieId, $personId, $personRole);
+        echo json_encode(['success' => true, 'data' => 'Person role updated']);
+    }
+    catch (Exception $e) { echo json_encode(['success' => false, 'error' => $e->getMessage()]); }
+}
 else { echo json_encode(['success' => false, 'error' => 'Missing parameters']); }
