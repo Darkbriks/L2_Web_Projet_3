@@ -101,4 +101,33 @@ class GenerateFormInput
         $html .= '</div>';
         return $html;
     }
+
+    public static function generateNumberInput($fieldName, $fieldLabel, $fieldValue = null, $fieldPlaceholder = null, $fieldDisabled = false): string
+    {
+        $html = '<div class="mb-3">';
+        $html .= '<label for="' . $fieldName . '" class="form-label">' . $fieldLabel . '</label>';
+        $html .= '<input type="number" class="form-control" id="' . $fieldName . '" name="' . $fieldName . '" value="' . $fieldValue . '" placeholder="' . $fieldPlaceholder . '" ' . ($fieldDisabled ? 'disabled' : '') . '>';
+        $html .= '</div>';
+        return $html;
+    }
+
+    public static function generateSelectInput($fieldName, $fieldLabel, $fieldOptions, $fieldSelected = null, $fieldDisabled = false): string
+    {
+        $html = '<div class="mb-3">';
+        $html .= '<label for="' . $fieldName . '" class="form-label">' . $fieldLabel . '</label>';
+        $html .= '<select class="form-select" id="' . $fieldName . '" name="' . $fieldName . '" ' . ($fieldDisabled ? 'disabled' : '') . '>';
+        foreach ($fieldOptions as $key => $value) { $html .= '<option value="' . $key . '" ' . ($fieldSelected == $key ? 'selected' : '') . '>' . $value . '</option>'; }
+        $html .= '</select>';
+        $html .= '</div>';
+        return $html;
+    }
+
+    public static function generateFileInput($fieldName, $fieldLabel, $fieldDisabled = false): string
+    {
+        $html = '<div class="mb-3">';
+        $html .= '<label for="' . $fieldName . '" class="form-label">' . $fieldLabel . '</label>';
+        $html .= '<input type="file" class="form-control" id="' . $fieldName . '" name="' . $fieldName . '" ' . ($fieldDisabled ? 'disabled' : '') . '>';
+        $html .= '</div>';
+        return $html;
+    }
 }

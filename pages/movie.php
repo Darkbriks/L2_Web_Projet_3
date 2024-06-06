@@ -10,6 +10,7 @@ session_start();
 $lang = $_SESSION['language'] ?? 'EN';
 require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
+$admin = $_SESSION['admin'] ?? false;
 ?>
 
 <?php ob_start(); ?>
@@ -23,7 +24,7 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
     $moviesDB = new mdb\MoviesDB();
     $movies = $moviesDB->getMovieById($id);
     if (count($movies) == 0) { throw new Exception($GLOBALS['movie-error-2'] . $id, 2); }
-    echo $movies[0]->getHtml();
+    echo $movies[0]->getHtml($admin);
 
     $personDB = new mdb\PersonDB();
     $directors = $personDB->getDirectorsOfMovie($movies[0]->id);
