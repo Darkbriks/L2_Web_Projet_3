@@ -253,23 +253,6 @@ class PersonDB extends PdoWrapper
         return $this->execute($query, $params, NULL);
     }
 
-    /**
-     * @throws Exception
-     */
-    public function alterPersonReturnID($id, $first_name, $last_name, $birth_date, $death_date, $image_path): void
-    {
-        $query = "UPDATE person SET first_name = :first_name, last_name = :last_name, birth_date = :birth_date, death_date = :death_date, image_path = :image_path WHERE id = :id";
-        $params = array(
-            ':id' => $id,
-            ':first_name' => $first_name,
-            ':last_name' => $last_name,
-            ':birth_date' => $birth_date,
-            ':death_date' => $death_date,
-            ':image_path' => $image_path
-        );
-        $this->execute($query, $params, NULL);
-    }
-
 
     /**
      * @throws Exception
