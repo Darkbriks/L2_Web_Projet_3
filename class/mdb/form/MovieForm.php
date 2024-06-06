@@ -1,8 +1,11 @@
 <?php
 
-namespace mdb;
+namespace mdb\form;
 
 use Exception;
+use mdb\MoviesDB;
+use mdb\PersonDB;
+use mdb\TagDB;
 
 class MovieForm
 {

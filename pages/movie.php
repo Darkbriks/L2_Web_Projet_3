@@ -31,11 +31,11 @@ $admin = $_SESSION['admin'] ?? false;
     $actors = $personDB->getActorsOfMovie($movies[0]->id);
     $composers = $personDB->getComposersOfMovie($movies[0]->id);
 
-    if (count($directors) > 0) { ?><h3><?php echo $GLOBALS['movie-directors'] ?></h3><div class="person-card-list"><?php foreach ($directors as $director) { echo $director->getHtml_card(); } ?></div><?php }
+    ?><h3><?php echo $GLOBALS['movie-directors'] ?></h3><div class="person-card-list"><?php foreach ($directors as $director) { echo $director->getHtml_card(false, $admin, $movies[0]->id); } ?></div>
 
-    if (count($directors) > 0) { ?><h3><?php echo $GLOBALS['movie-actors'] ?></h3> <div class="person-card-list"><?php foreach ($actors as $actor) { echo $actor->getHtml_card(true); } ?></div><?php }
+    <h3><?php echo $GLOBALS['movie-actors'] ?></h3> <div class="person-card-list"><?php foreach ($actors as $actor) { echo $actor->getHtml_card(true, $admin, $movies[0]->id); } ?></div>
 
-    if (count($directors) > 0) { ?><h3><?php echo $GLOBALS['movie-composers'] ?></h3> <div class="person-card-list"><?php foreach ($composers as $composer) { echo $composer->getHtml_card(); } ?></div><?php }
+    <h3><?php echo $GLOBALS['movie-composers'] ?></h3> <div class="person-card-list"><?php foreach ($composers as $composer) { echo $composer->getHtml_card(false, $admin, $movies[0]->id); } ?></div><?php
 }
 catch (Exception $e) { ?><script> document.addEventListener('DOMContentLoaded', function() { set_user_msg("<?php echo $e->getMessage() . " Code: " . $e->getCode(); ?>", "danger"); }); </script> <?php } ?>
 
