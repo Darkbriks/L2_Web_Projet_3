@@ -130,4 +130,11 @@ class GenerateFormInput
         $html .= '</div>';
         return $html;
     }
+
+    public static function generateAddPersonCard($name)
+    {
+        return "<div class='add-person-card' id='add-card-{$name}'>
+                    <i class='bi bi-plus-square' id='{$name}' style='cursor: pointer;'></i>
+                </div>";
+    }
 }

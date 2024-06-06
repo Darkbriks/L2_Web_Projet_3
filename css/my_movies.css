@@ -507,7 +507,13 @@ form h2 { text-align: center; }
     transition: transform 0.2s;
 }
 
-.person-card:hover { transform: scale(1.05); }
+.add-person-card
+{
+    background-color: transparent;
+    transition: transform 0.2s;
+}
+
+.person-card:hover .add-person-card:hover { transform: scale(1.05); }
 
 .person-card img
 {
@@ -518,6 +524,13 @@ form h2 { text-align: center; }
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 10px;
+}
+
+.person-card
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .person-card h3

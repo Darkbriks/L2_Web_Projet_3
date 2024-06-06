@@ -69,6 +69,7 @@ class Movie
                             document.getElementById('edit-vu').innerText = getLocalizedText('movie-save-vu');
                         }
                     });
+                    
                     document.getElementById('edit-favorite').addEventListener('click', function() 
                     {
                         if (document.getElementById('favorite').disabled === false) {
@@ -81,8 +82,6 @@ class Movie
                         }
                     });
                     
-                    
-                    
                     function saveVu()
                     {
                         fetch('../api/set-seen-favorite.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'id': '" . $this->id . "', 'seen': document.getElementById('seen').checked.toString() }) })
@@ -91,29 +90,17 @@ class Movie
                             .catch(error => { set_msg(error, 'danger'); });
                     }
                     
-                    function saveFavorite() {
-                    fetch('../api/set-seen-favorite.php', { 
-                        method: 'POST', 
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, 
-                        body: new URLSearchParams({ 'id': '" . $this->id . "', 'favorite': document.getElementById('favorite').checked.toString() }) 
-                    })
-                    .then(response => { 
-                        if (!response.ok) { 
-                            throw new Error('Erreur HTTP ! statut: ' + response.status); 
-                        } 
-                        return response.json(); 
-                    })
-                    .then(data => { 
-                        if (data.success) { 
-                            set_msg(data.data, 'success'); 
-                        } else { 
-                            set_msg(data.error, 'danger'); 
-                        } 
-                    })
-                    .catch(error => { 
-                        set_msg(error, 'danger'); 
-                    });
-                }
+                    function saveFavorite()
+                    {
+                        fetch('../api/set-seen-favorite.php', { 
+                            method: 'POST', 
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, 
+                            body: new URLSearchParams({ 'id': '" . $this->id . "', 'favorite': document.getElementById('favorite').checked.toString() }) 
+                        })
+                        .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
+                        .then(data => { if (data.success) { set_msg(data.data, 'success'); } else { set_msg(data.error, 'danger'); } })
+                        .catch(error => { set_msg(error, 'danger'); });
+                    }
                     
                     function set_msg(msg, type)
                     {

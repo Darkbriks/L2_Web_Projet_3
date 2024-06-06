@@ -27,32 +27,6 @@ class Person
              <p><strong>Death Date:</strong> {$deathDate}</p></div></div>";
     }
 
-
-
-    /*public function getHtml_Actor(): string
-    {
-        return "<div class='actor'>
-                    <img src='{$this->image_path}' alt='{$this->first_name} {$this->last_name}'>
-                    <h3>{$this->first_name} {$this->last_name} as {$this->played_name}</h3>
-                </div>";
-    }
-
-    public function getHtml_Director(): string
-    {
-        return "<div class='director'>
-                    <img src='{$this->image_path}' alt='{$this->first_name} {$this->last_name}'>
-                    <h3>Directed by: {$this->first_name} {$this->last_name}</h3>
-                </div>";
-    }
-
-    public function getHtml_Composer(): string
-    {
-        return "<div class='composer'>
-                    <img src='{$this->image_path}' alt='{$this->first_name} {$this->last_name}'>
-                    <h3>Music by: {$this->first_name} {$this->last_name}</h3>
-                </div>";
-    }*/
-
     public function getHtml_list(bool $played_name = false): string
     {
         $html = "<li class='card' style='cursor: pointer;' id='{$this->id}'>
@@ -74,7 +48,7 @@ class Person
         $html = "<div class='person-card' id='card-{$this->id}'>
                     <img id='{$this->id}' src='" . $GLOBALS['PEOPLES_DIR'] . $this->image_path . "' alt='{$this->first_name} {$this->last_name}' style='cursor: pointer;'>
                     <h3>{$this->first_name} {$this->last_name}</h3>";
-        if (!$canEdit && $this->played_name !== null) { $html .= "<p>{$this->played_name}</p>"; }
+        if (!$canEdit && isset($this->played_name)) { $html .= "<p>{$this->played_name}</p>"; }
         if ($canEdit)
         {
             if (isset($this->played_name))
