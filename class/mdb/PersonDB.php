@@ -256,7 +256,7 @@ class PersonDB extends PdoWrapper
     /**
      * @throws Exception
      */
-    public function alterPersonReturnID($id, $first_name, $last_name, $birth_date, $death_date, $image_path): bool|int
+    public function alterPersonReturnID($id, $first_name, $last_name, $birth_date, $death_date, $image_path): void
     {
         $query = "UPDATE person SET first_name = :first_name, last_name = :last_name, birth_date = :birth_date, death_date = :death_date, image_path = :image_path WHERE id = :id";
         $params = array(
@@ -267,8 +267,7 @@ class PersonDB extends PdoWrapper
             ':death_date' => $death_date,
             ':image_path' => $image_path
         );
-        if (!empty($this->execute($query, $params, NULL))) { return $id; }
-        return 0;
+        $this->execute($query, $params, NULL);
     }
 
 
