@@ -45,7 +45,7 @@ if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
     if ($action === 'add') {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {
             try {
-                $movieForm = new mdb\MovieForm();
+                $movieForm = new \mdb\form\MovieForm();
                 $img_file = $_FILES['posters'] ?? null;
                 $movieForm->createMovie($_POST, $img_file);
                 $add_movie_success = $GLOBALS['admin-movie-success'];
@@ -54,7 +54,7 @@ if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
             }
         } else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['person-first-name'])) {
             try {
-                $personForm = new mdb\PersonForm();
+                $personForm = new \mdb\form\PersonForm();
                 $img_file = $_FILES['person-image'] ?? null;
                 $personForm->createPerson($_POST, $img_file);
                 ?><script> document.addEventListener('DOMContentLoaded', function() {

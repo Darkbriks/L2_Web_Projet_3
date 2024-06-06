@@ -1,8 +1,9 @@
 <?php
 
-namespace mdb;
+namespace mdb\form;
 
 use Exception;
+use mdb\PersonDB;
 
 class PersonForm
 {
