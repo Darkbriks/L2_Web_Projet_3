@@ -1,6 +1,9 @@
 <?php
 ////////// FR //////////
 
+////////// GLOBAL EXPRESSIONS //////////
+$GLOBALS['still-alive'] = 'Encore en vie';
+
 ////////// TEMPLATE //////////
 // template.php
 $GLOBALS['template-title'] = 'Mes films';
@@ -153,6 +156,7 @@ $GLOBALS['movie-time-duration'] = 'Durée';
 $GLOBALS['movie-rating'] = 'Classification';
 $GLOBALS['movie-note'] = 'Note';
 $GLOBALS['movie-vu'] = 'Vu';
+$GLOBALS['movie-favorite'] = 'Favori';
 $GLOBALS['movie-minutes'] = 'minutes';
 $GLOBALS['movie-rating-1'] = 'Tout public';
 $GLOBALS['movie-rating-2'] = 'ans et plus';

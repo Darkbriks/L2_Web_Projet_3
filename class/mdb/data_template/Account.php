@@ -1,7 +1,6 @@
 <?php
 
 namespace mdb\data_template;
-use mdb\AccountDB;
 class Account
 {
     public function getId() { return $this->id; }

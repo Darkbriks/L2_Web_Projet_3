@@ -2,7 +2,6 @@
 
 namespace mdb\data_template;
 
-use mdb\form\GenerateFormInput;
 use mdb\PersonDB;
 use mdb\TagDB;
 
@@ -39,9 +38,9 @@ class Movie
                                     <button class='btn btn-outline-secondary btn-sm' id='edit-vu'>" . $GLOBALS['movie-edit-vu'] . "</button>
                                 </div>
                                 <div class='movie-present-checkbox'>
-                                <label class='form-check-label' for='favorite'><strong>" . $GLOBALS['movie-vu'] . ": </strong></label>
-                                <input class='form-check-input' type='checkbox' name='favorite' id='favorite' " . ($this->favorite ? 'checked' : '') . " disabled>
-                                <button class='btn btn-outline-secondary btn-sm' id='edit-favorite'>" . $GLOBALS['movie-edit-vu'] . "</button>
+                                    <label class='form-check-label' for='favorite'><strong>" . $GLOBALS['movie-favorite'] . ": </strong></label>
+                                    <input class='form-check-input' type='checkbox' name='favorite' id='favorite' " . ($this->favorite ? 'checked' : '') . " disabled>
+                                    <button class='btn btn-outline-secondary btn-sm' id='edit-favorite'>" . $GLOBALS['movie-edit-vu'] . "</button>
                                 </div>
                             </div>
                         </div>
@@ -55,18 +54,19 @@ class Movie
                     </div>
                 </div>
                 <script>
+                    //TODO: duplicate code
                     document.getElementById('edit-vu').addEventListener('click', function()
                     {
                         if (document.getElementById('seen').disabled === false)
                         {
                             document.getElementById('seen').disabled = true;
-                            document.getElementById('edit-vu').innerText = getLocalizedText('movie-edit-vu');
+                            document.getElementById('edit-vu').innerText = '" . $GLOBALS['movie-edit-vu'] . "';
                             saveVu();
                         }
                         else
                         {
                             document.getElementById('seen').disabled = false;
-                            document.getElementById('edit-vu').innerText = getLocalizedText('movie-save-vu');
+                            document.getElementById('edit-vu').innerText = '" . $GLOBALS['movie-save-vu'] . "';
                         }
                     });
                     
@@ -92,11 +92,7 @@ class Movie
                     
                     function saveFavorite()
                     {
-                        fetch('../api/set-seen-favorite.php', { 
-                            method: 'POST', 
-                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, 
-                            body: new URLSearchParams({ 'id': '" . $this->id . "', 'favorite': document.getElementById('favorite').checked.toString() }) 
-                        })
+                        fetch('../api/set-seen-favorite.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },  body: new URLSearchParams({ 'id': '" . $this->id . "', 'favorite': document.getElementById('favorite').checked.toString() }) })
                         .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
                         .then(data => { if (data.success) { set_msg(data.data, 'success'); } else { set_msg(data.error, 'danger'); } })
                         .catch(error => { set_msg(error, 'danger'); });
