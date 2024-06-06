@@ -73,7 +73,7 @@ class Person
                             })
                             .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
                             .then(data => { if (data.success) { document.getElementById('card-{$this->id}').remove(); } else { set_msg(data.error, 'warning'); } })
-                            .catch(error => { else { set_msg(error, 'danger'); });
+                            .catch(error => { set_msg(error, 'danger'); });
                         });
                     </script>";
             if (isset($this->played_name))

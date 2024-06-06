@@ -275,7 +275,7 @@ class MoviesDB extends PdoWrapper
      */
     public function addLink($movieId, $personId, $personType, $personRole = null): array
     {
-        $query = "INSERT INTO movie_person (movie_id, person_id, person_type, person_role) VALUES (:movieId, :personId, :personType, :personRole)";
+        $query = "INSERT INTO movie_person (movie_id, person_id, person_type, played_name) VALUES (:movieId, :personId, :personType, :personRole)";
         $params = [':movieId' => $movieId, ':personId' => $personId, ':personType' => $personType, ':personRole' => $personRole];
         return $this->execute($query, $params, NULL);
     }

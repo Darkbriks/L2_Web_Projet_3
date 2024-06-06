@@ -75,11 +75,11 @@ class GenerateFormInput
         return $html;
     }
 
-    public static function generateTextInput($fieldName, $fieldLabel, $fieldValue = null, $fieldPlaceholder = null, $fieldDisabled = false): string
+    public static function generateTextInput($fieldName, $fieldLabel, $fieldValue = null, $required = false, $fieldDisabled = false): string
     {
-        $html = '<div class="mb-3">';
+        $html = '<div class="form-floating mb-3">';
+        $html .= '<input type="text" class="form-control" id="' . $fieldName . '" name="' . $fieldName . '" value="' . $fieldValue . '" placeholder="' . $fieldLabel . '" ' . ($fieldDisabled ? 'disabled' : '') . ($required ? 'required' : '') . '>';
         $html .= '<label for="' . $fieldName . '" class="form-label">' . $fieldLabel . '</label>';
-        $html .= '<input type="text" class="form-control" id="' . $fieldName . '" name="' . $fieldName . '" value="' . $fieldValue . '" placeholder="' . $fieldPlaceholder . '" ' . ($fieldDisabled ? 'disabled' : '') . '>';
         $html .= '</div>';
         return $html;
     }
@@ -93,11 +93,11 @@ class GenerateFormInput
         return $html;
     }
 
-    public static function generateDateInput($fieldName, $fieldLabel, $fieldValue = null, $fieldDisabled = false): string
+    public static function generateDateInput($fieldName, $fieldLabel, $fieldValue = null, $required = false, $fieldDisabled = false): string
     {
-        $html = '<div class="mb-3">';
+        $html = '<div class="form-floating mb-3">';
+        $html .= '<input type="date" class="form-control" id="' . $fieldName . '" name="' . $fieldName . '" value="' . $fieldValue . '" ' . ($fieldDisabled ? 'disabled' : '') . ($required ? 'required' : '') . '>';
         $html .= '<label for="' . $fieldName . '" class="form-label">' . $fieldLabel . '</label>';
-        $html .= '<input type="date" class="form-control" id="' . $fieldName . '" name="' . $fieldName . '" value="' . $fieldValue . '" ' . ($fieldDisabled ? 'disabled' : '') . '>';
         $html .= '</div>';
         return $html;
     }
@@ -131,7 +131,7 @@ class GenerateFormInput
         return $html;
     }
 
-    public static function generateAddPersonCard($name)
+    public static function generateAddPersonCard($name): string
     {
         return "<div class='add-person-card' id='add-card-{$name}'>
                     <i class='bi bi-plus-square' id='{$name}' style='cursor: pointer;'></i>
