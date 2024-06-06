@@ -22,6 +22,7 @@ if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['b
     $birth_date = htmlspecialchars($_POST['birth_date']);
     $death_date = isset($_POST['death_date']) ? htmlspecialchars($_POST['death_date']) : null;
     // TODO: add image upload and save to server, use PersonForm::createPerson
+    // TODO: localize error messages
 
     try
     {

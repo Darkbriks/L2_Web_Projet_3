@@ -14,11 +14,13 @@ use mdb\MoviesDB;
 
 if (isset($_POST['tagId']))
 {
-    try { $moviesDB = new MoviesDB(); }
+    try
+    {
+        $moviesDB = new MoviesDB();
+        if ($_POST['tagId'] == -1) { $movies = $moviesDB->getMovies(); }
+        else { $movies = $moviesDB->getMoviesByTag(htmlspecialchars($_POST['tagId'])); }
+    }
     catch (Exception $e) { echo json_encode(['success' => false, 'error' => $e->getMessage()]); exit(); }
-
-    if ($_POST['tagId'] == -1) { $movies = $moviesDB->getMovies(); }
-    else { $movies = $moviesDB->getMoviesByTag(htmlspecialchars($_POST['tagId'])); }
 
     $json_movies = json_encode(array_map(function($movie) { return $movie->get_json(); }, $movies));
     echo json_encode(['success' => true, 'data' => $json_movies]);

@@ -12,11 +12,13 @@ Autoloader::register();
 
 use mdb\MoviesDB;
 
-    try { $moviesDB = new MoviesDB(); }
-    catch (Exception $e) { echo json_encode(['success' => false, 'error' => $e->getMessage()]); exit(); }
-
+try
+{
+    $moviesDB = new MoviesDB();
     $favoritesMovies = $moviesDB->getFavoritesMovies();
+}
+catch (Exception $e) { echo json_encode(['success' => false, 'error' => $e->getMessage()]); exit(); }
 
-    $json_movies = json_encode(array_map(function($movie) { return $movie->get_json(); }, $favoritesMovies));
-    echo json_encode(['success' => true, 'data' => $json_movies]);
+$json_movies = json_encode(array_map(function($movie) { return $movie->get_json(); }, $favoritesMovies));
+echo json_encode(['success' => true, 'data' => $json_movies]);
 ?>

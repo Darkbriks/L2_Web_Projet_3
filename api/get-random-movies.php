@@ -12,21 +12,16 @@ Autoloader::register();
 
 use mdb\MoviesDB;
 
-try {
+try
+{
     $moviesDB = new MoviesDB();
     $movies = $moviesDB->getMovies();
 
-    // Mélanger les films de manière aléatoire
     shuffle($movies);
-
-    // Sélectionner les 4 premiers films
     $randomMovies = array_slice($movies, 0, 4);
 
     $json_movies = json_encode(array_map(function($movie) { return $movie->get_json(); }, $randomMovies));
     echo json_encode(['success' => true, 'data' => $json_movies]);
 }
-catch (Exception $e) {
-    echo json_encode(['success' => false, 'error' => $e->getMessage()]);
-    exit();
-}
+catch (Exception $e) { echo json_encode(['success' => false, 'error' => $e->getMessage()]); }
 ?>

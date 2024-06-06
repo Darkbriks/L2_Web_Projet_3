@@ -5,6 +5,7 @@ require_once $GLOBALS['PDO_WRAPPER'];
 
 session_start();
 
+// TODO: localization
 if (!isset($_SESSION['admin']) || !$_SESSION['admin']) { json_encode(['success' => false, 'error' => 'You must be an admin to access this page']); exit(); }
 
 $lang = $_SESSION['language'] ?? 'EN';
