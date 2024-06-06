@@ -1,9 +1,9 @@
 <?php
 require_once "../config.php";
 
-if (!isset($_POST['lang'])) { echo json_encode(['success' => false, 'error' => $GLOBALS['api-get-localized-text-error-1']]); exit(); }
-
-require_once $GLOBALS['LOCALIZATION_DIR'] . $_POST['lang'] . '.php';
+session_start();
+$lang = $_SESSION['language'] ?? 'EN';
+require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
 if (isset($_POST['text']))
 {

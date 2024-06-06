@@ -25,8 +25,8 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
         });
     </script>
     <div class="mb-3 position-absolute top-50 start-50 translate-middle">
-    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#movie-modal">Movie</button>
-    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#person-modal">Person</button>
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#movie-modal">Movie</button>
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#person-modal">Person</button>
     </div>
     <div id="movie-search-results"></div>
     <div id="person-search-results"></div>
