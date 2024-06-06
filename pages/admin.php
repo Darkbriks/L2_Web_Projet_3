@@ -76,6 +76,12 @@ if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
     } else if ($action === 'edit') {?>
         <div class="mb-3">
             <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['new_first_name'])) {
+                $personForm = new \mdb\form\PersonForm();
+                $img_file = $_FILES['new_image_path'] ?? null;
+                $personForm->alterPerson($_POST['person_id'],$_POST,$img_file);
+            }
+
             include "add-person-to-movie-form.php";
             include "update-person-form.php";
             include "update-tag-form.php";
