@@ -252,4 +252,24 @@ class MoviesDB extends PdoWrapper
         $this->deleteMovieTagByMovieId($id);
         return $this->deleteMovieById($id);
     }
+
+    /**
+     * @throws Exception
+     */
+    public function addLink($movieId, $personId, $personType, $personRole = null): array
+    {
+        $query = "INSERT INTO movie_person (movie_id, person_id, person_type, person_role) VALUES (:movieId, :personId, :personType, :personRole)";
+        $params = [':movieId' => $movieId, ':personId' => $personId, ':personType' => $personType, ':personRole' => $personRole];
+        return $this->execute($query, $params, NULL);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function breakLink($movieId, $personId): array
+    {
+        $query = "DELETE FROM movie_person WHERE movie_id = :movieId AND person_id = :personId";
+        $params = [':movieId' => $movieId, ':personId' => $personId];
+        return $this->execute($query, $params, NULL);
+    }
 }

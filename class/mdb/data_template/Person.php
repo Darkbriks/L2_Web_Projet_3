@@ -71,7 +71,7 @@ class Person
 
     public function getHtml_card(bool $played_name, bool $canEdit, int $movieId): string
     {
-        $html = "<div class='person-card'>
+        $html = "<div class='person-card' id='card-{$this->id}'>
                     <img id='{$this->id}' src='" . $GLOBALS['PEOPLES_DIR'] . $this->image_path . "' alt='{$this->first_name} {$this->last_name}' style='cursor: pointer;'>
                     <h3>{$this->first_name} {$this->last_name}</h3>
                     " . ($played_name && $this->played_name !== null ? "<p>{$this->played_name}</p>" : '');
@@ -84,8 +84,16 @@ class Person
         if ($canEdit)
         {
             $html .= "<script>
-                        document.getElementById('remove-{$this->id}').addEventListener('click', function() {
-                            console.log('Removing person {$this->id} from movie {$movieId}');
+                        document.getElementById('remove-{$this->id}').addEventListener('click', function()
+                        {
+                            fetch('../api/set-movie-person-link.php', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                body: 'removeLink=true&movieId={$movieId}&personId={$this->id}'
+                            })
+                            .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
+                            .then(data => { if (data.success) { document.getElementById('card-{$this->id}').remove(); } else { alert(data.error); } })
+                            .catch(error => { alert(error); });
                         });
                     </script>";
         }
