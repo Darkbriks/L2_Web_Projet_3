@@ -95,7 +95,8 @@ class Movie
 
     public function get_json()
     {
-        $personDB = new PersonDB();
+        try {$personDB = new PersonDB();}
+        catch (\Exception $e) {return ['error' => $e->getMessage()];}
         $directors = $personDB->getDirectorsOfMovie($this->id);
         $actors = $personDB->getActorsOfMovie($this->id);
         $composers = $personDB->getComposersOfMovie($this->id);

@@ -15,3 +15,9 @@ $GLOBALS['languages-list'] = array(
     '2' => 'EN',
     '3' => 'ES',
     '4' => 'DE');
+
+$GLOBALS['dateFormats'] = array(
+    'FR' => 'd/m/Y',
+    'EN' => 'm/d/Y',
+    'ES' => 'd-m-Y',
+    'DE' => 'd.m.Y');

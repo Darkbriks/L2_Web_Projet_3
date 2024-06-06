@@ -1,6 +1,6 @@
 <?php
-
 namespace mdb\data_template;
+use mdb\PersonDB;
 
 class Person
 {
@@ -12,26 +12,22 @@ class Person
     public function getDeathDate() { return $this->death_date; }
     public function getImagePath() { return $this->image_path; }
 
+
     // Méthode pour générer le HTML en fonction du type
-    public function getHtml_Person(): string
+    public function getHtml($lang): string
     {
-        /*switch ($this->type) {
-            case 1:
-                return $this->getHtml_Actor();
-            case 2:
-                return $this->getHtml_Director();
-            case 3:
-                return $this->getHtml_Composer();
-            default:
-                return "<div class='person'>
-                    <p>{$this->first_name} {$this->last_name} ({$this->birth_date} / " . ($this->death_date ?? 'still alive') . ")</p>
-                </div>";
-        }*/
+        $deathDate = $this->death_date ? $this->death_date : 'Still Alive';
         return "<div class='person'>
-                    <img src='" . $GLOBALS['PEOPLES_DIR'] . $this->image_path . "' alt='{$this->first_name} {$this->last_name}'>
-                    <h3>{$this->first_name} {$this->last_name}</h3>
-                </div>";
+             <img src='" . $GLOBALS['PEOPLES_DIR'] . $this->image_path . "' alt='{$this->first_name} {$this->last_name}'>
+             <div class = person-details>
+             <h3>{$this->first_name} {$this->last_name}</h3>
+             <p><strong>First Name:</strong> {$this->first_name}</p>
+             <p><strong>Last Name:</strong> {$this->last_name}</p>
+             <p><strong>Birth Date:</strong> {$this->birth_date}</p>
+             <p><strong>Death Date:</strong> {$deathDate}</p></div></div>";
     }
+
+
 
     /*public function getHtml_Actor(): string
     {
