@@ -53,6 +53,14 @@ CREATE TABLE movie_person (
     FOREIGN KEY (person_id) REFERENCES person(id)
 );
 
+CREATE TABLE account (
+    account_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL
+);
+
+INSERT INTO account (username, password) VALUES
+    ('$2y$10$144XTlrBTmf5/ZlJJ0kX1edSk8tw5bguaE8XYFhwObicBOshv5OV2','$2y$10$MC86NCUfN3sHtdnhueIATOgdZXwVT.VJJhKuqDcSDccdrxxQj0OJq');
 
 INSERT INTO tag (name) VALUES
       ('Action'),
