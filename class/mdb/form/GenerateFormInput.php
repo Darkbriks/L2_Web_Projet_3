@@ -74,4 +74,31 @@ class GenerateFormInput
         $html .= "</div>";
         return $html;
     }
+
+    public static function generateTextInput($fieldName, $fieldLabel, $fieldValue = null, $fieldPlaceholder = null, $fieldDisabled = false): string
+    {
+        $html = '<div class="mb-3">';
+        $html .= '<label for="' . $fieldName . '" class="form-label">' . $fieldLabel . '</label>';
+        $html .= '<input type="text" class="form-control" id="' . $fieldName . '" name="' . $fieldName . '" value="' . $fieldValue . '" placeholder="' . $fieldPlaceholder . '" ' . ($fieldDisabled ? 'disabled' : '') . '>';
+        $html .= '</div>';
+        return $html;
+    }
+
+    public static function generateTextareaInput($fieldName, $fieldLabel, $fieldValue = null, $fieldPlaceholder = null, $fieldDisabled = false): string
+    {
+        $html = '<div class="mb-3">';
+        $html .= '<label for="' . $fieldName . '" class="form-label">' . $fieldLabel . '</label>';
+        $html .= '<textarea class="form-control" id="' . $fieldName . '" name="' . $fieldName . '" placeholder="' . $fieldPlaceholder . '" ' . ($fieldDisabled ? 'disabled' : '') . '>' . $fieldValue . '</textarea>';
+        $html .= '</div>';
+        return $html;
+    }
+
+    public static function generateDateInput($fieldName, $fieldLabel, $fieldValue = null, $fieldDisabled = false): string
+    {
+        $html = '<div class="mb-3">';
+        $html .= '<label for="' . $fieldName . '" class="form-label">' . $fieldLabel . '</label>';
+        $html .= '<input type="date" class="form-control" id="' . $fieldName . '" name="' . $fieldName . '" value="' . $fieldValue . '" ' . ($fieldDisabled ? 'disabled' : '') . '>';
+        $html .= '</div>';
+        return $html;
+    }
 }

@@ -125,6 +125,14 @@ class Template
                 if (element === null) { document.getElementById('content').prepend(msg_div); }
                 else { element.prepend(msg_div); }
             }
+
+            function getLocalizedText(key)
+            {
+                fetch('../api/get-localized-text.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'text': key }) })
+                    .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
+                    .then(data => { if (data.success) { return data.localizedText; } else { console.log('Erreur:', data.error); } })
+                    .catch(error => { console.log('Erreur:', error); });
+            }
         </script>
     <?php
     }

@@ -207,6 +207,15 @@ class MoviesDB extends PdoWrapper
     /**
      * @throws Exception
      */
+    public function setMovieAttribute($id, $attribute, $value): void
+    {
+        $query = "UPDATE movies SET " . $attribute . " = :value WHERE id = :id";
+        $this->execute($query, array(':value' => $value, ':id' => $id), NULL);
+    }
+
+    /**
+     * @throws Exception
+     */
     public function deleteMovieById($id): array
     {
         $query = "DELETE FROM movies WHERE id = :id";
