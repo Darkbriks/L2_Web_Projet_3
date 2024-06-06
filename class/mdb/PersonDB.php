@@ -267,7 +267,7 @@ class PersonDB extends PdoWrapper
             ':death_date' => $death_date,
             ':image_path' => $image_path
         );
-        if (!empty($this->execute($query, $params, NULL))) { return $this->pdo->lastInsertId(); }
+        if (!empty($this->execute($query, $params, NULL))) { return $id; }
         return 0;
     }
 
