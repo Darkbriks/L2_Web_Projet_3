@@ -6,6 +6,7 @@ use mdb\form\GenerateFormInput;
 
 class EditableMovie
 {
+    // TODO: check localization
     public static function getHtml($id): string
     {
         return "<div id='editModal' class='modal' tabindex='-1'>
