@@ -41,6 +41,15 @@ class Template
                 document.getElementById('language-button').textContent = '<?php echo $lang ?>';
 
                 document.getElementById('search').addEventListener('input', function() { search(this.value); });
+
+                var current_page = '<?php echo $current_page; ?>';
+                var navLinks = document.querySelectorAll('.nav-item');
+                navLinks.forEach(function(navLink) {
+                    var link = navLink.querySelector('.nav-link');
+                    if (link.getAttribute('href') === current_page) {
+                        navLink.classList.add('active');
+                    }
+                });
             });
 
             function search(value)
