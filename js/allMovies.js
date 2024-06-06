@@ -1,8 +1,13 @@
 document.addEventListener('DOMContentLoaded', function()
 {
+    // Ajout de l'écouteur d'événements avec l'ID favorties-list
+    const favorites = document.getElementById('favorites-list');
     const randomHome = document.getElementById('home-list');
     if (randomHome) {
         randomMovies()
+    }
+    else  if (favorites) {
+        favoritesMovies()
     }
     else{
         document.querySelectorAll('.tag').forEach(tagElement => {
@@ -11,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function()
             });
         });
         filterMoviesByTag(-1);
+
     }
 
     // Ajout de l'écouteur d'événements pour le bouton avec l'ID random-home
@@ -31,6 +37,14 @@ function randomMovies()
         .catch(error => { set_user_msg(error, 'danger'); });
 }
 
+function favoritesMovies()
+{
+    fetch('../api/get-favorites_movies.php')
+        .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
+        .then(data => { if (data.success) { const movies = JSON.parse(data.data); renderMovies(movies); } else { set_user_msg(data.error, 'danger'); } })
+        .catch(error => { set_user_msg(error, 'danger'); });
+}
+
 function filterMoviesByTag(tagId)
 {
     fetch('../api/get-movies-by-tag.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'tagId': tagId }) })
@@ -43,10 +57,10 @@ function renderMovies(movies, random = null )
 {
     const carrousel = document.querySelector('.carrousel');
     carrousel.innerHTML = '';
-    if(random === null){
+    let limite;
+    if (random === null) {
         limite = movies.length;
-    }
-    else{
+    } else {
         limite = 3;
     }
     const moviesPerSlide = Math.max(Math.floor((window.innerWidth * 0.95) / (window.innerHeight * 0.35) - 1), 1);
@@ -115,7 +129,7 @@ function renderMovies(movies, random = null )
         carrousel.appendChild(slide);
         slideIndex++;
     }
-    if(random === null){
+    if(random === null && movies.length > moviesPerSlide ){
         // Create navigation buttons
         const prevButton = document.createElement('button');
         prevButton.classList.add('carousel-control-prev-icon');

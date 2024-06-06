@@ -18,7 +18,8 @@ CREATE TABLE movies (
     time_duration INT NOT NULL,
     note INT,
     trailer_path VARCHAR(100) NOT NULL,
-    rating INT
+    rating INT,
+    favorite BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE person (

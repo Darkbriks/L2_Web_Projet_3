@@ -38,6 +38,11 @@ class Movie
                                     <input class='form-check-input' type='checkbox' name='seen' id='seen' " . ($this->vu ? 'checked' : '') . " disabled>
                                     <button class='btn btn-outline-secondary btn-sm' id='edit-vu'>" . $GLOBALS['movie-edit-vu'] . "</button>
                                 </div>
+                                <div class='movie-present-checkbox'>
+                                <label class='form-check-label' for='favorite'><strong>" . $GLOBALS['movie-vu'] . ": </strong></label>
+                                <input class='form-check-input' type='checkbox' name='favorite' id='favorite' " . ($this->favorite ? 'checked' : '') . " disabled>
+                                <button class='btn btn-outline-secondary btn-sm' id='edit-favorite'>" . $GLOBALS['movie-edit-vu'] . "</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -64,14 +69,51 @@ class Movie
                             document.getElementById('edit-vu').innerText = getLocalizedText('movie-save-vu');
                         }
                     });
+                    document.getElementById('edit-favorite').addEventListener('click', function() 
+                    {
+                        if (document.getElementById('favorite').disabled === false) {
+                            document.getElementById('favorite').disabled = true;
+                            document.getElementById('edit-favorite').innerText = '" . $GLOBALS['movie-edit-vu'] . "';
+                            saveFavorite();
+                        } else {
+                            document.getElementById('favorite').disabled = false;
+                            document.getElementById('edit-favorite').innerText = '" . $GLOBALS['movie-save-vu'] . "';
+                        }
+                    });
+                    
+                    
                     
                     function saveVu()
                     {
-                        fetch('../api/set-seen.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'id': '" . $this->id . "', 'seen': document.getElementById('seen').checked.toString() }) })
+                        fetch('../api/set-seen-favorite.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'id': '" . $this->id . "', 'seen': document.getElementById('seen').checked.toString() }) })
                             .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
                             .then(data => { if (data.success) { set_msg(data.data, 'success'); } else { set_msg(data.error, 'danger'); } })
                             .catch(error => { set_msg(error, 'danger'); });
                     }
+                    
+                    function saveFavorite() {
+                    fetch('../api/set-seen-favorite.php', { 
+                        method: 'POST', 
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, 
+                        body: new URLSearchParams({ 'id': '" . $this->id . "', 'favorite': document.getElementById('favorite').checked.toString() }) 
+                    })
+                    .then(response => { 
+                        if (!response.ok) { 
+                            throw new Error('Erreur HTTP ! statut: ' + response.status); 
+                        } 
+                        return response.json(); 
+                    })
+                    .then(data => { 
+                        if (data.success) { 
+                            set_msg(data.data, 'success'); 
+                        } else { 
+                            set_msg(data.error, 'danger'); 
+                        } 
+                    })
+                    .catch(error => { 
+                        set_msg(error, 'danger'); 
+                    });
+                }
                     
                     function set_msg(msg, type)
                     {

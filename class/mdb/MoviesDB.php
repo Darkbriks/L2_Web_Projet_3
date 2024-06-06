@@ -19,6 +19,14 @@ class MoviesDB extends PdoWrapper
     /**
      * @throws Exception
      */
+    public function getFavoritesMovies() : array
+    {
+        return $this->execute("SELECT * FROM movies WHERE favorite = 1",NULL,"mdb\data_template\Movie");
+    }
+
+    /**
+     * @throws Exception
+     */
     public function getRandomMovie() : array
     {
         return $this->execute("SELECT * FROM movies ORDER BY RAND() LIMIT 1",NULL,"mdb\data_template\Movie");
@@ -171,6 +179,15 @@ class MoviesDB extends PdoWrapper
     {
         $query = "UPDATE movies SET vu = :seen WHERE id = :id";
         $this->execute($query, array(':seen' => $seen, ':id' => $id), NULL);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function setFavorite($id, $favorite): void
+    {
+        $query = "UPDATE movies SET favorite = :favorite WHERE id = :id";
+        $this->execute($query, array(':favorite' => $favorite, ':id' => $id), NULL);
     }
 
     /**

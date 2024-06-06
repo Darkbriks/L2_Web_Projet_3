@@ -136,7 +136,7 @@ catch (Exception $e) { echo "Erreur:" . $e->getMessage(); }
             // La date de décès doit être vide ou une date passée
             deathDate = deathDate.trim();
             if (deathDate && new Date(deathDate) > new Date()) {
-                set_user_msg("<?php echo $GLOBALS['person-form-exception-death-date']; ?>", "warning", , document.getElementById('update-person-form-msg'));
+                set_user_msg("<?php echo $GLOBALS['person-form-exception-death-date']; ?>", "warning", document.getElementById('update-person-form-msg'));
                 return false;
             }
 
