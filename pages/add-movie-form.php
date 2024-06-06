@@ -253,12 +253,19 @@ $persons = $personDB->getPersons();
 
     function addPersonToList(type, id, name)
     {
+       //TEST THIS
         let personList = document.getElementById(type + 'List');
-        personList.querySelectorAll('.input').forEach(function(person)
-        {
-            if (person.value === id) { console.log('Personne déjà ajoutée'); return; }
-            // TODO: Fix this (ajouter 2 fois la même personne dans la même catégorie)
-        });
+        let alreadyAdded = false;
+
+           personList.querySelectorAll('.input').forEach(function(person) {
+               if (person.querySelector('input[type="hidden"]').value === id) {
+                   alreadyAdded = true;
+                   console.log('Personne déjà ajoutée');
+               }
+           });
+
+           if (alreadyAdded) return;
+
 
         let person = document.createElement('div');
         person.classList.add('input-group', 'mb-3');

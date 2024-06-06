@@ -8,7 +8,7 @@ $movieDB = new MoviesDB();
 $movies = $movieDB->getMovies(); // Récupère tous les films existants depuis la base de données
 ?>
 
-    <div class="mb-3"><button type="button" class="btn btn-primary" id="add-link-btn"><?php echo $GLOBALS['update-form-link-title']; ?></button></div>
+    <button type="button" class="btn btn-primary" id="add-link-btn"><?php echo $GLOBALS['update-form-link-title']; ?></button>
 
     <div class="modal fade" id="add-link-to-movie-modal" tabindex="-1" aria-labelledby="add-link-to-movie-modal-label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

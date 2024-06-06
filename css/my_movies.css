@@ -619,20 +619,5 @@ form h2 { text-align: center; }
 .role{
     padding-left: 22.5vw;
 }
-/********** update person form **********/
-#update-person-btn {
-    position: absolute;
-    justify-content: center;
-    left:45.8vw;
-    align-items: center;
-}
-#update-tag-btn {
-    position: absolute;
-    justify-content: space-between;
-    right: 40vw;
-    gap: 10px;
-}
-#add-link-btn{
-    margin-right: 15vw;
-}
+
 

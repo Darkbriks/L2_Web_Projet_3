@@ -5,11 +5,11 @@ $tagDB = new TagDB();
 $tags = $tagDB->getTags(); // Récupère toutes les tag existantes depuis la base de données
 ?>
 
-<div class="mb-3">
+
     <button type="button" class="btn btn-primary" id="update-tag-btn">
         <?php echo $GLOBALS['update-tag-form-title']; ?>
     </button>
-</div>
+
 
 <div class="modal fade" id="add-tag-modal" tabindex="-1" aria-labelledby="add-tag-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

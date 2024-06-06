@@ -34,12 +34,15 @@ function clearOptionList(type) { let personList = document.getElementById(type +
 function addPersonToList(type, id, name)
 {
     let personList = document.getElementById(type + 'List');
-    personList.querySelectorAll('.input').forEach(function(person)
-    {
-        if (person.value === id) { console.log('Personne déjà ajoutée'); return; }
-        // TODO: Fix this
+    let alreadyAdded = Array.from(personList.querySelectorAll('.person-id-value')).some(function(person) {
+        return person.value === id;
     });
 
+    if (alreadyAdded) {
+        console.log('Personne déjà ajoutée');
+        return;
+    }
+//test this..
     let person = document.createElement('div');
     person.classList.add('input-group', 'mb-3');
 

@@ -5,11 +5,11 @@ $personDB = new PersonDB();
 $persons = $personDB->getPersons(); // Récupère toutes les personnes existantes depuis la base de données
 ?>
 
-    <div class="mb-3">
+
         <button type="button" class="btn btn-primary" id="update-person-btn">
             <?php echo htmlspecialchars($GLOBALS['update-person-form-title'], ENT_QUOTES, 'UTF-8'); ?>
         </button>
-    </div>
+
 
     <div class="modal fade" id="add-person-modal" tabindex="-1" aria-labelledby="add-person-modal-label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

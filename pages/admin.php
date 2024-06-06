@@ -40,7 +40,13 @@ if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
             <button type="submit" name="action" value="edit" class="btn-admin">Modifier</button>
         </div>
     </form>
-
+    <div class="mb-3">
+        <?php
+        include "add-person-to-movie-form.php";
+        include "update-person-form.php";
+        include "update-tag-form.php";
+        ?>
+    </div>
     <?php
     // Vérifier l'action stockée dans la session
     if ($action === 'add') {
@@ -70,9 +76,6 @@ if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
         include "add-person-form.php";
         include "add-movie-form.php";
     } else if ($action === 'edit') {
-        include "update-person-form.php";
-        include "update-tag-form.php";
-        include "add-person-to-movie-form.php";
         include "update-movie-form.php";
     }
 } else {
