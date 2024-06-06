@@ -16,16 +16,25 @@ class AccountDB extends PdoWrapper
         catch (Exception $e) { throw new Exception($e->getMessage(), (int)$e->getCode()); }
     }
 
+    /**
+     * @throws Exception
+     */
     public function getAccountPasswords(): array
     {
         return $this->execute("SELECT password FROM account",NULL,"mdb\data_template\Account");
     }
 
+    /**
+     * @throws Exception
+     */
     public function getAccountUsername(): array
     {
         return $this->execute("SELECT username FROM account",NULL,"mdb\data_template\Account");
     }
 
+    /**
+     * @throws Exception
+     */
     public function getAccounts(): array
     {
         return $this->execute("SELECT * FROM account",NULL,"mdb\data_template\Account");

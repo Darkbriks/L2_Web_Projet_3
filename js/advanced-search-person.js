@@ -35,30 +35,10 @@ function searchPerson()
     othersPerson.forEach(function(person, index) { data['otherPerson' + index] = person; });
     tags.forEach(function(tag, index) { data['tag' + index] = tag; });
 
-    /*fetch('../api/advanced-search-get-person.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data) })
+    fetch('../api/advanced-search-get-person.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data) })
         .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
         .then(data => { if (data.success) { showPersonSearchResults(data.data); } else { set_user_msg('Erreur: ' + data.error, 'danger'); } })
-        .catch(error => { set_user_msg(error, 'danger'); });*/
-
-    console.log(data);
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', '../api/advanced-search-get-person.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send(new URLSearchParams(data));
-    xhr.onreadystatechange = function()
-    {
-        if (xhr.readyState === 4 && xhr.status === 200)
-        {
-            console.log(xhr.responseText);
-            let response = JSON.parse(xhr.responseText);
-            if (response.success)
-            {
-                showPersonSearchResults(response.data);
-            }
-            else { set_user_msg(response.error, 'danger'); }
-        }
-    }
+        .catch(error => { set_user_msg(error, 'danger'); });
 }
 
 function showPersonSearchResults(data)
@@ -72,7 +52,7 @@ function showPersonSearchResults(data)
     table.innerHTML = '<thead><tr><th scope="col">Nom</th><th scope="col">Prénom</th><th scope="col">Date de naissance</th><th scope="col">Date de décès</th></tr></thead><tbody>';
     persons.forEach(function(personId)
     {
-        fetch('../api/get-data.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'table': 'person', 'conditionLength': 1, 'attribute0': 'id', 'value0': personId }) })
+        fetch('../api/get-data.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'table': 'person', 'conditionLength': '1', 'attribute0': 'id', 'value0': personId }) })
             .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
             .then(data => { if (data.success)
             {

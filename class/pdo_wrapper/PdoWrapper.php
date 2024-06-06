@@ -26,15 +26,6 @@ class PdoWrapper
         catch (\PDOException $e) { throw new \PDOException($GLOBALS['pdo-connect-error'] . $e->getMessage(), (int)$e->getCode()); }
     }
 
-    /*public function execute($statement, $params, $class_name=null)
-    {
-        $res = $this->pdo->prepare($statement);
-        $res->execute($params) or die(print_r($res->errorInfo()));
-
-        if ($class_name != null) { return $res->fetchAll(\PDO::FETCH_CLASS, $class_name); }
-        else { return $res->fetchAll(\PDO::FETCH_CLASS); }
-    }*/
-
     /**
      * @throws Exception
      */

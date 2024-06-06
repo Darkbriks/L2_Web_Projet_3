@@ -161,10 +161,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['person_link_id']) && i
         if (checkLinkValues($person_link_id, $movie_link_id, $type, null)) {
 
             // Si le formulaire est valide, vous pouvez maintenant procéder à la mise à jour de la personne dans la base de données
-            $success = $personDB->addMovie_Person($movie_link_id, $person_link_id,null, $type);
-            if (!empty($success)) {
+            try
+            {
+                $personDB->addMovie_Person($movie_link_id, $person_link_id, null, $type);
                 echo "Les informations de la personne ont été mises à jour avec succès.";
-            } else {
+            }
+            catch (Exception $e)
+            {
                 echo "Une erreur s'est produite lors de la mise à jour des informations de la personne.";
             }
             header("Location: " . $_SERVER['PHP_SELF']);
@@ -180,12 +183,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['person_link_id']) && i
         if (checkLinkValues($person_link_id, $movie_link_id, $type, $played)) {
 
             // Si le formulaire est valide, vous pouvez maintenant procéder à la mise à jour de la personne dans la base de données
-            $success = $personDB->addMovie_Person($movie_link_id, $person_link_id,null, $type);
-            if (!empty($success)) {
+            try
+            {
+                $personDB->addMovie_Person($movie_link_id, $person_link_id, null, $type);
                 echo "Les informations de la personne ont été mises à jour avec succès.";
-            } else {
-                echo "Une erreur s'est produite lors de la mise à jour des informations de la personne.";
             }
+            catch (Exception $e) { echo "Une erreur s'est produite lors de la mise à jour des informations de la personne."; }
             header("Location: " . $_SERVER['PHP_SELF']);
             exit();
         }

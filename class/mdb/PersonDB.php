@@ -99,14 +99,13 @@ class PersonDB extends PdoWrapper
      */
     public function addPersonAndReturnId($first_name, $last_name, $birth_date, $death_date, $image_path): bool|int|string
     {
-        if ($this->addPerson($first_name, $last_name, $birth_date, $death_date, $image_path)) { return $this->pdo->lastInsertId(); }
-        return 0;
+        if ($this->addPerson($first_name, $last_name, $birth_date, $death_date, $image_path)) { return $this->pdo->lastInsertId(); } return 0;
     }
 
     /**
      * @throws Exception
      */
-    public function addMovie_Person($movieId, $personId, $playedName, $personType=1): bool
+    public function addMovie_Person($movieId, $personId, $playedName, $personType=1): void
     {
         $query = "INSERT INTO movie_person (movie_id, person_id, played_name, person_type)
               VALUES (:movieId, :personId, :playedName, :personType)";
@@ -117,7 +116,6 @@ class PersonDB extends PdoWrapper
             ':personType' => $personType
         );
         $this->execute($query, $params);
-        return true;
     }
 
     /**
@@ -126,45 +124,6 @@ class PersonDB extends PdoWrapper
     public function getPersons(): bool|array
     {
         return $this->execute("SELECT * FROM person", null, "mdb\data_template\Person");
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getActors(): bool|array
-    {
-        $query = "SELECT DISTINCT p.* 
-                  FROM person p
-                  INNER JOIN movie_person mp ON p.id = mp.person_id
-                  WHERE mp.person_type = 1";
-
-        return $this->execute($query, null, "mdb\data_template\Person");
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getComposers(): bool|array
-    {
-        $query = "SELECT DISTINCT p.* 
-                  FROM person p
-                  INNER JOIN movie_person mp ON p.id = mp.person_id
-                  WHERE mp.person_type = 3";
-
-        return $this->execute($query, null, "mdb\data_template\Person");
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getDirectors(): bool|array
-    {
-        $query = "SELECT DISTINCT p.* 
-                  FROM person p
-                  INNER JOIN movie_person mp ON p.id = mp.person_id
-                  WHERE mp.person_type = 2";
-
-        return $this->execute($query, null, "mdb\data_template\Person");
     }
 
     /**
@@ -278,17 +237,6 @@ class PersonDB extends PdoWrapper
     {
         $query = "UPDATE person SET" . $person_alter . "= :person_alter WHERE id = :id";
         return $this->execute($query,array(':person_alter' => $person_alter_value,':id' => $person_id),NULL);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getPersonsBy_Order($condition, $order): array
-    {
-        $order = ($order) ? "ASC" : "DESC";
-        $query = "SELECT * FROM person ORDER BY " . $condition. $order;
-
-        return $this->execute($query,NULL, "mdb\data_template\Movie");
     }
 
     /**

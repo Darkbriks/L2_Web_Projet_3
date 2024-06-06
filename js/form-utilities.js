@@ -1,15 +1,10 @@
 function updateOptionList(type, value, addRole = false)
 {
     // TODO: Ajouter la possibilité de créer une personne si elle n'existe pas
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', '../api/get-data.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send('table=person&conditionLength=2&attribute0=first_name&attribute1=last_name&value0=' + value + '&value1=' + value + '&and=false&limit=5&useLike=true');
-    xhr.onreadystatechange = function()
-    {
-        if (xhr.readyState === 4 && xhr.status === 200)
+    fetch('../api/get-data.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'table=person&conditionLength=2&attribute0=first_name&attribute1=last_name&value0=' + value + '&value1=' + value + '&and=false&limit=5&useLike=true' })
+        .then(response => response.json())
+        .then(response =>
         {
-            let response = JSON.parse(xhr.responseText);
             if (response.success)
             {
                 let personList = document.getElementById(type + 'DatalistOptions');
@@ -26,8 +21,7 @@ function updateOptionList(type, value, addRole = false)
                 });
             }
             else { set_user_msg(response.error, 'danger'); }
-        }
-    }
+        });
 }
 
 function clearOptionList(type) { let personList = document.getElementById(type + 'DatalistOptions'); personList.innerHTML = ''; }

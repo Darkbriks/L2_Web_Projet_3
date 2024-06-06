@@ -76,7 +76,7 @@ function showMovieSearchResults(data)
     table.innerHTML = '<thead><tr><th scope="col">Title</th><th scope="col">Release date</th><th scope="col">Duration</th><th scope="col">Rating</th><th scope="col">Note</th><th scope="col">Seen</th><th scope="col">Synopsis</th></tr></thead><tbody>';
     movies.forEach(function(movieId)
     {
-        fetch('../api/get-data.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'table': 'movies', 'conditionLength': 1, 'attribute0': 'id', 'value0': movieId }) })
+        fetch('../api/get-data.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'table': 'movies', 'conditionLength': '1', 'attribute0': 'id', 'value0': movieId }) })
             .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
             .then(data => { if (data.success)
             {

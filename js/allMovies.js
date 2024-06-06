@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function()
 {
-    // Ajout de l'écouteur d'événements avec l'ID favorties-list
+    // TODO: Vérifier si il ne serait pas mieux de séparer les fonctions de allMovies du reste
+
     const favorites = document.getElementById('favorites-list');
     const randomHome = document.getElementById('home-list');
     if (randomHome) {
@@ -19,14 +20,12 @@ document.addEventListener('DOMContentLoaded', function()
 
     }
 
-    // Ajout de l'écouteur d'événements pour le bouton avec l'ID random-home
     const randomHomeButton = document.getElementById('random-home');
     if (randomHomeButton) {
         randomHomeButton.addEventListener('click', function() {
             randomMovies()
         });
     }
-
 });
 
 function randomMovies()

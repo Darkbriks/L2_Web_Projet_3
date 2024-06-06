@@ -19,22 +19,6 @@ class MoviesDB extends PdoWrapper
     /**
      * @throws Exception
      */
-    public function getFavoritesMovies() : array
-    {
-        return $this->execute("SELECT * FROM movies WHERE favorite = 1",NULL,"mdb\data_template\Movie");
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getRandomMovie() : array
-    {
-        return $this->execute("SELECT * FROM movies ORDER BY RAND() LIMIT 1",NULL,"mdb\data_template\Movie");
-    }
-
-    /**
-     * @throws Exception
-     */
     public function getData($attributes, $values, $and = true, $limit = 10, $order = 'id', $direction = 'ASC', $useLike = false, $table='movies', $class_name=null): bool|array
     {
         return parent::getData($attributes, $values, $and, $limit, $order, $direction, $useLike, $table, "mdb\data_template\Movie");
@@ -119,33 +103,6 @@ class MoviesDB extends PdoWrapper
     /**
      * @throws Exception
      */
-    private function addMovie($title, $release_date, $synopsis, $vu, $image_path, $time_duration, $note, $trailer_path, $rating): bool
-    {
-        $checkSql = "SELECT COUNT(*) FROM movies WHERE title = :title";
-        $stmt = $this->pdo->prepare($checkSql);
-        $stmt->execute([':title' => $title]);
-        if ($stmt->fetchColumn() > 0) { throw new Exception($GLOBALS['movie-db-already-exists']); }
-
-        $sql = "INSERT INTO movies (title, release_date, synopsis, vu, image_path, time_duration, note, trailer_path, rating) VALUES (:title, :release_date, :synopsis, :vu, :image_path, :time_duration, :note, :trailer_path, :rating)";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([':title' => $title, ':release_date' => $release_date, ':synopsis' => $synopsis, ':vu' => $vu, ':image_path' => $image_path, ':time_duration' => $time_duration, ':note' => $note, ':trailer_path' => $trailer_path, ':rating' => $rating]);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function addMovieAndReturnId($title, $release_date, $synopsis, $vu, $image_path, $time_duration, $note, $trailer_path, $rating): int
-    {
-        if ($this->addMovie($title, $release_date, $synopsis, $vu, $image_path, $time_duration, $note, $trailer_path, $rating))
-        {
-            return $this->pdo->lastInsertId();
-        }
-        return 0;
-    }
-
-    /**
-     * @throws Exception
-     */
     public function getMovies(): array
     {
         return $this->execute("SELECT * FROM movies", null, "mdb\data_template\Movie");
@@ -170,6 +127,41 @@ class MoviesDB extends PdoWrapper
               WHERE tag.id = :tag";
 
         return $this->execute($query, array(':tag' => $tag), "mdb\data_template\Movie");
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getFavoritesMovies() : array
+    {
+        return $this->execute("SELECT * FROM movies WHERE favorite = 1",NULL,"mdb\data_template\Movie");
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function addMovie($title, $release_date, $synopsis, $vu, $image_path, $time_duration, $note, $trailer_path, $rating): bool
+    {
+        $checkSql = "SELECT COUNT(*) FROM movies WHERE title = :title";
+        $stmt = $this->pdo->prepare($checkSql);
+        $stmt->execute([':title' => $title]);
+        if ($stmt->fetchColumn() > 0) { throw new Exception($GLOBALS['movie-db-already-exists']); }
+
+        $sql = "INSERT INTO movies (title, release_date, synopsis, vu, image_path, time_duration, note, trailer_path, rating) VALUES (:title, :release_date, :synopsis, :vu, :image_path, :time_duration, :note, :trailer_path, :rating)";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([':title' => $title, ':release_date' => $release_date, ':synopsis' => $synopsis, ':vu' => $vu, ':image_path' => $image_path, ':time_duration' => $time_duration, ':note' => $note, ':trailer_path' => $trailer_path, ':rating' => $rating]);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function addMovieAndReturnId($title, $release_date, $synopsis, $vu, $image_path, $time_duration, $note, $trailer_path, $rating): int
+    {
+        if ($this->addMovie($title, $release_date, $synopsis, $vu, $image_path, $time_duration, $note, $trailer_path, $rating))
+        {
+            return $this->pdo->lastInsertId();
+        }
+        return 0;
     }
 
     /**
