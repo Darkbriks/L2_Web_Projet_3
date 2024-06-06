@@ -30,7 +30,7 @@ try {
 
     function displayMovies($movies, $role) {
         if (count($movies) > 0) {
-            echo "<h3>{$role}</h3>";
+            echo '<h3 class="role">' . $role . '</h3>';
             echo '<div class="movie-card-list">';
             foreach ($movies as $movie) {
                 echo '<div class="movie-card">';
