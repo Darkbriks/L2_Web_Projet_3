@@ -8,6 +8,7 @@
                     <li class="nav-item"><a class="nav-link <?php echo ($current_page === 'home.php') ? 'active' : ''; ?>" href="home.php"><?php echo $GLOBALS['header-home']; ?></a></li>
                     <li class="nav-item"><a class="nav-link <?php echo ($current_page === 'all-movies.php') ? 'active' : ''; ?>" href="all-movies.php"><?php echo $GLOBALS['header-movies']; ?></a></li>
                     <li class="nav-item"><a class="nav-link <?php echo ($current_page === 'all-people.php') ? 'active' : ''; ?>" href="all-people.php"><?php echo $GLOBALS['header-peoples']; ?></a></li>
+                    <li class="nav-item"><a class="nav-link <?php echo ($current_page === 'favorites.php') ? 'active' : ''; ?>" href="favorites.php"><?php echo $GLOBALS['header-favorites']; ?></a></li>
                     <li class="nav-item"><a class="nav-link <?php echo ($current_page === 'admin.php') ? 'active' : ''; ?>" href="admin.php"><?php echo $GLOBALS['header-admin']; ?></a></li>
                     <li class="nav-item"><a class="nav-link <?php echo ($current_page === 'advanced-search.php') ? 'active' : ''; ?>" href="advanced-search.php"><?php echo $GLOBALS['header-advanced-search']; ?></a></li>
                     <li>

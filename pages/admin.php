@@ -1,6 +1,4 @@
 <?php
-$admin_user = 'admin';
-$admin_pass = 'admin';
 
 require_once "../config.php";
 require_once "../DB_CREDENTIALS.php";
@@ -8,13 +6,20 @@ require ".." . DIRECTORY_SEPARATOR . "class" . DIRECTORY_SEPARATOR . "Autoloader
 Autoloader::register();
 
 session_start();
+use mdb\AccountDB;
+$accountDB = new AccountDB();
+$accounts = $accountDB->getAccounts();
+
 $lang = $_SESSION['language'] ?? 'EN';
 require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
 if (isset($_POST['username']) || isset($_POST['password'])) {
-    if ($_POST['username'] === $admin_user && $_POST['password'] === $admin_pass) {
-        $_SESSION['admin'] = true;
-    } else {
+    foreach ($accounts as $account) {
+        if(password_verify($_POST['username'], $account->getUsername()) && password_verify($_POST['username'], $account->getPassword())) {
+            $_SESSION['admin'] = true;
+        }
+    }
+    if(isset($_SESSION['admin']) && $_SESSION['admin'] !== true) {
         $login_error = $GLOBALS['login-error'];
     }
 }

@@ -12,6 +12,7 @@ $GLOBALS['header-title'] = 'Accueil des films';
 $GLOBALS['header-home'] = 'Accueil';
 $GLOBALS['header-movies'] = 'Films';
 $GLOBALS['header-peoples'] = 'Peoples';
+$GLOBALS['header-favorites'] = 'Favoris';
 $GLOBALS['header-admin'] = 'Admin';
 $GLOBALS['header-advanced-search'] = 'Recherche avancée';
 $GLOBALS['header-search'] = 'Rechercher';
@@ -87,7 +88,6 @@ $GLOBALS['update-tag-form-question']='Choisir un tag à mettre à jour ';
 $GLOBALS['delete-tag-form']='Supprimer le tag';
 $GLOBALS['tag-form-exception-name'] = 'Le nom de la balise doit contenir entre 3 et 50 caractères.';
 
-
 // PersonForm.php
 $GLOBALS['person-form-title'] = 'Ajouter une personne';
 $GLOBALS['person-form-type'] = 'Type de personne';
@@ -128,6 +128,9 @@ $GLOBALS['advanced-search-movie-filter-attribute-directors'] = 'Réalisateur(s)'
 $GLOBALS['advanced-search-movie-filter-attribute-actors'] = 'Acteur(s)';
 $GLOBALS['advanced-search-movie-filter-attribute-composers'] = 'Compositeur(s)';
 $GLOBALS['advanced-search-movie-filter-attribute-seen'] = 'Vu';
+
+////////// FAVORITES //////////
+$GLOBALS['favorites-title']= 'Vos favoris';
 
 ////////// ALL MOVIES //////////
 // allMovies.php
@@ -203,33 +206,33 @@ $GLOBALS['movie-db-already-exists'] = 'Le film existe déjà';
 $GLOBALS['person-db-already-exists'] = 'La personne existe déjà';
 
 // TagDB.php
-$GLOBALS['tag-db-already-exists'] = 'Le tag existe déjà';
+$GLOBALS['tag-db-already-exists'] = 'Das Tag existiert bereits';
 
 ////////// API //////////
 // add-tag.php
-$GLOBALS['api-add-tag-error-1'] = 'Aucun tag fourni';
-$GLOBALS['api-add-tag-error-2'] = 'Erreur lors de l\'ajout du tag. Veuillez vous assurer que le tag n\'existe pas déjà';
+$GLOBALS['api-add-tag-error-1'] = 'Kein Tag angegeben';
+$GLOBALS['api-add-tag-error-2'] = 'Fehler beim Hinzufügen des Tags. Bitte überprüfen Sie, ob das Tag nicht bereits existiert';
 
 // get-data.php
-$GLOBALS['api-get-data-table-not-valid'] = 'La table demandée n\'est pas valide. Les tables valides sont : movies, tag, et person';
-$GLOBALS['api-get-data-attribute-value-not-set'] = 'L\'attribut et/ou la valeur ne sont pas définis';
-$GLOBALS['api-get-data-table-not-set'] = 'La table n\'est pas définie';
+$GLOBALS['api-get-data-table-not-valid'] = 'Die angeforderte Tabelle ist ungültig. Gültige Tabellen sind: movies, tag und person';
+$GLOBALS['api-get-data-attribute-value-not-set'] = 'Das Attribut und/oder der Wert sind nicht definiert';
+$GLOBALS['api-get-data-table-not-set'] = 'Die Tabelle ist nicht definiert';
 
 // get-localized-text.php
-$GLOBALS['api-get-localized-text-error-1'] = 'Aucune langue fournie';
-$GLOBALS['api-get-localized-text-error-2'] = 'Texte introuvable';
-$GLOBALS['api-get-localized-text-error-3'] = 'Aucun texte fourni';
+$GLOBALS['api-get-localized-text-error-1'] = 'Keine Sprache angegeben';
+$GLOBALS['api-get-localized-text-error-2'] = 'Text nicht gefunden';
+$GLOBALS['api-get-localized-text-error-3'] = 'Kein Text angegeben';
 
 // get-movies-by-tag.php
-$GLOBALS['api-get-movies-by-tag-error-1'] = 'ID de tag manquant';
+$GLOBALS['api-get-movies-by-tag-error-1'] = 'Tag-ID fehlt';
 
 // language.php
-$GLOBALS['api-language-error-1'] = 'Aucune méthode fournie';
-$GLOBALS['api-language-error-2'] = 'Méthode invalide';
-$GLOBALS['api-language-error-3'] = 'Langue invalide';
-$GLOBALS['api-language-error-4'] = 'Erreur lors du changement de langue';
+$GLOBALS['api-language-error-1'] = 'Keine Methode angegeben';
+$GLOBALS['api-language-error-2'] = 'Ungültige Methode';
+$GLOBALS['api-language-error-3'] = 'Ungültige Sprache';
+$GLOBALS['api-language-error-4'] = 'Fehler beim Ändern der Sprache';
 
-// set-seen.php
-$GLOBALS['api-set-seen-error-1'] = 'Aucun ID de film fourni';
-$GLOBALS['api-set-seen-error-2'] = 'Aucun paramètre de \'Vu\' fourni';
-$GLOBALS['api-set-seen-success'] = 'Attribut \'Vu\' mis à jour avec succès';
+// set-seen-favorite.php
+$GLOBALS['api-set-seen-error-1'] = 'Keine Film-ID angegeben';
+$GLOBALS['api-set-seen-error-2'] = 'Kein "Gesehen"-Parameter angegeben';
+$GLOBALS['api-set-seen-success'] = 'Attribut "Gesehen" erfolgreich aktualisiert';
