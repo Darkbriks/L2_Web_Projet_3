@@ -40,28 +40,28 @@ catch (Exception $e) { echo "Erreur:" . $e->getMessage(); }
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name='new_first_name' id="person-first-name" placeholder='<?php echo htmlspecialchars($GLOBALS['person-form-add-person-first-name'], ENT_QUOTES, 'UTF-8'); ?>'>
+                            <input type="text" class="form-control" name='person-first-name' id="person-first-name" placeholder='<?php echo htmlspecialchars($GLOBALS['person-form-add-person-first-name'], ENT_QUOTES, 'UTF-8'); ?>'>
                             <label for="person-first-name">
                                 <?php echo htmlspecialchars($GLOBALS['person-form-add-person-first-name'], ENT_QUOTES, 'UTF-8'); ?>
                             </label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name='new_last_name' id="person-last-name" placeholder='<?php echo htmlspecialchars($GLOBALS['person-form-add-person-last-name'], ENT_QUOTES, 'UTF-8'); ?>'>
+                            <input type="text" class="form-control" name='person-last-name' id="person-last-name" placeholder='<?php echo htmlspecialchars($GLOBALS['person-form-add-person-last-name'], ENT_QUOTES, 'UTF-8'); ?>'>
                             <label for="person-last-name">
                                 <?php echo htmlspecialchars($GLOBALS['person-form-add-person-last-name'], ENT_QUOTES, 'UTF-8'); ?>
                             </label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input class="form-control" type='date' name='new_birth_date' id='person-birth-date'>
+                            <input class="form-control" type='date' name='person-birth-date' id='person-birth-date'>
                             <label for='person-birth-date'>
                                 <?php echo htmlspecialchars($GLOBALS['person-form-add-person-birth-date'], ENT_QUOTES, 'UTF-8'); ?>
                             </label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input class="form-control" type='date' name='new_death_date' id='person-death-date'>
+                            <input class="form-control" type='date' name='person-death-date' id='person-death-date'>
                             <label for='person-death-date'>
                                 <?php echo htmlspecialchars($GLOBALS['person-form-add-person-death-date'], ENT_QUOTES, 'UTF-8'); ?>
                             </label>
@@ -71,7 +71,7 @@ catch (Exception $e) { echo "Erreur:" . $e->getMessage(); }
                             <label for="person-image" class="form-label">
                                 <?php echo htmlspecialchars($GLOBALS['person-form-add-person-image'], ENT_QUOTES, 'UTF-8'); ?>
                             </label>
-                            <input class="form-control" type='file' name='new_image_path' id='new_image_path' accept='image/jpeg, image/jpg, image/png'>
+                            <input class="form-control" type='file' name='person-image-path' id='person-image-path' accept='image/jpeg, image/jpg, image/png'>
                         </div>
 
                         <button class="btn btn-primary" id="update-person-submit">
@@ -110,7 +110,7 @@ catch (Exception $e) { echo "Erreur:" . $e->getMessage(); }
 
             // Le nom ne doit pas être vide, et doit contenir entre 3 et 50 caractères
             name = name.trim();
-            if (name.length < 3 || name.length > 50) {
+            if (name.length < 10 || name.length > 50) {
                 set_user_msg("<?php echo addslashes($GLOBALS['person-form-exception-first-name']); ?>", "warning", document.getElementById('update-person-form-msg'));
                 return false;
             }
@@ -141,11 +141,11 @@ catch (Exception $e) { echo "Erreur:" . $e->getMessage(); }
             }
 
             // L'affiche ne doit pas être vide, et doit être une image (jpg, jpeg, png)
-            /*image = image.trim();
+            image = image.trim();
             if (image.length === 0) {
                 set_user_msg("<?php echo $GLOBALS['person-form-exception-image']; ?>", "warning", document.getElementById('update-person-form-msg'));
                 return false;
-            }*/
+            }
 
             return true;
         }
@@ -174,10 +174,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: " . $_SERVER['PHP_SELF']);
             exit();
         }
-    }
-    else if(isset($_POST['person_id'])) {
-        // Afficher un message d'erreur si des champs requis sont manquants
-        echo "Tous les champs requis doivent être remplis.";
     }
 }
 ?>
