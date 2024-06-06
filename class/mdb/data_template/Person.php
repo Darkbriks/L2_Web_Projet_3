@@ -73,14 +73,14 @@ class Person
     {
         $html = "<div class='person-card' id='card-{$this->id}'>
                     <img id='{$this->id}' src='" . $GLOBALS['PEOPLES_DIR'] . $this->image_path . "' alt='{$this->first_name} {$this->last_name}' style='cursor: pointer;'>
-                    <h3>{$this->first_name} {$this->last_name}</h3>
-                    " . ($played_name && $this->played_name !== null ? "<p>{$this->played_name}</p>" : '');
+                    <h3>{$this->first_name} {$this->last_name}</h3>";
+        if (!$canEdit) { $html .= ($played_name && $this->played_name !== null ? "<p>{$this->played_name}</p>" : ''); }
         if ($canEdit)
         {
-            $html .= "<button class='btn btn-primary' id='remove-{$this->id}'>Remove</button>";
+            $html .= ($played_name && $this->played_name !== null ? "<input type='text' id='role-{$this->id}' placeholder='Role' class='form-control form-control-sm' style='margin-bottom: 5px;' value='{$this->played_name}'>" : '');
+            $html .= "<button class='btn btn-primary  btn-sm' id='remove-{$this->id}'>Remove</button>";
         }
-        $html .= "</div>
-                <script>document.getElementById('{$this->id}').addEventListener('click', function() { window.location.href = 'person.php?id={$this->id}'; });</script>";
+        $html .= "</div><script>document.getElementById('{$this->id}').addEventListener('click', function() { window.location.href = 'person.php?id={$this->id}'; });</script>";
         if ($canEdit)
         {
             $html .= "<script>
@@ -92,12 +92,11 @@ class Person
                                 body: 'removeLink=true&movieId={$movieId}&personId={$this->id}'
                             })
                             .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
-                            .then(data => { if (data.success) { document.getElementById('card-{$this->id}').remove(); } else { alert(data.error); } })
-                            .catch(error => { alert(error); });
+                            .then(data => { if (data.success) { document.getElementById('card-{$this->id}').remove(); } else { set_msg(data.error, 'warning'); } })
+                            .catch(error => { else { set_msg(error, 'danger'); });
                         });
                     </script>";
         }
-
         return $html;
     }
 
