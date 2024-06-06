@@ -1,29 +1,15 @@
-<?php
-$currentPage = basename($_SERVER['PHP_SELF']);
-echo "Current page: " . $currentPag . "<br>";
-$isHomeActive = ($currentPage === 'home.php');
-$isAllMoviesActive = ($currentPage === 'all-movies.php');
-$isAllPeopleActive = ($currentPage === 'all-people.php');
-$isAdminActive = ($currentPage === 'admin.php');
-$isAdvancedSearchActive = ($currentPage === 'advanced-search.php');
-
-echo "Is Home Active: " . ($isHomeActive ? 'true' : 'false') . "<br>";
-echo "Is All Movies Active: " . ($isAllMoviesActive ? 'true' : 'false') . "<br>";
-echo "Is All People Active: " . ($isAllPeopleActive ? 'true' : 'false') . "<br>";
-echo "Is Admin Active: " . ($isAdminActive ? 'true' : 'false') . "<br>";
-echo "Is Advanced Search Active: " . ($isAdvancedSearchActive ? 'true' : 'false') . "<br>";
-?>
+<?php $current_page = basename($_SERVER['PHP_SELF']); ?>
 <header>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-title" href="#"><?php echo $GLOBALS['header-title']; ?></a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item <?php echo ($currentPage === 'home.php') ? 'active' : ''; ?>"><a class="nav-link" href="home.php"><?php echo $GLOBALS['header-home']; ?></a></li>
-                    <li class="nav-item <?php echo ($currentPage === 'all-movies.php') ? 'active' : ''; ?>"><a class="nav-link" href="all-movies.php"><?php echo $GLOBALS['header-movies']; ?></a></li>
-                    <li class="nav-item <?php echo ($currentPage === 'all-people.php') ? 'active' : ''; ?>"><a class="nav-link" href="all-people.php"><?php echo $GLOBALS['header-peoples']; ?></a></li>
-                    <li class="nav-item <?php echo ($currentPage === 'admin.php') ? 'active' : ''; ?>"><a class="nav-link" href="admin.php"><?php echo $GLOBALS['header-admin']; ?></a></li>
-                    <li class="nav-item <?php echo ($currentPage === 'advanced-search.php') ? 'active' : ''; ?>"><a class="nav-link" href="advanced-search.php"><?php echo $GLOBALS['header-advanced-search']; ?></a></li>
+                    <li class="nav-item"><a class="nav-link <?php echo ($current_page === 'home.php') ? 'active' : ''; ?>" href="home.php"><?php echo $GLOBALS['header-home']; ?></a></li>
+                    <li class="nav-item"><a class="nav-link <?php echo ($current_page === 'all-movies.php') ? 'active' : ''; ?>" href="all-movies.php"><?php echo $GLOBALS['header-movies']; ?></a></li>
+                    <li class="nav-item"><a class="nav-link <?php echo ($current_page === 'all-people.php') ? 'active' : ''; ?>" href="all-people.php"><?php echo $GLOBALS['header-peoples']; ?></a></li>
+                    <li class="nav-item"><a class="nav-link <?php echo ($current_page === 'admin.php') ? 'active' : ''; ?>" href="admin.php"><?php echo $GLOBALS['header-admin']; ?></a></li>
+                    <li class="nav-item"><a class="nav-link <?php echo ($current_page === 'advanced-search.php') ? 'active' : ''; ?>" href="advanced-search.php"><?php echo $GLOBALS['header-advanced-search']; ?></a></li>
                     <li>
                         <div class="form-floating">
                             <input class="form-control form-control-sm" type='text' name='search' id='search' required placeholder='<?php echo $GLOBALS['header-search'] ?>'>
