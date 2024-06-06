@@ -113,8 +113,7 @@ $admin = $_SESSION['admin'] ?? false;
 
                 fetch('../api/add-person.php', { method: 'POST', body: formData })
                 .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
-                .then(data => { if (data.success) { emptyModal() linkPersonToMovie(data.id, type, role); }
-                else { set_user_msg(data.error, 'warning', document.getElementById('add-person-modal-content')); } })
+                .then(data => { if (data.success) { emptyModal(); linkPersonToMovie(data.id, type, role); } else { set_user_msg(data.error, 'warning', document.getElementById('add-person-modal-content')); } })
                 .catch(error => { set_user_msg(error, 'danger', document.getElementById('add-person-modal-content')); });
             });
         });
