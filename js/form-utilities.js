@@ -1,5 +1,6 @@
-function updateOptionList(type, value)
+function updateOptionList(type, value, addRole = false)
 {
+    // TODO: Ajouter la possibilité de créer une personne si elle n'existe pas
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '../api/get-data.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -20,7 +21,7 @@ function updateOptionList(type, value)
                     option.classList.add('list-group-item', 'list-group-item-action');
                     option.innerHTML = person.first_name + ' ' + person.last_name;
                     option.id = person.id;
-                    option.addEventListener('click', addPersonToList.bind(null, type, person.id, person.first_name + ' ' + person.last_name));
+                    option.addEventListener('click', addPersonToList.bind(null, type, person.id, person.first_name + ' ' + person.last_name, addRole));
                     personList.appendChild(option);
                 });
             }
@@ -31,24 +32,32 @@ function updateOptionList(type, value)
 
 function clearOptionList(type) { let personList = document.getElementById(type + 'DatalistOptions'); personList.innerHTML = ''; }
 
-function addPersonToList(type, id, name)
+function addPersonToList(type, id, name, addRole = false)
 {
     let personList = document.getElementById(type + 'List');
-    let alreadyAdded = Array.from(personList.querySelectorAll('.person-id-value')).some(function(person) {
-        return person.value === id;
-    });
+    let persons = document.getElementById(type + 'List').querySelectorAll('.person-id-value');
+    for (let i = 0; i < persons.length; i++) { if (persons[i].value === id.toString()) { clearOptionList(type); document.getElementById(type + 'DataList').value = ''; return; } }
 
-    if (alreadyAdded) {
-        console.log('Personne déjà ajoutée');
-        return;
-    }
-//test this..
     let person = document.createElement('div');
     person.classList.add('input-group', 'mb-3');
 
-    person.innerHTML = '<input class="form-control" type="text" value="' + name + '" readonly>' +
-        '<button type="button" class="btn-close remove-btn" aria-label="Close" onclick="removePersonFromList(this)"></button>' +
-        '<input class="person-id-value" type="hidden" name="' + type + '[]" value="' + id + '">';
+    if (!addRole)
+    {
+        person.innerHTML = '<input class="form-control" type="text" value="' + name + '" readonly>' +
+            '<button type="button" class="btn-close remove-btn" aria-label="Close" onclick="removePersonFromList(this)"></button>' +
+            '<input class="person-id-value" type="hidden" name="' + type + '[]" value="' + id + '">';
+    }
+    else
+    {
+        let role = document.createElement('input');
+        role.classList.add('form-control');
+        role.type = 'text';
+        role.placeholder = 'Rôle';
+        role.name = type + '_role[]';
+        person.innerHTML = '<input class="form-control" type="text" value="' + name + '" readonly><input type="hidden" name="' + type + '[]" value="' + id + '">';
+        person.appendChild(role);
+        person.innerHTML += '<button type="button" class="btn-close remove-btn" aria-label="Close" onclick="removePersonFromList(this)"></button>';
+    }
 
     personList.appendChild(person);
     clearOptionList(type);

@@ -2,11 +2,17 @@
 use mdb\MoviesDB;
 use mdb\PersonDB;
 
-$personDB = new PersonDB();
-$persons = $personDB->getPersons(); // Récupère toutes les personnes existantes depuis la base de données
-$movieDB = new MoviesDB();
-$movies = $movieDB->getMovies(); // Récupère tous les films existants depuis la base de données
+try
+{
+    $personDB = new PersonDB();
+    $persons = $personDB->getPersons();
+    $movieDB = new MoviesDB();
+    $movies = $movieDB->getMovies();
+}
+catch (Exception $e) { $add_movie_error = $e->getMessage(); }
 ?>
+
+    <!-- TODO: Use GenerateFormInput (create new method if necessary) -->
 
     <button type="button" class="btn btn-primary" id="add-link-btn"><?php echo $GLOBALS['update-form-link-title']; ?></button>
 
@@ -86,49 +92,43 @@ $movies = $movieDB->getMovies(); // Récupère tous les films existants depuis l
             // Le nom ne doit pas être vide, et doit contenir entre 3 et 50 caractères
             name = name.trim();
             if (name.length < 3 || name.length > 50) {
-                showFormMsg("<?php echo addslashes($GLOBALS['person-form-exception-first-name']); ?>", "warning");
+                set_user_msg("<?php echo addslashes($GLOBALS['person-form-exception-first-name']); ?>", "warning", document.getElementById('link-form-msg'));
                 return false;
             }
 
             // Le nom de famille ne doit pas être vide, et doit contenir entre 3 et 50 caractères
             surname = surname.trim();
             if (surname.length < 3 || surname.length > 50) {
-                showFormMsg("<?php echo $GLOBALS['person-form-exception-last-name']; ?>", "warning");
+                set_user_msg("<?php echo $GLOBALS['person-form-exception-last-name']; ?>", "warning", document.getElementById('link-form-msg'));
                 return false;
             }
 
             // La date de naissance ne doit pas être vide et doit être une date passée
             birthDate = birthDate.trim();
             if (!birthDate) {
-                showFormMsg("<?php echo $GLOBALS['person-form-exception-birth-date']; ?>", "warning");
+                set_user_msg("<?php echo $GLOBALS['person-form-exception-birth-date']; ?>", "warning", document.getElementById('link-form-msg'));
                 return false;
             }
             if (new Date(birthDate) > new Date()) {
-                showFormMsg("<?php echo $GLOBALS['person-form-exception-birth-date']; ?>", "warning");
+                set_user_msg("<?php echo $GLOBALS['person-form-exception-birth-date']; ?>", "warning", document.getElementById('link-form-msg'));
                 return false;
             }
 
             // La date de décès doit être vide ou une date passée
             deathDate = deathDate.trim();
             if (deathDate && new Date(deathDate) > new Date()) {
-                showFormMsg("<?php echo $GLOBALS['person-form-exception-death-date']; ?>", "warning");
+                set_user_msg("<?php echo $GLOBALS['person-form-exception-death-date']; ?>", "warning", document.getElementById('link-form-msg'));
                 return false;
             }
 
             // L'affiche ne doit pas être vide, et doit être une image (jpg, jpeg, png)
             /*image = image.trim();
             if (image.length === 0) {
-                showFormMsg("<?php echo $GLOBALS['person-form-exception-image']; ?>", "warning");
+                set_user_msg("<?php echo $GLOBALS['person-form-exception-image']; ?>", "warning", , document.getElementById('link-form-msg'));
                 return false;
             }*/
 
             return true;
-        }
-
-        function showFormMsg(msg, type) {
-            let form_msg = document.getElementById('link-form-msg');
-            form_msg.innerHTML = '<div class="update-person-alert alert-' + type + '" role="alert">' + msg + '</div>';
-            console.log(msg);
         }
     </script>
 

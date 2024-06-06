@@ -1,15 +1,17 @@
 <?php
 use mdb\PersonDB;
 
-$personDB = new PersonDB();
-$persons = $personDB->getPersons(); // Récupère toutes les personnes existantes depuis la base de données
+try
+{
+    $personDB = new PersonDB();
+    $persons = $personDB->getPersons();
+}
+catch (Exception $e) { echo "Erreur:" . $e->getMessage(); }
 ?>
 
-
-        <button type="button" class="btn btn-primary" id="update-person-btn">
-            <?php echo htmlspecialchars($GLOBALS['update-person-form-title'], ENT_QUOTES, 'UTF-8'); ?>
-        </button>
-
+    <button type="button" class="btn btn-primary" id="update-person-btn">
+        <?php echo htmlspecialchars($GLOBALS['update-person-form-title'], ENT_QUOTES, 'UTF-8'); ?>
+    </button>
 
     <div class="modal fade" id="add-person-modal" tabindex="-1" aria-labelledby="add-person-modal-label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -109,49 +111,43 @@ $persons = $personDB->getPersons(); // Récupère toutes les personnes existante
             // Le nom ne doit pas être vide, et doit contenir entre 3 et 50 caractères
             name = name.trim();
             if (name.length < 3 || name.length > 50) {
-                showFormMsg("<?php echo addslashes($GLOBALS['person-form-exception-first-name']); ?>", "warning");
+                set_user_msg("<?php echo addslashes($GLOBALS['person-form-exception-first-name']); ?>", "warning", document.getElementById('update-person-form-msg'));
                 return false;
             }
 
             // Le nom de famille ne doit pas être vide, et doit contenir entre 3 et 50 caractères
             surname = surname.trim();
             if (surname.length < 3 || surname.length > 50) {
-                showFormMsg("<?php echo $GLOBALS['person-form-exception-last-name']; ?>", "warning");
+                set_user_msg("<?php echo $GLOBALS['person-form-exception-last-name']; ?>", "warning", document.getElementById('update-person-form-msg'));
                 return false;
             }
 
             // La date de naissance ne doit pas être vide et doit être une date passée
             birthDate = birthDate.trim();
             if (!birthDate) {
-                showFormMsg("<?php echo $GLOBALS['person-form-exception-birth-date']; ?>", "warning");
+                set_user_msg("<?php echo $GLOBALS['person-form-exception-birth-date']; ?>", "warning", document.getElementById('update-person-form-msg'));
                 return false;
             }
             if (new Date(birthDate) > new Date()) {
-                showFormMsg("<?php echo $GLOBALS['person-form-exception-birth-date']; ?>", "warning");
+                set_user_msg("<?php echo $GLOBALS['person-form-exception-birth-date']; ?>", "warning", document.getElementById('update-person-form-msg'));
                 return false;
             }
 
             // La date de décès doit être vide ou une date passée
             deathDate = deathDate.trim();
             if (deathDate && new Date(deathDate) > new Date()) {
-                showFormMsg("<?php echo $GLOBALS['person-form-exception-death-date']; ?>", "warning");
+                set_user_msg("<?php echo $GLOBALS['person-form-exception-death-date']; ?>", "warning", , document.getElementById('update-person-form-msg'));
                 return false;
             }
 
             // L'affiche ne doit pas être vide, et doit être une image (jpg, jpeg, png)
             /*image = image.trim();
             if (image.length === 0) {
-                showFormMsg("<?php echo $GLOBALS['person-form-exception-image']; ?>", "warning");
+                set_user_msg("<?php echo $GLOBALS['person-form-exception-image']; ?>", "warning", document.getElementById('update-person-form-msg'));
                 return false;
             }*/
 
             return true;
-        }
-
-        function showFormMsg(msg, type) {
-            let form_msg = document.getElementById('update-person-form-msg');
-            form_msg.innerHTML = '<div class="update-person-alert alert-' + type + '" role="alert">' + msg + '</div>';
-            console.log(msg);
         }
     </script>
 

@@ -1,15 +1,17 @@
 <?php
 use mdb\tagDB;
 
-$tagDB = new TagDB();
-$tags = $tagDB->getTags(); // Récupère toutes les tag existantes depuis la base de données
+try
+{
+    $tagDB = new TagDB();
+    $tags = $tagDB->getTags();
+}
+catch (Exception $e) { echo $e->getMessage(); }
 ?>
 
-
-    <button type="button" class="btn btn-primary" id="update-tag-btn">
-        <?php echo $GLOBALS['update-tag-form-title']; ?>
-    </button>
-
+<button type="button" class="btn btn-primary" id="update-tag-btn">
+    <?php echo $GLOBALS['update-tag-form-title']; ?>
+</button>
 
 <div class="modal fade" id="add-tag-modal" tabindex="-1" aria-labelledby="add-tag-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -75,16 +77,10 @@ $tags = $tagDB->getTags(); // Récupère toutes les tag existantes depuis la bas
         // Le nom ne doit pas être vide, et doit contenir entre 2 et 50 caractères
         name = name.trim();
         if (name.length < 3 || name.length > 50) {
-            showFormMsg("<?php echo $GLOBALS['tag-form-exception-name']; ?>", "warning");
+            set_user_msg("<?php echo $GLOBALS['tag-form-exception-name']; ?>", "warning", document.getElementById('update-tag-form-msg'));
             return false;
         }
         return true;
-    }
-
-    function showFormMsg(msg, type) {
-        let form_msg = document.getElementById('update-tag-form-msg');
-        form_msg.innerHTML = '<div class="update-tag-alert alert-' + type + '" role="alert">' + msg + '</div>';
-        console.log(msg);
     }
 </script>
 

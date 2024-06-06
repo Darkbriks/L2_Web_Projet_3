@@ -3,12 +3,19 @@
 use mdb\PersonDB;
 use mdb\TagDB;
 
-$tagDB = new TagDB();
-$categories = $tagDB->getTags();
+try
+{
+    $tagDB = new TagDB();
+    $categories = $tagDB->getTags();
 
-$personDB = new PersonDB();
-$persons = $personDB->getPersons();
+    $personDB = new PersonDB();
+    $persons = $personDB->getPersons();
+}
+catch (Exception $e) { $add_movie_error = $e->getMessage(); }
 ?>
+
+<script src="../js/form-utilities.js"></script>
+<!-- TODO: Use GenerateFormInput (create new method if necessary) -->
 
 <form method='POST' enctype='multipart/form-data' class="add-movie-form">
     <div id="add-movie-form-msg">
@@ -142,7 +149,7 @@ $persons = $personDB->getPersons();
         document.getElementById('actorDataList').addEventListener('input', function()
         {
             let actor = document.getElementById('actorDataList').value;
-            if (actor.length > 0) { updateOptionList('actor', actor); }
+            if (actor.length > 0) { updateOptionList('actor', actor, true); }
             else { clearOptionList('actor'); }
         });
 
@@ -152,10 +159,6 @@ $persons = $personDB->getPersons();
             if (composer.length > 0) { updateOptionList('composer', composer); }
             else { clearOptionList('composer'); }
         });
-
-        /*document.getElementById('directorDataList').addEventListener('focusout', function() { clearOptionList('director'); });
-        document.getElementById('actorDataList').addEventListener('focusout', function() { clearOptionList('actor'); });
-        document.getElementById('composerDataList').addEventListener('focusout', function() { clearOptionList('composer'); });*/
 
         document.querySelector('.add-movie-form').addEventListener('submit', function(e)
         {
@@ -217,79 +220,6 @@ $persons = $personDB->getPersons();
         }
     }
 
-    function updateOptionList(type, value)
-    {
-        // TODO: Ajouter la possibilité de créer une personne si elle n'existe pas
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', '../api/get-data.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send('table=person&conditionLength=2&attribute0=first_name&attribute1=last_name&value0=' + value + '&value1=' + value + '&and=false&limit=5&useLike=true');
-        xhr.onreadystatechange = function()
-        {
-            if (xhr.readyState === 4 && xhr.status === 200)
-            {
-                let response = JSON.parse(xhr.responseText);
-                if (response.success)
-                {
-                    let personList = document.getElementById(type + 'DatalistOptions');
-                    personList.innerHTML = '';
-                    let data = JSON.parse(response.data);
-                    data.forEach(function(person)
-                    {
-                        let option = document.createElement('button');
-                        option.classList.add('list-group-item', 'list-group-item-action');
-                        option.innerHTML = person.first_name + ' ' + person.last_name;
-                        option.id = person.id;
-                        option.addEventListener('click', addPersonToList.bind(null, type, person.id, person.first_name + ' ' + person.last_name));
-                        personList.appendChild(option);
-                    });
-                }
-                else { showMovieFormMsg(response.error, 'danger'); }
-            }
-        }
-    }
-
-    function clearOptionList(type) { let personList = document.getElementById(type + 'DatalistOptions'); personList.innerHTML = ''; }
-
-    function addPersonToList(type, id, name)
-    {
-       //TEST THIS
-        let personList = document.getElementById(type + 'List');
-        let alreadyAdded = false;
-
-           personList.querySelectorAll('.input').forEach(function(person) {
-               if (person.querySelector('input[type="hidden"]').value === id) {
-                   alreadyAdded = true;
-                   console.log('Personne déjà ajoutée');
-               }
-           });
-
-           if (alreadyAdded) return;
-
-
-        let person = document.createElement('div');
-        person.classList.add('input-group', 'mb-3');
-
-        if (type !== 'actor') { person.innerHTML = '<input class="form-control" type="text" value="' + name + '" readonly><button type="button" class="btn-close remove-btn" aria-label="Close" onclick="removePersonFromList(this)"></button><input type="hidden" name="' + type + '[]" value="' + id + '">'; }
-        else
-        {
-            let role = document.createElement('input');
-            role.classList.add('form-control');
-            role.type = 'text';
-            role.placeholder = 'Rôle';
-            role.name = type + '_role[]';
-            person.innerHTML = '<input class="form-control" type="text" value="' + name + '" readonly><input type="hidden" name="' + type + '[]" value="' + id + '">';
-            person.appendChild(role);
-            person.innerHTML += '<button type="button" class="btn-close remove-btn" aria-label="Close" onclick="removePersonFromList(this)"></button>';
-        }
-
-        personList.appendChild(person);
-        clearOptionList(type);
-        document.getElementById(type + 'DataList').value = '';
-    }
-
-    function removePersonFromList(button) { button.parentElement.remove(); }
-
     function validateForm() {
         let form = document.querySelector('.add-movie-form');
         let title = form.querySelector('#title').value;
@@ -343,8 +273,7 @@ $persons = $personDB->getPersons();
 
     function showMovieFormMsg(msg, type)
     {
-        let form_msg = document.getElementById('add-movie-form-msg');
-        form_msg.innerHTML = '<div class="alert alert-' + type + '" role="alert">' + msg + '</div>';
+        set_user_msg(msg, type, document.getElementById('add-movie-form-msg'))
         scroll(0, 0);
     }
 </script>
