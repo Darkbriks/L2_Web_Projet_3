@@ -68,7 +68,7 @@ class TagDB extends PdoWrapper
     /**
      * @throws Exception
      */
-    public function getTagsOfMovie(int $movieId): array
+    public function getTagsOfMovie($movieId): array
     {
         $query = "SELECT tag.* 
               FROM tag

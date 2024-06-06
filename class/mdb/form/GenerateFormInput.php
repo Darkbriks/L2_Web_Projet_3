@@ -2,9 +2,12 @@
 
 namespace mdb\form;
 
+use Exception;
+use mdb\TagDB;
+
 class GenerateFormInput
 {
-    public static function generateAdvancedSearchInput($fieldName, $fieldOperatorValues): string
+    public static function generateAdvancedSearchInput($fieldName, $fieldOperatorValues, $useInput = true): string
     {
         $html = '<div class="input-group mb-3">';
         $html .= '<label class="input-group-text" for="filter-' . $fieldName . '">' . $fieldName . '</label>';
@@ -12,12 +15,12 @@ class GenerateFormInput
         $html .= '<option value="null">--</option>';
         foreach ($fieldOperatorValues as $key => $value) { $html .= '<option value="' . $key . '">' . $value . '</option>'; }
         $html .= '</select>';
-        $html .= '<input type="text" class="form-control" id="filter-' . $fieldName . '" name="filter-' . $fieldName . '" placeholder="Type to search...">';
+        if ($useInput) { $html .= '<input type="text" class="form-control" id="filter-' . $fieldName . '" name="filter-' . $fieldName . '" placeholder="Type to search...">'; }
         $html .= '</div>';
         return $html;
     }
 
-    private static function generateAdvancedSearchPersonInput($fieldName): string
+    public static function generateAdvancedSearchPersonInput($fieldName): string
     {
         $html = '<div class="mb-3">';
         $html .= '<p>' . $fieldName . '</p>';
@@ -50,6 +53,25 @@ class GenerateFormInput
         $html = self::generateAdvancedSearchPersonInput('director');
         $html .= self::generateAdvancedSearchPersonInput('actor');
         $html .= self::generateAdvancedSearchPersonInput('composer');
+        return $html;
+    }
+
+    public static function generateCategoryList($categories = null): string
+    {
+        if ($categories === null)
+        {
+            try { $tagDB = new TagDB(); $categories = $tagDB->getTags(); }
+            catch (Exception $e) { return $e->getMessage(); }
+        }
+        $html = "<div id='category'>";
+        foreach ($categories as $category)
+        {
+            $html .= "<div class='form-check'>";
+            $html .= "<input class='form-check-input' type='checkbox' name='category[]' id='category_" . $category->getId() . "' value='" . $category->getId() . "'>";
+            $html .= "<label class='form-check-label' for='category_" . $category->getId() . "'>" . $category->getName() . "</label>";
+            $html .= "</div>";
+        }
+        $html .= "</div>";
         return $html;
     }
 }

@@ -23,6 +23,57 @@ class PersonDB extends PdoWrapper
     /**
      * @throws Exception
      */
+    public function advancedPersonSearch($firstName, $lastName, $birthDate, $deathDate, $firsNameOperator, $lastNameOperator, $birthDateOperator, $deathDateOperator, $otherPerson, $otherPersonOperator, $tags, $tagsOperator): array
+    {
+        $firstQuery = "SELECT p.id, mp.movie_id FROM person p
+                LEFT JOIN movie_person mp ON p.id = mp.person_id
+              WHERE p.first_name " . $firsNameOperator . " :firstName
+              AND p.last_name " . $lastNameOperator . " :lastName
+              AND p.birth_date " . $birthDateOperator . " :birthDate";
+
+        $params = array(
+            ':firstName' => "%" . $firstName . "%",
+            ':lastName' => "%" . $lastName . "%",
+            ':birthDate' => $birthDate,
+        );
+
+        if ($deathDate != "0000-00-00")
+        {
+            $firstQuery .= " AND p.death_date " . $deathDateOperator . " :deathDate";
+            $params[':deathDate'] = $deathDate;
+        }
+
+        $Ids = $this->execute($firstQuery, $params);
+
+        // Pour chaque film de qhaque personne, on vérifie si les autres personnes sont dans le film et si les tags sont présents
+        $filteredPerson = array();
+        $tagDB = new TagDB();
+        foreach ($Ids as $id)
+        {
+            if (in_array($id->id, $filteredPerson)) { continue; }
+
+            $personOnMovie = $this->getPersonOfMovie($id->movie_id);
+            $personOnMovie = array_column($personOnMovie, 'id');
+            $nbPersonMatch = count(array_intersect($personOnMovie, $otherPerson));
+
+            $tagsOnMovie = $tagDB->getTagsOfMovie($id->movie_id);
+            $tagsOnMovie = array_column($tagsOnMovie, 'id');
+            $nbTagsMatch = count(array_intersect($tagsOnMovie, $tags));
+
+            if ($otherPersonOperator == "AND" && $nbPersonMatch == count($otherPerson) || $otherPersonOperator == "OR" && $nbPersonMatch > 0)
+            {
+                if ($tagsOperator == "AND" && $nbTagsMatch == count($tags) || $tagsOperator == "OR" && $nbTagsMatch > 0)
+                {
+                    $filteredPerson[] = $id->id;
+                }
+            }
+        }
+        return $filteredPerson;
+    }
+
+    /**
+     * @throws Exception
+     */
     public function addPerson($first_name, $last_name, $birth_date, $death_date, $image_path): bool
     {
         $checkSql = "SELECT COUNT(*) FROM person WHERE first_name = :first_name AND last_name = :last_name AND birth_date = :birth_date";
@@ -66,58 +117,6 @@ class PersonDB extends PdoWrapper
             ':personType' => $personType
         );
         $this->execute($query, $params);
-        return true;
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function addListOfMovie_Person($list): bool
-    {
-        foreach ($list as $person)
-        {
-            if(!$this->addMovie_Person($person['movie_id'],$person['person_id'],$person['played_name'],$person['person_type'])) { return false; }
-        }
-        return true;
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function addMovie_Director($movie_id, $director_id): bool
-    {
-        return$this->addMovie_Person($movie_id, $director_id, '', 2);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function addListOfMovie_Director($list): bool
-    {
-        foreach ($list as $director)
-        {
-            if(!$this->addMovie_Director($director['movie_id'], $director['director_id'])) { return false; }
-        }
-        return true;
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function addMovie_Composer($movie_id, $composer_id): bool
-    {
-        return $this->addMovie_Person($movie_id, $composer_id, '', 3);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function addListOfMovie_Composer($list): bool
-    {
-        foreach ($list as $composer)
-        {
-            if(!$this->addMovie_Composer($composer['movie_id'], $composer['composer_id'])) { return false; }
-        }
         return true;
     }
 
@@ -174,6 +173,18 @@ class PersonDB extends PdoWrapper
     public function getPersonById($id): bool|array
     {
         return $this->execute("SELECT * FROM person WHERE id = :id", ["id" => $id], "mdb\data_template\Person");
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getPersonOfMovie($movieId): bool|array
+    {
+        $query = "SELECT DISTINCT p.id
+              FROM movie_person mp
+              INNER JOIN person p ON mp.person_id = p.id
+              WHERE mp.movie_id = :movieId";
+        return $this->execute($query, array(':movieId' => $movieId));
     }
 
     /**
@@ -250,36 +261,6 @@ class PersonDB extends PdoWrapper
     {
         $query = "UPDATE person SET" . $person_alter . "= :person_alter WHERE id = :id";
         return $this->execute($query,array(':person_alter' => $person_alter_value,':id' => $person_id),NULL);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getPersonsBy($alive = null, $type = null, $first_name = null,$last_name = null): array
-    {
-        $query = "SELECT * FROM person WHERE 1=1";
-        $params = [];
-
-        if ($alive !== null) {
-            $query .= " AND death_date IS NULL";
-        }
-
-        if ($type !== null) {
-            $query .= " AND time_duration = :type";
-            $params[':type'] = $type;
-        }
-
-        if ($first_name !== null) {
-            $query .= " AND first_name LIKE :first_name";
-            $params[':first_name'] = '%' . $first_name . '%';
-        }
-
-        if ($last_name !== null) {
-            $query .= " AND last_name LIKE :last_name";
-            $params[':last_name'] = '%' . $last_name . '%';
-        }
-
-        return $this->execute($query, $params, "mdb\data_template\Movie");
     }
 
     /**

@@ -10,7 +10,7 @@ function searchMovies()
     let ratingOperator = document.getElementById('operator-movie-rating').value;
     let note = document.getElementById('filter-movie-note').value;
     let noteOperator = document.getElementById('operator-movie-note').value;
-    let seen = document.getElementById('filter-movie-seen').value;
+    let seen = document.getElementById('operator-movie-seen').value;
     let synopsis = document.getElementById('filter-movie-synopsis').value;
     let synopsisOperator = document.getElementById('operator-movie-synopsis').value;
 
@@ -28,7 +28,7 @@ function searchMovies()
 
     let tags = [];
     document.getElementById('category').querySelectorAll('input[type="checkbox"]').forEach(function(tag) { if (tag.checked) { tags.push(tag.value); } });
-    let tagsOperator = document.getElementById('filter-movie-tag').value;
+    let tagsOperator = document.getElementById('operator-movie-tag').value;
 
     let data = {
         'title': title,
@@ -62,7 +62,7 @@ function searchMovies()
     fetch('../api/advanced-search-get-movies.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data) })
         .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
         .then(data => { if (data.success) { showMovieSearchResults(data.data); } else { set_user_msg('Erreur: ' + data.error, 'danger'); } })
-        .catch(error => { console.error(error); });
+        .catch(error => { set_user_msg(error, 'danger'); });
 }
 
 function showMovieSearchResults(data)
