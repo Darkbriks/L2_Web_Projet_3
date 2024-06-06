@@ -30,27 +30,26 @@ class PersonForm
     public function alterPerson(int $person_id, array $data, $img_file = null): void
     {
         foreach ($data as $key => $value) { $data[$key] = htmlspecialchars(trim($value)); }
-        $data['person-death-date'] = (isset($data['person-death-date'])) ? $data['person-death-date'] : null;
-        $this->checkForm($data, $img_file, true);
+        $data['person_death_date'] = (isset($data['person_death_date'])) ? $data['person_death_date'] : null;
+        $this->checkUpdateForm($data, $img_file);
 
-        if ($img_file && !empty($img_file['name'])) {
-            try { $data['image-path'] = $this->saveImage($img_file); }
-            catch (Exception $e) { throw new Exception($e->getMessage()); }
-        }
+        try { $data['image-path'] = $this->saveImage($img_file); }
+        catch (Exception $e) { throw new Exception($e->getMessage()); }
 
-        $this->updateActor($person_id, $data);
+
+        if ($this->updateActor($person_id,$data) === 0) { throw new Exception($GLOBALS['person-form-exception-adding']); }
     }
 
-    private function updateActor(int $person_id, array $data): void
+    private function updateActor(int $person_id, array $data): int
     {
         $personDB = new PersonDB();
-        $personDB->alterPerson($person_id, $data['person-first-name'], $data['person-last-name'], $data['person-birth-date'], $data['person-death-date'], $data['image-path']);
+        return $personDB->alterPersonReturnID($person_id, $data['new_first_name'], $data['new_last_name'], $data['new_birth_date'], $data['new_death_date'], $data['image-path']);
     }
 
     /**
      * @throws Exception
      */
-    private function saveImage(array $image): string
+    public function saveImage(array $image): string
     {
         $tmp_name = $image['tmp_name'];
         $img_name = $image['name'];
@@ -67,6 +66,43 @@ class PersonForm
         $personDB = new PersonDB();
         return $personDB->addPersonAndReturnId($data['person-first-name'], $data['person-last-name'], $data['person-birth-date'], $data['person-death-date'], $data['image-path']);
     }
+
+    private function checkUpdateForm(array $data, $img_film): void
+    {
+        // The first name should not be empty and must contain between 2 and 50 characters
+        $data['new_first_name'] = htmlspecialchars(trim($data['new_first_name']));
+        if (empty($data['new_first_name']) || strlen($data['new_first_name']) < 2 || strlen($data['new_first_name']) > 50)
+        {
+            throw new Exception($GLOBALS['person-form-exception-first-name']);
+        }
+
+        // The last name should not be empty and must contain between 2 and 50 characters
+        $data['new_last_name'] = htmlspecialchars(trim($data['new_last_name']));
+        if (empty($data['new_last_name']) || strlen($data['new_last_name']) < 2 || strlen($data['new_last_name']) > 50)
+        {
+            throw new Exception($GLOBALS['person-form-exception-last-name']);
+        }
+
+        // The birth date should not be empty and must be in the format YYYY-MM-DD
+        $data['new_birth_date'] = htmlspecialchars(trim($data['new_birth_date']));
+        if (empty($data['new_birth_date']) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $data['new_birth_date']))
+        {
+            throw new Exception($GLOBALS['person-form-exception-birth-date']);
+        }
+
+        // The death date can be empty, but if provided, it must be in the format YYYY-MM-DD
+        if (!empty($data['new_death_date']))
+        {
+            $data['new_death_date'] = htmlspecialchars(trim($data['new_death_date']));
+            if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $data['new_death_date']))
+            {
+                throw new Exception($GLOBALS['person-form-exception-death-date']);
+            }
+        }
+
+
+    }
+
 
     /**
      * @throws Exception
@@ -108,4 +144,5 @@ class PersonForm
         if (empty($img_file['name']) || !in_array($img_file['type'], ['image/jpeg', 'image/jpg', 'image/png']))
         { throw new Exception($GLOBALS['person-form-exception-image']); }
     }
+
 }
