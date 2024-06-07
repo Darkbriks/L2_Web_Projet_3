@@ -42,8 +42,8 @@ $movies = $movieDB->getMovies(); // Récupère tous les films existants depuis l
     </div>
     <div class="mb-3">
         <label for='age_limit' hidden><?php echo $GLOBALS['movie-form-add-movie-age-rating'] ?></label>
-        <select class="form-select" name='age_limit' id='age_limit' required>
-            <option value=''><?php echo $GLOBALS['movie-form-add-movie-age-rating'] ?></option>
+        <select class="form-select" name='age_limit' id='age_limit'>
+            <option value='1'><?php echo $GLOBALS['movie-form-add-movie-age-rating'] ?></option>
             <option value='1'><?php echo $GLOBALS['movie-form-add-movie-age-rating-all'] ?></option>
             <option value='10'>10 <?php echo $GLOBALS['movie-form-add-movie-age-rating-number'] ?></option>
             <option value='12'>12 <?php echo $GLOBALS['movie-form-add-movie-age-rating-number'] ?></option>
@@ -52,7 +52,7 @@ $movies = $movieDB->getMovies(); // Récupère tous les films existants depuis l
         </select>
     </div>
     <div class="form-floating mb-3">
-        <input class="form-control" type='text' name='trailer' id='trailer' required placeholder='<?php echo $GLOBALS['movie-form-add-movie-trailer-placeholder'] ?>'>
+        <input class="form-control" type='text' name='trailer' id='trailer' placeholder='<?php echo $GLOBALS['movie-form-add-movie-trailer-placeholder'] ?>'>
         <label for='trailer'><?php echo $GLOBALS['movie-form-add-movie-trailer'] ?></label>
     </div>
     <input type="submit" class = "btn btn-warning"value="<?php echo $GLOBALS['update-movie-form-question']; ?>">
@@ -69,81 +69,16 @@ $movies = $movieDB->getMovies(); // Récupère tous les films existants depuis l
         });
     });
 
-    document.querySelector('#update-movie-form').addEventListener('submit', function(e) {
+    document.querySelector('.update-movie-form').addEventListener('submit', function(e) {
         document.getElementById('update-movie-form-msg').innerHTML = '';
         e.preventDefault();
         console.log('Form submit prevented for validation');
-        if (validateMovieForm()) {
-            console.log('Form validation passed');
+        if (checkMovieForm('.update-movie-form','update-movie-form-msg')) {
             document.querySelector('.update-movie-form').submit();
         } else {
-            console.log('Form validation failed');
         }
     });
 
-    function validateMovieForm() {
-        let form = document.querySelector('.update-movie-form');
-        let title = form.querySelector('#title').value.trim();
-        let releaseDate = form.querySelector('#release_date').value.trim();
-        let synopsis = form.querySelector('#synopsis').value.trim();
-        let image = form.querySelector('#image_path').value.trim();
-        let timeDuration = parseInt(form.querySelector('#duration').value);
-        let note = parseFloat(form.querySelector('#note').value);
-        let rating = form.querySelector('#age_limit').value.trim();
-        let trailerPath = form.querySelector('#trailer').value.trim();
-
-        if (title.length < 3 || title.length > 50) {
-            showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-title']; ?>", "warning");
-            return false;
-        }
-
-        if (!releaseDate) {
-            showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-release-date']; ?>", "warning");
-            return false;
-        }
-        if (new Date(releaseDate) > new Date()) {
-            showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-release-date']; ?>", "warning");
-            return false;
-        }
-
-        if (synopsis.length > 500) {
-            showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-synopsis']; ?>", "warning");
-            return false;
-        }
-
-        if (image.length === 0) {
-            showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-image']; ?>", "warning");
-            return false;
-        }
-
-        if (timeDuration < 0 || timeDuration > 300) {
-            showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-duration']; ?>", "warning");
-            return false;
-        }
-
-        if (note < 0 || note > 5) {
-            showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-note']; ?>", "warning");
-            return false;
-        }
-
-        if (rating.length === 0) {
-            showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-rating']; ?>", "warning");
-            return false;
-        }
-
-        if (trailerPath.length > 255) {
-            showMovieFormMsg("<?php echo $GLOBALS['movie-form-exception-trailer']; ?>", "warning");
-            return false;
-        }
-
-        return true;
-    }
-
-    function showMovieFormMsg(msg, type) {
-        let form_msg = document.getElementById('update-movie-form-msg');
-        form_msg.innerHTML = '<div class="alert alert-' + type + '" role="alert">' + msg + '</div>';
-        console.log(msg);
-    }
 </script>
 
 <?php
