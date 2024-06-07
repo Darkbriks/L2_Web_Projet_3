@@ -74,6 +74,15 @@ class PersonDB extends PdoWrapper
     /**
      * @throws Exception
      */
+    public function setPersonAttribute($id, $attribute, $value): void
+    {
+        $query = "UPDATE person SET " . $attribute . " = :value WHERE id = :id";
+        $this->execute($query, array(':value' => $value, ':id' => $id));
+    }
+
+    /**
+     * @throws Exception
+     */
     public function addPerson($first_name, $last_name, $birth_date, $death_date, $image_path): bool
     {
         $checkSql = "SELECT COUNT(*) FROM person WHERE first_name = :first_name AND last_name = :last_name AND birth_date = :birth_date";

@@ -3,6 +3,10 @@
 
 ////////// GLOBAL EXPRESSIONS //////////
 $GLOBALS['still-alive'] = 'Encore en vie';
+$GLOBALS['edit'] = 'Modifier';
+$GLOBALS['save-changes'] = 'Sauvegarder les modifications';
+$GLOBALS['cancel'] = 'Annuler';
+$GLOBALS['error-unknown-type'] = 'Erreur: type inconnu';
 
 ////////// TEMPLATE //////////
 // template.php
@@ -174,22 +178,22 @@ $GLOBALS['movie-composers'] = 'Compositeur(s)';
 $GLOBALS['movie-error-1'] = 'Aucun ID de film fourni';
 $GLOBALS['movie-error-2'] = 'Aucun film trouvé avec l\'ID : ';
 
-// EditableMovie.php
-$GLOBALS['movie-edit'] = 'Modifier';
-$GLOBALS['movie-save-changes'] = 'Sauvegarder les modifications';
-$GLOBALS['movie-cancel'] = 'Annuler';
+// EditableObject.php
 $GLOBALS['movie-editable-new-title'] = 'Nouveau titre';
 $GLOBALS['movie-editable-new-release-date'] = 'Nouvelle date de sortie';
 $GLOBALS['movie-editable-new-synopsis'] = 'Nouveau synopsis';
 $GLOBALS['movie-editable-new-time-duration'] = 'Nouvelle durée';
 $GLOBALS['movie-editable-new-note'] = 'Nouvelle note';
 $GLOBALS['movie-editable-new-rating'] = 'Nouvelle classification';
-$GLOBALS['movie-editable-error-unknown-type'] = 'Erreur: type inconnu';
 
 ////////// PERSON //////////
 // person.php
 $GLOBALS['person-error-1'] = 'Aucun ID de personne fourni';
 $GLOBALS['person-error-2'] = 'Aucune personne trouvée avec l\'ID : ';
+$GLOBALS['person-first-name'] = 'Prenom';
+$GLOBALS['person-last-name'] = 'Nom';
+$GLOBALS['person-birth-date'] = 'Date de naissance';
+$GLOBALS['person-death-date'] = 'Date de décès';
 
 ////////// LOGIN //////////
 // login.php

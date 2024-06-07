@@ -170,7 +170,7 @@ $GLOBALS['movie-composers'] = 'Composer(s)';
 $GLOBALS['movie-error-1'] = 'No movie ID provided';
 $GLOBALS['movie-error-2'] = 'No movie found with ID: ';
 
-// EditableMovie.php
+// EditableObject.php
 $GLOBALS['movie-edit'] = 'Edit';
 $GLOBALS['movie-save-changes'] = 'Save changes';
 $GLOBALS['movie-cancel'] = 'Cancel';

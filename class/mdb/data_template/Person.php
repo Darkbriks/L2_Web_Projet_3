@@ -12,17 +12,21 @@ class Person
     public function getImagePath() { return $this->image_path; }
 
     // TODO: localization
-    public function getHtml(): string
+    public function getHtml($isAdmin = false): string
     {
         $deathDate = ($this->death_date ?? $GLOBALS['still-alive']);
-        return "<div class='person'>
-             <img src='" . $GLOBALS['PEOPLES_DIR'] . $this->image_path . "' alt='{$this->first_name} {$this->last_name}'>
-             <div class = person-details>
-             <h3>{$this->first_name} {$this->last_name}</h3>
-             <p><strong>First Name:</strong> {$this->first_name}</p>
-             <p><strong>Last Name:</strong> {$this->last_name}</p>
-             <p><strong>Birth Date:</strong> {$this->birth_date}</p>
-             <p><strong>Death Date:</strong> {$deathDate}</p></div></div>";
+        $html = "<div class='person'>
+                    <img class='editable' data-type='img' data-attribute='image_path' src='" . $GLOBALS['PEOPLES_DIR'] . $this->image_path . "' alt='{$this->first_name} {$this->last_name}'>
+                     <div class = person-details>
+                         <h3 id='full_name'>{$this->first_name} {$this->last_name}</h3>
+                         <div style='display: flex; gap: 10px'><p><strong>" . $GLOBALS['person-first-name'] . ":</strong></p><p class='editable' data-type='text' data-attribute='first_name'>" . $this->first_name . "</p></div>
+                         <div style='display: flex; gap: 10px'><p><strong>" . $GLOBALS['person-last-name'] . ":</strong></p><p class='editable' data-type='text' data-attribute='last_name'>" . $this->last_name . "</p></div>
+                         <div style='display: flex; gap: 10px'><p><strong>" . $GLOBALS['person-birth-date'] . ":</strong></p><p class='editable' data-type='date' data-attribute='birth_date'>" . $this->birth_date . "</p></div>
+                         <div style='display: flex; gap: 10px'><p><strong>" . $GLOBALS['person-death-date'] . ":</strong></p><p class='editable' data-type='date' data-attribute='death_date'>" . $deathDate . "</p></div>
+                    </div>
+                </div>";
+        if ($isAdmin) { $html .= EditableObject::getHtml($this->id, 'person'); }
+        return $html;
     }
 
     public function getHtml_list(bool $played_name = false): string

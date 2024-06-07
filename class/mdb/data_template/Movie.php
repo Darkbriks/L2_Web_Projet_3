@@ -97,19 +97,9 @@ class Movie
                         .then(data => { if (data.success) { set_msg(data.data, 'success'); } else { set_msg(data.error, 'danger'); } })
                         .catch(error => { set_msg(error, 'danger'); });
                     }
-                    
-                    function set_msg(msg, type)
-                    {
-                        let movieContainer = document.querySelector('.movie-container');
-                        let userMsg = document.createElement('div');
-                        userMsg.classList.add('alert', 'alert-' + type);
-                        userMsg.innerText = msg;
-                        movieContainer.prepend(userMsg);
-                        setTimeout(() => { userMsg.remove(); }, 10000);
-                    }
                 </script>";
 
-        if ($isAdmin) { $html .= EditableMovie::getHtml($this->id); }
+        if ($isAdmin) { $html .= EditableObject::getHtml($this->id, 'movieperson'); }
         return $html;
     }
 
