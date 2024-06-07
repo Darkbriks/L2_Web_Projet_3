@@ -17,6 +17,7 @@ $GLOBALS['header-admin'] = 'Administración';
 $GLOBALS['header-advanced-search'] = 'Búsqueda avanzada';
 $GLOBALS['header-search'] = 'Buscar';
 $GLOBALS['header-logout'] = 'Cerrar sesión';
+$GLOBALS['header-login']='Iniciar sesión';
 $GLOBALS['header-theme'] = 'Tema';
 $GLOBALS['header-language-dropdown-default'] = 'Seleccionar idioma';
 

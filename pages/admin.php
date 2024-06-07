@@ -13,14 +13,35 @@ $accounts = $accountDB->getAccounts();
 $lang = $_SESSION['language'] ?? 'EN';
 require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
-if (isset($_POST['username']) || isset($_POST['password'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    $login_success = false;
+
     foreach ($accounts as $account) {
-        if(password_verify($_POST['username'], $account->getUsername()) && password_verify($_POST['username'], $account->getPassword())) {
+        if (password_verify($username, $account->getUsername()) && password_verify($password, $account->getPassword())) {
             $_SESSION['admin'] = true;
+            $login_success = true;
+            break;
         }
     }
-    if(isset($_SESSION['admin']) && $_SESSION['admin'] !== true) {
-        $login_error = $GLOBALS['login-error'];
+
+    if ($login_success) {
+        if (isset($_POST['ajax'])) {
+            echo json_encode(['success' => true]);
+            exit();
+        } else {
+            header("Location: $_SERVER[HTTP_REFERER]");
+            exit();
+        }
+    } else {
+        if (isset($_POST['ajax'])) {
+            echo json_encode(['success' => false, 'error' => $GLOBALS['login-error']]);
+            exit();
+        } else {
+            $login_error = $GLOBALS['login-error'];
+        }
     }
 }
 
@@ -39,13 +60,13 @@ $action = $_SESSION['action'] ?? null;
 <?php
 if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
     <form method="POST" enctype="multipart/form-data">
-
         <div class="mb-3">
             <button type="submit" name="action" value="add" class="btn-admin">Ajouter</button>
             <button type="submit" name="action" value="edit" class="btn-admin">Modifier</button>
         </div>
     </form>
-    <?php
+
+ <?php
     // Vérifier l'action stockée dans la session
     if ($action === 'add') {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {

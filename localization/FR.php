@@ -20,6 +20,7 @@ $GLOBALS['header-admin'] = 'Admin';
 $GLOBALS['header-advanced-search'] = 'Recherche avancée';
 $GLOBALS['header-search'] = 'Rechercher';
 $GLOBALS['header-logout'] = 'Déconnexion';
+$GLOBALS['header-login'] = 'Connexion';
 $GLOBALS['header-theme'] = 'Thème';
 $GLOBALS['header-language-dropdown-default'] = 'Choisir la langue';
 
