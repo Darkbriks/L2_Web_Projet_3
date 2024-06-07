@@ -61,12 +61,12 @@ $action = $_SESSION['action'] ?? null;
 if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
     <form method="POST" enctype="multipart/form-data">
         <div class="mb-3">
-            <button type="submit" name="action" value="add" class="btn-admin">Ajouter</button>
-            <button type="submit" name="action" value="edit" class="btn-admin">Modifier</button>
+            <button type="submit" name="action" value="add" class="btn btn-info btn-lg">Ajouter</button>
+            <button type="submit" name="action" value="edit" class="btn btn-info btn-lg">Modifier</button>
         </div>
     </form>
-
- <?php
+    <script src="../js/validateForm.js"></script>
+    <?php
     // Vérifier l'action stockée dans la session
     if ($action === 'add') {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {

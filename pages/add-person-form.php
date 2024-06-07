@@ -55,47 +55,5 @@
             let add_person_modal = new bootstrap.Modal(document.getElementById('add-person-modal'));
             add_person_modal.show();
         });
-
-        document.querySelector('#person-submit').addEventListener('submit', function(e)
-        {
-            document.getElementById('add-person-form-msg').innerHTML = '';
-            e.preventDefault();
-            if (checkaddForm()) { document.querySelector('.add-person-form').submit(); } // appeler la fonction correctement
-        });
     });
-
-    function checkaddForm()
-    {
-        let form = document.querySelector('.add-person-form');
-        let name = form.querySelector('#person-first-name').value;
-        let surname = form.querySelector('#person-last-name').value;
-        let birthDate = form.querySelector('#person-birth-date').value;
-        let deathDate = form.querySelector('#person-death-date').value;
-        let image = form.querySelector('#person-image').value
-
-        // Le nom ne doit pas être vide, et doit contenir entre 3 et 50 caractères
-        name = name.trim(); if (name.length < 3 || name.length > 50) { showPersonFormMsg("<?php echo $GLOBALS['person-form-exception-first-name']; ?>", "warning"); return false; }
-
-        // Le nom de famille ne doit pas être vide, et doit contenir entre 3 et 50 caractères
-        surname = surname.trim(); if (surname.length < 3 || surname.length > 50) { showPersonFormMsg("<?php echo $GLOBALS['person-form-exception-last-name']; ?>", "warning"); return false; }
-
-        // La date de naissance ne doit pas être vide et doit être une date passée
-        birthDate = birthDate.trim(); if (!birthDate) { showPersonFormMsg("<?php echo $GLOBALS['person-form-exception-birth-date']; ?>", "warning"); return false; }
-        if (new Date(birthDate) > new Date()) { showPersonFormMsg("<?php echo $GLOBALS['person-form-exception-birth-date']; ?>", "warning"); return false; }
-
-        // La date de décès doit être vide ou une date passée
-        deathDate = deathDate.trim(); if (deathDate && new Date(deathDate) > new Date()) { showPersonFormMsg("<?php echo $GLOBALS['person-form-exception-death-date']; ?>", "warning"); return false; }
-
-        // L'affiche ne doit pas être vide, et doit être une image (jpg, jpeg, png)
-        image = image.trim(); if (image.length === 0) { showMovieFormMsg("<?php echo $GLOBALS['person-form-exception-image']; ?>", "warning"); return false; }
-
-        return true;
-    }
-
-    function showPersonFormMsg(msg, type)
-    {
-        let form_msg = document.getElementById('add-person-form-msg');
-        form_msg.innerHTML = '<div class="alert alert-' + type + '" role="alert">' + msg + '</div>';
-        console.log(msg);
-    }
 </script>

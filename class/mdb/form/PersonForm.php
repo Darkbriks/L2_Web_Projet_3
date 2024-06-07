@@ -12,7 +12,7 @@ class PersonForm
      */
     public function Person(array $data, $img_file, $person_id = null): void
     {
-        $this->checkForm($data, $img_file);
+        //$this->checkForm($data, $img_file);
 
         try { $data['image-path'] = ValidateForm::saveImage($img_file, 'uploads/peoples/'); }
         catch (Exception $e) { throw new Exception($e->getMessage()); }
@@ -23,7 +23,7 @@ class PersonForm
             { throw new Exception($GLOBALS['person-form-exception-adding']); }
         }
         else{
-            $personDB->alterPerson($person_id, $data['person-first-name'], $data['person-last-name'], $data['person-birth-date'], $data['person-death_date'], $data['image-path']);
+            $personDB->alterPerson($person_id, $data['person-first-name'], $data['person-last-name'], $data['person-birth-date'], $data['person-death-date'], $data['image-path']);
         }
     }
 
@@ -40,5 +40,7 @@ class PersonForm
         ValidateForm::validatePotentiallyEmptyDateInput($data['person-death-date'], $GLOBALS['person-form-exception-death-date']);
         ValidateForm::validateImageInput($img_file, $GLOBALS['person-form-exception-image']);
     }
+
+
 
 }

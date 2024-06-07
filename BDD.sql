@@ -27,7 +27,7 @@ CREATE TABLE person (
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     birth_date DATE NOT NULL,
-    death_date DATE,
+    death_date DATE DEFAULT NULL,
     image_path VARCHAR(100) NOT NULL
 );
 

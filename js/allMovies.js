@@ -56,14 +56,15 @@ function renderMovies(movies, random = null )
 {
     const carrousel = document.querySelector('.carrousel');
     carrousel.innerHTML = '';
+    const moviesPerSlide = Math.max(Math.floor((window.innerWidth * 0.95) / (window.innerHeight * 0.35) - 1), 1);
+    let slideIndex = 0;
+
     let limite;
     if (random === null) {
         limite = movies.length;
     } else {
-        limite = 3;
+        limite = moviesPerSlide;
     }
-    const moviesPerSlide = Math.max(Math.floor((window.innerWidth * 0.95) / (window.innerHeight * 0.35) - 1), 1);
-    let slideIndex = 0;
 
     for (let i = 0; i < limite; i += moviesPerSlide)
     {
