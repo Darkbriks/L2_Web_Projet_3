@@ -71,7 +71,7 @@ catch (Exception $e) { echo "Erreur:" . $e->getMessage(); }
                             <label for="person-image" class="form-label">
                                 <?php echo htmlspecialchars($GLOBALS['person-form-add-person-image'], ENT_QUOTES, 'UTF-8'); ?>
                             </label>
-                            <input class="form-control" type='file' name='person-image-path' id='person-image-path' accept='image/jpeg, image/jpg, image/png'>
+                            <input class="form-control" type='file' name='person-image' id='person-image' accept='image/jpeg, image/jpg, image/png'>
                         </div>
 
                         <button class="btn btn-warning" id="update-person-submit">
@@ -91,6 +91,16 @@ catch (Exception $e) { echo "Erreur:" . $e->getMessage(); }
                 add_person_modal.show();
             });
         });
+        document.querySelector('.update-person-form').addEventListener('submit', function (e) {
+            console.log('cccc');
+            if(document.getElementById('update-person-form-msg')) {
+                document.getElementById('update-person-form-msg').innerHTML = '';
+                e.preventDefault();
+                if (checkPersonForm('.update-person-form', 'update-person-form-msg')) {
+                    document.querySelector('.update-person-form').submit();
+                }
+            }
+        })
     </script>
 
 

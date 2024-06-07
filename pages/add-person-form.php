@@ -55,5 +55,15 @@
             let add_person_modal = new bootstrap.Modal(document.getElementById('add-person-modal'));
             add_person_modal.show();
         });
+        document.querySelector('.add-person-form').addEventListener('submit', function (e) {
+            console.log('bbbbbbb');
+            if (document.getElementById('add-person-form-msg')) {
+                document.getElementById('add-person-form-msg').innerHTML = '';
+                e.preventDefault();
+                if (checkPersonForm('.add-person-form','add-person-form-msg')) {
+                    document.querySelector('.add-person-form').submit();
+                }
+            }
+        });
     });
 </script>

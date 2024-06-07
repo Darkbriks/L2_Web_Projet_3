@@ -68,6 +68,8 @@ if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
     </form>
 </div>
     <script src="../js/validateForm.js"></script>
+    <script src="../js/checkForm.js"></script>
+
     <?php
     // Vérifier l'action stockée dans la session
     if ($action === 'add') {
@@ -101,7 +103,7 @@ if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
             <?php
             if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['person-first-name'])) {
                 $personForm = new \mdb\form\PersonForm();
-                $img_file = $_FILES['person-image-path'] ?? null;
+                $img_file = $_FILES['person-image'] ?? null;
                 try {
                     $personForm->Person($_POST, $img_file, $_POST['person_id']);
                 ?><script> document.addEventListener('DOMContentLoaded', function() {

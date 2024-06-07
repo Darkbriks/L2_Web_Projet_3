@@ -60,9 +60,9 @@ class PersonDB extends PdoWrapper
             $tagsOnMovie = array_column($tagsOnMovie, 'id');
             $nbTagsMatch = count(array_intersect($tagsOnMovie, $tags));
 
-            if ($otherPersonOperator == "AND" && $nbPersonMatch == count($otherPerson) || $otherPersonOperator == "OR" && $nbPersonMatch > 0)
+            if (($otherPersonOperator == "AND" && $nbPersonMatch == count($otherPerson)) || ($otherPersonOperator == "OR" && $nbPersonMatch > 0))
             {
-                if ($tagsOperator == "AND" && $nbTagsMatch == count($tags) || $tagsOperator == "OR" && $nbTagsMatch > 0)
+                if (($tagsOperator == "AND" && $nbTagsMatch == count($tags)) || ($tagsOperator == "OR" && $nbTagsMatch > 0))
                 {
                     $filteredPerson[] = $id->id;
                 }

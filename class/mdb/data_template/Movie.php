@@ -87,16 +87,16 @@ class Movie
                     {
                         fetch('../api/set-seen-favorite.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'id': '" . $this->id . "', 'seen': document.getElementById('seen').checked.toString() }) })
                             .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
-                            .then(data => { if (data.success) { set_msg(data.data, 'success'); } else { set_msg(data.error, 'danger'); } })
-                            .catch(error => { set_msg(error, 'danger'); });
+                            .then(data => { if (data.success) { set_user_msg(data.data, 'success', document.querySelector('movie-present')); } else { set_user_msg(data.error, 'danger', document.querySelector('movie-present')); } })
+                            .catch(error => { set_user_msg(error, 'danger', document.querySelector('movie-present')); });
                     }
                     
                     function saveFavorite()
                     {
                         fetch('../api/set-seen-favorite.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },  body: new URLSearchParams({ 'id': '" . $this->id . "', 'favorite': document.getElementById('favorite').checked.toString() }) })
                         .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
-                        .then(data => { if (data.success) { set_msg(data.data, 'success'); } else { set_msg(data.error, 'danger'); } })
-                        .catch(error => { set_msg(error, 'danger'); });
+                        .then(data => { if (data.success) { set_user_msg(data.data, 'success', document.querySelector('movie-present')); } else { set_user_msg(data.error, 'danger', document.querySelector('movie-present')); } })
+                        .catch(error => { set_user_msg(error, 'danger', document.querySelector('movie-present')); });
                     }
                 </script>";
 
