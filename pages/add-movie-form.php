@@ -180,7 +180,7 @@ catch (Exception $e) { $add_movie_error = $e->getMessage(); }
         {
             let reader = new FileReader();
             reader.onload = function(e) { postersPreview.innerHTML = '<img src="' + e.target.result + '" alt="Poster">'; }
-            reader.readAsDataURL(image-path[0]);
+            reader.readAsDataURL(posters[0]);
         }
         else { removePoster() }
     }
