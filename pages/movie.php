@@ -11,6 +11,7 @@ $lang = $_SESSION['language'] ?? 'EN';
 require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
 $admin = $_SESSION['admin'] ?? false;
+$img_file = $_FILES['image-path'] ?? null;
 ?>
 
 <?php ob_start(); ?>
@@ -19,6 +20,8 @@ $admin = $_SESSION['admin'] ?? false;
 
 <?php try
 {
+
+
     if (!isset($_GET['id'])) { throw new Exception($GLOBALS['movie-error-1'], 1); }
     $id = (int)htmlspecialchars($_GET['id']);
     $moviesDB = new mdb\MoviesDB();
@@ -31,13 +34,13 @@ $admin = $_SESSION['admin'] ?? false;
     $actors = $personDB->getActorsOfMovie($movies[0]->id);
     $composers = $personDB->getComposersOfMovie($movies[0]->id);
 
-    ?><h3><?php echo $GLOBALS['movie-directors'] ?></h3><div class="person-card-list"><?php foreach ($directors as $director) { echo $director->getHtml_card(false, $admin, $movies[0]->id); }
+    ?><h3><?php echo $GLOBALS['movie-directors'] ?></h3><div class="person-card-list"><?php foreach ($directors as $director) { echo $director->getHtml_card($admin, $movies[0]->id); }
     if ($admin) { echo mdb\form\GenerateFormInput::generateAddPersonCard('director'); } ?></div>
 
-    <h3><?php echo $GLOBALS['movie-actors'] ?></h3> <div class="person-card-list"><?php foreach ($actors as $actor) { echo $actor->getHtml_card(true, $admin, $movies[0]->id); }
+    <h3><?php echo $GLOBALS['movie-actors'] ?></h3> <div class="person-card-list"><?php foreach ($actors as $actor) { echo $actor->getHtml_card($admin, $movies[0]->id); }
     if ($admin) { echo mdb\form\GenerateFormInput::generateAddPersonCard('actor'); } ?></div>
 
-    <h3><?php echo $GLOBALS['movie-composers'] ?></h3> <div class="person-card-list"><?php foreach ($composers as $composer) { echo $composer->getHtml_card(false, $admin, $movies[0]->id); }
+    <h3><?php echo $GLOBALS['movie-composers'] ?></h3> <div class="person-card-list"><?php foreach ($composers as $composer) { echo $composer->getHtml_card($admin, $movies[0]->id); }
     if ($admin) { echo mdb\form\GenerateFormInput::generateAddPersonCard('composer'); } ?></div>
 
     <div class="modal fade" id="add-person-modal" tabindex="-1" aria-labelledby="add-person-modal-label" aria-hidden="true">
