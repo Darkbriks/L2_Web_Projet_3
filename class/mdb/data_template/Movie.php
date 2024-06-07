@@ -100,7 +100,7 @@ class Movie
                     }
                 </script>";
 
-        if ($isAdmin) { $html .= EditableObject::getHtml($this->id, 'movieperson'); }
+        if ($isAdmin) { $html .= EditableObject::getHtml($this->id, 'movie'); }
         return $html;
     }
 
