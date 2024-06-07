@@ -10,6 +10,8 @@ session_start();
 $lang = $_SESSION['language'] ?? 'EN';
 require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
+$admin = $_SESSION['admin'] ?? false;
+
 ob_start();
 
 try {
@@ -22,7 +24,7 @@ try {
     if (count($persons) == 0) {
         throw new Exception($GLOBALS['person-error-2'] . $id, 2);
     }
-    echo $persons[0]->getHtml($lang);
+    echo $persons[0]->getHtml($admin);
 
     $actorMovies = $personDB->getMoviesOfPerson($id, 1);
     $directorMovies = $personDB->getMoviesOfPerson($id, 2);

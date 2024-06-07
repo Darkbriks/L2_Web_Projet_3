@@ -69,13 +69,14 @@ function setLanguage(newLanguage)
         .catch(error => { console.log('Erreur:', error); });
 }
 
-function set_user_msg(msg, type="info", element=null)
+function set_user_msg(msg, type="info", element=null, timeout=10000)
 {
     let msg_div = document.createElement('div');
     msg_div.classList.add('alert', 'alert-' + type);
     msg_div.textContent = msg;
     if (element === null) { document.getElementById('content').prepend(msg_div); }
     else { element.prepend(msg_div); }
+    setTimeout(() => { msg_div.remove(); }, timeout);
 }
 
 function getLocalizedText(key)
