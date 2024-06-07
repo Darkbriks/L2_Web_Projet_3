@@ -33,7 +33,6 @@ class EditableObject
                         {
                             element.addEventListener('click', function()
                             {
-                                console.log(element.dataset.type + ' ' + element.dataset.attribute);
                                 editObject(element.dataset.type, element.dataset.attribute);
                                 let modal = new bootstrap.Modal(document.getElementById('editModal'));
                                 modal.show();
@@ -42,13 +41,21 @@ class EditableObject
                         
                         document.getElementById('submit-modal').addEventListener('click', function()
                         {
+                            
                             let modalContent = document.getElementById('edit-modal-content');
+                            
+                            if (modalContent.querySelector('input[type=\"file\"]') !== null)
+                            {
+                                uploadFile(modalContent.querySelector('input[type=\"file\"]').files[0], modalContent.dataset.for);
+                                return;
+                            }
+                            
                             let input = modalContent.querySelector('input');
                             let textarea = modalContent.querySelector('textarea');
                             
                             let value;
-                            if (input !== null) { console.log(input.value); value = input.value; }
-                            else if (textarea !== null) { console.log(textarea.value); value = textarea.value; }
+                            if (input !== null) { value = input.value; }
+                            else if (textarea !== null) { value = textarea.value; }
                             else if (modalContent.querySelector('select') !== null) { value = modalContent.querySelector('select').value; }
                             else { console.log('Error: no input found'); }
                             
@@ -57,6 +64,23 @@ class EditableObject
                             modal.hide();
                         });
                     });
+                    
+                    function uploadFile(file, type)
+                    {
+                        // Soummettre le fichier
+                        let formData = new FormData();
+                        formData.append('file', file);
+                        formData.append('dir', (type === 'movie' ? 'uploads/posters/' : 'uploads/peoples/'));
+                        /*fetch('../api/upload-file.php', { method: 'POST', body: formData })
+                            .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
+                            .then(data => { if (data.success) { set_user_msg(data.data, 'success', document.querySelector('.movie-container')); } else { set_user_msg(data.error, 'danger', document.querySelector('.movie-container')); } })
+                            .catch(error => { set_user_msg(error, 'danger', document.querySelector('.movie-container')); });*/
+                            
+                        let xhr = new XMLHttpRequest();
+                        xhr.open('POST', '../api/upload-file.php', true);
+                        xhr.onload = function() { if (xhr.status === 200) { set_user_msg(xhr.responseText, 'success', document.querySelector('.movie-container')); } else { set_user_msg(xhr.responseText, 'danger', document.querySelector('.movie-container')); } };
+                        xhr.send(formData);
+                    }
                 </script>" . ($type === 'movie' ? self::moviePart($id) : self::personPart($id));
     }
 
@@ -101,14 +125,13 @@ class EditableObject
             function editObject(type, attribute)
             {
                 let modalContent = document.getElementById('edit-modal-content');
-            
-                console.log(type + ' ' + attribute);
-                
+                            
                 // TODO: create and localize texts
                 if (attribute === 'first_name') { modalContent.innerHTML = '" . GenerateFormInput::generateTextInput('first_name', $GLOBALS['movie-editable-new-title']) . "'; }
                 else if (attribute === 'last_name') { modalContent.innerHTML = '" . GenerateFormInput::generateTextInput('last_name', $GLOBALS['movie-editable-new-release-date']) . "'; }
                 else if (attribute === 'birth_date') { modalContent.innerHTML = '" . GenerateFormInput::generateDateInput('birth_date', $GLOBALS['movie-editable-new-synopsis']) . "'; }
                 else if (attribute === 'death_date') { modalContent.innerHTML = '" . GenerateFormInput::generateDateInput('death_date', $GLOBALS['movie-editable-new-time-duration']) . "'; }
+                else if (attribute === 'image_path') { modalContent.innerHTML = '" . GenerateFormInput::generateFileInput('image_path', $GLOBALS['movie-editable-new-note']) . "'; }
                 else { modalContent.innerHTML = '<p>" . $GLOBALS['error-unknown-type'] . "</p>'; }
                 modalContent.dataset.attribute = attribute;
             }
