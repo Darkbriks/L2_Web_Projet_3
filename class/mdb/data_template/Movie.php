@@ -53,6 +53,7 @@ class Movie
                         <p class='editable' data-type='textarea' data-attribute='synopsis'>" . $this->synopsis . "</p>
                     </div>
                 </div>
+            
                 <script>
                     //TODO: duplicate code
                     document.getElementById('edit-vu').addEventListener('click', function()

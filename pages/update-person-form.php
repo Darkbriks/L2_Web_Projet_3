@@ -9,7 +9,7 @@ try
 catch (Exception $e) { echo "Erreur:" . $e->getMessage(); }
 ?>
 
-    <button type="button" class="btn btn-primary" id="update-person-btn">
+    <button type="button" class="btn btn-outline-primary" id="update-person-btn">
         <?php echo htmlspecialchars($GLOBALS['update-person-form-title'], ENT_QUOTES, 'UTF-8'); ?>
     </button>
 
@@ -74,10 +74,10 @@ catch (Exception $e) { echo "Erreur:" . $e->getMessage(); }
                             <input class="form-control" type='file' name='person-image-path' id='person-image-path' accept='image/jpeg, image/jpg, image/png'>
                         </div>
 
-                        <button class="btn btn-primary" id="update-person-submit">
+                        <button class="btn btn-warning" id="update-person-submit">
                             <?php echo htmlspecialchars($GLOBALS['update-person-form-submit'], ENT_QUOTES, 'UTF-8'); ?>
                         </button>
-                        <input type="submit" name="delete_person" value="<?php echo htmlspecialchars($GLOBALS['delete-person-form'], ENT_QUOTES, 'UTF-8'); ?>">
+                        <input type="submit" class="btn btn-outline-danger" name="delete_person" value="<?php echo htmlspecialchars($GLOBALS['delete-person-form'], ENT_QUOTES, 'UTF-8'); ?>">
                     </form>
                 </div>
             </div>

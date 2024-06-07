@@ -14,7 +14,7 @@ catch (Exception $e) { $add_movie_error = $e->getMessage(); }
 
     <!-- TODO: Use GenerateFormInput (create new method if necessary) -->
 
-    <button type="button" class="btn btn-primary" id="add-link-btn"><?php echo $GLOBALS['update-form-link-title']; ?></button>
+    <button type="button" class="btn btn-outline-primary" id="add-link-btn"><?php echo $GLOBALS['update-form-link-title']; ?></button>
 
     <div class="modal fade" id="add-link-to-movie-modal" tabindex="-1" aria-labelledby="add-link-to-movie-modal-label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -50,8 +50,8 @@ catch (Exception $e) { $add_movie_error = $e->getMessage(); }
                             <input class="form-control" type='text' name='played' id='played' placeholder='<?php echo $GLOBALS['movie-form-add-played']; ?>'>
                             <label for='played'><?php echo $GLOBALS['movie-form-add-played']; ?></label>
                         </div>
-                        <button class="btn btn-primary" id="link-submit"><?php echo $GLOBALS['update-form-link']; ?></button>
-                        <input type="submit" name="delete_link" value="<?php echo $GLOBALS['delete-form-link']; ?>">
+                        <button class="btn btn-success" id="link-submit"><?php echo $GLOBALS['update-form-link']; ?></button>
+                        <input type="submit" class="btn btn-outline-danger" name="delete_link" value="<?php echo $GLOBALS['delete-form-link']; ?>">
                     </form>
                 </div>
             </div>

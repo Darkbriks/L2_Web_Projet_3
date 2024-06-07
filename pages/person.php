@@ -42,6 +42,7 @@ try {
                 echo '</div>';
             }
             echo '</div>';
+            echo '<div class = "space"></div>';
         }
     }
 

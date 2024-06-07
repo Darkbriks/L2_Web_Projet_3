@@ -18,6 +18,6 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
     <h1 class="title"><?php echo $GLOBALS['all-peoples-title']; ?></h1>
     <div class="peoples-container" id="peoples-container"></div>
-
+    <div class ="space"></div>
 <?php $content = ob_get_clean(); ?>
 <?php Template::render($content);

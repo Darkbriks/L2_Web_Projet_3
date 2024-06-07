@@ -15,7 +15,8 @@ class Person
     public function getHtml($isAdmin = false): string
     {
         $deathDate = ($this->death_date ?? $GLOBALS['still-alive']);
-        $html = "<div class='person'>
+        $html = "<div class='spct'></div>
+                <div class='person'>
                     <img class='editable' data-type='img' data-attribute='image_path' src='" . $GLOBALS['PEOPLES_DIR'] . $this->image_path . "' alt='{$this->first_name} {$this->last_name}'>
                      <div class = person-details>
                          <h3 id='full_name'>{$this->first_name} {$this->last_name}</h3>

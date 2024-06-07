@@ -126,11 +126,11 @@ catch (Exception $e) { $add_movie_error = $e->getMessage(); }
     <div class="mb-3 login-form-submit">
         <button class="btn btn-success"><?php echo $GLOBALS['movie-form-add-movie-add'] ?></button>
         <span style="width: 25px"></span>
-        <button class="btn btn-danger" type='reset'><?php echo $GLOBALS['movie-form-add-movie-cancel'] ?></button>
+        <button class="btn btn-outline-danger" type='reset'><?php echo $GLOBALS['movie-form-add-movie-cancel'] ?></button>
     </div>
 
 </form>
-
+<div class="space"></div>
 <script>
     document.addEventListener('DOMContentLoaded', function()
     {

@@ -41,18 +41,18 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
 
                 <div class="modal-body">
                     <?php
-                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('movie-title', ['LIKE' => 'Like', 'NOT LIKE' => 'Not like']);
-                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('movie-release', ['=' => 'Equal', '!=' => 'Not equal', '>' => 'Greater than', '<' => 'Less than']);
-                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('movie-duration', ['=' => 'Equal', '!=' => 'Not equal', '>' => 'Greater than', '<' => 'Less than']);
-                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('movie-rating', ['=' => 'Equal', '!=' => 'Not equal', '>' => 'Greater than', '<' => 'Less than']);
-                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('movie-note', ['=' => 'Equal', '!=' => 'Not equal', '>' => 'Greater than', '<' => 'Less than']);
-                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('movie-synopsis', ['LIKE' => 'Like', 'NOT LIKE' => 'Not like']);
-                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('movie-seen', ['1' => 'Seen', '0' => 'Not seen', '-1' => 'All'], false);
+                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput($GLOBALS['advanced-search-movie-filter-attribute-title'], ['LIKE' => 'Like', 'NOT LIKE' => 'Not like']);
+                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput($GLOBALS['advanced-search-movie-filter-attribute-release-date'], ['=' => 'Equal', '!=' => 'Not equal', '>' => 'Greater than', '<' => 'Less than']);
+                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput($GLOBALS['advanced-search-movie-filter-attribute-duration'], ['=' => 'Equal', '!=' => 'Not equal', '>' => 'Greater than', '<' => 'Less than']);
+                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput($GLOBALS['advanced-search-movie-filter-attribute-age-rating'], ['=' => 'Equal', '!=' => 'Not equal', '>' => 'Greater than', '<' => 'Less than']);
+                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput($GLOBALS['movie-form-add-movie-score'], ['=' => 'Equal', '!=' => 'Not equal', '>' => 'Greater than', '<' => 'Less than']);
+                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput($GLOBALS['advanced-search-movie-filter-attribute-synopsis'] , ['LIKE' => 'Like', 'NOT LIKE' => 'Not like']);
+                        echo mdb\form\GenerateFormInput::generateAdvancedSearchInput($GLOBALS['advanced-search-movie-filter-attribute-seen'], ['1' => 'Seen', '0' => 'Not seen', '-1' => 'All'], false);
                     ?>
 
                     <div class="mb-3">
                         <?php
-                            echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('movie-tag', ['AND' => 'AND', 'OR' => 'OR'], false);
+                            echo mdb\form\GenerateFormInput::generateAdvancedSearchInput($GLOBALS['advanced-search-movie-filter-attribute-tags'] , ['AND' => 'AND', 'OR' => 'OR'], false);
                             echo mdb\form\GenerateFormInput::generateCategoryList();
                         ?>
                     </div>
@@ -79,10 +79,10 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
                 <div class="modal-body">
                     <?php
                     echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('person-first-name', ['LIKE' => 'Like', 'NOT LIKE' => 'Not like']);
-                    echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('person-last-name', ['LIKE' => 'Like', 'NOT LIKE' => 'Not like']);
-                    echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('person-birth-date', ['=' => 'Equal', '!=' => 'Not equal', '>' => 'Greater than', '<' => 'Less than']);
-                    echo mdb\form\GenerateFormInput::generateAdvancedSearchInput('person-death-date', ['=' => 'Equal', '!=' => 'Not equal', '>' => 'Greater than', '<' => 'Less than']);
-                    echo mdb\form\GenerateFormInput::generateAdvancedSearchPersonInput('other-person');
+                    echo mdb\form\GenerateFormInput::generateAdvancedSearchInput($GLOBALS['advanced-search-person-last-name'], ['LIKE' => 'Like', 'NOT LIKE' => 'Not like']);
+                    echo mdb\form\GenerateFormInput::generateAdvancedSearchInput($GLOBALS['advanced-search-person-birth-date'], ['=' => 'Equal', '!=' => 'Not equal', '>' => 'Greater than', '<' => 'Less than']);
+                    echo mdb\form\GenerateFormInput::generateAdvancedSearchInput($GLOBALS['advanced-search-person-death-date'] , ['=' => 'Equal', '!=' => 'Not equal', '>' => 'Greater than', '<' => 'Less than']);
+                    echo mdb\form\GenerateFormInput::generateAdvancedSearchPersonInput($GLOBALS['advanced-search-person-other-person']);
                     ?>
 
                     <div class="mb-3">

@@ -59,12 +59,14 @@ $action = $_SESSION['action'] ?? null;
 
 <?php
 if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
+<div class="spct">
     <form method="POST" enctype="multipart/form-data">
         <div class="mb-3">
-            <button type="submit" name="action" value="add" class="btn btn-info btn-lg">Ajouter</button>
-            <button type="submit" name="action" value="edit" class="btn btn-info btn-lg">Modifier</button>
+            <button type="submit" name="action" value="add" class="btn btn-light btn-lg"><?php echo $GLOBALS['movie-form-add-movie-add'] ?></button>
+            <button type="submit" name="action" value="edit" class="btn btn-light btn-lg"><?php echo $GLOBALS['movie-edit'] ?></button>
         </div>
     </form>
+</div>
     <script src="../js/validateForm.js"></script>
     <?php
     // Vérifier l'action stockée dans la session
@@ -116,7 +118,7 @@ if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
                     $movieForm = new \mdb\form\MovieForm();
                     $img_file = $_FILES['image_path'] ?? null;
                     $movieForm->Movie($_POST, $img_file,$_POST['movie_id']);
-                    $add_movie_success = $GLOBALS['admin-movie-success'];
+                    $add_movie_success = $GLOBALS['admin-movie-update-success'];
                 } catch (Exception $e) {
                     $add_movie_error = $e->getMessage();
                 }

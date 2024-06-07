@@ -1,4 +1,4 @@
-<div class="mb-3"><button type="button" class="btn btn-primary" id="add-person-btn">Ajouter une personne</button></div>
+<div class="mb-3"><button type="button" class="btn btn-outline-primary" id="add-person-btn"><?php echo $GLOBALS['person-form-title']?></button></div>
 
 <div class="modal fade" id="add-person-modal" tabindex="-1" aria-labelledby="add-person-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

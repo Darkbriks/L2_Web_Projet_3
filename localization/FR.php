@@ -33,17 +33,21 @@ $GLOBALS['footer-text'] = 'Sources des éléments ...';
 
 ////////// ADMIN //////////
 // admin.php
+//add
 $GLOBALS['admin-movie-success'] = 'Film ajouté avec succès';
 $GLOBALS['admin-person-success'] = 'Personne ajoutée avec succès';
+//update
+$GLOBALS['admin-movie-update-success'] = 'Film modifié avec succès';
+$GLOBALS['admin-person-update-success'] = 'Personne modifiée avec succès';
 
 // MovieForm.php
 $GLOBALS['movie-form-title'] = 'Ajouter un film';
 $GLOBALS['movie-form-add-movie-title'] = 'Titre';
 $GLOBALS['movie-form-add-movie-image'] = 'Image';
 $GLOBALS['movie-form-add-movie-score'] = 'Note';
-$GLOBALS['update-form-link-title'] = 'Ajouter une liaison';
-$GLOBALS['update-form-link'] = 'Ajouter la liaison';
-$GLOBALS['delete-form-link'] = 'Supprimer la liaison';
+$GLOBALS['update-form-link-title'] = 'Ajouter un lien';
+$GLOBALS['update-form-link'] = 'Ajouter un lien';
+$GLOBALS['delete-form-link'] = 'Supprimer le lien';
 $GLOBALS['update-movie-form-title'] = 'Choisir un film à modifier';
 $GLOBALS['update-movie-form-question'] = 'Modifier ce film';
 $GLOBALS['delete-movie-form'] = 'Supprimer ce film';
@@ -71,11 +75,10 @@ $GLOBALS['movie-form-add-movie-add-actor'] = 'Ajouter un acteur';
 $GLOBALS['movie-form-add-movie-composers-list'] = 'Liste des compositeurs';
 $GLOBALS['movie-form-add-movie-add-composer'] = 'Ajouter un compositeur';
 $GLOBALS['movie-form-add-played'] = 'Rôle joué';
-$GLOBALS['movie-form-add-played'] = 'Rôle joué';
 $GLOBALS['movie-form-add-movie-seen'] = 'Vu';
 $GLOBALS['movie-form-add-movie-add'] = 'Ajouter';
 $GLOBALS['movie-form-add-movie-cancel'] = 'Annuler';
-$GLOBALS['movie-form-exception-adding'] = 'Erreur lors de l\'ajout du film dans la base de données';
+$GLOBALS['movie-form-exception-adding'] = 'Erreur lors de l\'ajout du film à la base de données';
 $GLOBALS['movie-form-exception-upload'] = 'Erreur lors du téléchargement de l\'affiche';
 $GLOBALS['movie-form-exception-title'] = 'Le titre du film est obligatoire et doit contenir entre 3 et 50 caractères';
 $GLOBALS['movie-form-exception-release-date'] = 'La date de sortie doit être au format YYYY-MM-DD';
@@ -88,13 +91,14 @@ $GLOBALS['movie-form-exception-age-rating'] = 'La classification du film est obl
 $GLOBALS['movie-form-exception-seen'] = 'La valeur de \'\'Vu\'\' doit être vraie ou fausse. Le film ne peut pas avoir été vu si il n\'est pas sorti';
 $GLOBALS['movie-form-exception-actor-role'] = 'Le rôle doit être défini pour chaque acteur';
 
+
 //update-tag-form.php
 $GLOBALS['update-tag-form-title']='Modifier un tag';
 $GLOBALS['update-tag-form-submit']='Modifier';
 $GLOBALS['update-tag-form-name']='Nom du tag';
 $GLOBALS['update-tag-form-question']='Choisir un tag à mettre à jour ';
 $GLOBALS['delete-tag-form']='Supprimer le tag';
-$GLOBALS['tag-form-exception-name'] = 'Le nom de la balise doit contenir entre 3 et 50 caractères.';
+$GLOBALS['tag-form-exception-name'] = 'Le nom du tag doit comporter entre 3 et 50 caractères';
 
 // PersonForm.php
 $GLOBALS['person-form-title'] = 'Ajouter une personne';
@@ -136,6 +140,33 @@ $GLOBALS['advanced-search-movie-filter-attribute-directors'] = 'Réalisateur(s)'
 $GLOBALS['advanced-search-movie-filter-attribute-actors'] = 'Acteur(s)';
 $GLOBALS['advanced-search-movie-filter-attribute-composers'] = 'Compositeur(s)';
 $GLOBALS['advanced-search-movie-filter-attribute-seen'] = 'Vu';
+$GLOBALS['advanced-search-movie-filter-value-like'] = 'Comme';
+$GLOBALS['advanced-search-movie-filter-value-not-like'] = 'Pas comme';
+$GLOBALS['advanced-search-movie-filter-value-equal'] = 'Égal';
+$GLOBALS['advanced-search-movie-filter-value-not-equal'] = 'Pas égal';
+$GLOBALS['advanced-search-movie-filter-value-greater-than'] = 'Plus grand que';
+$GLOBALS['advanced-search-movie-filter-value-less-than'] = 'Moins que';
+$GLOBALS['advanced-search-movie-filter-value-seen'] = 'Vu';
+$GLOBALS['advanced-search-movie-filter-value-not-seen'] = 'Non vu';
+$GLOBALS['advanced-search-movie-filter-value-and'] = 'ET';
+$GLOBALS['advanced-search-movie-filter-value-OR'] = 'OU';
+
+// advanced-search-person.php
+$GLOBALS['advanced-search-person-modal-title'] = 'Recherche avancée de personne';
+$GLOBALS['advanced-search-person-first-name'] = 'Prénom';
+$GLOBALS['advanced-search-person-last-name'] = 'Nom de famille';
+$GLOBALS['advanced-search-person-birth-date'] = 'Date de naissance';
+$GLOBALS['advanced-search-person-death-date'] = 'Date de décès';
+$GLOBALS['advanced-search-person-other-person'] = 'Autre personne';
+$GLOBALS['advanced-search-person-tag']= 'Tags';
+$GLOBALS['advanced-search-movie-filter-value-like'] = 'Comme';
+$GLOBALS['advanced-search-person-filter-value-not-like'] = 'Pas comme';
+$GLOBALS['advanced-search-person-filter-value-equal'] = 'Égal';
+$GLOBALS['advanced-search-person-filter-value-not-equal'] = 'Pas égal';
+$GLOBALS['advanced-search-person-filter-value-greater-than'] = 'Supérieur à';
+$GLOBALS['advanced-search-person-filter-value-less-than'] = 'Inférieur à';
+$GLOBALS['advanced-search-person-filter-value-and'] = 'ET';
+$GLOBALS['advanced-search-person-filter-value-OR'] = 'OU';
 
 ////////// FAVORITES //////////
 $GLOBALS['favorites-title']= 'Vos favoris';
@@ -178,13 +209,17 @@ $GLOBALS['movie-composers'] = 'Compositeur(s)';
 $GLOBALS['movie-error-1'] = 'Aucun ID de film fourni';
 $GLOBALS['movie-error-2'] = 'Aucun film trouvé avec l\'ID : ';
 
-// EditableObject.php
+// EditableMovie.php
+$GLOBALS['movie-edit'] = 'Modifier';
+$GLOBALS['movie-save-changes'] = 'Sauvegarder les modifications';
+$GLOBALS['movie-cancel'] = 'Annuler';
 $GLOBALS['movie-editable-new-title'] = 'Nouveau titre';
 $GLOBALS['movie-editable-new-release-date'] = 'Nouvelle date de sortie';
 $GLOBALS['movie-editable-new-synopsis'] = 'Nouveau synopsis';
 $GLOBALS['movie-editable-new-time-duration'] = 'Nouvelle durée';
 $GLOBALS['movie-editable-new-note'] = 'Nouvelle note';
 $GLOBALS['movie-editable-new-rating'] = 'Nouvelle classification';
+$GLOBALS['movie-editable-error-unknown-type'] = 'Erreur: type inconnu';
 
 ////////// PERSON //////////
 // person.php
@@ -215,33 +250,33 @@ $GLOBALS['movie-db-already-exists'] = 'Le film existe déjà';
 $GLOBALS['person-db-already-exists'] = 'La personne existe déjà';
 
 // TagDB.php
-$GLOBALS['tag-db-already-exists'] = 'Das Tag existiert bereits';
+$GLOBALS['tag-db-already-exists'] = 'Le tag existe déjà';
 
 ////////// API //////////
 // add-tag.php
-$GLOBALS['api-add-tag-error-1'] = 'Kein Tag angegeben';
-$GLOBALS['api-add-tag-error-2'] = 'Fehler beim Hinzufügen des Tags. Bitte überprüfen Sie, ob das Tag nicht bereits existiert';
+$GLOBALS['api-add-tag-error-1'] = 'Aucun tag fourni';
+$GLOBALS['api-add-tag-error-2'] = 'Erreur lors de l\'ajout du tag. Veuillez vous assurer que le tag n\'existe pas déjà';
 
 // get-data.php
-$GLOBALS['api-get-data-table-not-valid'] = 'Die angeforderte Tabelle ist ungültig. Gültige Tabellen sind: movies, tag und person';
-$GLOBALS['api-get-data-attribute-value-not-set'] = 'Das Attribut und/oder der Wert sind nicht definiert';
-$GLOBALS['api-get-data-table-not-set'] = 'Die Tabelle ist nicht definiert';
+$GLOBALS['api-get-data-table-not-valid'] = 'La table demandée n\'est pas valide. Les tables valides sont : films, tag et personne';
+$GLOBALS['api-get-data-attribute-value-not-set'] = 'Attribut et/ou valeur non définis';
+$GLOBALS['api-get-data-table-not-set'] = 'Table non définie';
 
 // get-localized-text.php
-$GLOBALS['api-get-localized-text-error-1'] = 'Keine Sprache angegeben';
-$GLOBALS['api-get-localized-text-error-2'] = 'Text nicht gefunden';
-$GLOBALS['api-get-localized-text-error-3'] = 'Kein Text angegeben';
+$GLOBALS['api-get-localized-text-error-1'] = 'Aucune langue fournie';
+$GLOBALS['api-get-localized-text-error-2'] = 'Texte introuvable';
+$GLOBALS['api-get-localized-text-error-3'] = 'Aucun texte fourni';
 
 // get-movies-by-tag.php
-$GLOBALS['api-get-movies-by-tag-error-1'] = 'Tag-ID fehlt';
+$GLOBALS['api-get-movies-by-tag-error-1'] = 'ID de tag manquant';
 
 // language.php
-$GLOBALS['api-language-error-1'] = 'Keine Methode angegeben';
-$GLOBALS['api-language-error-2'] = 'Ungültige Methode';
-$GLOBALS['api-language-error-3'] = 'Ungültige Sprache';
-$GLOBALS['api-language-error-4'] = 'Fehler beim Ändern der Sprache';
+$GLOBALS['api-language-error-1'] = 'Aucune méthode fournie';
+$GLOBALS['api-language-error-2'] = 'Méthode invalide';
+$GLOBALS['api-language-error-3'] = 'Langue invalide';
+$GLOBALS['api-language-error-4'] = 'Erreur lors du changement de langue';
 
 // set-seen-favorite.php
-$GLOBALS['api-set-seen-error-1'] = 'Keine Film-ID angegeben';
-$GLOBALS['api-set-seen-error-2'] = 'Kein "Gesehen"-Parameter angegeben';
-$GLOBALS['api-set-seen-success'] = 'Attribut "Gesehen" erfolgreich aktualisiert';
+$GLOBALS['api-set-seen-error-1'] = 'Aucun ID de film fourni';
+$GLOBALS['api-set-seen-error-2'] = 'Aucun paramètre \'Vu\' fourni';
+$GLOBALS['api-set-seen-success'] = 'Attribut \'Vu\' mis à jour avec succès';

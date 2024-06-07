@@ -9,7 +9,7 @@ try
 catch (Exception $e) { echo $e->getMessage(); }
 ?>
 
-<button type="button" class="btn btn-primary" id="update-tag-btn">
+<button type="button" class="btn btn-outline-primary" id="update-tag-btn">
     <?php echo $GLOBALS['update-tag-form-title']; ?>
 </button>
 
@@ -44,10 +44,10 @@ catch (Exception $e) { echo $e->getMessage(); }
                         <label for="tag-name"><?php echo $GLOBALS['update-tag-form-name']; ?></label>
                     </div>
 
-                    <button class="btn btn-primary" id="tag-submit">
+                    <button class="btn btn-warning" id="tag-submit">
                         <?php echo $GLOBALS['update-tag-form-title']; ?>
                     </button>
-                    <input type="submit" name="delete_tag" value="<?php echo $GLOBALS['delete-tag-form']; ?>">
+                    <input type="submit" class="btn btn-outline-danger" name="delete_tag" value="<?php echo $GLOBALS['delete-tag-form']; ?>">
                 </form>
             </div>
         </div>

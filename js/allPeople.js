@@ -24,7 +24,7 @@ function renderPeople(peoples)
         "</div>" +
         "<div class='people-name'>" +
             "<h3>" + people.full_name + "</h3>" +
-        "</div>";
+        "</div>" ;
 
         container.appendChild(peopleCard);
         peopleCard.addEventListener('click', () => { window.location.href = `person.php?id=${people.id}`; });

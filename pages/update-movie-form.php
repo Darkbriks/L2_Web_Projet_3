@@ -55,10 +55,11 @@ $movies = $movieDB->getMovies(); // Récupère tous les films existants depuis l
         <input class="form-control" type='text' name='trailer' id='trailer' required placeholder='<?php echo $GLOBALS['movie-form-add-movie-trailer-placeholder'] ?>'>
         <label for='trailer'><?php echo $GLOBALS['movie-form-add-movie-trailer'] ?></label>
     </div>
-    <input type="submit" value="<?php echo $GLOBALS['update-movie-form-question']; ?>">
-    <input type="submit" name="delete_movie" value="<?php echo $GLOBALS['delete-movie-form']; ?>">
+    <input type="submit" class = "btn btn-warning"value="<?php echo $GLOBALS['update-movie-form-question']; ?>">
+    <input type="submit" class="btn btn-outline-danger" name="delete_movie" value="<?php echo $GLOBALS['delete-movie-form']; ?>">
 </form>
 <div id="update-movie-form-msg"></div>
+<div class="space"></div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('update-movie-btn').addEventListener('click', function() {
