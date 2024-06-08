@@ -44,11 +44,7 @@ class EditableObject
                             
                             let modalContent = document.getElementById('edit-modal-content');
                             
-                            if (modalContent.querySelector('input[type=\"file\"]') !== null)
-                            {
-                                uploadFile(modalContent.querySelector('input[type=\"file\"]').files[0], modalContent.dataset.for);
-                                return;
-                            }
+                            if (modalContent.querySelector('input[type=\"file\"]') !== null) { uploadFile(modalContent.querySelector('input[type=\"file\"]').files[0], modalContent.dataset.for); return; }
                             
                             let input = modalContent.querySelector('input');
                             let textarea = modalContent.querySelector('textarea');
@@ -67,7 +63,6 @@ class EditableObject
                     
                     function uploadFile(file, type)
                     {
-                        // Soummettre le fichier
                         let formData = new FormData();
                         formData.append('file', file);
                         formData.append('dir', (type === 'movie' ? 'uploads/posters/' : 'uploads/peoples/'));
@@ -85,11 +80,12 @@ class EditableObject
                     
                     function saveImg(type, path)
                     {
-                           fetch('../api/set-movie-attribute.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'id': '" . $id . "', 'attribute': 'image_path', 'value': path }) })
+                           fetch('../api/set-' + type + '-attribute.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'id': '" . $id . "', 'attribute': 'image_path', 'value': path }) })
                                 .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
                                 .then(data => { if (data.success)
                                 {
-                                    document.querySelector('.editable[data-attribute=\"image_path\"]').src = path;
+                                    document.querySelector('.editable[data-attribute=\"image_path\"]').src = (type === 'movie' ? '../uploads/posters/' : '../uploads/peoples/') + path;
+                                    console.log(document.querySelector('.editable[data-attribute=\"image_path\"]').src);
                                 }
                                 else { set_user_msg(data.error, 'danger', document.querySelector('.movie-container')); } })
                                 .catch(error => { set_user_msg(error, 'danger', document.querySelector('.movie-container')); });
