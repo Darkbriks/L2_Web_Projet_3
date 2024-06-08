@@ -55,7 +55,7 @@ $movies = $movieDB->getMovies(); // Récupère tous les films existants depuis l
         <input class="form-control" type='text' name='trailer' id='trailer' placeholder='<?php echo $GLOBALS['movie-form-add-movie-trailer-placeholder'] ?>'>
         <label for='trailer'><?php echo $GLOBALS['movie-form-add-movie-trailer'] ?></label>
     </div>
-    <input type="submit" class = "btn btn-warning"value="<?php echo $GLOBALS['update-movie-form-question']; ?>">
+    <input type="submit" class = "btn btn-warning" id='update-movie-btn' value="<?php echo $GLOBALS['update-movie-form-question']; ?>">
     <input type="submit" class="btn btn-outline-danger" name="delete_movie" value="<?php echo $GLOBALS['delete-movie-form']; ?>">
 </form>
 <div id="update-movie-form-msg"></div>
@@ -67,16 +67,15 @@ $movies = $movieDB->getMovies(); // Récupère tous les films existants depuis l
             let add_person_modal = new bootstrap.Modal(document.getElementById('add-person-modal'));
             add_person_modal.show();
         });
-    });
-
-    document.querySelector('.update-movie-form').addEventListener('submit', function(e) {
-        document.getElementById('update-movie-form-msg').innerHTML = '';
-        e.preventDefault();
-        console.log('Form submit prevented for validation');
-        if (checkMovieForm('.update-movie-form','update-movie-form-msg')) {
-            document.querySelector('.update-movie-form').submit();
-        } else {
-        }
+        document.querySelector('#update-movie-form').addEventListener('submit', function(e) {
+            document.getElementById('update-movie-form-msg').innerHTML = '';
+            e.preventDefault();
+            console.log('Form submit prevented for validation');
+            if (checkMovieForm('.update-movie-form','update-movie-form-msg')) {
+                document.querySelector('.update-movie-form').submit();
+            } else {
+            }
+        });
     });
 
 </script>
