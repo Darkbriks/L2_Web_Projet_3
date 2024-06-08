@@ -71,15 +71,28 @@ class EditableObject
                         let formData = new FormData();
                         formData.append('file', file);
                         formData.append('dir', (type === 'movie' ? 'uploads/posters/' : 'uploads/peoples/'));
-                        /*fetch('../api/upload-file.php', { method: 'POST', body: formData })
+                        fetch('../api/upload-file.php', { method: 'POST', body: formData })
                             .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
-                            .then(data => { if (data.success) { set_user_msg(data.data, 'success', document.querySelector('.movie-container')); } else { set_user_msg(data.error, 'danger', document.querySelector('.movie-container')); } })
-                            .catch(error => { set_user_msg(error, 'danger', document.querySelector('.movie-container')); });*/
-                            
-                        let xhr = new XMLHttpRequest();
-                        xhr.open('POST', '../api/upload-file.php', true);
-                        xhr.onload = function() { if (xhr.status === 200) { set_user_msg(xhr.responseText, 'success', document.querySelector('.movie-container')); } else { set_user_msg(xhr.responseText, 'danger', document.querySelector('.movie-container')); } };
-                        xhr.send(formData);
+                            .then(data => { if (data.success)
+                            {
+                                saveImg(type, data.data);
+                                let modal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
+                                modal.hide();
+                            }
+                            else { set_user_msg(data.error, 'danger', document.querySelector('.movie-container')); } })
+                            .catch(error => { set_user_msg(error, 'danger', document.querySelector('.movie-container')); });
+                    }
+                    
+                    function saveImg(type, path)
+                    {
+                           fetch('../api/set-movie-attribute.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ 'id': '" . $id . "', 'attribute': 'image_path', 'value': path }) })
+                                .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
+                                .then(data => { if (data.success)
+                                {
+                                    document.querySelector('.editable[data-attribute=\"image_path\"]').src = path;
+                                }
+                                else { set_user_msg(data.error, 'danger', document.querySelector('.movie-container')); } })
+                                .catch(error => { set_user_msg(error, 'danger', document.querySelector('.movie-container')); });
                     }
                 </script>" . ($type === 'movie' ? self::moviePart($id) : self::personPart($id));
     }
@@ -97,7 +110,7 @@ class EditableObject
                 else if (attribute === 'time_duration') { modalContent.innerHTML = '" . GenerateFormInput::generateNumberInput('time_duration', $GLOBALS['movie-editable-new-time-duration']) . "'; }
                 else if (attribute === 'note') { modalContent.innerHTML = '" . GenerateFormInput::generateNumberInput('note', $GLOBALS['movie-editable-new-note']) . "'; }
                 else if (attribute === 'rating') { modalContent.innerHTML = '" . GenerateFormInput::generateSelectInput('rating', $GLOBALS['movie-editable-new-rating'], ['1' => $GLOBALS['movie-form-add-movie-age-rating-all'], '10' => '10 ' . $GLOBALS['movie-form-add-movie-age-rating-number'], '12' => '12 ' . $GLOBALS['movie-form-add-movie-age-rating-number'], '16' => '16 ' . $GLOBALS['movie-form-add-movie-age-rating-number'], '18' => '18 ' . $GLOBALS['movie-form-add-movie-age-rating-number']]) . "'; }
-                // TODO: Affiche & Trailer
+                else if (attribute === 'image_path') { modalContent.innerHTML = '" . GenerateFormInput::generateFileInput('image_path', $GLOBALS['movie-editable-new-note']) . "'; }
                 else { modalContent.innerHTML = '<p>" . $GLOBALS['error-unknown-type'] . "</p>'; }
                 
                 modalContent.dataset.attribute = attribute;
