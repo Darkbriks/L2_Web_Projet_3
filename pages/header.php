@@ -93,7 +93,7 @@
                 modal.hide();
 
                 document.querySelector('.btn-login[data-bs-target="#loginModal"]').classList.replace('btn-outline-primary', 'btn-outline-danger');
-                document.querySelector('.btn-login[data-bs-target="#loginModal"]').innerHTML = '<?php echo $GLOBALS['logout']; ?>';
+                document.querySelector('.btn-login[data-bs-target="#loginModal"]').innerHTML = '<?php echo $GLOBALS['header-logout']; ?>';
                 document.querySelector('.btn-login[data-bs-target="#loginModal"]').removeAttribute('data-bs-toggle');
                 document.querySelector('.btn-login[data-bs-target="#loginModal"]').removeAttribute('data-bs-target');
                 document.querySelector('.btn-login[data-bs-target="#loginModal"]').setAttribute('href', 'logout.php');
