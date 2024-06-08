@@ -7,6 +7,7 @@ Autoloader::register();
 
 session_start();
 use mdb\AccountDB;
+use mdb\form\PersonForm;
 $accountDB = new AccountDB();
 $accounts = $accountDB->getAccounts();
 
@@ -84,9 +85,8 @@ if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
             }
         } else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['person-first-name'])) {
             try {
-                $personForm = new \mdb\form\PersonForm();
                 $img_file = $_FILES['person-image'] ?? null;
-                $personForm->Person($_POST, $img_file);
+                PersonForm::Person($_POST, $img_file);
                 ?><script> document.addEventListener('DOMContentLoaded', function() {
                         set_user_msg("<?php echo $GLOBALS['admin-person-success'] ?>", 'success');
                     }); </script><?php
@@ -102,10 +102,9 @@ if (isset($_SESSION['admin']) && $_SESSION['admin']) { ?>
         <div class="mb-3">
             <?php
             if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['person-first-name'])) {
-                $personForm = new \mdb\form\PersonForm();
                 $img_file = $_FILES['person-image'] ?? null;
                 try {
-                    $personForm->Person($_POST, $img_file, $_POST['person_id']);
+                    PersonForm::Person($_POST, $img_file, $_POST['person_id']);
                 ?><script> document.addEventListener('DOMContentLoaded', function() {
                         set_user_msg("<?php echo $GLOBALS['admin-person-success'] ?>", 'success');
                     }); </script><?php

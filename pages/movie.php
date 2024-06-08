@@ -112,11 +112,11 @@ $img_file = $_FILES['image-path'] ?? null;
                 formData.append('death_date', document.getElementById('person-death-date').value);
                 formData.append('personType', type);
                 formData.append('role', role);
-                formData.append('image', document.getElementById('person-image').files[0]['name']);
+                formData.append('file', document.getElementById('person-image').files[0]);
 
                 fetch('../api/add-person.php', { method: 'POST', body: formData })
-                .then(response => { if (!response.ok) { throw new Error('Erreur HTTP ! statut: ' + response.status); } return response.json(); })
-                .then(data => { if (data.success) { emptyModal(); linkPersonToMovie(data.id, type, role); } else { set_user_msg(data.error, 'warning', document.getElementById('add-person-modal-content')); } })
+                .then(response => { if (!response.ok) { set_user_msg('Erreur HTTP ! statut: ' + response.status, 'danger', document.getElementById('add-person-modal-content')); } return response.json(); })
+                .then(data => { if (data.success) { emptyModal(); linkPersonToMovie(data.data, type, role); } else { set_user_msg(data.error, 'warning', document.getElementById('add-person-modal-content')); } })
                 .catch(error => { set_user_msg(error, 'danger', document.getElementById('add-person-modal-content')); });
             });
         });
