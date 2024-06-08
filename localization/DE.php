@@ -255,6 +255,9 @@ $GLOBALS['person-db-already-exists'] = 'Person existiert bereits';
 $GLOBALS['tag-db-already-exists'] = 'Tag existiert bereits';
 
 ////////// API //////////
+// add-person.php
+$GLOBALS['api-add-person-error-1'] = 'Kein Vorname angegeben';
+
 // add-tag.php
 $GLOBALS['api-add-tag-error-1'] = 'Kein Tag angegeben';
 $GLOBALS['api-add-tag-error-2'] = 'Fehler beim Hinzufügen des Tags. Bitte stellen Sie sicher, dass der Tag nicht bereits existiert';

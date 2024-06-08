@@ -234,6 +234,9 @@ $GLOBALS['person-db-already-exists'] = 'La persona ya existe';
 $GLOBALS['tag-db-already-exists'] = 'La etiqueta ya existe';
 
 ////////// API //////////
+// add-person.php
+$GLOBALS['api-add-person-error-1'] = 'No se proporcionó ningún nombre';
+
 // add-tag.php
 $GLOBALS['api-add-tag-error-1'] = 'No se proporcionó ninguna etiqueta';
 $GLOBALS['api-add-tag-error-2'] = 'Error al agregar la etiqueta. Asegúrese de que la etiqueta no exista ya';
