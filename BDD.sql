@@ -1,8 +1,8 @@
--- DROP DATABASE IF EXISTS L2_Web_Projet_3;
--- CREATE DATABASE IF NOT EXISTS L2_Web_Projet_3;
--- USE L2_Web_Projet_3;
-USE darkbriks_mymovies;
--- USE MyMovies;
+DROP DATABASE IF EXISTS L2_Web_Projet_3;
+CREATE DATABASE IF NOT EXISTS L2_Web_Projet_3;
+USE L2_Web_Projet_3;
+-- USE darkbriks_mymovies;
+USE MyMovies;
 
 DROP TABLE IF EXISTS movie_person;
 DROP TABLE IF EXISTS movie_tag;
@@ -63,8 +63,7 @@ CREATE TABLE account (
     password VARCHAR(100) NOT NULL
 );
 
-INSERT INTO account (username, password) VALUES
-    ('$2y$10$144XTlrBTmf5/ZlJJ0kX1edSk8tw5bguaE8XYFhwObicBOshv5OV2','$2y$10$MC86NCUfN3sHtdnhueIATOgdZXwVT.VJJhKuqDcSDccdrxxQj0OJq');
+INSERT INTO account (username, password) VALUES ('$2y$10$144XTlrBTmf5/ZlJJ0kX1edSk8tw5bguaE8XYFhwObicBOshv5OV2','$2y$10$MC86NCUfN3sHtdnhueIATOgdZXwVT.VJJhKuqDcSDccdrxxQj0OJq');
 
 INSERT INTO tag (name) VALUES
       ('Action'),
@@ -104,8 +103,6 @@ INSERT INTO person (first_name, last_name, birth_date, death_date, image_path) V
      ('Eric', 'Stuart', '1967-10-18', NULL, 'Eric_Stuart.jpg'),
      ('Kunihiko', 'Yuyama', '1952-10-15', NULL, 'Kunihiko_Yuyama.jpg');
 
-
-
 -- Insérer des films
 INSERT INTO movies (title, release_date, synopsis, vu, image_path, time_duration, note, rating, trailer_path) VALUES
     ('Star Wars: Episode I - The Phantom Menace','1999-05-19', 'Two Jedi escape a hostile blockade to find allies and come across a young boy who may bring balance to the Force, but the long dormant Sith resurface to claim their old glory.', TRUE, 'Star_Wars_Phantom_Menace_poster.jpg', 140,10,9,'https://www.youtube.com/embed/bD7bpG-zDJQ?si=xfHKPX_EvYjcpQOd'),
@@ -122,6 +119,7 @@ INSERT INTO movies (title, release_date, synopsis, vu, image_path, time_duration
     ('Pokémon: The Movie 3 - Spell of the Unown', '2000-07-08','Sacha et ses amis doivent sauver une jeune fille nommée Molly de l emprise des Pokémon Unown.', FALSE, 'Pokemon_Movie_3.png', 82, 6, 'https://www.youtube.com/embed/SEqstQn0sag?si=X5ucHDI-JlZ2anf7', 8),
     ('Pokémon: The Movie 4Ever - Celebi: Voice of the Forest', '2001-07-07','Sacha et ses amis voyagent dans le temps pour sauver Celebi, un Pokémon légendaire.', FALSE, 'Pokemon_Movie_4.jpg', 73, 6, 'https://www.youtube.com/embed/9lES7wavO5E?si=uW7HqQ370Yb5dugf', 7),
     ('Pokémon Heroes: Latios and Latias', '2002-07-13','Sacha et ses amis doivent protéger la ville d Altomare des méchants qui veulent capturer les Pokémon légendaires Latios et Latias.', FALSE, 'Pokemon_Movie_5.jpg', 81, 6, 'https://www.youtube.com/embed/ZivTZFebZGY?si=-QU45WQWNvDkpk_j', 8);
+
 -- Acteurs et personnages joués dans les films
 INSERT INTO movie_person (movie_id, person_id, played_name, person_type) VALUES
      (1, 4, 'Qui-Gon Jinn', 1), (1, 8, 'Padmé Amidala', 1), (1, 9, 'Obi-Wan Kenobi', 1),
@@ -143,9 +141,6 @@ INSERT INTO movie_person (movie_id, person_id, played_name, person_type) VALUES
      (10, 17, 'Ondine', 1), (11, 17, 'Ondine', 1), (12, 17, 'Ondine', 1),(13, 17, 'Ondine', 1),(14, 17, 'Ondine', 1),
      (10, 18, 'Pierre', 1), (11, 18, 'Pierre', 1), (12, 18, 'Pierre', 1),(13, 18, 'Pierre', 1),(14, 18, 'Pierre', 1),
      (10, 19, NULL, 2), (11, 19, NULL, 2), (12, 19, NULL, 2),(13, 19, NULL, 2),(14, 19, NULL, 2);
-
-
-
 
 -- Insérer des relations movie_tag
 INSERT INTO movie_tag (movie_id, tag_id) VALUES
