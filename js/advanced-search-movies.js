@@ -81,12 +81,13 @@ function showMovieSearchResults(data)
             .then(data => { if (data.success)
             {
                 let movie = JSON.parse(data.data)[0];
-                table.innerHTML += '<tr><td>' + movie.title + '</td><td>' + movie.release_date + '</td><td>' + movie.time_duration + '</td><td>' + movie.rating + '</td><td>' + movie.note + '</td><td>' + movie.vu + '</td><td>' + movie.synopsis + '</td></tr>';
+                table.innerHTML += '<tr><td id="' + movie.id + '">' + movie.title + '</td><td>' + movie.release_date + '</td><td>' + movie.time_duration + '</td><td>' + movie.rating + '</td><td>' + movie.note + '</td><td>' + movie.vu + '</td><td>' + movie.synopsis + '</td></tr>';
             }
             else { set_user_msg('Erreur: ' + data.error, 'danger'); } })
             .catch(error => { console.error(error); });
     });
     table.innerHTML += '</tbody>';
     document.getElementById('movie-search-results').innerHTML = '';
+    document.getElementById('person-search-results').innerHTML = '';
     document.getElementById('movie-search-results').appendChild(table);
 }

@@ -24,7 +24,7 @@ require_once $GLOBALS['LOCALIZATION_DIR'] . $lang . '.php';
             document.getElementById('validate-person-search').addEventListener('click', searchPerson);
         });
     </script>
-    <div class="mb-3 position-absolute top-50 start-50 translate-middle">
+    <div class="mb-3">
         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#movie-modal">Movie</button>
         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#person-modal">Person</button>
     </div>

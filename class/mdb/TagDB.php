@@ -77,7 +77,7 @@ class TagDB extends PdoWrapper
     /**
      * @throws Exception
      */
-    public function addMovie_Tag($movie_id, $tag_id): bool
+    public function addMovie_Tag($movie_id, $tag_id): array
     {
         $query = "INSERT INTO movie_tag (movie_id, tag_id) VALUES (:movie_id, :tag_id)";
         return $this->execute($query, array(':movie_id' => $movie_id, ':tag_id' => $tag_id), NULL);

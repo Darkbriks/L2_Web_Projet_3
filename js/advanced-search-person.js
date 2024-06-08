@@ -65,5 +65,6 @@ function showPersonSearchResults(data)
     });
     table.innerHTML += '</tbody>';
     document.getElementById('person-search-results').innerHTML = '';
+    document.getElementById('movie-search-results').innerHTML = '';
     document.getElementById('person-search-results').appendChild(table);
 }
