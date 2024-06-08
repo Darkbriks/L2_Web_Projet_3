@@ -4,3 +4,6 @@ Pour consulter la branche qui contient le projet tel qu'il était lors de sa pr�
 # Connexion au mode administrateur
 - Identifiant du mode administrateur : admin
 - Mot de passe du mode administrateur : admin
+
+# Version en ligne
+Le projet est disponible en ligne à l'adresse suivante : [MyMovies](https://darkbriks.alwaysdata.net/MyMovies/)
